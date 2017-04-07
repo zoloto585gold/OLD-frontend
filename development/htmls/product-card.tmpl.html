@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, maximum-scale=1">
+
+		@@include('blocks/css-list.html')
+	</head>
+	<body>
+		<header>
+			@@include('blocks/header.html')
+		</header>
+
+
+		<main>
+			@@include('blocks/pcard/pcard-breadcrumbs.html')
+			@@include('blocks/pcard/pcard-main.html')
+			@@include('blocks/pcard/pcard-order.html')
+			@@include('blocks/pcard/pcard-description.html')
+			<!-- // @@include('blocks/pcard/pcard-video.html') -->
+			@@include('blocks/pcard/pcard-reviews.html')
+
+			<!-- модальные окна -->
+			@@include('blocks/pcard/pcard-motivate.html')
+
+		</main>
+
+
+		<footer>
+			@@include('blocks/footer.html')
+		</footer>
+
+
+		@@include('blocks/js-list.html')
+		@@include('blocks/js-list--pcard.html')
+	</body>
+</html> 

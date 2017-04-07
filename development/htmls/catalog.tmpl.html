@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Catalog</title>
+	<link rel="stylesheet" href="css/main.min.css">
+	<link rel="stylesheet" href="css/catalog.min.css">
+	<meta content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
+</head>
+<body>
+	<header>
+		@@include('blocks/header.html')
+	</header>
+
+	<main>
+		@@include('blocks/catalog/filter.html')
+		@@include('blocks/pagination/main.html')
+	</main>
+
+	<footer>
+		@@include('blocks/footer/footer-info.html')
+		<!-- "FOOTER-ALL" -->
+		<div class="section footer-all">
+			<div class="section__inner footer-all__inner">
+				
+			</div>
+		</div>
+		<!-- END-of-"FOOTER-ALL" -->
+	</footer>
+
+	@@include('blocks/js-list.html')
+</body>
+</html>

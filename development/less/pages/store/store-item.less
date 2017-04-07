@@ -1,0 +1,221 @@
+.store-item {
+	position: absolute;
+	right: 0;
+	top: 155px;
+	z-index: 1;
+
+	display: none;
+	width: 400px;
+	height: 165px;
+	overflow: hidden;
+
+	background-color: #fff;
+	box-shadow: 0px 0px 6px 1px rgba(0,0,0,.35);
+
+	font-size: 0;
+
+
+	&--active {
+		display: inline-block;
+	}
+
+
+	&__heading {
+		position: relative;
+
+		height: 55px;
+		padding: 5px 35px 5px 13px;
+		background-color: #ebebeb;
+
+		&:after {
+			position: absolute;
+			left: 0;
+			bottom: -5px;
+			z-index: 3;
+
+			content: '';
+
+			display: block;
+			width: 100%;
+			height: 5px;
+
+			background: url(/bitrix/templates/zoloto/images/thingies/shadow-2.png) center top no-repeat;
+		}
+	}
+
+
+	&__title {
+		padding-top: 5px;
+
+		text-transform: uppercase;
+		font-size: 16px;
+		line-height: 14px;
+	}
+
+
+	&__sub-title {}
+
+
+	&__close {
+		position: absolute;
+		top: 0;
+		right: 0;
+
+		display: block;
+		width: 40px;
+		height: 45px;
+
+		text-align: center;
+		font-size: 16px;
+		line-height: 45px;
+		color: #9c9c9c;
+
+		cursor: pointer;
+	}
+
+
+	&__group {
+		display: inline-block;
+		vertical-align: top;
+		width: 50%;
+		padding: 20px 5px 10px 15px;
+
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+
+		font-size: 11px;
+	}
+
+
+	&__group-text {
+		position: relative;
+
+		display: block;
+		height: 50px;
+		overflow: hidden;
+		padding-left: 47px;
+
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+
+		text-transform: uppercase;
+		font-size: 11px;
+		line-height: 14px;
+		font-weight: 400;
+
+
+		&:before {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 1;
+
+			content: '';
+
+			display: block;
+			width: 40px;
+			height: 40px;
+			overflow: hidden;
+
+			background-image: url(@img-sprite-primary);
+			background-repeat: no-repeat;
+		}
+
+
+		&--schedule {
+			&:before {
+				background-position: 0 -252px;
+			}
+		}
+		&--gps {
+			padding-top: 6px;
+
+
+			&:before {
+				background-position: -40px -252px;
+			}
+		}
+	}
+
+
+	&__gps-clipboard {
+		position: absolute;
+		// border: 0; // это свойство здесь не применять
+		height: 0px;
+		padding: 0;
+		margin: 0;
+		overflow: hidden;
+		opacity: 0;
+	}
+
+
+	&__button {
+		display: none; // кнопки временно скрыты
+		// width: 185px;
+		width: 100%;
+		height: 25px;
+
+		font-size: 9px;
+		line-height: 25px;
+
+
+		&--gps {
+			display: block;
+		}
+	}
+}
+
+
+@media @mobile {
+	.store-item {
+		position: absolute;
+		right: 50%;
+		top: 50%;
+		z-index: 1;
+
+
+		margin-top: 90px;
+		margin-right: -145px;
+
+		width: 290px;
+		height: 265px;
+
+
+		&__title {
+			font-size: 12px;
+		}
+
+
+		&__group {
+			width: 100%;
+			height: 77px;
+			padding: 30px 54px 0 46px;
+		}
+
+
+		&__group-text {
+			/* padding-right: 80px;
+			padding-top: 30px; */
+
+
+			&--schedule {
+
+			}
+
+
+			&--gps {}
+		}
+
+
+		&__button {
+
+
+			&--gps {
+				margin-top: 5px;
+				margin-left: 5px;
+			}
+		}
+	}
+}

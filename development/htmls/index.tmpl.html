@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Catalog</title>
+	<link rel="stylesheet" href="css/main.min.css">
+	<link rel="stylesheet" href="css/index.min.css">
+	<link rel="stylesheet" href="css/after_all.min.css">
+	<meta content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
+</head>
+<body>
+	<header>
+		@@include('blocks/header.html')
+	</header>
+
+	<main>
+		<!-- "SLIDER" -->
+		<div class="section index-slider">
+			<div class="section__inner index-slider__inner">
+				
+			</div>
+		</div>
+		<!-- "END-of-SLIDER" -->
+
+		@@include('blocks/index/filter.html')
+
+		<!-- "SHOWCASE" -->
+		<div class="section showcase">
+			<div class="section__inner showcase__inner">
+				
+			</div>
+		</div>
+		<!-- END-of-"SHOWCASE" -->
+
+		<!-- "INDEX-INFO" -->
+		<div class="section index-info">
+			<div class="section__inner index-info__inner">
+				
+			</div>
+		</div>
+		<!-- END-of-"INDEX-INFO" -->
+	</main>
+
+	<footer class="footer">
+		@@include('blocks/footer/footer-info.html')
+		@@include('blocks/footer/footer-main__pre.html')
+		@@include('blocks/footer/footer-main__accordions.html')
+		@@include('blocks/footer/footer-main__contacts.html')
+		@@include('blocks/footer/footer-main__post.html')
+	</footer>
+
+	@@include('blocks/js-list.html')
+</body>
+</html>

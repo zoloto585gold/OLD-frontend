@@ -1,0 +1,74 @@
+.promo-banner {
+	width: 100%;
+
+	a {
+		height:  390px;
+		position:  relative;
+		display: block;
+		position: relative;
+		height: 400px;
+	}
+
+
+	&--small {
+
+
+		a {
+			display: none;
+		}
+	}
+
+
+	&--big {
+
+
+		a {
+			display: block;
+		}
+	}
+}
+
+
+@media screen and (max-width: 1024px) {
+/* коэфф. уменьшения для картинки (1920x400)*0.7 = 1344x280 */
+	.promo-banner {
+
+
+		a {
+			height: 280px;
+		}
+	}
+}
+
+@media screen and (max-width: 767px) {
+	/* коэфф. уменьшения для картинки (1920x400)*0.58 = 1344x230 */
+	.promo-banner {
+
+
+		a {
+			height: 230px;
+		}
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.promo-banner {
+
+
+		&--big {
+
+			a {
+				display: none;
+			}
+		}
+
+
+		&--small {
+
+			a {
+				display: block;
+				height: 390px;
+			}
+		}
+	}
+}
