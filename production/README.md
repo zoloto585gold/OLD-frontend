@@ -1,0 +1,1 @@
+сьруькьура папки production совпадает с структурой bitrix/templates/zoloto/
