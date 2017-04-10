@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var autoprefixer = require('gulp-autoprefixer');
 var less = require('gulp-less');
 var concat = require('gulp-concat');
 var cssmin = require('gulp-cssmin');
@@ -26,7 +27,7 @@ var sourcemaps = require('gulp-sourcemaps');
 	--START--
 */
 /*
-	HTML INCLUDE 4 
+	HTML INCLUDE 4
 	"HEADER"
 */
 // html include header-top
@@ -78,7 +79,7 @@ gulp.task('make-header-block', ['html-include-header-top', 'html-include-header-
 
 
 /*
-	HTML INCLUDE 4 
+	HTML INCLUDE 4
 	"CATALOG PAGE"
 */
 
@@ -126,7 +127,7 @@ gulp.task('make-catalog-page-full', ['make-header-block', 'html-include-catalog-
 
 
 /*
-	HTML INCLUDE 4 
+	HTML INCLUDE 4
 	"INDEX PAGE"
 */
 // index-filter
@@ -171,7 +172,7 @@ gulp.task('make-index-page-full', ['make-header-block', 'make-index-filter'], fu
 
 
 /*
-	HTML INCLUDE 4 
+	HTML INCLUDE 4
 	"PRODUCT CARD PAGE"
 */
 // pcard page
@@ -205,7 +206,7 @@ gulp.task('make-pcard-page-full', ['make-header-block', 'make-pcard-page'], func
 
 
 /*
-	HTML INCLUDE 4 
+	HTML INCLUDE 4
 	"USER CABINET"
 */
 
@@ -401,43 +402,43 @@ gulp.task('make-msalnikov-list', function () {
 		}))
 		.pipe(gulp.dest('production/zoloto/css'));
 });
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /*
  * *************
  * NEW GULP FILE
  * *************
  */
 
-// 
-// 
+//
+//
 // DEV-OR-PROD@--START
-// 
+//
 // для создания локальной версии
 // должна быть раскомментирована
 // эта строка:
-// var dev_or_prod = '_2dev';
+var dev_or_prod = '_2dev';
 
 // по умолчанию "dev_or_prod" принимает значение для сборки прод
 var dev_or_prod = dev_or_prod || '_2prod';
@@ -447,8 +448,8 @@ var dev_or_prod = dev_or_prod || '_2prod';
 if(dev_or_prod === '_2prod') cssFolder = 'production/zoloto/css';
 else if(dev_or_prod === '_2dev') cssFolder = 'development/css';
 // DEV-OR-PROD@--END
-// 
-// 
+//
+//
 
 
 
@@ -503,14 +504,18 @@ gulp.task('z585-css:scaff', function () {
 gulp.task('z585-css:build', function () {
 	return gulp.src('development/less/z585-all-list.less')
 		.pipe(less())
-		.pipe(cssmin())
+		.pipe(autoprefixer({
+            browsers: ['last 5 versions'],
+            cascade: false
+        }))
+		// .pipe(cssmin())
 		.pipe(rename('z585_all.min.css'))
 		.pipe(gulp.dest(cssFolder));
 });
 
 
 
-// те стили, которые сейчас(04.04.2017) на проде, 
+// те стили, которые сейчас(04.04.2017) на проде,
 // на период перехода к z585_all.css
 // msalnikov.min.css
 var msalnikovScaffoldingList = [
@@ -523,8 +528,8 @@ var msalnikovScaffoldingList = [
 	'development/less/scaffolding/layout__uikit.less',
 	'development/less/scaffolding/layout__header.less',
 	'development/less/scaffolding/layout__footer.less',
-	// 
-	// 
+	//
+	//
 	// стили страниц
 	'development/less/scaffolding/pages__index.less',
 	'development/less/scaffolding/pages__product-card.less',
