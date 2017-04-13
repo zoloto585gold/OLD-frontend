@@ -340,67 +340,6 @@ gulp.task('make-jqueryteam', function () {
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('development/js/'));
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ZIP
-var zip_src_1 = 'no_build/zoloto585__catalog2/',
-	zip_files_1 = [zip_src_1 + '**/*.*', '!' + zip_src_1 + 'catalog_builder.css', '!' + zip_src_1 + 'grid.css'],
-	zip_name_1 = 'zoloto585__catalog2.zip',
-	zip_dest_1 = 'archives/';
-
-gulp.task('zip', function () {
-	return gulp.src(zip_files_1)
-		.pipe(zip(zip_name_1))
-		.pipe(gulp.dest(zip_dest_1));
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * @TODO
- * сдеалть сборку по новой LESS-структуре
- */
-// new ***
-gulp.task('make-msalnikov-list', function () {
-	return gulp.src('development/less/msalnikov-list.less')
-		.pipe(less())
-		.pipe(cssmin())
-		.pipe(rename({
-			suffix: '.min',
-			basename: 'msalnikov',
-		}))
-		.pipe(gulp.dest('production/zoloto/css'));
-});
 // 
 // 
 // 
@@ -430,36 +369,9 @@ gulp.task('make-msalnikov-list', function () {
  * *************
  */
 
-// 
-// 
-// DEV-OR-PROD@--START
-// 
-// для создания локальной версии
-// должна быть раскомментирована
-// эта строка:
-// var dev_or_prod = '_2dev';
-
-// по умолчанию "dev_or_prod" принимает значение для сборки прод
-var dev_or_prod = dev_or_prod || '_2prod';
-
-// переопределние путей
-// TODO@: сделать удобнее эту переключалку
-if(dev_or_prod === '_2prod') cssFolder = 'production/zoloto/css';
-else if(dev_or_prod === '_2dev') cssFolder = 'development/css';
-// DEV-OR-PROD@--END
-// 
-// 
-
-
-
 // z585-all-css
 var z585AllScaffoldingList = [
-
-	/* ******************************************* */
-	'development/less/' + dev_or_prod + '.less', // локализация(пути к картинкам, шрифтам, ...)
-	// значение формируется здесь: DEV-OR-PROD@    (метка для Ctrl + F поиска)
-	/* ******************************************* */
-
+	// 
 	'development/less/scaffolding/mixins.less',
 	'development/less/scaffolding/layout__fonts.less',
 	'development/less/scaffolding/layout__external.less',
@@ -489,71 +401,50 @@ var z585AllScaffoldingList = [
 	'development/less/scaffolding/system__helpers.less',
 ];
 
-// scaffolding "склеивание" отдельных импорт-листов в один общий
-// импорт-лист, который будет обрабатывать плагин "gulp-less"
-gulp.task('z585-css:scaff', function () {
+/*
+ Пять "тасков" для работы с LESS, для получения файла z585_all.min.css для локальной версии сайта(та что на localhost дома на компе) и версии, кторая идет на "прод" и "дев" сервера
+
+	z585-css:local-scaff
+	z585-css:local-build
+	z585-css:prod-scaff
+	z585-css:prod-build
+ */
+gulp.task('z585-css:prod-scaff', function () {
+	if(z585AllScaffoldingList[0] === 'development/less/_2dev.less') z585AllScaffoldingList.shift();
+	z585AllScaffoldingList.unshift('development/less/_2prod.less');
+
 	return gulp.src(z585AllScaffoldingList)
 		.pipe(sourcemaps.init({loadMaps: true}))
-		.pipe(concat('z585-all-list.less'))
+		.pipe(concat('z585-all-list.prod.less'))
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('development/less/'));
 });
 
-// build z585_all.min.css
-gulp.task('z585-css:build', function () {
-	return gulp.src('development/less/z585-all-list.less')
+gulp.task('z585-css:prod-build', function () {
+	return gulp.src('development/less/z585-all-list.prod.less')
 		.pipe(less())
 		.pipe(cssmin())
 		.pipe(rename('z585_all.min.css'))
-		.pipe(gulp.dest(cssFolder));
+		.pipe(gulp.dest('production/css'));
 });
 
+gulp.task('z585-css:local-scaff', function () {
+	if(z585AllScaffoldingList[0] === 'development/less/_2prod.less') z585AllScaffoldingList.shift();
+	z585AllScaffoldingList.unshift('development/less/_2dev.less');
 
-
-// те стили, которые сейчас(04.04.2017) на проде, 
-// на период перехода к z585_all.css
-// msalnikov.min.css
-var msalnikovScaffoldingList = [
-	'development/less/_2prod.less', // для прода
-
-	'development/less/scaffolding/mixins.less',
-	'development/less/scaffolding/layout__fonts.less',
-
-	'development/less/scaffolding/layout__grid.less',
-	'development/less/scaffolding/layout__uikit.less',
-	'development/less/scaffolding/layout__header.less',
-	'development/less/scaffolding/layout__footer.less',
-	// 
-	// 
-	// стили страниц
-	'development/less/scaffolding/pages__index.less',
-	'development/less/scaffolding/pages__product-card.less',
-	'development/less/scaffolding/pages__catalog.less',
-	'development/less/scaffolding/pages__page-404.less',
-	'development/less/scaffolding/pages__user-cabinet.less',
-	'development/less/scaffolding/pages__store.less',
-
-	// latest legacy
-	'development/less/scaffolding/legacy__latest.less',
-
-	// system
-	'development/less/scaffolding/system__helpers.less',
-];
-
-// scaffolding msalnikov-list
-gulp.task('msalnikov-css:scaff', function () {
-	return gulp.src(msalnikovScaffoldingList)
+	return gulp.src(z585AllScaffoldingList)
 		.pipe(sourcemaps.init({loadMaps: true}))
-		.pipe(concat('msalnikov-list.less'))
+		.pipe(concat('z585-all-list.local.less'))
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('development/less/'));
 });
 
-// build msalnikov.min.css
-gulp.task('msalnikov-css:build', function () {
-	return gulp.src('development/less/msalnikov-list.less')
+gulp.task('z585-css:local-build', function () {
+	return gulp.src('development/less/z585-all-list.prod.less')
 		.pipe(less())
 		.pipe(cssmin())
-		.pipe(rename('msalnikov.min.css'))
-		.pipe(gulp.dest('production/zoloto/css'));
+		.pipe(rename('z585_all.min.css'))
+		.pipe(gulp.dest('development/css'));
 });
+
+gulp.task('z585-css', ['z585-css:local-scaff', 'z585-css:prod-scaff', 'z585-css:local-build', 'z585-css:prod-build']);
