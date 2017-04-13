@@ -7,26 +7,43 @@
     font-family: 'Circe';
     position: relative;
     text-align: left;
+
+
     @media @tablet-portrait{
         float: none;
         display: inline-block;
     }
+
+
     @media @mobile{
         width: 218px;
     }
+
+
     @media @mobile-portrait{
         float: none;
         margin: 0 auto 10px;
         width: 238px;
     }
+
+
     &:hover{
+        border-color: #9f9f9f;
+        -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, .2);
+        box-shadow: 0 0 4px rgba(0, 0, 0, .2);
+
+
         .catalog-item__img:after{
             display: block;
         }
+
+
         .catalog-item__fav{
             display: block;
         }
     }
+
+
     &__fav{
         display: none;
         position: absolute;
@@ -40,6 +57,8 @@
         text-transform: uppercase;
         text-decoration: none;
         z-index: 10;
+
+
         &:before{
             content: '';
             display: inline-block;
@@ -50,17 +69,24 @@
             margin-right: 8px;
             margin-top: -2px;
         }
+
+
         &:hover{
             text-decoration: underline;
             &:before{
                 background: url(@img-sprite-primary) -47px -202px no-repeat;
             }
         }
+
+
         &--active{
             &:before{
                 background: url(@img-sprite-primary) -47px -202px no-repeat;
             }
         }
+
+
+
         @media @touch{
             display: block;
             top: 10px;
@@ -71,10 +97,14 @@
             overflow: hidden;
         }
     }
+
+
     &__img{
         display: block;
         padding: 17px 0;
         position: relative;
+
+
         &:after{
             content: '';
             display: none;
@@ -87,11 +117,15 @@
             right: 0;
             bottom: 0;
         }
+
+
         img{
             display: block;
             margin: 0 auto;
-            max-width: 100%;
-            height: auto;
+            // max-width: 100%;
+            // height: auto;
+            width: 180px;
+            height: 180px;
         }
     }
     &__info{
@@ -100,6 +134,8 @@
         border-bottom: 1px solid #ecebeb;
         padding: 5px 10px;
         position: relative;
+
+
         &:after{
             content: '';
             display: block;
@@ -113,6 +149,8 @@
             background-size: 100% auto;
         }
     }
+
+
     &__title{
         display: block;
         font-size: 12px;
@@ -121,22 +159,32 @@
         height: 24px;
         overflow: hidden;
         text-overflow: ellipsis;
-        margin-bottom: 8px;
+        margin-bottom: 29px;
         text-decoration: none;
+
+
         &:hover{
             color: #c01d33;
         }
     }
     &__price{
-        float: right;
-        font-size: 24px;
-        line-height: 1;
+        position: absolute;
+        right: 10px;
+        bottom: 0;
+
+        font-size: 23px;
+        font-weight: 300;
+        line-height: 24px;
         color: @color-1;
+
+
         @media @mobile-album{
             font-size: 20px;
         }
-        &--old{
-            float: none;
+
+
+        &--old {
+            left: 10px;
             font-weight: 100;
             text-transform: uppercase;
 
@@ -152,6 +200,8 @@
             font-size: 12px;
         }
     }
+
+
     &__button{
         display: block;
         width: 100%;
@@ -162,32 +212,46 @@
         border-radius: 0 0 5px 5px;
         font-size: 12px;
         line-height: 40px;
+
+
         &--reserve{
             background: #ed3030;
             color: #fff;
+
+
             &:before{
                 background: url(@img-sprite-primary) -135px -158px no-repeat;
             }
+
+
             &:hover{
                 background: #b32024;
             }
-
         }
+
+
         &--soon{
             background: #f3f3f3;
             color: @color-2;
+
+
             &:before{
                 background: url(@img-sprite-primary) -91px -90px no-repeat;
             }
+
+
             &:hover{
                 color: #fff;
                 background: #ed3030;
+
+
                 &:before{
                     background: url(@img-sprite-primary) -135px -177px no-repeat;
                 }
             }
-
         }
+
+
         &--reserve:before,
         &--soon:before {
             content: '';
