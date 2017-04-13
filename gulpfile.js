@@ -369,28 +369,6 @@ gulp.task('make-jqueryteam', function () {
  * *************
  */
 
-// 
-// 
-// DEV-OR-PROD@--START
-// 
-// для создания локальной версии
-// должна быть раскомментирована
-// эта строка:
-var dev_or_prod = '_2dev';
-
-// по умолчанию "dev_or_prod" принимает значение для сборки прод
-var dev_or_prod = dev_or_prod || '_2prod';
-
-// переопределние путей
-// TODO@: сделать удобнее эту переключалку
-if(dev_or_prod === '_2prod') cssFolder = 'production/zoloto/css';
-else if(dev_or_prod === '_2dev') cssFolder = 'development/css';
-// DEV-OR-PROD@--END
-// 
-// 
-
-
-
 // z585-all-css
 var z585AllScaffoldingList = [
 	// 
@@ -424,23 +402,12 @@ var z585AllScaffoldingList = [
 ];
 
 /*
- scaffolding "склеивание" отдельных импорт-листов в один общий
- импорт-лист, который будет обрабатывать плагин "gulp-less"
+ Пять "тасков" для работы с LESS, для получения файла z585_all.min.css для локальной версии сайта(та что на localhost дома на компе) и версии, кторая идет на "прод" и "дев" сервера
 
 	z585-css:local-scaff
 	z585-css:local-build
 	z585-css:prod-scaff
 	z585-css:prod-build
-
-
-	z585-css:local
-	z585-css:prod
-
-
-
-	if(dev_or_prod === '_2prod') cssFolder = 'production/css';
-	else if(dev_or_prod === '_2dev') cssFolder = 'development/css';
-
  */
 gulp.task('z585-css:prod-scaff', function () {
 	if(z585AllScaffoldingList[0] === 'development/less/_2dev.less') z585AllScaffoldingList.shift();
@@ -481,26 +448,3 @@ gulp.task('z585-css:local-build', function () {
 });
 
 gulp.task('z585-css', ['z585-css:local-scaff', 'z585-css:prod-scaff', 'z585-css:local-build', 'z585-css:prod-build']);
-
-
-
-
-
-gulp.task('z585-css:scaff', function () {
-	z585AllScaffoldingList[0] = 'development/less/_2prod.less';
-	console.log(z585AllScaffoldingList);
-	return gulp.src(z585AllScaffoldingList)
-		.pipe(sourcemaps.init({loadMaps: true}))
-		.pipe(concat('z585-all-list.less'))
-		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('development/less/'));
-});
-
-// build z585_all.min.css
-gulp.task('z585-css:build', function () {
-	return gulp.src('development/less/z585-all-list.less')
-		.pipe(less())
-		.pipe(cssmin())
-		.pipe(rename('z585_all.min.css'))
-		.pipe(gulp.dest(cssFolder));
-});

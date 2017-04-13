@@ -11,14 +11,14 @@ function toggleFavorite(itemId, object, successHandlerAdd, successHandlerDelete)
 			id: itemId
 		}
 	};
-	$(object).toggleClass('act');
+	//$(object).toggleClass('catalog-item__fav--active');
 	//
-	if ($(object).hasClass('act')) {
-		arRequest.data.action = 'add';
-		arRequest.success = successHandlerAdd;
-	} else {
+	if ($(object).hasClass('catalog-item__fav--active')) {
 		arRequest.data.action = 'delete';
 		arRequest.success = successHandlerDelete;
+	} else {
+		arRequest.data.action = 'add';
+		arRequest.success = successHandlerAdd;
 	}
 	$.ajax(arRequest);
 }
@@ -61,15 +61,15 @@ function initFavoritesActions() {
 	// работа с "фаворитами"" в шапке сайта(красная "полоска" в шапке сайте, элемент с кинкой в виде "звездочки")
 	var topCntContainer = $('#top-favirites-cnt');
 
-	$('.catalog-item__fav').off('click').on('click', function() {
+	$(document).on('click','.catalog-item__fav', function() {
 		var itemId = $(this).data('id');
 
 		toggleFavorite(itemId, this, function(result) {
-			$(this).attr('title', 'Убрать из избранного').addClass('catalog-item__fav--active');
+			$(this).addClass('catalog-item__fav--active');
 			$(this).text('Убрать из избранного');
 			topCntContainer.html(result);
 		}, function(result) {
-			$(this).attr('title', 'Добавить в избранное').removeClass('catalog-item__fav--active');
+			$(this).removeClass('catalog-item__fav--active');
 			$(this).text('Добавить в избранное');
 			topCntContainer.html(result);
 		});
@@ -81,11 +81,11 @@ function initFavoritesActions() {
 
 
 
-	$('.catalog-item__fav--active').off('click').on('click', function() {
+	$(document).on('click','.catalog-item__fav--active', function() {
 		var itemId = $(this).data('id');
 
 		toggleFavorite(itemId, this, null, function(result) {
-			$(this).parent().parent().remove();
+			//$(this).parent().parent().remove();
 			topCntContainer.html(result);
 			if ($('.favorites .catalog_list .catalog-item').length == 0) {
 				$('.favorites .no_faves').show();
