@@ -192,13 +192,14 @@ html, body { margin: 0; padding: 0; }
 .pcard-main__inner { font-size: 0; }
 @media screen and (max-width: 479px) {
 	.pcard-main {
-		min-width: 310px;
-		&__inner{ width: 310px; }
+		min-width: 300px;
+		&__inner{ width: 300px; }
 	}
 }
 .pcard__title {
 	.font-circe_regular(20px, 1, #303030);
 	text-transform: uppercase;
+	margin-top: 0 !important;
 }
 @media screen and (max-width: 1024px) {
 	.pcard-main {
@@ -227,19 +228,19 @@ html, body { margin: 0; padding: 0; }
 		display: none;
 		position: absolute;
 		right: 25px;
-		bottom: 4px;
-		width: 92px;
-		height: 92px;
+		bottom: 0;
+		width: 95px;
+		height: 95px;
 		border: 1px solid #f2f4f4;
 		cursor: pointer;
-		background: url(../img/sprites/play.png) center no-repeat;
+		background: url('@{img}/sprites/play.png') center no-repeat;
 		&:hover{
 			border-color: #ed3030;
 		}
 	}
 	&.is-video{
 		.fotorama__nav-wrap{
-			width: 392px !important;
+			width: 387px !important;
 			@media screen and (max-width: 1024px){
 				width: 100px !important;
 			}
@@ -267,7 +268,11 @@ html, body { margin: 0; padding: 0; }
 .pcard-fotorama__thumbs-link:nth-child(4n) { margin-right: 0; }
 .pcard-fotorama__thumbs-pic {}
 
-.fotorama {
+.pcard-fotorama .fotorama {
+	padding-bottom: 5px;
+	@media screen and (max-width: 1024px){
+		padding-bottom: 0;
+	}
 	&__stage {
 		width: 480px !important;
 		height: 480px !important;
@@ -279,6 +284,10 @@ html, body { margin: 0; padding: 0; }
 	&__html img:first-child { .-posa-c-(300px, 300px); }
 	&__nav {
 		text-align: left;
+		&__frame{
+			padding: 0 !important;
+			margin-right: 3px;
+		}
 	}
 	&__nav-wrap {
 		width: 480px;
@@ -291,9 +300,13 @@ html, body { margin: 0; padding: 0; }
 	&__thumb-border {
 		.-solid-(#ed3030);
 		background: none;
+		width: 95px !important;
+		height: 95px !important;
 		margin-top: 0 !important;
 	}
 	&__thumb {
+		width: 95px !important;
+		height: 95px !important;
 		background: #fff;
 		.-solid-(#f2f4f3);
 	}
@@ -310,7 +323,7 @@ html, body { margin: 0; padding: 0; }
 }
 @media screen and (max-width: 1024px) {
 	.pcard-fotorama__canvas { .-block-(100%, 300px); }
-	.fotorama {
+	.pcard-fotorama .fotorama {
 		&__stage {
 			width: 100% !important;
 			height: 298px !important;
@@ -320,15 +333,16 @@ html, body { margin: 0; padding: 0; }
 			.-solid-(#dbdbdb);
 			.-bxsz-(border-box);
 		}
-		&__html { width: 310px; }
+		&__html { width: 300px; }
 		&__html .zoom { height: 100%; }
 		&__html img:first-child { .-posa-c-(300px, 300px); }
 		&__nav {
 			white-space: normal;
 
 			&__frame {
-				margin: -1px 0 0 -1px;
-				.-sqr-imp-(100px);
+				margin: -2px 0 0 -1px;
+				width: 100px !important;
+				height: 99px !important;
 				.-solid-(#dbdbdb);
 				padding: 0 !important;
 				.-bxsz-(border-box);
@@ -342,6 +356,11 @@ html, body { margin: 0; padding: 0; }
 		}
 		&__nav__shaft&__grab {
 			.-wh-(100px, 300px);
+		}
+
+		&__thumb{
+			width: 100px !important;
+			height: 100px ! important;
 		}
 
 		&__loaded--img {
@@ -362,7 +381,7 @@ html, body { margin: 0; padding: 0; }
 
 /*@tablet Album*/
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-	.fotorama {
+	.pcard-fotorama .fotorama {
 		&__stage {
 			/*width: 600px !important;*/
 		}
@@ -373,7 +392,7 @@ html, body { margin: 0; padding: 0; }
 
 /*@tablet Portrait*/
 @media screen and (min-width: 640px) and (max-width: 767px) {
-	.fotorama {
+	.pcard-fotorama .fotorama {
 		&__html {
 			width: 518px;
 		}
@@ -382,7 +401,7 @@ html, body { margin: 0; padding: 0; }
 
 /*@tablet Album*/
 @media screen and (min-width: 480px) and (max-width: 639px) {
-	.fotorama {
+	.pcard-fotorama .fotorama {
 		&__html {
 			width: 358px;
 		}
@@ -391,11 +410,11 @@ html, body { margin: 0; padding: 0; }
 
 /*@mobile Portrait*/
 @media screen and (max-width: 479px) {
-	.pcard-fotorama__canvas { .-block-(310px, 300px); }
+	.pcard-fotorama__canvas { .-block-(300px, 300px); }
 
-	.fotorama {
+	.pcard-fotorama .fotorama {
 		&__stage {
-			width: 310px !important;
+			width: 300px !important;
 			height: 300px !important;
 			margin-left: 0;
 			margin-top: 0;
@@ -403,7 +422,7 @@ html, body { margin: 0; padding: 0; }
 			.-solid-(#dbdbdb);
 			.-bxsz-(border-box);
 		}
-		&__html { width: 310px; }
+		&__html { width: 300px; }
 		&__html .zoom { height: 100%; }
 		&__html img:first-child { .-posa-c-(300px, 300px); }
 		&__nav-wrap { .-dn-; }
@@ -584,6 +603,9 @@ html, body { margin: 0; padding: 0; }
 .pcard-store-panel__button-favorite {
 	margin: 0px 20px;
 	.pcard-store-panel__button-dflt(-543px);
+	@media screen and (max-width: 479px){
+		margin: 0;
+	}
 }
 .pcard-store-panel__button-compare {
 	margin: 0px 40px;
@@ -591,17 +613,20 @@ html, body { margin: 0; padding: 0; }
 }
 .pcard-store-panel__button-want_popup {
 	margin: 0px 20px;
-	.pcard-store-panel__button-dflt(-648px);
+	.pcard-store-panel__button-dflt(-649px);
 	float: right;
+	@media screen and (max-width: 479px){
+		margin: 0;
+	}
 }
 
-.pcard-store-panel__button-favorite:hover { .pcard-store-panel__button-hover(-543px); }
+.pcard-store-panel__button-favorite:hover { .pcard-store-panel__button-hover(-517px); }
 .pcard-store-panel__button-compare:hover { .pcard-store-panel__button-hover(-592px); }
-.pcard-store-panel__button-want_popup:hover { .pcard-store-panel__button-hover(-648px); }
+.pcard-store-panel__button-want_popup:hover { .pcard-store-panel__button-hover(-621px); }
 
-.pcard-store-panel__button-favorite.active { .pcard-store-panel__button-hover(-517px); }
-.pcard-store-panel__button-compare.active { .pcard-store-panel__button-hover(-569px); }
-.pcard-store-panel__button-want_popup.active { .pcard-store-panel__button-hover(-621px); }
+.pcard-store-panel__button-favorite.is-active { .pcard-store-panel__button-hover(-517px); }
+.pcard-store-panel__button-compare.is-active { .pcard-store-panel__button-hover(-569px); }
+.pcard-store-panel__button-want_popup.is-active { .pcard-store-panel__button-hover(-621px); }
 
 
 
@@ -646,7 +671,7 @@ html, body { margin: 0; padding: 0; }
 	}
 }
 .pcard-properties__header {
-	padding: 17px 5px 7px 25px;
+	padding: 12px 5px 12px 25px;
 	.box-b();
 	.font-circe_regular(12px, 17px, #303030);
 	margin: 0;
@@ -663,12 +688,12 @@ html, body { margin: 0; padding: 0; }
 .pcard-properties__item-name {
 	display: inline-block;
 	width: 130px;
-	padding: 17px 5px 7px 25px;
+	padding: 12px 5px 12px 25px;
 	.box-b();
 }
 .pcard-properties__item-value {
 	display: inline-block;
-	padding: 17px 5px 7px 25px;
+	padding: 12px 5px 12px 25px;
 	.box-b();
 }
 
@@ -702,10 +727,8 @@ html, body { margin: 0; padding: 0; }
 .pcard-fitting {
 	display: none;
 	&__body{
-		background-color: #f0f7fe;
+		background: url('@{img}/thingies/size-popup-bg.png') #f0f7fe no-repeat left bottom;
 		padding: 0 30px 60px;
-		background-repeat: no-repeat;
-		background-position: left bottom;
 	}
 	&__text {
 		.font-circe_light(14px, 16px, #999);
@@ -776,6 +799,7 @@ html, body { margin: 0; padding: 0; }
 		}
 		&__label {
 			.font-circe_bold(14px, 1, #333);
+			top: 1px;
 		}
 		&__value {
 			display: inline-block;
@@ -976,7 +1000,7 @@ html, body { margin: 0; padding: 0; }
 		display: block;
 		width: 100%;
 		height: 9px;
-		background: url(../img/thingies/shadow-5.png) center top no-repeat;
+		background: url('@{img}/thingies/shadow-5.png') center top no-repeat;
 		position: absolute;
 		top: 100%;
 		left: 0;
@@ -1030,10 +1054,14 @@ html, body { margin: 0; padding: 0; }
 			margin-top: 3px;
 		}
 	}
-	&__btn{
+	&__btns{
 		float: right;
-		.font-circe_regular(11px, 30px, #fff);
 		width: 190px;
+	}
+	&__btn{
+		display: none;
+		.font-circe_regular(11px, 30px, #fff);
+		width: 100%;
 		height: 30px;
 		background-color: #ed3030;
 		text-align: center;
@@ -1043,6 +1071,9 @@ html, body { margin: 0; padding: 0; }
 		margin-top: 13px;
 		&:hover{
 			background-color: #b32023;
+		}
+		&.is-active{
+			display: block;
 		}
 	}
 }
@@ -1129,7 +1160,6 @@ html, body { margin: 0; padding: 0; }
 		padding-bottom: 0;
 		.-bxsz-(border-box);
 		.-brad-ad-(0);
-		border-bottom: 0;
 
 		&__header {
 			.-tab-header-();

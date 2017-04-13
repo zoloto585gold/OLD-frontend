@@ -438,7 +438,7 @@ gulp.task('make-msalnikov-list', function () {
 // для создания локальной версии
 // должна быть раскомментирована
 // эта строка:
-var dev_or_prod = '_2dev';
+// var dev_or_prod = '_2dev';
 
 // по умолчанию "dev_or_prod" принимает значение для сборки прод
 var dev_or_prod = dev_or_prod || '_2prod';
@@ -508,7 +508,7 @@ gulp.task('z585-css:build', function () {
             browsers: ['last 5 versions'],
             cascade: false
         }))
-		// .pipe(cssmin())
+		.pipe(cssmin())
 		.pipe(rename('z585_all.min.css'))
 		.pipe(gulp.dest(cssFolder));
 });
