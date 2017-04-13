@@ -3,12 +3,25 @@ $(document).ready(function() {
 	// ********
 	// FOTORAMA
 	// ********
-	$('.fotorama').on('fotorama:ready', function (e, fotorama, extra) {
-		$('.zoom').zoom();
+	if(parseInt(window.innerWidth) >= 1025) {
+		$('.fotorama').on('fotorama:ready', function (e, fotorama, extra) {
+			$('.zoom').zoom();
+
+		});
+		$('.fotorama').on('fotorama:show', function (e, fotorama, extra) {
+			$('.zoom').zoom();
+		});
+	}
+
+	// ********
+	// CUSTOM SCROLL
+	// ********
+	$('.scroll-properties').jScrollPane({});
+	var apiScrollBlock = $('.scroll-properties').data('jsp');
+	$(window).bind('resize', function(){
+		$('.scroll-properties').jScrollPane();
 	});
-	$('.fotorama').on('fotorama:show', function (e, fotorama, extra) {
-		$('.zoom').zoom();
-	});
+
 
 
 
@@ -23,8 +36,8 @@ $(document).ready(function() {
 		pcardOrderSMSCode = +'777'; // код-заглушка для подтверждения смс
 
 	/*
-		ЭЛЕМЕНТЫ 
-		ИНТЕРФЕЙСА 
+		ЭЛЕМЕНТЫ
+		ИНТЕРФЕЙСА
 		БРОНИРОВАНИЯ
 	*/
 	var $pcardVideo = $('.pcard-video'),
@@ -186,7 +199,7 @@ $(document).ready(function() {
 				this.cityLon = this.defaultData['cityLon'];
 			},
 			/**************/
-			
+
 			refresh: function($selector) {
 				var shopId    = $selector.attr('data-pcard-order-shop-id'),
 					shop      = $selector.attr('data-pcard-order-shop-name'),
@@ -230,7 +243,7 @@ $(document).ready(function() {
 			},
 			print: function () {
 				var printText = '';
-				
+
 				for(var prop in this) {
 					if(!this.hasOwnProperty(prop)) continue;
 					printText += prop + ': ' + this[prop] + ';\n'
@@ -302,7 +315,7 @@ $(document).ready(function() {
 			buildCitiesList: function (cityId) {
 				var htmlCode = '';
 				htmlCode += '<select class="pcard-order-city__select">';
-				
+
 				for(var i = 0; i < shopsData.length; i++)
 					htmlCode += '<option ' + (shopsData[i].cityId === +cityId ? 'selected' : '') + ' value="' + shopsData[i].cityId + '" data-pcard-order-city-id="' + shopsData[i].cityId + '" data-pcard-order-city-latitude="' + shopsData[i].cityLat + '" data-pcard-order-city-longitude="' + shopsData[i].cityLon + '" data-pcard-order-city="' + shopsData[i].city + '">' + shopsData[i].city + '</option>';
 				htmlCode += '</select>';
@@ -314,18 +327,18 @@ $(document).ready(function() {
 
 				// вариант отображения через select-меню, для меньших устройств
 				htmlCode += '<select class="pcard-order-shops__select" data-pcard-order-city-id="' + cityId + '">';
-				for(var i = 0, lc = shopsData.length; i < lc; i++) 
-					if(shopsData[i].cityId === cityId) 
-						for(var j = 0, ls = shopsData[i].shops.length; j < ls; j++) 
+				for(var i = 0, lc = shopsData.length; i < lc; i++)
+					if(shopsData[i].cityId === cityId)
+						for(var j = 0, ls = shopsData[i].shops.length; j < ls; j++)
 							if(shopsData[i].shops[j].shopLat !== undefined && shopsData[i].shops[j].shopLon !== undefined)
 								htmlCode += '<option ' + (shopsData[i].shops[j].id === shopId ? ' selected' : '') + ' value="' + shopsData[i].shops[j].title + '" data-pcard-order-placemark-id="' + shopsData[i].shops[j].shopLat + '_' + shopsData[i].shops[j].shopLon + '" data-pcard-order-shop-id="' + shopsData[i].shops[j].id + '"" data-pcard-order-shop-address="' + shopsData[i].shops[j].address + '" data-pcard-order-shop-name="' + shopsData[i].shops[j].title + '" data-pcard-order-shop-time="' + shopsData[i].shops[j].time + '">' + shopsData[i].shops[j].address + '</option>'
 				htmlCode += '</select>';
 
 				// вариант отображения через ul-список, для больших устройств
 				htmlCode += '<ul class="pcard-order-shops__list" data-pcard-order-city-id="' + cityId + '">';
-				for(var i = 0, lc = shopsData.length; i < lc; i++) 
-					if(shopsData[i].cityId === cityId) 
-						for(var j = 0, ls = shopsData[i].shops.length; j < ls; j++) 
+				for(var i = 0, lc = shopsData.length; i < lc; i++)
+					if(shopsData[i].cityId === cityId)
+						for(var j = 0, ls = shopsData[i].shops.length; j < ls; j++)
 							if(shopsData[i].shops[j].shopLat !== undefined && shopsData[i].shops[j].shopLon !== undefined)
 								htmlCode += '<li class="pcard-order-shops__item' + (shopsData[i].shops[j].id === shopId ? ' active' : '') + '" data-pcard-order-placemark-id="' + shopsData[i].shops[j].shopLat + '_' + shopsData[i].shops[j].shopLon + '" data-pcard-order-shop-id="' + shopsData[i].shops[j].id + '"" data-pcard-order-shop-address="' + shopsData[i].shops[j].address + '" data-pcard-order-shop-name="' + shopsData[i].shops[j].title + '" data-pcard-order-shop-time="' + shopsData[i].shops[j].time + '">' + shopsData[i].shops[j].title + '<br>' + shopsData[i].shops[j].address + '</li>'
 				htmlCode += '</ul>';
@@ -341,10 +354,10 @@ $(document).ready(function() {
 			},
 			shopCounter: function (cityId) {
 				var count = 0;
-				for(var i = 0, l = shopsData.length; i < l; i++) 
-					if(shopsData[i].cityId === cityId) 
-						for(var j = 0, ls = shopsData[i].shops.length; j < ls; j++) 
-							if(shopsData[i].shops[j].shopLat !== undefined && shopsData[i].shops[j].shopLon !== undefined) 
+				for(var i = 0, l = shopsData.length; i < l; i++)
+					if(shopsData[i].cityId === cityId)
+						for(var j = 0, ls = shopsData[i].shops.length; j < ls; j++)
+							if(shopsData[i].shops[j].shopLat !== undefined && shopsData[i].shops[j].shopLon !== undefined)
 								count++;
 				return count;
 			},
@@ -368,7 +381,7 @@ $(document).ready(function() {
 				$('.pcard-order-form__message')
 					.empty()
 					.prepend('<div class="pcard-order-form-message__close-but"></div><p>На номер <b>' + orderInfo.phone + '</b> отправлен SMS код!</p><p>Введите полученный номер в поле ниже для подтверждения Вашего заказа. </p>');
-					
+
 				if(showhide === 'show') $('.pcard-order-form__message').css({'display' : 'block'});
 				else if(showhide === 'hide') $('.pcard-order-form__message').css({'display' : 'none'});
 			},
@@ -465,7 +478,7 @@ $(document).ready(function() {
 				orderInfo.cityLat = coords[0];
 				orderInfo.cityLon = coords[1];
 			};
-			
+
 		});
 
 
@@ -532,17 +545,17 @@ $(document).ready(function() {
 		// (всплывающее окно над картой)
 		// ********************************
 		var shopsBalloonLayout = ymaps.templateLayoutFactory.createClass(
-				'<div class="pcard-map-shop" style="display: block;">' + 
-					'<div class="pcard-map-shop__header">' + 
-						'<div class="pcard-map-shop__address">$[properties.shopAddress]</div>' + 
-						'<div class="pcard-map-shop__close-but">X</div>' + 
-					'</div>' + 
-					'<div class="pcard-map-shop__content">' + 
-						'<div class="pcard-map-shop__when">можно забрать:</div>' + 
-						'<div class="pcard-map-shop__when_strike">$[properties.shopWhen]</div>' + 
-						'<div class="pcard-map-shop__time">$[properties.shopTime]</div>' + 
-						'<div class="pcard-map-shop__button">бронировать изделие</div>' + 
-					'</div>' + 
+				'<div class="pcard-map-shop" style="display: block;">' +
+					'<div class="pcard-map-shop__header">' +
+						'<div class="pcard-map-shop__address">$[properties.shopAddress]</div>' +
+						'<div class="pcard-map-shop__close-but">X</div>' +
+					'</div>' +
+					'<div class="pcard-map-shop__content">' +
+						'<div class="pcard-map-shop__when">можно забрать:</div>' +
+						'<div class="pcard-map-shop__when_strike">$[properties.shopWhen]</div>' +
+						'<div class="pcard-map-shop__time">$[properties.shopTime]</div>' +
+						'<div class="pcard-map-shop__button">бронировать изделие</div>' +
+					'</div>' +
 				'</div>',
 				{
 					build: function () {
@@ -573,7 +586,7 @@ $(document).ready(function() {
 
 		// ****************************************
 		// клик по метке на карте
-		// модальное окно с предложением 
+		// модальное окно с предложением
 		// "БРОНИРОВАТЬ ИЗДЕЛИЕ" в этом магазине
 		// ****************************************
 		myMap.geoObjects.events.add('click', function (e) {
@@ -626,9 +639,9 @@ $(document).ready(function() {
 		});
 
 
-		// 
-		// 
-		// 
+		//
+		//
+		//
 		myMap.geoObjects.events.add('mouseenter', function (e) {
 			// alert('Дошло до коллекции объектов карты');
 			// Получение ссылки на дочерний объект, на котором произошло событие.
@@ -640,9 +653,9 @@ $(document).ready(function() {
 			// console.log('###########hover');
 			// data-pcard-order-placemark-id
 		});
-		// 
-		// 
-		// 
+		//
+		//
+		//
 		myMap.geoObjects.events.add('mouseleave', function (e) {
 			// alert('Дошло до коллекции объектов карты');
 			// Получение ссылки на дочерний объект, на котором произошло событие.
@@ -666,7 +679,7 @@ $(document).ready(function() {
 
 
 	/*
-		makeOrderInterface(state)  -  функция прохождения по цепочки шагов интерфейса бронирования, 
+		makeOrderInterface(state)  -  функция прохождения по цепочки шагов интерфейса бронирования,
 		state  -  текстовый идентификатор шага
 
 		state === 'init'  -  открытие первого шага бронирования
@@ -728,7 +741,7 @@ $(document).ready(function() {
 
 				// console.log(bonusCard);
 
-				// 
+				//
 
 				if(bonusCard != false) bonusCardValid = true;
 
@@ -798,13 +811,13 @@ $(document).ready(function() {
 			orderInterface.selectCity(orderInfo.cityId);
 
 			$pcardOrderCloseButton.show();
-			
+
 			if(!isShow($pcardOrderStep_2)) $pcardOrderStep_2.show();
-			
+
 			orderInterface.stepActivate($pcardOrderStep_2);
-			
+
 			$pcardOrderStepTitle_2.text('2 шаг: Выберите магазин');
-			
+
 			orderInterface.setShopCount(orderInfo.cityId); // количество магазинов в этом городе
 
 			orderInterface.stepHide($('.pcard-order__step-3'));
@@ -813,11 +826,11 @@ $(document).ready(function() {
 			orderInterface.selectCity(+$('.pcard-order-city__select').find('option:selected').attr('data-pcard-order-city-id'));
 			orderInterface.setShopCount(+$('.pcard-order-city__select').find('option:selected').attr('data-pcard-order-city-id'));
 
-			// 
+			//
 			// console.log(orderInterface.state + ' + ' + orderInfo.cityId);
 
 
-			// 
+			//
 			// myMap.setCenter([orderInfo.cityLat, orderInfo.cityLon], 10);
 		}
 
@@ -830,7 +843,7 @@ $(document).ready(function() {
 			orderInterface.state = 'smsstart';
 			orderInterface.setSMSAlert('hide');
 			$('#pcard-order-user-phone').val('');
-			
+
 			isHide($pcardOrderStep_3) ? $pcardOrderStep_3.show() : '';
 
 			// делаем информативынм заголовок окна 2-го шага
@@ -850,7 +863,7 @@ $(document).ready(function() {
 			orderInfo.phone = $('#pcard-order-user-phone').val();
 			orderInterface.setSMSAlert('show');
 
-			// 
+			//
 			// console.log(orderInterface.state);
 		}
 
@@ -882,7 +895,7 @@ $(document).ready(function() {
 		if(toBreak) { // для меньших(к мобильнику)
 			orderInterface.state !== 'cancel' ? $pcardOrderReserveButton.hide() : $pcardOrderReserveButton.show();
 			orderInterface.setShopModal();
-			
+
 			if(orderInterface.state !== 'cancel') {
 				orderInterface.setTopOffset();
 			}
@@ -924,7 +937,7 @@ $(document).ready(function() {
 		else if($(event.target).hasClass('pcard-order-shops__select')) {
 			orderInfo.refresh($(event.target).find('option:selected'));
 			makeOrderInterface('setshop');
-			
+
 		}
 	});
 
@@ -934,12 +947,12 @@ $(document).ready(function() {
 
 		/*
 			Суть if-else'а:
-			
+
 			если происходит ресайз по ширине/горизонтали экрана,
-			то вызываем функцию "makeOrderInterface()" 
-			и иперестраиваем/адаптируем вид интерфейса под 
+			то вызываем функцию "makeOrderInterface()"
+			и иперестраиваем/адаптируем вид интерфейса под
 			текущую ширину,
-			
+
 			если горизонтально, ширина страницы не меняется то ничего не делаем
 		*/
 		if(pcardOlderWidth === orderInterface.currentWidth) {
@@ -959,123 +972,89 @@ $(document).ready(function() {
 
 	$('#pcard-order-user-phone').inputmask('+7(999) 999-99-99');
 
-
-
-
-
-
-
 // ####
+
 	$('body').prepend('<div class="popup__overlay"></div>')
 	var $popUpOverlay = $('.popup__overlay');
 	$popUpOverlay.hide();
 
+
+	// закрытие попАпа
+	$('.pcard-popup__header').find('.pcard-popup__close-but').on('click', function () {
+		$popUpOverlay.hide();
+		$('#product-video').attr('src', '');
+		$('.pcard-popup__wrap').removeClass('is-show');
+	});
+
+	// закрытие попАпа по клику на затемнённое пространство
+	$popUpOverlay.on('click', function (event) {
+		var e = $('.pcard-popup__wrap ');
+		if (!e.is(event.target) && e.has(event.target).length === 0) {
+			e.removeClass('is-show');
+			$('#product-video').attr('src', '');
+			$popUpOverlay.hide();
+		}
+	});
+
 	// ******************************
 	// POPUP для "КAК УЗНАТЬ РАЗМЕР?"
 	// ******************************
-
-	// добавляет кнопку закрытия попАпа
-	$('.pcard-fitting__header').prepend('<div class="pcard-popup__close-but"></div>'); 
-	$('.pcard-fitting__header').find('.pcard-popup__close-but').on('click', function () {
-		$('.pcard-fitting__header').removeClass('pcard-popup__header');
-		$popUpOverlay.hide();
-		$('.pcard-fitting')
-			.removeClass('is-show')
-			.removeClass('pcard-popup__wrap');
-	});
-
-	// всплытие окна
 	$('.pcard-store-fitting__popup-but').on('click', function () {
 		$popUpOverlay.show();
-		$('.pcard-fitting')
-			.addClass('pcard-popup__wrap')
-			.addClass('is-show');
-
-		// закрытие попАпа по клику на затемнённое пространство
-		$popUpOverlay.on('click', function (event) {
-			var e = $('.pcard-fitting ');
-			if (!e.is(event.target) && e.has(event.target).length === 0) {
-				$('.pcard-fitting__header').removeClass('pcard-popup__header');
-				e.removeClass('is-show')
-				.removeClass('pcard-popup__wrap');
-
-				$popUpOverlay.hide();
-			}
-		});
-
-		$('.pcard-fitting__header').addClass('pcard-popup__header');
-		$('.pcard-popup__close-but').show();
-		
+		$('.pcard-fitting').addClass('is-show');
 	});
 
 	// Подбор размера кольца
+	var sizeguide = {
+		"finger":[47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76],
+		"ring":[48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77],
+		"russian":["15.0","15.5","15.5","16.0","16.0","16.5","17.0","17.0","17.5","18.0","18.0","18.5","19.0","19.0","19.5","19.5","20.0","20.5","20.5","21.0","21.5","21.5","22.0","22.5","22.5","23.0","23.0","23.5","24.0","24.0"]
+	};
+
+	$.each(sizeguide.finger, function(key, val) {
+		$('#finger-size-select').append('<option class="pcard-form-select__option pcard-fitting__menu-item" value="'+key+'">'+val+'</option>')
+	});
+	$.each(sizeguide.ring, function(key, val) {
+		$('#ring-size-select').append('<option class="pcard-form-select__option pcard-fitting__menu-item" value="'+key+'">'+val+'</option>')
+	});
+
 	$('.pcard-fitting-select__menu').on('change', function () {
-		$('.pcard-fitting-result__value').empty().prepend(parseInt(+$(this).val()/3.14));
+		var a = $(this).val();
+		$('.pcard-fitting-result__value').empty().prepend(sizeguide.russian[a]);
 	});
-
-	$(window).on('resize', function () {
-		if(parseInt(window.innerWidth) <= 1024) {
-			console.log('noDesktop');
-			$('.pcard-fitting__header').removeClass('pcard-popup__header');
-			$('.pcard-fitting ')
-				.removeClass('is-show')
-				.removeClass('pcard-popup__wrap');
-			$popUpOverlay.hide();
-		}
-		else console.log('Desktop');
-	});
-
-
-
 
 
 
 	// **************************
 	// POPUP для "ХОЧУ В ПОДАРОК"
 	// **************************
-	$('.pcard-gift__header').prepend('<div class="pcard-popup__close-but"></div>'); // добавляет кнопку закрытия попАпа
-	$('.pcard-gift__header').find('.pcard-popup__close-but').on('click', function () {
-		$popUpOverlay.hide();
-		$('.pcard-gift__header').removeClass('pcard-popup__header');
-		$('.pcard-gift')
-			.removeClass('is-show')
-			.removeClass('pcard-popup__wrap');
-	});
-
-	// всплытие окна
 	$('.pcard-store-panel__button-want_popup').on('click', function () {
 		$popUpOverlay.show();
-		$('.pcard-gift')
-			.addClass('pcard-popup__wrap')
-			.addClass('is-show');
-
-		// закрытие попАпа по клику на затемнённое пространство
-		$popUpOverlay.on('click', function (event) {
-			var e = $('.pcard-gift');
-			if (!e.is(event.target) && e.has(event.target).length === 0) {
-				$('.pcard-gift__header').removeClass('pcard-popup__header');
-				e.removeClass('is-show').removeClass('pcard-popup__wrap');
-
-				$popUpOverlay.hide();
-			}
-		});
-
-		$('.pcard-gift__header').addClass('pcard-popup__header');
-		$('.pcard-popup__close-but').css('display', 'block');
+		$('.pcard-gift').addClass('is-show');
 	});
 
-	$(window).on('resize', function () {
-		if(parseInt(window.innerWidth) <= 1024) {
-			console.log('noDesktop');
-			$('.pcard-gift__header').removeClass('pcard-popup__header');
-			$('.pcard-gift')
-				.removeClass('is-show')
-				.removeClass('pcard-popup__wrap');
-			$popUpOverlay.hide();
-		}
-		else console.log('Desktop');
+
+	// **************************
+	// POPUP для Видео
+	// **************************
+	var videoSrc = $('#product-video').attr('src');
+	$('.pcard-fotorama__video-btn').on('click', function () {
+		$popUpOverlay.show();
+		$('.pcard-video').addClass('is-show');
+		$('#product-video').attr('src', videoSrc);
 	});
 
+	// **************************
+	// Fixed product info
+	// **************************
+	$(window).scroll(function(){
+		var top = $(".pcard-store__reserve-button").offset().top;
+	     if ($(window).scrollTop() > top) {
+	          $('.fixed-item-info').addClass('is-show');
+	     } else {
+			 $('.fixed-item-info').removeClass('is-show');
+		 }
+	});
 
 
 	// ***********************************************
@@ -1089,6 +1068,4 @@ $(document).ready(function() {
 		$tab.addClass('pcard-tab_closed');
 	}
 	$('.pcard-properties__header').on('click', function () { pcardTabs('.pcard-properties'); });
-	$('.pcard-fitting__header').on('click', function () { pcardTabs('.pcard-fitting'); });
-	$('.pcard-gift__header').on('click', function () { pcardTabs('.pcard-gift'); });
 });
