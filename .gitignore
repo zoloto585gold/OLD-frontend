@@ -2,3 +2,6 @@
 node_modules/
 development/css/*.css
 production/css/*.css
+
+development/less/z585-all-list.prod.less
+development/less/z585-all-list.local.less
