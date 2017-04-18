@@ -448,3 +448,14 @@ gulp.task('z585-css:local-build', function () {
 });
 
 gulp.task('z585-css', ['z585-css:local-scaff', 'z585-css:prod-scaff', 'z585-css:local-build', 'z585-css:prod-build']);
+
+gulp.task('watch', function () {
+	//livereload.listen(); @TODO
+	gulp.watch('development/**/*', ['z585-css']);
+});
+
+
+
+
+
+
