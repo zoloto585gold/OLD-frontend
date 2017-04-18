@@ -1,11 +1,11 @@
 /*
-	
+
 */
 // ==============
 // == forms.js ==
 // ==============
-// 
-// 
+//
+//
 // что делает: стилизует состояния для полей форм,
 // в зависимости от действия/манипуляции с полем формы
 ;$(function () {
@@ -28,15 +28,15 @@
 		$(this).removeClass('form-textline--active');
 	});
 });
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // =======================
 // = ПОПАП ВЫБОРА ГОРОДА =
 // =======================
@@ -80,20 +80,20 @@
 		topGeoModal(false); // закрывает окно
 	});
 });
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // ================================
 // = ОБРАБОТЧИК НАВИГАЦИИ В ШАПКЕ =
 // ================================
@@ -111,7 +111,7 @@
 	// вспомогательные функции
 	// -----------------------
 
-	// закрывает touchnavi и/или сбрасывает настройки активности навгиции, 
+	// закрывает touchnavi и/или сбрасывает настройки активности навгиции,
 	// которые доступны только для touch-устройств
 	function resetTouchNavi() {
 		$('.section').removeClass('section--offset-left');
@@ -130,7 +130,7 @@
 		$('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');
 	}
 
-	// 
+	//
 	// function openTouchNavi() {}
 
 	// сбрасывает/удаляет элементы присущие навигации только для desktop-устройств
@@ -158,7 +158,7 @@
 				.css({'background-image' : bg})
 				.attr('data-inner-list', innerListId);
 		}
-		
+
 	}
 	function resetDesktopNaviInnerListWrapper() {
 		$('.navi-inner-list-wrapper').removeClass('navi-inner-list-wrapper--active');
@@ -203,7 +203,7 @@
 			if($wanted.hasClass('top-sandwich__button--active')) resetTouchNavi();
 
 			// открываем меню
-			else { 
+			else {
 				$('.section').addClass('section--offset-left');
 				$('.header-bottom').removeClass('section--offset-left');
 
@@ -266,13 +266,13 @@
 	// ---------------------
 	// @DESKTOP NAVI HANDLER
 	// ---------------------
-	// обработка поведения навигации, 
+	// обработка поведения навигации,
 	// для разрешения экрана > 1024px по ширине
 	// т.е. для @desktop
 	var $mainNav = $('.main-nav'),
 		$mainNavItems = $('.main-nav__item'),
 		$altMainNav = $('.alt-main-nav'),
-		
+
 		$headerBottom = $('.header-bottom');
 
 	// #ref
@@ -318,7 +318,7 @@
 	// выпадших вкладок
 	// находит соответствующий "надпункт" из "alt-main-nav", который соответствует данной активной вкладке
 	// и делает этот "надпункт" активным;
-	// 
+	//
 	// оставляет черный треуголник активности на кнопке
 	// когда курсор ушёл с этой кнопке
 	// на выпадающий блок
@@ -334,7 +334,7 @@
 	// рассматривается hover когда
 	// указатель мыши находится или покидает
 	// всю навигацию;
-	// 
+	//
 	// отображает/скрывает
 	// заднюю подложку(которая тянется на весь экран по ширине) для выпадающего блока меню
 	$('.main-nav').hover(function (el) {
@@ -347,9 +347,9 @@
 	});
 
 
-	
 
-	
+
+
 	// #ref
 	function resetNaviInnerList(el) {
 		var innerListId = $(this).attr('data-inner-list');
@@ -380,20 +380,20 @@
 		}
 	});
 });
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // ====================
 // = ПОДБОР УКРАШЕНИЯ =
 // ====================
@@ -417,9 +417,9 @@
 		}
 	});
 });
-// 
-// 
-// 
+//
+//
+//
 // =======================
 // = ФИЛЬТР ДЛЯ КАТАЛОГА =
 // =======================
@@ -440,16 +440,16 @@
 
 	// кнопка reset фильтра
 	$('#catalog-filter-reset-button').on('click', function (event) {
-		
+
 	});
 
 	// кнопка submit фильтра
 	$('#catalog-filter-submit-button').on('click', function (event) {
 		event.preventDefault();
 
-		// 
+		//
 		// отправка значений с формы фильтра на сервер
-		// 
+		//
 
 		$('.filter').addClass('filter--closed');
 	});
@@ -471,6 +471,30 @@ $(function(){
 		}
 	);
 });
-// 
-// 
-// 
+//
+//
+//
+// =======================
+// = Включение горизонтального скролла на тач устройствах =
+// =======================
+$(function() {
+	if( $('.js-scroll-touch').length > 0 ) {
+		if(parseInt(window.innerWidth) < 1024) {
+			$('.js-scroll-touch').jScrollPane({
+				autoReinitialise : true,
+			});
+		} else {
+			$('.js-scroll-touch').jScrollPane().data('jsp').destroy();
+		}
+
+		$(window).on('resize', function () {
+			if(parseInt(window.innerWidth) < 1024) {
+				$('.js-scroll-touch').jScrollPane({
+					autoReinitialise : true,
+				});
+			} else {
+				$('.js-scroll-touch').jScrollPane().data('jsp').destroy();
+			}
+		});
+	}
+});
