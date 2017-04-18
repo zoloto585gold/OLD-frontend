@@ -478,15 +478,7 @@ $(function(){
 // = Включение горизонтального скролла на тач устройствах =
 // =======================
 $(function() {
-	if(parseInt(window.innerWidth) < 1024) {
-		$('.js-scroll-touch').jScrollPane({
-			autoReinitialise : true,
-		});
-	} else {
-		$('.js-scroll-touch').jScrollPane().data('jsp').destroy();
-	}
-
-	$(window).on('resize', function () {
+	if( $('.js-scroll-touch').length > 0 ) {
 		if(parseInt(window.innerWidth) < 1024) {
 			$('.js-scroll-touch').jScrollPane({
 				autoReinitialise : true,
@@ -494,5 +486,15 @@ $(function() {
 		} else {
 			$('.js-scroll-touch').jScrollPane().data('jsp').destroy();
 		}
-	});
+
+		$(window).on('resize', function () {
+			if(parseInt(window.innerWidth) < 1024) {
+				$('.js-scroll-touch').jScrollPane({
+					autoReinitialise : true,
+				});
+			} else {
+				$('.js-scroll-touch').jScrollPane().data('jsp').destroy();
+			}
+		});
+	}
 });
