@@ -837,13 +837,13 @@ html, body { margin: 0; padding: 0; }
 	&-form {
 		display: inline-block;
 		width: 245px;
-		.step1{
+		&__step1{
 			display: none;
 			&.is-active{
 				display: block;
 			}
 		}
-		.step2{
+		&__step2{
 			display: none;
 			padding-top: 110px;
 			font-size: 17px;
@@ -1275,10 +1275,10 @@ html, body { margin: 0; padding: 0; }
 		&-form{
 			width: 100%;
 			display: block;
-		}
-		.step2{
-			padding: 40px 0;
-			text-align: center;
+			&__step2{
+				padding: 40px 0;
+				text-align: center;
+			}
 		}
 	}
 }
