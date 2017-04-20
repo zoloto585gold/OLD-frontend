@@ -26,7 +26,7 @@ var sourcemaps = require('gulp-sourcemaps');
 	--START--
 */
 /*
-	HTML INCLUDE 4 
+	HTML INCLUDE 4
 	"HEADER"
 */
 // html include header-top
@@ -78,7 +78,7 @@ gulp.task('make-header-block', ['html-include-header-top', 'html-include-header-
 
 
 /*
-	HTML INCLUDE 4 
+	HTML INCLUDE 4
 	"CATALOG PAGE"
 */
 
@@ -126,7 +126,7 @@ gulp.task('make-catalog-page-full', ['make-header-block', 'html-include-catalog-
 
 
 /*
-	HTML INCLUDE 4 
+	HTML INCLUDE 4
 	"INDEX PAGE"
 */
 // index-filter
@@ -171,7 +171,7 @@ gulp.task('make-index-page-full', ['make-header-block', 'make-index-filter'], fu
 
 
 /*
-	HTML INCLUDE 4 
+	HTML INCLUDE 4
 	"PRODUCT CARD PAGE"
 */
 // pcard page
@@ -205,7 +205,7 @@ gulp.task('make-pcard-page-full', ['make-header-block', 'make-pcard-page'], func
 
 
 /*
-	HTML INCLUDE 4 
+	HTML INCLUDE 4
 	"USER CABINET"
 */
 
@@ -340,29 +340,29 @@ gulp.task('make-jqueryteam', function () {
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('development/js/'));
 });
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /*
  * *************
  * NEW GULP FILE
@@ -371,7 +371,7 @@ gulp.task('make-jqueryteam', function () {
 
 // z585-all-css
 var z585AllScaffoldingList = [
-	// 
+	//
 	'development/less/scaffolding/mixins.less',
 	'development/less/scaffolding/layout__fonts.less',
 	'development/less/scaffolding/layout__external.less',
