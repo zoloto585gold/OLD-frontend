@@ -440,7 +440,7 @@ gulp.task('z585-css:local-scaff', function () {
 });
 
 gulp.task('z585-css:local-build', function () {
-	return gulp.src('development/less/z585-all-list.prod.less')
+	return gulp.src('development/less/z585-all-list.local.less')
 		.pipe(less())
 		.pipe(cssmin())
 		.pipe(rename('z585_all.min.css'))
