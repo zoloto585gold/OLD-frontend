@@ -837,6 +837,20 @@ html, body { margin: 0; padding: 0; }
 	&-form {
 		display: inline-block;
 		width: 245px;
+		&__step1{
+			display: none;
+			&.is-active{
+				display: block;
+			}
+		}
+		&__step2{
+			display: none;
+			padding-top: 110px;
+			font-size: 17px;
+			&.is-active{
+				display: block;
+			}
+		}
 		&__label {
 			position: relative;
 			display: block;
@@ -854,6 +868,13 @@ html, body { margin: 0; padding: 0; }
 					width: 20px;
 					height: 20px;
 					margin: 7px auto 0;
+				}
+			}
+
+			&.has-error{
+				.pcard-gift-form__field{ .-solid-(#c93232); }
+				.pcard-gift-form__error-msg{
+					display: block;
 				}
 			}
 		}
@@ -895,6 +916,15 @@ html, body { margin: 0; padding: 0; }
 
 			&:hover,
 			&:focus { .-solid-(#c93232); }
+		}
+
+		&__error-msg{
+			display: none;
+			position: absolute;
+			top: 40px;
+			left: 0;
+			font-size: 11px;
+			color: #c93232;
 		}
 
 		&__message {
@@ -1245,6 +1275,10 @@ html, body { margin: 0; padding: 0; }
 		&-form{
 			width: 100%;
 			display: block;
+			&__step2{
+				padding: 40px 0;
+				text-align: center;
+			}
 		}
 	}
 }
