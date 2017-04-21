@@ -274,6 +274,9 @@ gulp.task('make-ucab-all-page-full', ['make-ucab-page-full', 'make-ureg-page-ful
 		}))
 		.pipe(gulp.dest('development'));
 });
+
+
+
 /************************
 	SHAME@html-including,
 	не используется,
@@ -368,7 +371,34 @@ gulp.task('make-jqueryteam', function () {
  * NEW GULP FILE
  * *************
  */
-
+// 
+// 
+// 
+// 
+// 
+// 
+// HTML Building
+// 
+// 
+// html:build
+gulp.task('html:build', function () {
+	return gulp.src(['development/htmls/*.tmpl', '!development/htmls/your-page.tmpl'])
+		.pipe(fileinclude({
+			prefix: '@@'
+		}))
+		.pipe(rename({
+			extname: '.html'
+		}))
+		.pipe(gulp.dest('development'));
+});
+// 
+// 
+// 
+// 
+// 
+// CSS Building
+// 
+// 
 // z585-all-css
 var z585AllScaffoldingList = [
 	//
