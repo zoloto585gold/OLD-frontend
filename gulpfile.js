@@ -371,15 +371,15 @@ gulp.task('make-jqueryteam', function () {
  * NEW GULP FILE
  * *************
  */
-// 
-// 
-// 
-// 
-// 
-// 
+//
+//
+//
+//
+//
+//
 // HTML Building
-// 
-// 
+//
+//
 // html:build
 gulp.task('html:build', function () {
 	return gulp.src(['development/htmls/*.tmpl', '!development/htmls/your-page.tmpl'])
@@ -391,14 +391,14 @@ gulp.task('html:build', function () {
 		}))
 		.pipe(gulp.dest('development'));
 });
-// 
-// 
-// 
-// 
-// 
+//
+//
+//
+//
+//
 // CSS Building
-// 
-// 
+//
+//
 // z585-all-css
 var z585AllScaffoldingList = [
 	//
@@ -423,6 +423,7 @@ var z585AllScaffoldingList = [
 	'development/less/scaffolding/pages__user-cabinet.less',
 	'development/less/scaffolding/pages__store.less',
 	'development/less/scaffolding/pages__stock.less',
+	'development/less/scaffolding/pages__favorites.less',
 
 	// latest legacy
 	'development/less/scaffolding/legacy__latest.less',
@@ -472,7 +473,7 @@ gulp.task('z585-css:local-scaff', function () {
 gulp.task('z585-css:local-build', function () {
 	return gulp.src('development/less/z585-all-list.local.less')
 		.pipe(less())
-		.pipe(cssmin())
+		// .pipe(cssmin())
 		.pipe(rename('z585_all.min.css'))
 		.pipe(gulp.dest('development/css'));
 });
