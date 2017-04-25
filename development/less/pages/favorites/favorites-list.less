@@ -1,0 +1,31 @@
+.favorites{
+    .catalog-item{
+        &__fav{
+            display: block;
+            top: 5px;
+            left: auto;
+            right: 5px;
+            width: 24px;
+            height: 24px;
+            overflow: hidden;
+            &:before,
+            &--is-active{
+                height: 24px;
+                background-position: -83px -260px !important;
+                margin-top: 0;
+            }
+            &:hover{
+                &:before{
+                    background-position: -109px -260px !important;
+                }
+            }
+        }
+        &:hover{
+            .catalog-item__img{
+                &:after{
+                    display: none;
+                }
+            }
+        }
+    }
+}
