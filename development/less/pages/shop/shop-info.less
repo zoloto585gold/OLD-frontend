@@ -1,5 +1,6 @@
 .shop-info{
     background: #f7f6f6;
+    font-family: 'Circe', sans-serif;
     &__header{
         background: #fff;
         border-bottom: 1px solid #c4c4c4;
@@ -64,7 +65,7 @@
             }
         }
     }
-    &__location{
+    &__locations{
         float: right;
         width: 500px;
         padding: 10px 0 10px 20px;
@@ -90,13 +91,22 @@
             &--point{
                 width: 24px;
                 background-position: -30px -356px;
-                margin-left: 6px;
+                margin-left: 4px;
             }
             &--clock{
                 background-position: -57px -358px;
             }
             &--phone{
                 background-position: -90px -358px;
+            }
+            &--yandex{
+                background-position: -40px -252px;
+                width: 40px;
+                height: 40px;
+            }
+            &--gps{
+                background-position: -122px -353px;
+                height: 40px;
             }
         }
         span{
@@ -106,6 +116,73 @@
         }
         a{
             border-bottom: 1px dotted #333;
+        }
+    }
+    &__location{
+        background: #fff;
+    }
+    &__location-top{
+        margin-top: -5px;
+        padding: 10px 0;
+        position: relative;
+        &:before,
+        &:after{
+            content: '';
+            display: block;
+            width: 100%;
+            height: 5px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            background: url(@img-thingies-shadow-5) no-repeat;
+        }
+        &:before{
+            top: -5px;
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+        &:after{
+            top: 100%;
+        }
+        .shop-info__list-item{
+            float: left;
+            width: 250px;
+            margin-bottom: 0;
+            line-height: 16px;
+            padding-top: 5px;
+            &--text{
+                padding-top: 12px;
+                font-size: 18px;
+            }
+            &--gps{
+                padding-left: 20px;
+            }
+            i{
+                margin-top: -5px;
+            }
+            a:not(.button){
+                border-bottom: none;
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+            .button{
+                display: block;
+                font-size: 11px;
+                padding: 0 15px;
+                text-align: center;
+                margin-top: -4px;
+            }
+        }
+    }
+    &__location-text{
+        padding: 15px 0;
+        p{
+            font-size: 14px;
+            font-weight: 300;
         }
     }
 }

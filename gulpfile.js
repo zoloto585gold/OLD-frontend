@@ -424,6 +424,7 @@ var z585AllScaffoldingList = [
 	'development/less/scaffolding/pages__store.less',
 	'development/less/scaffolding/pages__stock.less',
 	'development/less/scaffolding/pages__favorites.less',
+	'development/less/scaffolding/pages__shop.less',
 
 	// latest legacy
 	'development/less/scaffolding/legacy__latest.less',
@@ -479,3 +480,10 @@ gulp.task('z585-css:local-build', function () {
 });
 
 gulp.task('z585-css', ['z585-css:local-scaff', 'z585-css:prod-scaff', 'z585-css:local-build', 'z585-css:prod-build']);
+
+gulp.task('watch', function() {
+	gulp.watch( ['development/htmls/**/*.{tmpl,html}'], ['html:build'] );
+    gulp.watch( 'development/less/**/*.less', ['z585-css'] );
+});
+
+gulp.task('default', ['watch']);
