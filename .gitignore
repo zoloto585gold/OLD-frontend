@@ -1,7 +1,15 @@
 # ignore node modules
-node_modules/
-development/css/*.css
-production/css/*.css
 
+# ENVIROMENT
+node_modules/
+
+
+# DEVELOPMENT
+development/css/*.css
 development/less/z585-all-list.prod.less
 development/less/z585-all-list.local.less
+
+
+
+# PRODUCTION
+production/css/*.css
