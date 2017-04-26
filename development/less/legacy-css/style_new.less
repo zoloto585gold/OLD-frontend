@@ -302,9 +302,13 @@ span.modef_num{
 
 
 .content_pagination {
-	padding: 30px 0;
+	padding: 15px 0;
 	box-shadow: 0 2px 1.58px 0.42px rgba(0, 0, 0, 0.15);
-	min-height: 90px;
+	min-height: 50px;
+
+	@media @desktop {
+		display: none;
+	}
 }
 .content_pagination.noshadow{
 	box-shadow: none;
@@ -1528,6 +1532,7 @@ fieldset.select_type_content{
 }
 
 .total-elements-informer{
+	display: none;
 	float: right;
 	margin: 20px 0 25px;	
 	font-family: 'Circle';
