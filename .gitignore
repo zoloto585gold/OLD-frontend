@@ -13,3 +13,4 @@ development/less/z585-all-list.local.less
 
 # PRODUCTION
 production/css/*.css
+/production/images/*
