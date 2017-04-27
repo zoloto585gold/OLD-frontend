@@ -19,6 +19,15 @@
 	$('.form-textline').on('focusout', function (event) {
 		$(this).removeClass('form-textline--active');
 	});
+
+
+	// кастомизированное поле для сообщений  textarea (form-textbox.less)
+	$('.form-textbox').on('focusin', function (event) {
+		$(this).addClass('form-textbox--active');
+	});
+	$('.form-textbox').on('focusout', function (event) {
+		$(this).removeClass('form-textbox--active');
+	});
 });
 // 
 // 
