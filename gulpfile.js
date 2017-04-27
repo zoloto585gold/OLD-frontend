@@ -479,3 +479,10 @@ gulp.task('z585-css:local-build', function () {
 });
 
 gulp.task('z585-css', ['z585-css:local-scaff', 'z585-css:prod-scaff', 'z585-css:local-build', 'z585-css:prod-build']);
+
+gulp.task('watch', function() {
+	gulp.watch( ['development/htmls/**/*.{tmpl,html}'], ['html:build'] );
+    gulp.watch( 'development/less/**/*.less', ['z585-css'] );
+});
+
+gulp.task('default', ['watch']);

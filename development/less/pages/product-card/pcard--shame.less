@@ -815,7 +815,8 @@ html, body { margin: 0; padding: 0; }
 
 
 /*******************PCARD-MAIN:Gift**********************/
-.pcard-gift {
+.pcard-gift,
+.pcard-coming {
 	display: none;
 	&__text {
 		.font-circe_regular(14px, 16px, #666);
@@ -872,8 +873,11 @@ html, body { margin: 0; padding: 0; }
 			}
 
 			&.has-error{
-				.pcard-gift-form__field{ .-solid-(#c93232); }
-				.pcard-gift-form__error-msg{
+				.pcard-gift-form__field,
+				.pcard-coming-form__field
+				{ .-solid-(#c93232); }
+				.pcard-gift-form__error-msg,
+				.pcard-coming-form__error-msg{
 					display: block;
 				}
 			}
@@ -1265,7 +1269,8 @@ html, body { margin: 0; padding: 0; }
 		}
 	}
 
-	.pcard-gift{
+	.pcard-gift,
+	.pcard-coming{
 		&__body{
 			padding: 0 25px 25px;
 		}
