@@ -1,112 +1,3 @@
-/*
-
- */
-// ==============
-// == forms.js ==
-// ==============
-// 
-// 
-// что делает: стилизует состояния для полей форм,
-// в зависимости от действия/манипуляции с полем формы
-;$(function () {
-	// старый вариант текстовго поля
-	$('.form').on('focusin', function (event) {
-		var $_this = $(event.target);
-		if($_this.hasClass('form__field-input')) $_this.parent().addClass('focus');
-	});
-	$('.form').on('focusout', function (event) {
-		var $_this = $(event.target);
-		if($_this.hasClass('form__field-input')) $_this.parent().removeClass('focus');
-	});
-
-
-	// кастомизированное текстовое поле input type="text" (form-textline.less)
-	$('.form-textline').on('focusin', function (event) {
-		$(this).addClass('form-textline--active');
-	});
-	$('.form-textline').on('focusout', function (event) {
-		$(this).removeClass('form-textline--active');
-	});
-});
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// =======================
-// = ПОПАП ВЫБОРА ГОРОДА =
-// =======================
-;$(function () {
-	function topGeoModal(a) {
-		if(a) {
-			$('.top-geo-modal').addClass('top-geo-modal--active');
-			$('.top-geo-modal__inner').addClass('top-geo-modal__inner--active');
-		}
-		else if(!a) {
-			$('.top-geo-modal').removeClass('top-geo-modal--active');
-			$('.top-geo-modal__inner').removeClass('top-geo-modal__inner--active');
-		}
-	}
-
-	//
-	// Search
-	//
-	$(document).on('keyup change', '.js-top-geo-form__search input', function() {
-		var query = $.trim($(this).val());
-		var tag = 'span';
-		var regex = RegExp(query, 'gi');
-		var replacement = '<'+ tag +'>$&</'+ tag +'>';
-		var scrollApi = $('.js-top-geo-form__cities').data('jsp');
-
-		$('.js-top-geo-form__cities a[data-city] span').contents().unwrap();
-
-		if (query.length < 2) {
-			return false;
-		}
-
-		$('.js-top-geo-form__cities a[data-city]').each(function() {
-			if ($(this).text().search(regex) != -1 && scrollApi !== false) {
-				scrollApi.scrollToElement(this);
-				scrollApi = false;
-			}
-
-			$(this).html(function() {
-				return $(this).text().replace(regex, replacement);
-			});
-		});
-	});
-
-	$(document).on('click', '.top-geo__button', function () {
-		topGeoModal(true);
-	});
-
-	$(document).on('click', '.top-geo-modal__close', function () {
-		topGeoModal(false);
-	});
-
-	$(document).on('click', '.top-geo-modal', function (event) {
-		if($(event.target).hasClass('top-geo-modal')) topGeoModal(false);
-	});
-
-	$(document).on('click', '.top-geo-form a', function (event) {
-		event.preventDefault();
-
-		var cityName = $(this).text(); //выбранный город
-
-		$('.js-top-geo-form__search input').val("").trigger("keyup"); //очистим город в строке поиска
-
-		// код взаимодейтвия с сервером для установки выбранного города
-		$.cookie('city', cityName, { expires: 365, path: '/' });
-		set_city();
-		$('.top-geo__button>span').text(cityName); // устанавлмвает в рзамтке в шапке название выбранного города
-		$('.top-geo-form__chosen-city-result').text(cityName); // для мобильной версии
-		topGeoModal(false); // закрывает окно
-	});
-});
 // 
 // 
 // 
@@ -134,87 +25,9 @@
 
 
 
-	// ищем элемент с css-классом '.alt-main-nav'
-	// у этого элемента берём значение data-атрибута 'data-main-nav'
-	// парсим эту JSON-строку в нормальный JavaScript-объект
-	// этот объект/структуру называем mainNavData
-	// 
-	// объявляем переменную mainNavBanners, которая представляет
-	// массив из html-кусков групп баннеров для каждой вкладки
-	// 8 вкладок = 8 баннеров
-	// 
-	var mainNavData = JSON.parse($('.alt-main-nav').attr('data-main-nav'));
-	var mainNavBanners = [];
-
-
-
 	// -----------------------
 	// вспомогательные функции
 	// -----------------------
-	
-	
-
-	// 
-	// функция, которая делает html-шаблонизацию для объекта/струтктуры mainNavData
-	// и записвает этот html с данными в массив mainNavBanners
-	// 
-	function mainNavBannersHTMLWrapper () {
-		mainNavData.forEach(function (item, index, array) {
-			var bannersHTML = '';
-
-			if(item['nav-banners'] !== undefined) {
-				Array.prototype.forEach.call(item['nav-banners']['nav-banners-item'], function (item, index, array) {
-					var image = '<a class="nav-banners-link" href="' + item['href'] + '"><img class="nav-banners-link__img" src="' + item['img'] + '" alt=""></a>';
-					var button = item['button'] !== false ? ('<a class="b-button nav-banners-button" href="' + item['href'] + '">' + item['button'] + '</a>') : '';
-					var banner = '<div class="nav-banners__item  nav-banners__item--type-' + item['type'] + '">' + image + button + '</div>';
-
-					bannersHTML += banner;
-				});
-				mainNavBanners[item['tab-number']] = '<div class="nav-banners  nav-banners--type-' + item['nav-banners']['nav-banners-type'] + '">' + bannersHTML + '</div>';
-			}
-		});
-
-		return mainNavBanners;
-	}
-
-
-	// 
-	// функция, которая вставляет в html-разметку главной навигации на странице 
-	// сгенерированную разметку баннеров
-	// каждая группа баннеров вставляется в свой лист
-	// 
-	function addMainNavBanners() {
-		if($('.nav-banners').length === 0) {
-			mainNavBanners.forEach(function (item, index, array) {
-				$('.main-nav__item[data-inner-list=' + index + ']').append(item);
-			});
-		}
-	}
-
-
-
-	// 
-	// функция, котрая удаляет баннеры из вкладок
-	// 
-	function removeMainNavBanners() {
-		$('.nav-banners').remove();
-	}
-
-
-	// 
-	// функция, которая устанавливает значение для data-атрибутов фонов и фоновых цветов
-	// выпадающих вкладок главной навигации
-	// 
-	function setMainNavBGImages() {
-		mainNavData.forEach(function (item, index, array) {
-			$('.alt-main-nav__item[data-inner-list=' + item['tab-number'] + ']').attr('data-inner-background-image', item['inner-background-image']);
-			$('.alt-main-nav__item[data-inner-list=' + item['tab-number'] + ']').attr('data-inner-background-color', item['inner-background-color']);
-			$('.alt-main-nav__item[data-inner-list=' + item['tab-number'] + ']').attr('data-outer-background-image', item['outer-background-image']);
-			$('.alt-main-nav__item[data-inner-list=' + item['tab-number'] + ']').attr('data-outer-background-color', item['outer-background-color']);
-			console.log(item['tab-number']);
-		});
-	}
-
 
 	// закрывает touchnavi и/или сбрасывает настройки активности навгиции, 
 	// которые доступны только для touch-устройств
@@ -263,7 +76,7 @@
 				.css({'background-image' : bg})
 				.attr('data-inner-list', innerListId);
 		}
-
+		
 	}
 	function resetDesktopNaviInnerListWrapper() {
 		$('.navi-inner-list-wrapper').removeClass('navi-inner-list-wrapper--active');
@@ -308,7 +121,7 @@
 			if($wanted.hasClass('top-sandwich__button--active')) resetTouchNavi();
 
 			// открываем меню
-			else {
+			else { 
 				$('.section').addClass('section--offset-left');
 				$('.header-bottom').removeClass('section--offset-left');
 
@@ -377,7 +190,7 @@
 	var $mainNav = $('.main-nav'),
 		$mainNavItems = $('.main-nav__item'),
 		$altMainNav = $('.alt-main-nav'),
-
+		
 		$headerBottom = $('.header-bottom');
 
 	// #ref
@@ -452,9 +265,9 @@
 	});
 
 
+	
 
-
-
+	
 	// #ref
 	function resetNaviInnerList(el) {
 		var innerListId = $(this).attr('data-inner-list');
@@ -467,33 +280,6 @@
 		resetDesktopNaviInnerListWrapper(innerListId);
 		console.log(innerListId);
 	}
-
-
-	// 
-	// инициализация баннеров
-	// в главной навигации
-	// 
-	mainNavBannersHTMLWrapper();
-	setMainNavBGImages();
-
-	// убираю старые значения которые в верстке есть, в проде убрать строку
-	// removeMainNavBanners(); 
-
-	// адаптайзер
-	if(parseInt(window.innerWidth) > 1024) {
-		addMainNavBanners();
-	} else {
-		removeMainNavBanners();
-	}
-
-	$(window).on('resize', function () {
-		if(parseInt(window.innerWidth) > 1024) {
-			addMainNavBanners();
-		} else {
-			removeMainNavBanners();
-		}
-	});
-
 
 	// (2) hover
 	// (3) hover
@@ -511,103 +297,4 @@
 			resetTouchNavi();
 		}
 	});
-
-
-
-
-
 });
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// ====================
-// = ПОДБОР УКРАШЕНИЯ =
-// ====================
-;$(function () {
-	var tab = 'index-filter__header',
-		$tab = $('.' + tab),
-		active = tab + '--active',
-
-		filter = 'filter-mini',
-		$filter = $('.' + filter),
-		opened = filter + '--opened';
-
-	$tab.on('click', function () {
-		if($filter.hasClass(opened)) {
-			$filter.removeClass(opened);
-			$tab.removeClass(active);
-		}
-		else {
-			$filter.addClass(opened);
-			$tab.addClass(active);
-		}
-	});
-});
-// 
-// 
-// 
-// =======================
-// = ФИЛЬТР ДЛЯ КАТАЛОГА =
-// =======================
-;$(function() { // фильтр для каталога
-	$('.js-filter-group-scroll-pane').jScrollPane({
-		autoReinitialise : true,
-		verticalDragMinHeight: 9,
-		verticalDragMaxHeight: 9,
-		horizontalDragMinWidth: 9,
-		horizontalDragMaxWidth: 9
-	});
-
-	// открытие закрытие фильтра
-	$('#catalog-filter-change-button').on('click', function (event) {
-		event.preventDefault();
-		$('.filter').hasClass('filter--closed') ? $('.filter').removeClass('filter--closed') : $('.filter').addClass('filter--closed');
-	});
-
-	// кнопка reset фильтра
-	$('#catalog-filter-reset-button').on('click', function (event) {
-
-	});
-
-	// кнопка submit фильтра
-	$('#catalog-filter-submit-button').on('click', function (event) {
-		event.preventDefault();
-
-		// 
-		// отправка значений с формы фильтра на сервер
-		// 
-
-		$('.filter').addClass('filter--closed');
-	});
-
-	// кнопка с выбранным тегом поиска
-	$('.filter-tags__tab').on('click', function (event) {
-		$(this).remove();
-	});
-});
-// Юля Остапенко
-$(function(){
-	$('#catalog_filter_form .js-scroll-pane').jScrollPane(
-		{
-			autoReinitialise : true,
-			verticalDragMinHeight: 9,
-			verticalDragMaxHeight: 9,
-			horizontalDragMinWidth: 9,
-			horizontalDragMaxWidth: 9
-		}
-	);
-});
-// 
-// 
-// 

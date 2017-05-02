@@ -28,37 +28,8 @@
 		</footer>
 	</div>
 
-	<script src="https://api-maps.yandex.ru/2.0-stable/?load=package.standard,package.geoObjects&amp;lang=ru-RU" type="text/javascript"></script>
+
 	@@include('scaff/layout__js-list.html')
-	<script src="js/handlers/basket.js"></script>
-	<script>
-		var Z585 = Z585 || {};
-
-		Z585.define = function (namespace) {
-			var parts = namespace.split('.'),
-				parent = Z585,
-				i;
-
-			if(parts[0] === 'Z585') {
-				parts = parts.slice(1);
-			}
-
-			for(i = 0; i < parts.length; i++) {
-				if(typeof parent[parts[i]] === 'undefined') {
-					parent[parts[i]] = {};
-				}
-
-				parent = parent[parts[i]];
-			}
-
-			return parent;
-		};
-
-		(function () {
-			var modalWindow = Z585.define('Z585.uikit.modalWindow');
-		})();
-
-		
-	</script>
+	<script src="js/render/basket.js"></script>
 </body>
 </html>
