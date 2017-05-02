@@ -29,6 +29,24 @@ gulp.task('make-msalnikov-js', function () {
 });
 
 
+// App
+var appList = [
+		'development/js/app/z585.js',
+		'development/js/app/z585.uiux.modalwindow.js',
+		// 'development/js/app/.js',
+	];
+
+gulp.task('js:app', function () {
+	return gulp.src(appList)
+		.pipe(sourcemaps.init({loadMaps: true}))
+		.pipe(concat('app.js'))
+		.pipe(uglifyjs())
+		.pipe(rename('app.min.js'))
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest('development/js/'));
+});
+
+
 
 // jQuery Team
 var jQueryTeamPath = 'development/js/jqueryteam/', // 'js/jqueryteam_in/''
