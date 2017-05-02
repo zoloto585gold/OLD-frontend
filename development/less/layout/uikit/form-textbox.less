@@ -1,0 +1,57 @@
+/*
+	КАСТОМИЗАЦИЯ ДЛЯ <textarea>
+*/
+.form-textbox {
+	position: relative;
+
+	display: block;
+	height: 115px;
+
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+
+	border: 1px solid #e2e2e2;
+	border-radius: 3px;
+
+
+	&__default {
+		display: block;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+
+		background-color: #fff;
+
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+
+		text-transform: uppercase;
+		font: 400 14px 'Circe';
+		color: #999;
+
+		outline: none;
+		border: 0;
+		resize: none;
+	}
+}
+
+
+.form-textbox--active {
+	border-color: #b32024;
+}
+
+
+.form-textbox--invalid {
+	border-color: #b32024;
+}
+
+
+.form-textbox--valid {
+	/* border-color: #b32024;*/
+}
