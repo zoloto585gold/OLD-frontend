@@ -5,7 +5,7 @@
 	@@include('scaff/layout__css-list.html')
 
 
-	<title>Title your page</title>
+	<title>Каталог</title>
 
 
 	<!-- здесь подключай свои стили -->
@@ -19,15 +19,16 @@
 
 
 		<main class="page__content">
-			@@include('pages/favorites/favorites.tmpl')
+			@@include('scaff/pages__catalog.html')
 		</main>
 
 
-		<footer class="footer">
+		<footer class="page__footer">
 			@@include('scaff/layout__footer.html')
 		</footer>
 	</div>
 
 	@@include('scaff/layout__js-list.html')
+	<script src="js/catalog_filter_script.js"></script>
 </body>
 </html>
