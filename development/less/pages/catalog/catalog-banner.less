@@ -1,0 +1,13 @@
+.catalog-banner{
+    position: relative;
+    height: 240px;
+    @media screen and (max-width: @tablet_a-min) {
+      display: none;
+    }
+    &__img{
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
