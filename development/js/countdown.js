@@ -19,7 +19,7 @@
       var Todayminutes    = Today.getMinutes();
       var Todayseconds    = Today.getSeconds();
 
-      var DeadLine        = new Date('May 5, 2017 18:30');
+      var DeadLine        = new Date(this.$el.data('date'));
       var DeadLineday     = DeadLine.getDate();
       var DeadLinehours   = DeadLine.getUTCHours();
       var DeadLineminutes = DeadLine.getMinutes();

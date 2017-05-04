@@ -1,13 +1,13 @@
 // Countdown
 .header-middle__countdown{
     float: left;
-    margin: 3px 0 0 180px;
+    margin: 8px 0 0 180px;
     width: auto;
-    padding: 5px 10px 5px 0;
+    padding: 2px 10px 2px 0;
     background: #f8f8f5;
     position: relative;
     @media @touch {
-        margin: 3px 0 0 15px;
+        margin: 8px 0 0 15px;
     }
     @media screen and (max-width:  @tablet_a-min){
         display: none;
@@ -19,9 +19,9 @@
         width: 100%;
         height: 5px;
         position: absolute;
-        top: 100%;
         left: 0;
         right: 0;
+        top: 100%;
         background: url(@img-thingies-shadow-1) no-repeat top center;
     }
 
@@ -46,7 +46,7 @@
             font-weight: 900;
             color: #e14e4d;
             position: absolute;
-            top: 15px;
+            top: 10px;
             right: -8px;
         }
 
@@ -60,8 +60,8 @@
       .count-title {
         display: block;
         margin-bottom: 0px;
-        font: normal 10px 'Circe';
-        color: #1a1a1a;
+        font: normal 8px 'Circe';
+        color: #999;
         text-transform: uppercase;
       }
 
@@ -170,11 +170,12 @@
     }
     .header-middle__countdown-text{
         float: left;
-        margin: 3px 0 0 10px;
+        margin: 8px 0 0 10px;
         font-family: 'Circe';
         font-size: 11px;
         color: #3d3d3d;
         text-transform: uppercase;
+        line-height: 1.2;
         span{
             display: block;
             font-weight: 300;
