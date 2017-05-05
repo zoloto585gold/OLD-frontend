@@ -76,6 +76,7 @@ var jQueryTeamPath = 'development/js/jqueryteam/', // 'js/jqueryteam_in/''
 		jQueryTeamPath + 'jquery.easydropdown.js',
 		jQueryTeamPath + 'jquery.maskedinput.min.js',
 		jQueryTeamPath + 'selectivizr-min.js',
+		jQueryTeamPath + 'TweenMax.min.js',
 	];
 gulp.task('make-jqueryteam', function () {
 	return gulp.src(jQueryTeamOrderList)
@@ -231,4 +232,3 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', ['watch']);
-
