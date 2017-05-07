@@ -23,7 +23,7 @@
 			<button class="overtop-banner__close-btn"></button>
 		</div>
 
-		<div class="section header-top header-top--position_fixed">
+		<div class="section header-top header-top--position_fixed header-top--position_second">
 			<div class="section__inner header-top__inner">
 				<div class="header-top__item  top-sandwich">
 					<div class="top-sandwich__button"><span class="top-sandwich__button-text">Скрыть каталог</span></div>
@@ -2258,7 +2258,9 @@
 		$('.overtop-banner__close-btn').on('click', function() {
 			var $wrap = $(this).closest('[data-wrap]');
 			
-			$wrap.slideUp(300);
+			$wrap.slideUp(300, function() {
+				$('.header-top').removeClass('header-top--position_second');
+			});
 
 			$.cookie('overtop-banner', 'ok', {
 				expires: 5
