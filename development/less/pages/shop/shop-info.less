@@ -36,6 +36,10 @@
         float: left;
         width: 500px;
         margin-bottom: 25px;
+        @media @touch{
+            float: none;
+            width: 100%;
+        }
         .fotorama{
             &__nav-wrap{
                 position: absolute;
@@ -70,6 +74,11 @@
         width: 500px;
         padding: 10px 0 10px 20px;
         margin-bottom: 25px;
+        @media @touch{
+            float: none;
+            width: 100%;
+            padding: 0;
+        }
     }
     &__list-item{
         display: inline-block;
@@ -156,6 +165,13 @@
             &--text{
                 padding-top: 12px;
                 font-size: 18px;
+                @media @touch{
+                    float: none;
+                    width: 100%;
+                    text-align: center;
+                    padding-top: 0;
+                    padding-bottom: 10px;
+                }
             }
             &--gps{
                 padding-left: 20px;
