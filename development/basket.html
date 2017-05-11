@@ -604,54 +604,53 @@
 		<main class="page__content">
 			<!-- "BASKET-LIST" -->
 <div class="section  basket-list-section">
-	<div class="section__inner  basket-list-section__inner">
-		<div class="basket-list">
-	<article class="basket-item">
-		<a href="#" class="basket-item__pic"><img src="https://zoloto585.ru/upload/resize_cache/iblock/5f4/999_999_2/IMG_26504s.jpg" alt="alt" width="48" height="48"></a>
-		<div class="basket-item__info">
-			<h2 class="basket-item__title">КОЛЬЦО С ОДНИМ КАМНЕМ (БРИЛЛИАНТ) ИЗ БЕЛОГО ЗОЛОТА 585 ПРОБЫ</h2>
-			<div class="basket-item__store">УЛ. ЩОРСА, 29 ЛИТЕР А</div>
-			<div class="basket-item__amount">1 шт.</div>
-			<div class="basket-item__cost">9 910 РУБ.</div>
-			<button class="b-button  basket-item__button">Изменить магазин</button>
-			<button class="b-button  basket-item__button  basket-item__button--remove">Удалить</button>
-		</div>
-	</article>
-	<article class="basket-item">
-		<a href="#" class="basket-item__pic"><img src="https://zoloto585.ru/upload/resize_cache/iblock/5f4/999_999_2/IMG_26504s.jpg" alt="alt" width="48" height="48"></a>
-		<div class="basket-item__info">
-			<h2 class="basket-item__title">КОЛЬЦО С ОДНИМ КАМНЕМ (БРИЛЛИАНТ) ИЗ БЕЛОГО ЗОЛОТА 585 ПРОБЫ</h2>
-			<div class="basket-item__store">УЛ. ЩОРСА, 29 ЛИТЕР А</div>
-			<div class="basket-item__amount">1 шт.</div>
-			<div class="basket-item__cost">9 910 РУБ.</div>
-			<button class="b-button  basket-item__button">Изменить магазин</button>
-			<button class="b-button  basket-item__button  basket-item__button--remove">Удалить</button>
-		</div>
-	</article>
-	<article class="basket-item">
-		<a href="#" class="basket-item__pic"><img src="https://zoloto585.ru/upload/resize_cache/iblock/5f4/999_999_2/IMG_26504s.jpg" alt="alt" width="48" height="48"></a>
-		<div class="basket-item__info">
-			<h2 class="basket-item__title">КОЛЬЦО С ОДНИМ КАМНЕМ (БРИЛЛИАНТ) ИЗ БЕЛОГО ЗОЛОТА 585 ПРОБЫ</h2>
-			<div class="basket-item__store">УЛ. ЩОРСА, 29 ЛИТЕР А</div>
-			<div class="basket-item__amount">1 шт.</div>
-			<div class="basket-item__cost">9 910 РУБ.</div>
-			<button class="b-button  basket-item__button">Изменить магазин</button>
-			<button class="b-button  basket-item__button  basket-item__button--remove">Удалить</button>
-		</div>
-	</article>
-</div>
+	<div class="section__inner  basket-list-section__inner" id="basket-list-section">
+		<!--  -->
+		<div class="basket-total">Сумма: <span class="basket-total__value" id="basket-total-value"></span></div>
 	</div>
 </div>
-<!-- END-of-"BASKET-LIST" -->
+<!-- END-of-"BASKET-LIST"
 
 
 <!-- "BASKET-FORM" -->
 <div class="section  basket-form-section">
 	<div class="section__inner  basket-form-section__inner">
-		<div class="form-textline">
-	<input id="pcard-bonus-card-field" type="text" maxlength="16" class="form-textline__default">
-	<span class="form-textline__icon">1</span>
-</div>
+		<h2 class="basket-form-section__heading">КОНТАКТНАЯ ИНФОРМАЦИЯ</h2>
+		<form action="#" class="basket-form">
+			<div class="form-field  basket-form__field">
+				<label for="" class="form-field__label">Имя</label>
+				<div class="form-textline">
+					<input id="" type="text" class="form-textline__default">
+					<span class="form-textline__icon"></span>
+				</div>
+			</div>
+
+			<div class="form-field  basket-form__field">
+				<label for="" class="form-field__label">Телефон</label>
+				<div class="form-textline">
+					<input id="" type="text" class="form-textline__default">
+					<span class="form-textline__icon"></span>
+				</div>
+			</div>
+
+			<div class="form-field  basket-form__field">
+				<label for="" class="form-field__label">Адрес электронной почты</label>
+				<div class="form-textline">
+					<input id="" type="text" class="form-textline__default">
+					<span class="form-textline__icon"></span>
+				</div>
+			</div>
+
+			<div class="form-field  basket-form__field">
+				<label for="" class="form-field__label">Комментарий к заказу</label>
+				<div class="form-textbox">
+					<textarea id="" class="form-textbox__default"></textarea>
+				</div>
+			</div>
+
+			<input type="submit" class="b-button  basket-form__submit" value="Оформить заказ">
+		</form>
+		
 	</div>
 </div>
 <!-- END-of-"BASKET-FORM" -->
@@ -674,7 +673,8 @@
 				<div class="footer-info-item  footer-info-item--prices">
 					Низкие цены
 				</div>
-
+</div>
+</div>
 <!-- END-of-"FOOTER-INFO" -->
 
 
@@ -741,7 +741,11 @@
 		</footer>
 	</div>
 
+
 		<script src="js/jqueryteam.min.js"></script>
+	<script src="js/app.min.js"></script>
+	<script src="js/libs/jsrender/jsrender.js"></script>
 	<script src="js/inc/forms.js"></script>
+	<script src="js/render/basket.js"></script>
 </body>
 </html>

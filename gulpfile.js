@@ -19,281 +19,6 @@ var sourcemaps = require('gulp-sourcemaps');
 
 
 
-/************************
-	SHAME@html-including,
-	не используется,
-	переделать
-	--START--
-*/
-/*
-	HTML INCLUDE 4
-	"HEADER"
-*/
-// html include header-top
-gulp.task('html-include-header-top', function () {
-	return gulp.src('development/htmls/blocks/header/top/_main.inc.html')
-		.pipe(fileinclude({
-			prefix: '@@'
-		}))
-		.pipe(rename({
-			basename: 'top'
-		}))
-		.pipe(gulp.dest('development/htmls/blocks/header'));
-});
-
-// html include header-middle
-gulp.task('html-include-header-middle', function () {
-	return gulp.src('development/htmls/blocks/header/middle/_main.inc.html')
-		.pipe(fileinclude({
-			prefix: '@@'
-		}))
-		.pipe(rename({
-			basename: 'middle'
-		}))
-		.pipe(gulp.dest('development/htmls/blocks/header'));
-});
-
-// html include header-bottom
-gulp.task('html-include-header-bottom', function () {
-	return gulp.src('development/htmls/blocks/header/bottom/_main.inc.html')
-		.pipe(fileinclude({
-			prefix: '@@'
-		}))
-		.pipe(rename({
-			basename: 'bottom'
-		}))
-		.pipe(gulp.dest('development/htmls/blocks/header'));
-});
-
-// make header block
-gulp.task('make-header-block', ['html-include-header-top', 'html-include-header-middle', 'html-include-header-bottom'], function () {
-	return gulp.src(['development/htmls/blocks/header/top.html', 'development/htmls/blocks/header/middle.html', 'development/htmls/blocks/header/bottom.html'])
-		.pipe(concat('header.html'))
-		.pipe(gulp.dest('development/htmls/blocks'));
-});
-
-
-
-
-
-
-/*
-	HTML INCLUDE 4
-	"CATALOG PAGE"
-*/
-
-// html include catalog-filter
-gulp.task('html-include-catalog-filter', function () {
-	return gulp.src('development/htmls/blocks/catalog/filter/main.inc.html')
-		.pipe(fileinclude({
-			prefix: '@@'
-		}))
-		.pipe(rename({
-			basename: 'filter'
-		}))
-		.pipe(gulp.dest('development/htmls/blocks/catalog'));
-});
-
-// catalog page
-gulp.task('make-catalog-page', ['html-include-catalog-filter'], function () {
-	return gulp.src('development/htmls/catalog.tmpl.html')
-		.pipe(fileinclude({
-			prefix: '@@',
-			// basepath: '/development/'
-		}))
-		.pipe(rename({
-			basename: 'catalog'
-		}))
-		.pipe(gulp.dest('development'));
-});
-
-// cataloп page FULL
-gulp.task('make-catalog-page-full', ['make-header-block', 'html-include-catalog-filter'], function () {
-	return gulp.src('development/htmls/catalog.tmpl.html')
-		.pipe(fileinclude({
-			prefix: '@@',
-			// basepath: '/development/'
-		}))
-		.pipe(rename({
-			basename: 'catalog'
-		}))
-		.pipe(gulp.dest('development'));
-});
-
-
-
-
-
-
-/*
-	HTML INCLUDE 4
-	"INDEX PAGE"
-*/
-// index-filter
-gulp.task('make-index-filter', function () {
-	return gulp.src('development/htmls/blocks/index/filter/_main.inc.html')
-		.pipe(fileinclude({
-			prefix: '@@',
-			// basepath: '/development/'
-		}))
-		.pipe(rename({
-			basename: 'filter'
-		}))
-		.pipe(gulp.dest('development/htmls/blocks/index'));
-});
-
-
-// index page
-gulp.task('make-index-page', function () {
-	return gulp.src('development/htmls/index.tmpl.html')
-		.pipe(fileinclude({
-			prefix: '@@',
-			// basepath: '/development/'
-		}))
-		.pipe(rename({
-			basename: 'index'
-		}))
-		.pipe(gulp.dest('development'));
-});
-
-// index page FULL
-gulp.task('make-index-page-full', ['make-header-block', 'make-index-filter'], function () {
-	return gulp.src('development/htmls/index.tmpl.html')
-		.pipe(fileinclude({
-			prefix: '@@',
-			// basepath: '/development/'
-		}))
-		.pipe(rename({
-			basename: 'index'
-		}))
-		.pipe(gulp.dest('development'));
-});
-
-
-/*
-	HTML INCLUDE 4
-	"PRODUCT CARD PAGE"
-*/
-// pcard page
-gulp.task('make-pcard-page', function () {
-	return gulp.src('development/htmls/product-card.tmpl.html')
-		.pipe(fileinclude({
-			prefix: '@@',
-			// basepath: '/development/'
-		}))
-		.pipe(rename({
-			basename: 'product-card'
-		}))
-		.pipe(gulp.dest('development'));
-});
-
-// pcard page FULL
-gulp.task('make-pcard-page-full', ['make-header-block', 'make-pcard-page'], function () {
-	return gulp.src('development/htmls/product-card.tmpl.html')
-		.pipe(fileinclude({
-			prefix: '@@',
-			// basepath: '/development/'
-		}))
-		.pipe(rename({
-			basename: 'product-card'
-		}))
-		.pipe(gulp.dest('development'));
-});
-
-
-
-
-
-/*
-	HTML INCLUDE 4
-	"USER CABINET"
-*/
-
-// USER-CABINET page FULL
-gulp.task('make-ucab-page-full', ['make-header-block'], function () {
-	return gulp.src('development/htmls/user-cabinet.tmpl.html')
-		.pipe(fileinclude({
-			prefix: '@@',
-			// basepath: '/development/'
-		}))
-		.pipe(rename({
-			basename: 'user-cabinet'
-		}))
-		.pipe(gulp.dest('development'));
-});
-
-// USER-REGISTRATION page FULL
-gulp.task('make-ureg-page-full', ['make-header-block'], function () {
-	return gulp.src('development/htmls/user-registration.tmpl.html')
-		.pipe(fileinclude({
-			prefix: '@@',
-			// basepath: '/development/'
-		}))
-		.pipe(rename({
-			basename: 'user-registration'
-		}))
-		.pipe(gulp.dest('development'));
-});
-
-// USER-LOGIN page FULL
-gulp.task('make-ulog-page-full', ['make-header-block'], function () {
-	return gulp.src('development/htmls/user-login.tmpl.html')
-		.pipe(fileinclude({
-			prefix: '@@',
-			// basepath: '/development/'
-		}))
-		.pipe(rename({
-			basename: 'user-login'
-		}))
-		.pipe(gulp.dest('development'));
-});
-
-// USER-PASSWORD-RECOVERY page FULL
-gulp.task('make-urec-page-full', ['make-header-block'], function () {
-	return gulp.src('development/htmls/user-recovery.tmpl.html')
-		.pipe(fileinclude({
-			prefix: '@@',
-			// basepath: '/development/'
-		}))
-		.pipe(rename({
-			basename: 'user-recovery'
-		}))
-		.pipe(gulp.dest('development'));
-});
-
-
-// USER-CABINET page FULL
-gulp.task('make-ucab-all-page-full', ['make-ucab-page-full', 'make-ureg-page-full', 'make-ulog-page-full', 'make-urec-page-full'], function () {
-	return gulp.src('development/htmls/user-cabinet.tmpl.html')
-		.pipe(fileinclude({
-			prefix: '@@',
-			// basepath: '/development/'
-		}))
-		.pipe(rename({
-			basename: 'user-cabinet'
-		}))
-		.pipe(gulp.dest('development'));
-});
-
-
-
-/************************
-	SHAME@html-including,
-	не используется,
-	переделать
-	--END--
-*/
-
-
-
-
-
-
-
-
-
-
-
 /*
 	JS
 */
@@ -301,6 +26,24 @@ gulp.task('make-msalnikov-js', function () {
 	return gulp.src(['development/js/inc/global.forms.js', 'development/js/inc/header.geo-form.js', 'development/js/inc/header.main-nav.js', 'development/js/inc/index.filter.js', 'development/js/inc/catalog.filter.js'])
 		.pipe(concat('msalnikov.js'))
 		.pipe(gulp.dest('development/js'));
+});
+
+
+// App
+var appList = [
+		'development/js/app/z585.js',
+		'development/js/app/z585.uiux.modalwindow.js',
+		// 'development/js/app/.js',
+	];
+
+gulp.task('js:app', function () {
+	return gulp.src(appList)
+		.pipe(sourcemaps.init({loadMaps: true}))
+		.pipe(concat('app.js'))
+		.pipe(uglifyjs())
+		.pipe(rename('app.min.js'))
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest('development/js/'));
 });
 
 
@@ -425,6 +168,7 @@ var z585AllScaffoldingList = [
 	'development/less/scaffolding/pages__stock.less',
 	'development/less/scaffolding/pages__favorites.less',
 	'development/less/scaffolding/pages__shop.less',
+	'development/less/scaffolding/pages__basket.less',
 
 	// latest legacy
 	'development/less/scaffolding/legacy__latest.less',
@@ -478,6 +222,7 @@ gulp.task('z585-css:local-build', function () {
 		.pipe(rename('z585_all.min.css'))
 		.pipe(gulp.dest('development/css'));
 });
+
 
 gulp.task('z585-css', ['z585-css:local-scaff', 'z585-css:prod-scaff', 'z585-css:local-build', 'z585-css:prod-build']);
 
