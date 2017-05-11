@@ -19,10 +19,22 @@
         display: block;
         width: 48px;
         height: 48px;
-        background: #000;
         position: absolute;
         top: 0;
         left: 0;
+        background: url(@img-sprite-primary) no-repeat;
+        &--one{
+            background-position: 0px -394px;
+        }
+        &--two{
+            background-position: -51px -394px;
+        }
+        &--three{
+            background-position: 0px -445px;
+        }
+        &--four{
+            background-position: -51px -445px;
+        }
     }
     &__title{
         .font-circe_regular(12px, 14px, #333);
