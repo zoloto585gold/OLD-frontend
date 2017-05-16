@@ -1043,10 +1043,10 @@ html, body { margin: 0; padding: 0; }
 	}
 	&.is-show{
 		top: 0;
-		@media screen and (max-width: 1024px){
+		@media @touch {
 			top: 45px;
 		}
-		@media screen and (max-width: 479px){
+		@media @mobile-portrait {
 			display: none !important;
 		}
 	}
@@ -1060,7 +1060,7 @@ html, body { margin: 0; padding: 0; }
 		text-transform: uppercase;
 		padding-top: 15px;
 		margin-right: 120px;
-		@media screen and (max-width: 1024px){
+		@media  @touch {
 			display: none !important;
 		}
 	}
@@ -1071,14 +1071,14 @@ html, body { margin: 0; padding: 0; }
 		.font-circe_light(12px, 16px, #333);
 		margin: 0 15px;
 		padding-top: 17px;
-		@media screen and (max-width: 639px){
+		@media @mobile {
 			display: none !important;
 		}
 	}
 	&__price{
 		text-transform: uppercase;
 		padding-top: 15px;
-		@media screen and (max-width: 639px){
+		@media @mobile {
 			margin-left: 15px;
 		}
 		&-old{
