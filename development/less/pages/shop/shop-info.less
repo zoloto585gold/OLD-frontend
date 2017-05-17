@@ -1,0 +1,130 @@
+.shop-info{
+    background: #f7f6f6;
+    font-family: 'Circe', sans-serif;
+    &__header{
+        background: #fff;
+        border-bottom: 1px solid #c4c4c4;
+        padding: 12px 0;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+    &__title{
+        display: inline-block;
+        font-size: 24px;
+        padding: 0;
+        margin: 0;
+    }
+    &__availability{
+        float: right;
+        font-size: 10px;
+        line-height: 14px;
+        position: relative;
+        padding-left: 42px;
+        padding-top: 4px;
+        &:before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 30px;
+            height: 34px;
+            background: url(@img-sprite-primary) no-repeat 0px -356px;
+        }
+    }
+    &__slider{
+        float: left;
+        width: 500px;
+        margin-bottom: 25px;
+        @media @touch{
+            float: none;
+            width: 100%;
+        }
+        .fotorama{
+            &__nav-wrap{
+                position: absolute;
+                bottom: 5px;
+                left: 0;
+                right: 0;
+                text-align: center;
+            }
+            &__nav__shaft{
+                float: none;
+            }
+            &__dot{
+                width: 12px;
+                height: 12px;
+                border-radius: 0;
+                overflow: hidden;
+                background: #fff;
+                border: 1px solid #ff0000;
+            }
+            &__active{
+                .fotorama__dot{
+                    width: 12px;
+                    height: 12px;
+                    border-width: 1px;
+                    background: #ff0000;
+                }
+            }
+        }
+    }
+    &__locations{
+        float: right;
+        width: 500px;
+        padding: 10px 0 10px 20px;
+        margin-bottom: 25px;
+        @media @touch{
+            float: none;
+            width: 100%;
+            padding: 0;
+        }
+    }
+    &__list-item{
+        display: inline-block;
+        width: 49.5%;
+        margin-bottom: 20px;
+        .font-circe_regular(14px, 1, #333);
+        text-transform: uppercase;
+        &--phone{
+            a{
+                font-size: 11px;
+            }
+        }
+        .shop-icon{
+            float: left;
+            width: 30px;
+            height: 34px;
+            background: url(@img-sprite-primary) no-repeat;
+            margin-right: 10px;
+            &--point{
+                width: 24px;
+                background-position: -30px -356px;
+                margin-left: 4px;
+            }
+            &--clock{
+                background-position: -57px -358px;
+            }
+            &--phone{
+                background-position: -90px -358px;
+            }
+            &--yandex{
+                background-position: -40px -252px;
+                width: 40px;
+                height: 40px;
+            }
+            &--gps{
+                background-position: -122px -353px;
+                height: 40px;
+            }
+        }
+        span{
+            display: block;
+            font-weight: 300;
+            margin-bottom: 5px;
+        }
+        a{
+            border-bottom: 1px dotted #333;
+        }
+    }
+}
