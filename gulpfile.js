@@ -173,6 +173,7 @@ var z585AllScaffoldingList = [
 	'development/less/scaffolding/pages__store.less',
 	'development/less/scaffolding/pages__stock.less',
 	'development/less/scaffolding/pages__favorites.less',
+	'development/less/scaffolding/pages__shop.less',
 	'development/less/scaffolding/pages__basket.less',
 
 	// latest legacy
