@@ -11,9 +11,49 @@ var uglifyjs = require('gulp-uglifyjs');
 // var mainBowerFiles = require('gulp-main-bower-files');
 var sourcemaps = require('gulp-sourcemaps');
 
+var adfoxList = {
+	css: [
+		'development/less/scaffolding/mixins.less',
+		'development/less/scaffolding/layout__fonts.less',
+		'development/less/scaffolding/layout__adfox.less',
+	],
+	js: [
+		'development/js/jqueryteam/jquery-1.11.1.min.js',
+		'development/js/jqueryteam/TweenMax.min.js',
+		'development/js/countdown.js'
+	]
+};
 
-
-
+// jQuery Team
+var jQueryTeamPath = 'development/js/jqueryteam/', // 'js/jqueryteam_in/''
+	jQueryTeamOrderList = [
+		jQueryTeamPath + 'jquery-1.11.1.min.js',
+		// jQueryTeamPath + 'jquery-1.11.0.min.js',
+		jQueryTeamPath + 'owl.carousel.js',
+		jQueryTeamPath + 'select.js',
+		jQueryTeamPath + 'jquery-ui.js',
+		jQueryTeamPath + 'jquery.ui.touch-punch.min.js',
+		jQueryTeamPath + 'jquery.ui.datepicker-ru.js',
+		jQueryTeamPath + 'jquery.touchSwipe.min.js',
+		jQueryTeamPath + 'jquery.zoom.js',
+		jQueryTeamPath + 'fotorama.js',
+		jQueryTeamPath + 'jquery.mousewheel.js',
+		jQueryTeamPath + 'perfect-scrollbar.js',
+		jQueryTeamPath + 'jquery.magnific-popup.js',
+		jQueryTeamPath + 'jquery.plugin.js',
+		jQueryTeamPath + 'jquery.countdown.js',
+		jQueryTeamPath + 'jquery.countdown-ru.js',
+		jQueryTeamPath + 'jquery.inputmask.js',
+		jQueryTeamPath + 'jquery.validate.min.js',
+		jQueryTeamPath + 'jquery.cookie.js',
+		jQueryTeamPath + 'jquery.jscrollpane.min.js',
+		jQueryTeamPath + 'jquery.formstyler.min.js',
+		jQueryTeamPath + 'jquery.session.js',
+		jQueryTeamPath + 'jquery.easydropdown.js',
+		jQueryTeamPath + 'jquery.maskedinput.min.js',
+		jQueryTeamPath + 'selectivizr-min.js',
+		jQueryTeamPath + 'TweenMax.min.js',
+	];
 
 
 
@@ -53,36 +93,7 @@ gulp.task('js:app', function () {
 
 
 
-// jQuery Team
-var jQueryTeamPath = 'development/js/jqueryteam/', // 'js/jqueryteam_in/''
-	jQueryTeamOrderList = [
-		jQueryTeamPath + 'jquery-1.11.1.min.js',
-		// jQueryTeamPath + 'jquery-1.11.0.min.js',
-		jQueryTeamPath + 'owl.carousel.js',
-		jQueryTeamPath + 'select.js',
-		jQueryTeamPath + 'jquery-ui.js',
-		jQueryTeamPath + 'jquery.ui.touch-punch.min.js',
-		jQueryTeamPath + 'jquery.ui.datepicker-ru.js',
-		jQueryTeamPath + 'jquery.touchSwipe.min.js',
-		jQueryTeamPath + 'jquery.zoom.js',
-		jQueryTeamPath + 'fotorama.js',
-		jQueryTeamPath + 'jquery.mousewheel.js',
-		jQueryTeamPath + 'perfect-scrollbar.js',
-		jQueryTeamPath + 'jquery.magnific-popup.js',
-		jQueryTeamPath + 'jquery.plugin.js',
-		jQueryTeamPath + 'jquery.countdown.js',
-		jQueryTeamPath + 'jquery.countdown-ru.js',
-		jQueryTeamPath + 'jquery.inputmask.js',
-		jQueryTeamPath + 'jquery.validate.min.js',
-		jQueryTeamPath + 'jquery.cookie.js',
-		jQueryTeamPath + 'jquery.jscrollpane.min.js',
-		jQueryTeamPath + 'jquery.formstyler.min.js',
-		jQueryTeamPath + 'jquery.session.js',
-		jQueryTeamPath + 'jquery.easydropdown.js',
-		jQueryTeamPath + 'jquery.maskedinput.min.js',
-		jQueryTeamPath + 'selectivizr-min.js',
-		jQueryTeamPath + 'TweenMax.min.js',
-	];
+
 gulp.task('make-jqueryteam', function () {
 	return gulp.src(jQueryTeamOrderList)
 		.pipe(sourcemaps.init({loadMaps: true}))
@@ -229,9 +240,78 @@ gulp.task('z585-css:local-build', function () {
 		.pipe(gulp.dest('development/css'));
 });
 
-
+// 
 gulp.task('z585-css', ['z585-css:local-scaff', 'z585-css:prod-scaff', 'z585-css:local-build', 'z585-css:prod-build']);
 
+
+
+/**
+ * for Adfox
+ */
+gulp.task('adfox:js:local', function () {
+	return gulp.src(adfoxList.js)
+		.pipe(sourcemaps.init({loadMaps: true}))
+		.pipe(concat('adfox.js'))
+		.pipe(uglifyjs())
+		.pipe(rename('z585_adfox.min.js'))
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest('development/js/'));
+});
+gulp.task('adfox:js:prod', function () {
+	return gulp.src(adfoxList.js)
+		.pipe(sourcemaps.init({loadMaps: true}))
+		.pipe(concat('adfox.js'))
+		.pipe(uglifyjs())
+		.pipe(rename('z585_adfox.min.js'))
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest('production/js/'));
+});
+
+gulp.task('adfox:css:prod-scaff', function () {
+	if(adfoxList.css[0] === 'development/less/_2dev.less') adfoxList.css.shift();
+	adfoxList.css.unshift('development/less/_2prod.less');
+
+	return gulp.src(adfoxList.css)
+		.pipe(sourcemaps.init({loadMaps: true}))
+		.pipe(concat('z585_adfox.prod.less'))
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest('development/less/'));
+});
+
+gulp.task('adfox:css:prod-build', function () {
+	return gulp.src('development/less/z585_adfox.prod.less')
+		.pipe(less())
+		.pipe(cssmin())
+		.pipe(rename('z585_adfox.min.css'))
+		.pipe(gulp.dest('production/css'));
+});
+
+gulp.task('adfox:css:local-scaff', function () {
+	if(adfoxList.css[0] === 'development/less/_2prod.less') adfoxList.css.shift();
+	adfoxList.css.unshift('development/less/_2dev.less');
+
+	return gulp.src(adfoxList.css)
+		.pipe(sourcemaps.init({loadMaps: true}))
+		.pipe(concat('z585_adfox.local.less'))
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest('development/less/'));
+});
+
+gulp.task('adfox:css:local-build', function () {
+	return gulp.src('development/less/z585_adfox.local.less')
+		.pipe(less())
+		.pipe(rename('z585_adfox.min.css'))
+		.pipe(gulp.dest('development/css'));
+});
+
+gulp.task('adfox', ['adfox:js:local', 'adfox:js:prod', 'adfox:css:local-scaff', 'adfox:css:prod-scaff', 'adfox:css:local-build', 'adfox:css:prod-build']);
+
+
+
+
+
+// 
+// 
 gulp.task('watch', function() {
 	gulp.watch( ['development/htmls/**/*.{tmpl,html}'], ['html:build'] );
     gulp.watch( [
