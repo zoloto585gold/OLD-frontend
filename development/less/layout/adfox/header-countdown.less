@@ -1,17 +1,15 @@
 // Countdown
 .header-middle__countdown{
-    float: left;
-    margin: 8px 0 0 180px;
-    width: auto;
-    padding: 2px 10px 2px 0;
+    position: absolute;
+    top: 8.5px;
+    left: 50%;
+    margin-left: -175px;
+
+    height: 32px;
+    width: 350px;
+
     background: #f8f8f5;
-    position: relative;
-    @media @touch {
-        margin: 8px 0 0 15px;
-    }
-    @media screen and (max-width:  @tablet_a-min){
-        display: none;
-    }
+
 
     &:after{
         content: '';
@@ -27,7 +25,7 @@
 
     .header-middle__countdown-block {
       float: left;
-      width: 194px;
+      width: 211px;
       margin: 0 auto;
       overflow: hidden;
 
