@@ -14,3 +14,5 @@ development/less/z585-all-list.local.less
 # PRODUCTION
 production/css/*.css
 /production/images/*
+/production/js/libs.min.js
+/production/js/libs.min.js
