@@ -24,37 +24,46 @@ var adfoxList = {
 	]
 };
 
-// jQuery Team
-var jQueryTeamPath = 'development/js/jqueryteam/', // 'js/jqueryteam_in/''
-	jQueryTeamOrderList = [
-		jQueryTeamPath + 'jquery-1.11.1.min.js',
-		// jQueryTeamPath + 'jquery-1.11.0.min.js',
-		jQueryTeamPath + 'owl.carousel.js',
-		jQueryTeamPath + 'select.js',
-		jQueryTeamPath + 'jquery-ui.js',
-		jQueryTeamPath + 'jquery.ui.touch-punch.min.js',
-		jQueryTeamPath + 'jquery.ui.datepicker-ru.js',
-		jQueryTeamPath + 'jquery.touchSwipe.min.js',
-		jQueryTeamPath + 'jquery.zoom.js',
-		jQueryTeamPath + 'fotorama.js',
-		jQueryTeamPath + 'jquery.mousewheel.js',
-		jQueryTeamPath + 'perfect-scrollbar.js',
-		jQueryTeamPath + 'jquery.magnific-popup.js',
-		jQueryTeamPath + 'jquery.plugin.js',
-		jQueryTeamPath + 'jquery.countdown.js',
-		jQueryTeamPath + 'jquery.countdown-ru.js',
-		jQueryTeamPath + 'jquery.inputmask.js',
-		jQueryTeamPath + 'jquery.validate.min.js',
-		jQueryTeamPath + 'jquery.cookie.js',
-		jQueryTeamPath + 'jquery.jscrollpane.min.js',
-		jQueryTeamPath + 'jquery.formstyler.min.js',
-		jQueryTeamPath + 'jquery.session.js',
-		jQueryTeamPath + 'jquery.easydropdown.js',
-		jQueryTeamPath + 'jquery.maskedinput.min.js',
-		jQueryTeamPath + 'selectivizr-min.js',
-		jQueryTeamPath + 'TweenMax.min.js',
-	];
-
+var srcList = {
+	js: {
+		libs: [
+			'development/js/libs/plugins/picturefill.min.js',
+			// 
+			// 
+			'development/js/libs/jqueryteam/jquery-1.11.1.min.js',
+			'development/js/libs/jqueryteam/owl.carousel.js',
+			'development/js/libs/jqueryteam/select.js',
+			'development/js/libs/jqueryteam/jquery-ui.js',
+			'development/js/libs/jqueryteam/jquery.ui.touch-punch.min.js',
+			'development/js/libs/jqueryteam/jquery.ui.datepicker-ru.js',
+			'development/js/libs/jqueryteam/jquery.touchSwipe.min.js',
+			'development/js/libs/jqueryteam/jquery.zoom.js',
+			'development/js/libs/jqueryteam/fotorama.js',
+			'development/js/libs/jqueryteam/jquery.mousewheel.js',
+			'development/js/libs/jqueryteam/perfect-scrollbar.js',
+			'development/js/libs/jqueryteam/jquery.magnific-popup.js',
+			'development/js/libs/jqueryteam/jquery.plugin.js',
+			'development/js/libs/jqueryteam/jquery.countdown.js',
+			'development/js/libs/jqueryteam/jquery.countdown-ru.js',
+			'development/js/libs/jqueryteam/jquery.inputmask.js',
+			'development/js/libs/jqueryteam/jquery.validate.min.js',
+			'development/js/libs/jqueryteam/jquery.cookie.js',
+			'development/js/libs/jqueryteam/jquery.jscrollpane.min.js',
+			'development/js/libs/jqueryteam/jquery.formstyler.min.js',
+			'development/js/libs/jqueryteam/jquery.session.js',
+			'development/js/libs/jqueryteam/jquery.easydropdown.js',
+			'development/js/libs/jqueryteam/jquery.maskedinput.min.js',
+			'development/js/libs/jqueryteam/selectivizr-min.js',
+			'development/js/libs/jqueryteam/TweenMax.min.js',
+			// 
+			// 
+			'development/js/libs/jsrender/jsrender.js',
+			// 
+			// 
+			// development/js/libs/z585
+		]
+	}
+};
 
 
 
@@ -68,6 +77,18 @@ gulp.task('make-msalnikov-js', function () {
 		.pipe(gulp.dest('development/js'));
 });
 
+
+
+// Libs
+gulp.task('js:libs', function () {
+	return gulp.src(srcList.js.libs)
+		.pipe(sourcemaps.init({loadMaps: true}))
+		.pipe(concat('libs.js'))
+		.pipe(uglifyjs())
+		.pipe(rename('libs.min.js'))
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest('development/js/'));
+});
 
 
 
