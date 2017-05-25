@@ -61,8 +61,21 @@ var srcList = {
 			// 
 			// 
 			// development/js/libs/z585
-		]
-	}
+		],
+
+		app: [
+			'development/js/app/z585.js',
+			'development/js/app/z585.htmlrender.js',
+			// 'development/js/app/',
+			// 'development/js/app/',
+			// 'development/js/app/',
+			// 'development/js/app/',
+		],
+
+		shopPage: [
+			'development/js/pages/shop-page/render.js',
+		],
+	},
 };
 
 
@@ -90,20 +103,22 @@ gulp.task('js:libs', function () {
 		.pipe(gulp.dest('development/js/'));
 });
 
-
-
 // App
-var appList = [
-		'development/js/app/z585.js',
-		'development/js/app/z585.appsettings.js',
-		// 'development/js/app/z585.uiux.modalwindow.js',
-		// 'development/js/app/.js',
-	];
-
 gulp.task('js:app', function () {
-	return gulp.src(appList)
+	return gulp.src(srcList.js.app)
 		.pipe(sourcemaps.init({loadMaps: true}))
 		.pipe(concat('app.js'))
+		.pipe(uglifyjs())
+		.pipe(rename('app.min.js'))
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest('development/js/'));
+});
+
+// shop-page
+gulp.task('js:shop-page', function () {
+	return gulp.src(srcList.js.shopPage)
+		.pipe(sourcemaps.init({loadMaps: true}))
+		.pipe(concat('shop-page.js'))
 		// .pipe(uglifyjs())
 		// .pipe(rename('app.min.js'))
 		.pipe(sourcemaps.write())

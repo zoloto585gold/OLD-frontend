@@ -143,7 +143,8 @@
 	// массив из html-кусков групп баннеров для каждой вкладки
 	// 8 вкладок = 8 баннеров
 	//
-	var mainNavData = JSON.parse($('.alt-main-nav').attr('data-main-nav'));
+	
+	var mainNavData; // = JSON.parse($('.alt-main-nav').attr('data-main-nav'));
 	var mainNavBanners = [];
 
 
