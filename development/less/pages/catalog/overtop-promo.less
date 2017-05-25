@@ -1,0 +1,209 @@
+
+.overtop-promo{
+	width: 100%;
+	height: auto;
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99;
+	background: #fff;
+	text-align: left;
+	border-bottom: solid 1px #d7d7d7;
+
+	@media @desktop {
+		display: block;
+	}
+
+	&::after{
+		content: '';
+		display: block;
+		width: 100%;
+		height: 9px;
+		background: url(/bitrix/templates/zoloto/frontend/images/thingies/shadow-5.png) center top no-repeat;
+		position: absolute;
+		top: 100%;
+		left: 0;
+	}
+
+	&__inner{
+		width: 100%;
+		max-width: 1000px;
+		margin: 0 auto;
+		padding: 3px 40px 3px 0;
+		position: relative;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-flex-wrap: nowrap;
+		    -ms-flex-wrap: nowrap;
+		        flex-wrap: nowrap;
+		-webkit-box-pack: justify;
+		-webkit-justify-content: space-between;
+		   -moz-box-pack: justify;
+		    -ms-flex-pack: justify;
+		        justify-content: space-between;
+		background: #fff;
+	}
+
+	&__close-btn{
+		width: 30px;
+		height: 30px;
+		position: absolute;
+		top: 50%;
+		right: 0;
+		z-index: 3;
+		background: #f2f2f2;
+		border: none;
+		cursor: pointer;
+		text-align: center;
+		transform: translateY(-50%);
+		padding-top: 4px;
+		.font-circe_regular(20px, 1, #666);
+		.transition();
+		
+
+		&:hover{
+			background: #666;
+			color: #f2f2f2;
+		}
+	}
+
+	&__img{
+		width: 430px;
+		height: 55px;
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
+		background-size: cover;
+	}
+
+	&__btn{
+		display: none;
+		width: 200px;
+		height: 37px;
+		margin: 12px 0 0;
+		background: #ed3030;
+		border: none;
+		border-radius: 3px;
+		box-shadow: 0 0 2px -1px #000;
+		text-transform: uppercase;
+		text-decoration: none;
+		text-align: center;
+		cursor: pointer;
+		position: relative;
+		.font-circe_bold(12px, 37px, #fff);
+		.transition();
+
+		&:hover{
+			background: #b32023;
+		}
+
+		&[data-active]{
+			display: block;
+		}
+	}
+
+	&__field-wrapper{
+		width: 240px;
+		margin: 14px 0 0 70px;
+		overflow: hidden;
+	}
+
+	&__field-input{
+		display: block;
+		width: 100%;
+		height: 35px;
+		padding-left: 10px;
+		padding-right: 10px;
+		border: solid 1px #e8e8e8;
+		border-radius: 2px;
+		box-shadow: none;
+		text-transform: uppercase;
+		.font-circe_light(12px, 17px, #999);
+		.transition();
+
+		&:focus{
+			border-color: #666;
+		}
+
+		&:invalid{
+			border-color: #ee3b3b;
+		}
+	}
+
+	&__field-hint{
+		display: none;
+		text-transform: uppercase;
+		margin: 0 0 0 3px;
+		position: relative;
+		top: 2px;
+		.font-circe_light(10px, 1, #ed3030);
+	}
+
+	&__block{
+		display: none;
+		min-height: 60px;
+		
+		&[data-active]{
+			display: block;
+		}
+	}
+
+	&__result{
+		width: 750px;
+		text-align: center;
+		position: relative;
+
+		&-label,
+		&-value{
+			display: inline-block;
+			margin: 0;
+			text-transform: uppercase;
+			position: relative;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+
+		&-label{
+			.font-circe_thin(28px, 1, #333);
+		}
+
+		&-value{
+			.font-circe_regular(28px, 1, #333);
+		}
+	}
+
+	&__signed{
+		width: 750px;
+		height: 55px;
+		background: #b2f0f5;
+		overflow: hidden;
+
+		&-top{
+			margin-top: 2px;
+			text-transform: uppercase;
+			.font-circe_thin(12px, 17px, #333);
+		}
+
+		&-middle{
+			text-transform: uppercase;
+			.font-circe_thin(24px, 17px, #333);
+
+			span{
+				.font-circe_light(24px, 20px, #333);
+			}
+		}
+
+		&-bottom{
+			.font-circe_thin(12px, 17px, #6e6e6e);
+		}
+
+		img{
+			float:left;
+			margin-left: 5px;
+			margin-right: 33px;
+		}
+	}
+}
