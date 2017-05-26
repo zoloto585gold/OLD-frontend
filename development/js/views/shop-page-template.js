@@ -26,19 +26,20 @@ $.templates({ 'shop-page-template': ' \
 			</ul>\
 		</div>\
 	</div>\
+	\
+	\
+	\
 	<div class="shop-location">\
 		<div class="section shop-location__top">\
 			<div class="section__inner">\
-			<ul>\
-			<li class="shop-info__list-item shop-info__list-item--text"><b>Как к нам добраться:</b></li>\
-			<li class="shop-info__list-item"><i class="shop-icon shop-icon--yandex"></i><a  href="http://maps.yandex.ru/?rtext=~{{:GPS_N}}%2C{{:GPS_S}}" target="_blank">построить маршрут<br>на яндекс картах</a></li>\
-			<li class="shop-info__list-item shop-info__list-item--gps"><i class="shop-icon shop-icon--gps"></i><b>GPS координаты:</b><br>({{:GPS_N}}, {{:GPS_S}})</li>\
-			<li class="shop-info__list-item">\
-				<!-- ({{:GPS_N}}, {{:GPS_S}}) -->\
-				<textarea class="store-item__gps-clipboard  js-clipboard-buffer" data-clipboard-id="123">{{:GPS_N}} {{:GPS_S}}</textarea>\
-				<button id="copy-gpscoords-button" class="b-button  button  js-clipboard-button" data-clipboard-id="123">скопировать GPS координаты ></button>\
-				<button id="copy-gpscoords-button" class="b-button  store-item__button  store-item__button--gps" data-coords-gps_n="{{:GPS_N}}" data-coords-gps_s="{{:GPS_S}}">Скопировать GPS координаты</button>\</li>\
-			</ul>\
+				<ul>\
+					<li class="shop-info__list-item shop-info__list-item--text"><b>Как к нам добраться:</b></li>\
+					<li class="shop-info__list-item"><i class="shop-icon shop-icon--yandex"></i><a  href="http://maps.yandex.ru/?rtext=~{{:GPS_N}}%2C{{:GPS_S}}" target="_blank">построить маршрут<br>на яндекс картах</a></li>\
+					<li class="shop-info__list-item shop-info__list-item--gps"><i class="shop-icon shop-icon--gps"></i><b>GPS координаты:</b><br>({{:GPS_N}}, {{:GPS_S}})</li>\
+					<li class="shop-info__list-item">\
+						<button class="b-button  button  js-clipboard-button" data-clipboard-id="{{:XML_ID}}" data-clipboard-data="{{:GPS_N}} {{:GPS_S}}">скопировать GPS координаты ></button>\
+					</li>\
+				</ul>\
 			</div>\
 		</div>\
 		<div class="shop-location__text js-toggle-parent">\
@@ -53,6 +54,10 @@ $.templates({ 'shop-page-template': ' \
 				</div>\
 			</div>\
 		</div>\
+		\
+		\
+		\
+		<!--\
 		<div class="shop-location__map-block js-toggle-parent">\
 			<div class="section shop-location__map-header js-toggle-btn">\
 				<div class="section__inner">\
@@ -63,5 +68,9 @@ $.templates({ 'shop-page-template': ' \
 			Карта\
 			</div>\
 		</div>\
+		-->\
+		\
+		\
+		\
 	</div>\
 '});

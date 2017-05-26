@@ -65,6 +65,8 @@ var srcList = {
 
 		app: [
 			'development/js/app/z585.js',
+			'development/js/app/z585.main.js',
+			'development/js/app/z585.data.js',
 			'development/js/app/z585.htmlrender.js',
 			// 'development/js/app/',
 			// 'development/js/app/',
@@ -74,6 +76,10 @@ var srcList = {
 
 		shopPage: [
 			'development/js/pages/shop-page/render.js',
+		],
+
+		storesPage: [
+			'development/js/pages/stores-page/render.js',
 		],
 	},
 };
@@ -119,8 +125,19 @@ gulp.task('js:shop-page', function () {
 	return gulp.src(srcList.js.shopPage)
 		.pipe(sourcemaps.init({loadMaps: true}))
 		.pipe(concat('shop-page.js'))
-		// .pipe(uglifyjs())
-		// .pipe(rename('app.min.js'))
+		.pipe(uglifyjs())
+		.pipe(rename('shop-page.min.js'))
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest('development/js/'));
+});
+
+// stores-page
+gulp.task('js:stores-page', function () {
+	return gulp.src(srcList.js.storesPage)
+		.pipe(sourcemaps.init({loadMaps: true}))
+		.pipe(concat('stores-page.js'))
+		.pipe(uglifyjs())
+		.pipe(rename('stores-page.min.js'))
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('development/js/'));
 });

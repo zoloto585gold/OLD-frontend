@@ -10,7 +10,7 @@ $.templates({ 'store-item-template': ' \
 			{{:SCHEDULE_PREPARE}}\
 		</p>\
 		<!-- Кнопка/ссылка на магазин -->\
-		<!-- <button class="b-button  store-item__button  store-item__button--schedule" data-store-url="{{:DETAIL_URL}}">Страница магазина</button>\ -->\
+		<a href="{{:DETAIL_URL}}" class="b-button  store-item__button  store-item__button--schedule" data-store-url="{{:DETAIL_URL}}">Страница магазина</a>\
 		<!-- {{:DETAIL_URL}} -->\
 	</div>\
 	<div class="store-item__group">\
