@@ -23,10 +23,10 @@
 		// перебираю элементы массива и по заданному 
 		// значению URL'а нахожу нужный мне объект 
 		Array.prototype.forEach.call(data, function (item, i, array) {
-			if(data[i]['DETAIL_URL'] === url) {
-				shop = data[i];
+			if(item['DETAIL_URL'] === url) {
+				shop = item;
 			} else {
-				// result = "404, не нашёл";
+				// 
 			}
 		});
 

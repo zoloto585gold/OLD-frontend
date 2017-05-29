@@ -68,6 +68,7 @@ var srcList = {
 			'development/js/app/z585.main.js',
 			'development/js/app/z585.data.js',
 			'development/js/app/z585.htmlrender.js',
+			'development/js/app/z585.debug.js',
 			// 'development/js/app/',
 			// 'development/js/app/',
 			// 'development/js/app/',

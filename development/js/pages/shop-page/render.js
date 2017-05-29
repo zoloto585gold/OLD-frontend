@@ -24,8 +24,14 @@
 				// находим объект нужного магазина по его URL'у
 				var result = Z585.data.shops.getShopByURL(url, dataRaw);
 
+				// result = Z585.data.shops.shopValidate(result);
+
 				// рендеринг страницы
-				$('.shop-info').html($.templates[templateName].render(result));
+				if(!result) {
+					Z585.debug.log('Не нашел URL\'а :: ' + '  ' + url);
+				} else {
+					$('.shop-info').html($.templates[templateName].render(result));
+				}
 
 				// копирование GPS-координат в буфер обмена 
 				$(document).on('click', '.js-clipboard-button', function (e) {
