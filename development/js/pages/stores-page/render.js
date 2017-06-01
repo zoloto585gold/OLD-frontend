@@ -33,7 +33,22 @@
 			Z585.HTMLRender.lazyGetTemplate('store-cities-list-template')
 		)
 		.done(function () {
-			var city = $.cookie('city') ? $.cookie('city') : 'Санкт-Петербург';
+			var city;
+			var citiesItemPopular = $('.top-geo-form__pop-cities-inner a');
+
+
+			/*
+				Проверяет есть ли город(который в шапке) в объекте "digitalData" и 
+				если его нет, то берет город из тега "$('.top-geo__button').find('span')"
+			 */
+			if (window.digitalData && window.digitalData.website && window.digitalData.website.region) {
+				city = window.digitalData.website.region;
+			} else {
+				city = $('.top-geo__button').find('span').text();
+			}
+
+			// console.log(window.digitalData.website.region, city);
+
 			storeCurrentCityName = city;
 			$.getJSON(dataRawPath, function (data) {
 				/**
@@ -42,7 +57,7 @@
 				 */
 				var storeData = {
 					currentCityValues: { // значения для текущего города
-						cityName: $.cookie('city') ? $.cookie('city') : 'Санкт-Петербург',
+						cityName: city,
 					},
 					citiesList: [], // массив из названий гoродов
 					citiesListAdvanced: [], // массив объектов с полями {имя_города, колво_магазинов_в_городе}
@@ -77,14 +92,6 @@
 				$('.store-about__title').find('a').html(city);
 				$('.store-about__sub-title').find('a').html(city);
 				$('.store-about__sub-title').find('a').html($('#store-list-combobox option:selected').attr('value'));
-
-				$(document).on('change', '#store-list-combobox', function () {
-					var cityName = $(this).find(':checked').val();
-
-					$('.store-about__sub-title').find('a').html(cityName);
-					$('.store-about__title').find('a').html(cityName);
-					$('#store-about-count').html(currentCityData.length);
-				});
 
 
 				$('#store-list-combobox').html($.templates['store-list-template'].render(citiesList));
@@ -183,14 +190,51 @@
 							});
 						});
 
+						
+
+						/*
+							функция `changeCityListener()` меняет положение карты, 
+							значение в select-меню и текст страницы при смене города
+						 */
+						function changeCityListener() {
+							return function(e) {
+								var cityName = $(this).text();
+
+								$('#store-list-combobox').find('option:contains("' + cityName + '")').attr('selected', 'selected');
+
+								$('.store-item').removeClass('store-item--active');
+
+								$('.store-about__title').find('a').html(cityName);
+
+								ymaps.geocode(cityName, {
+									results: 1
+								}).then(function (res) {
+									// Выбираем первый результат геокодирования.
+									var firstGeoObject = res.geoObjects.get(0),
+										// Координаты геообъекта.
+										coords = firstGeoObject.geometry.getCoordinates(),
+										// Область видимости геообъекта.
+										bounds = firstGeoObject.properties.get('boundedBy');
+
+									// Масштабируем карту на область видимости геообъекта.
+									myMap.setBounds(bounds, {
+										// Проверяем наличие тайлов на данном масштабе.
+										checkZoomRange: true
+									});
+								});
+							};
+						}
 
 
+						// смена карты по по выбору города в шапке из списка ПОПУЛЯРНЫХ ГОРОДОВ
+						$('.top-geo-form__pop-cities-inner a').bind('click', changeCityListener());
 
+						// смена карты по по выбору города в шапке из списка ВСЕХ ГОРОДОВ
+						$('.cities-list__item a').bind('click', changeCityListener());
 
-
+						// смена карты по выбору города в select-меню над картой
 						$('#store-list-combobox').bind('change', function () {
 							var option = $('#store-list-combobox option:selected');
-							// var coords = option.attr('value').split(',');
 							var storeCurrentCityName = option.attr('value');
 
 							$('.store-item').removeClass('store-item--active');
@@ -213,6 +257,8 @@
 							});
 						});
 
+
+
 						$('#store-list-combobox').trigger('change');
 
 
@@ -232,7 +278,5 @@
 								checkZoomRange: true
 							});
 						});
-						// console.log('585');
-						// console.log(storeCurrentCityName);
 			};
 		}
