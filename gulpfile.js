@@ -1,17 +1,59 @@
-var gulp = require('gulp');
-var less = require('gulp-less');
-var concat = require('gulp-concat');
-var cssmin = require('gulp-cssmin');
-var rename = require('gulp-rename');
+'use strict';
 
-var zip = require('gulp-zip');
-var fileinclude = require('gulp-file-include');
-var order = require('gulp-order');
-var uglifyjs = require('gulp-uglifyjs');
-// var mainBowerFiles = require('gulp-main-bower-files');
-var sourcemaps = require('gulp-sourcemaps');
+const gulp = require('gulp');
+const less = require('gulp-less');
+const concat = require('gulp-concat');
+const cssmin = require('gulp-cssmin');
+const rename = require('gulp-rename');
+const fs = require('fs');
+const path = require('path');
+const zip = require('gulp-zip');
+const fileinclude = require('gulp-file-include');
+const order = require('gulp-order');
+const uglifyjs = require('gulp-uglifyjs');
+// const mainBowerFiles = require('gulp-main-bower-files');
+const sourcemaps = require('gulp-sourcemaps');
+const browserSync = require('browser-sync');
+const reload = browserSync.reload;
 
-var adfoxList = {
+const config = {
+	connect: {
+		server: {
+			baseDir: './development'
+		},
+		tunnel: false,
+		host: 'localhost',
+		port: 9000,
+		logPrefix: 'Frontend_z585',
+	},
+
+	path: {
+		js: {
+			libs: [
+				'development/js/libs/**/*.js',
+				'!development/js/libs/jqueryteam/jquery-1.11.0.min.js',
+			],
+
+			app: [
+				'development/js/app/z585.js',
+				'development/js/app/z585.main.js',
+				'development/js/app/z585.data.js',
+				'development/js/app/z585.htmlrender.js',
+				'development/js/app/z585.debug.js',
+			],
+
+			pages: [
+				'development/js/pages/**/*.js',
+			],
+
+			views: [
+				'development/js/views/*.js'
+			],
+		}
+	},
+};
+
+const adfoxList = {
 	css: [
 		'development/less/scaffolding/mixins.less',
 		'development/less/scaffolding/layout__fonts.less',
@@ -24,69 +66,34 @@ var adfoxList = {
 	]
 };
 
-var srcList = {
-	js: {
-		libs: [
-			'development/js/libs/plugins/picturefill.min.js',
-			// 
-			// 
-			'development/js/libs/jqueryteam/jquery-1.11.1.min.js',
-			'development/js/libs/jqueryteam/owl.carousel.js',
-			'development/js/libs/jqueryteam/select.js',
-			'development/js/libs/jqueryteam/jquery-ui.js',
-			'development/js/libs/jqueryteam/jquery.ui.touch-punch.min.js',
-			'development/js/libs/jqueryteam/jquery.ui.datepicker-ru.js',
-			'development/js/libs/jqueryteam/jquery.touchSwipe.min.js',
-			'development/js/libs/jqueryteam/jquery.zoom.js',
-			'development/js/libs/jqueryteam/fotorama.js',
-			'development/js/libs/jqueryteam/jquery.mousewheel.js',
-			'development/js/libs/jqueryteam/perfect-scrollbar.js',
-			'development/js/libs/jqueryteam/jquery.magnific-popup.js',
-			'development/js/libs/jqueryteam/jquery.plugin.js',
-			'development/js/libs/jqueryteam/jquery.countdown.js',
-			'development/js/libs/jqueryteam/jquery.countdown-ru.js',
-			'development/js/libs/jqueryteam/jquery.inputmask.js',
-			'development/js/libs/jqueryteam/jquery.validate.min.js',
-			'development/js/libs/jqueryteam/jquery.cookie.js',
-			'development/js/libs/jqueryteam/jquery.jscrollpane.min.js',
-			'development/js/libs/jqueryteam/jquery.formstyler.min.js',
-			'development/js/libs/jqueryteam/jquery.session.js',
-			'development/js/libs/jqueryteam/jquery.easydropdown.js',
-			'development/js/libs/jqueryteam/jquery.maskedinput.min.js',
-			'development/js/libs/jqueryteam/selectivizr-min.js',
-			'development/js/libs/jqueryteam/TweenMax.min.js',
-			// 
-			// 
-			'development/js/libs/jsrender/jsrender.js',
-			// 
-			// 
-			// development/js/libs/z585
-		],
+const helper = {
 
-		app: [
-			'development/js/app/z585.js',
-			'development/js/app/z585.main.js',
-			'development/js/app/z585.data.js',
-			'development/js/app/z585.htmlrender.js',
-			'development/js/app/z585.debug.js',
-			// 'development/js/app/',
-			// 'development/js/app/',
-			// 'development/js/app/',
-			// 'development/js/app/',
-		],
-
-		shopPage: [
-			'development/js/pages/shop-page/render.js',
-		],
-
-		storesPage: [
-			'development/js/pages/stores-page/render.js',
-		],
+	/**
+	 * Возвращает переданный флаг 
+	 * gulp taskname --arg1 HELLO --arg2 BYE
+	 */
+	getArg: function(key) {
+		let index = process.argv.indexOf('--' + key);
+		let next = process.argv[index + 1];
+		return (index < 0) ? null : (!next || next[0] === '-') ? true : next;
 	},
+
+	/**
+	 * Возвращает список директорий
+	 */
+	getFolders: function(dir) {
+		return fs.readdirSync(dir)
+			.filter(function(file) {
+				return fs.statSync(path.join(dir, file)).isDirectory();
+			});
+	},
+
 };
 
-
-
+// Запуск локального сервера для лайврелоада
+gulp.task('webserver', function () {
+	browserSync(config.connect);
+});
 
 /*
 	JS
@@ -97,87 +104,68 @@ gulp.task('make-msalnikov-js', function () {
 		.pipe(gulp.dest('development/js'));
 });
 
-
-
-// Libs
+// JS Libs
 gulp.task('js:libs', function () {
-	return gulp.src(srcList.js.libs)
+	return gulp.src(config.path.js.libs)
 		.pipe(sourcemaps.init({loadMaps: true}))
 		.pipe(concat('libs.js'))
 		.pipe(uglifyjs())
 		.pipe(rename('libs.min.js'))
 		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('development/js/'));
+		.pipe(gulp.dest('development/js/'))
+		.pipe(gulp.dest('production/js/'))
+		.pipe(reload({stream: true}));
 });
 
-// App
+// JS App
 gulp.task('js:app', function () {
-	return gulp.src(srcList.js.app)
+	return gulp.src(config.path.js.app)
 		.pipe(sourcemaps.init({loadMaps: true}))
 		.pipe(concat('app.js'))
 		.pipe(uglifyjs())
 		.pipe(rename('app.min.js'))
 		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('development/js/'));
+		.pipe(gulp.dest('development/js/'))
+		.pipe(gulp.dest('production/js/'))
+		.pipe(reload({stream: true}));
 });
 
-// shop-page
-gulp.task('js:shop-page', function () {
-	return gulp.src(srcList.js.shopPage)
-		.pipe(sourcemaps.init({loadMaps: true}))
-		.pipe(concat('shop-page.js'))
-		.pipe(uglifyjs())
-		.pipe(rename('shop-page.min.js'))
-		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('development/js/'));
+// JS Pages
+gulp.task('js:pages', function () {
+	var pagesPath = 'development/js/pages/';
+	var folders = helper.getFolders(pagesPath);
+
+	var tasks = folders.map(function(folder) {
+		return gulp.src(path.join(pagesPath, folder, '/*.js'))
+			.pipe(sourcemaps.init({loadMaps: true}))
+			.pipe(concat(folder + '.js'))
+			.pipe(uglifyjs())    
+			.pipe(rename(folder + '.min.js')) 
+			.pipe(sourcemaps.write())
+			.pipe(gulp.dest('development/js'))
+			.pipe(gulp.dest('production/js'))
+			.pipe(reload({stream: true}));
+	});
+
+	return tasks;
 });
 
-// stores-page
-gulp.task('js:stores-page', function () {
-	return gulp.src(srcList.js.storesPage)
-		.pipe(sourcemaps.init({loadMaps: true}))
-		.pipe(concat('stores-page.js'))
-		.pipe(uglifyjs())
-		.pipe(rename('stores-page.min.js'))
-		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('development/js/'));
+// JS Views
+gulp.task('js:views', function () {
+	return gulp.src(config.path.js.views)
+		.pipe(gulp.dest('production/js/views/'))
+		.pipe(reload({stream: true}));
 });
 
+// JS Build
+gulp.task('js:build', [
+	'js:libs',
+	'js:libs',
+	'js:app',
+	'js:pages',
+	'js:views',
+]);
 
-
-
-
-
-gulp.task('make-jqueryteam', function () {
-	return gulp.src(jQueryTeamOrderList)
-		.pipe(sourcemaps.init({loadMaps: true}))
-		.pipe(concat('jqueryteam.js'))
-		.pipe(uglifyjs())
-		.pipe(rename('jqueryteam.min.js'))
-		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('development/js/'));
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 /*
@@ -187,12 +175,7 @@ gulp.task('make-jqueryteam', function () {
  */
 //
 //
-//
-//
-//
-//
 // HTML Building
-//
 //
 // html:build
 gulp.task('html:build', function () {
@@ -206,12 +189,7 @@ gulp.task('html:build', function () {
 		.pipe(gulp.dest('development'));
 });
 //
-//
-//
-//
-//
 // CSS Building
-//
 //
 // z585-all-css
 var z585AllScaffoldingList = [
@@ -360,21 +338,28 @@ gulp.task('adfox:css:local-build', function () {
 
 gulp.task('adfox', ['adfox:js:local', 'adfox:js:prod', 'adfox:css:local-scaff', 'adfox:css:prod-scaff', 'adfox:css:local-build', 'adfox:css:prod-build']);
 
-
-
-
-
 // 
-// 
+// Watch
 gulp.task('watch', function() {
+
+	// HTML
 	gulp.watch( ['development/htmls/**/*.{tmpl,html}'], ['html:build'] );
+
+	// Less
     gulp.watch( [
 		'development/less/**/*.less',
 		'!development/less/z585-all-list.*',
 	], [
 		'z585-css:local-scaff',
 		'z585-css:local-build',
-	] );
+	]);
+
+	// JS
+	gulp.watch('development/js/libs/**/*.js', [ 'js:libs' ] );
+	gulp.watch('development/js/app/*.js', [ 'js:app' ] );
+	gulp.watch('development/js/pages/**/*.js', [ 'js:pages' ] );
+	gulp.watch('development/js/views/*.js', [ 'js:views' ] );
+
 });
 
-gulp.task('default', ['watch']);
+gulp.task('default', [ 'webserver', 'watch' ]);
