@@ -25,7 +25,7 @@
 				var result = Z585.data.shops.getShopByURL(url, dataRaw);
 
 				// result = Z585.data.shops.shopValidate(result);
-
+				console.log(result);
 				// рендеринг страницы
 				if(!result) {
 					Z585.debug.log('Не нашел URL\'а :: ' + '  ' + url);
@@ -33,10 +33,13 @@
 					$('.shop-info').html($.templates[templateName].render(result));
 				}
 
-				// копирование GPS-координат в буфер обмена 
+				// копирование GPS-координат в буфер обмена
 				$(document).on('click', '.js-clipboard-button', function (e) {
 					Z585.main.copyToClipBoard($(this));
 				});
+
+				// инициализация карты
+				ymaps.ready(Z585.yamaps.init(result));
 			});
 		});
 }());
