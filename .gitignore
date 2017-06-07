@@ -4,20 +4,23 @@
 node_modules/
 
 
-# LOCAL
+#########
+# LOCAL #
+#########
+#
+development/*.html
+
+#
 development/css/*.css
 development/less/z585-all-list.prod.less
 development/less/z585-all-list.local.less
 
-# производные сборки библиотеки
+# производные сборки JS
 development/js/libs.min.js
-
-# производные сборки Z585
 development/js/app.min.js
-
-# производные сборки шаблонов страниц
 development/js/stores-page.min.js
 development/js/shop-page.min.js
+development/js/basket-page.min.js
 
 
 
