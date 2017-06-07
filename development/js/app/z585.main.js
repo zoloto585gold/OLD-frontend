@@ -63,7 +63,7 @@
 		Для разделения этих сред используются такие гипотезы:
 			'PROD' - на сайте продакшна подразумевается наличие объекта "digitalData" с таким свойство и его значением window.digitalData.website.environment === 'production'
 			'DEV' - на ДЕВЕ объекта "digitalData" нет и он не является локальным т.е. в URL'е не содержит localhost
-			'LOCAL' - определяем по URL'у : location.origin === 'http://localhost' , т.к. локальный вариант всегда должен содержать http://localhost для сайта zoloto585.ru
+			'LOCAL' - определяем по URL'у : location.hostname === 'localhost' , т.к. локальный вариант всегда должен содержать http://localhost для сайта zoloto585.ru
 
 
 		метод "enviromentDefine" определяет среду в которой запускается скрипт и устанавливает свойству "enviroment" соответствующее значение
@@ -86,7 +86,7 @@
 			main.isDev = false; // 
 			main.isProd = true; // 
 		}
-		else if(location.origin === 'http://localhost'){
+		else if(location.hostname === 'localhost'){
 			main.environment = 'LOCAL';
 			main.isLocal = true; // 
 			main.isDev = false; // 
