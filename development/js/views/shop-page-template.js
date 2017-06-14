@@ -57,18 +57,16 @@ $.templates({ 'shop-page-template': ' \
 		\
 		\
 		\
-		<!--\
 		<div class="shop-location__map-block js-toggle-parent">\
 			<div class="section shop-location__map-header js-toggle-btn">\
 				<div class="section__inner">\
 				на карте\
 				</div>\
 			</div>\
-			<div class="shop-location__map js-toggle-content">\
-			Карта\
+			<div  class="shop-location__map js-toggle-content">\
+				<div id="shop-map" style="height: 500px;"></div>\
 			</div>\
 		</div>\
-		-->\
 		\
 		\
 		\
