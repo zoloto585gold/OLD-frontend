@@ -30,8 +30,37 @@ const config = {
 	path: {
 		js: {
 			libs: [
-				'development/js/libs/**/*.js',
-				'!development/js/libs/jqueryteam/jquery-1.11.0.min.js',
+				'development/js/libs/plugins/picturefill.min.js',
+				//
+				//
+				'development/js/libs/jqueryteam/jquery-1.11.1.min.js',
+				'development/js/libs/jqueryteam/owl.carousel.js',
+				'development/js/libs/jqueryteam/select.js',
+				'development/js/libs/jqueryteam/jquery-ui.js',
+				'development/js/libs/jqueryteam/jquery.ui.touch-punch.min.js',
+				'development/js/libs/jqueryteam/jquery.ui.datepicker-ru.js',
+				'development/js/libs/jqueryteam/jquery.touchSwipe.min.js',
+				'development/js/libs/jqueryteam/jquery.zoom.js',
+				'development/js/libs/jqueryteam/fotorama.js',
+				'development/js/libs/jqueryteam/jquery.mousewheel.js',
+				'development/js/libs/jqueryteam/perfect-scrollbar.js',
+				'development/js/libs/jqueryteam/jquery.magnific-popup.js',
+				'development/js/libs/jqueryteam/jquery.plugin.js',
+				'development/js/libs/jqueryteam/jquery.countdown.js',
+				'development/js/libs/jqueryteam/jquery.countdown-ru.js',
+				'development/js/libs/jqueryteam/jquery.inputmask.js',
+				'development/js/libs/jqueryteam/jquery.validate.min.js',
+				'development/js/libs/jqueryteam/jquery.cookie.js',
+				'development/js/libs/jqueryteam/jquery.jscrollpane.min.js',
+				'development/js/libs/jqueryteam/jquery.formstyler.min.js',
+				'development/js/libs/jqueryteam/jquery.session.js',
+				'development/js/libs/jqueryteam/jquery.easydropdown.js',
+				'development/js/libs/jqueryteam/jquery.maskedinput.min.js',
+				'development/js/libs/jqueryteam/selectivizr-min.js',
+				'development/js/libs/jqueryteam/TweenMax.min.js',
+				//
+				//
+				'development/js/libs/jsrender/jsrender.js',
 			],
 
 			app: [
@@ -40,6 +69,7 @@ const config = {
 				'development/js/app/z585.data.js',
 				'development/js/app/z585.htmlrender.js',
 				'development/js/app/z585.debug.js',
+				'development/js/app/z585.yamaps.js',
 			],
 
 			pages: [
@@ -69,7 +99,7 @@ const adfoxList = {
 const helper = {
 
 	/**
-	 * Возвращает переданный флаг 
+	 * Возвращает переданный флаг
 	 * gulp taskname --arg1 HELLO --arg2 BYE
 	 */
 	getArg: function(key) {
@@ -139,8 +169,8 @@ gulp.task('js:pages', function () {
 		return gulp.src(path.join(pagesPath, folder, '/*.js'))
 			.pipe(sourcemaps.init({loadMaps: true}))
 			.pipe(concat(folder + '.js'))
-			.pipe(uglifyjs())    
-			.pipe(rename(folder + '.min.js')) 
+			.pipe(uglifyjs())
+			.pipe(rename(folder + '.min.js'))
 			.pipe(sourcemaps.write())
 			.pipe(gulp.dest('development/js'))
 			.pipe(gulp.dest('production/js'))
@@ -272,7 +302,7 @@ gulp.task('z585-css:local-build', function () {
 		.pipe(gulp.dest('development/css'));
 });
 
-// 
+//
 gulp.task('z585-css', ['z585-css:local-scaff', 'z585-css:prod-scaff', 'z585-css:local-build', 'z585-css:prod-build']);
 
 
@@ -338,7 +368,7 @@ gulp.task('adfox:css:local-build', function () {
 
 gulp.task('adfox', ['adfox:js:local', 'adfox:js:prod', 'adfox:css:local-scaff', 'adfox:css:prod-scaff', 'adfox:css:local-build', 'adfox:css:prod-build']);
 
-// 
+//
 // Watch
 gulp.task('watch', function() {
 
