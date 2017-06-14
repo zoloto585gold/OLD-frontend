@@ -1,0 +1,28 @@
+.header-adfox-wrapper {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	z-index: 10;
+	margin-left: -290px;
+
+	width: 580px;
+	height: 44px;
+	overflow: hidden;
+
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+
+
+
+	@media @touch {
+		display: none;
+	}
+
+
+	@media @tablet-album {
+		display: block;
+		width: 350px;
+		margin-left: -175px;
+	}
+}

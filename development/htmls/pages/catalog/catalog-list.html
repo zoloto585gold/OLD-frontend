@@ -1,0 +1,97 @@
+<div class="section  catalog-list-section">
+	<div class="overtop-promo">
+		<div class="overtop-promo__inner" data-wrap>
+			<button class="overtop-promo__close-btn">X</button>
+
+			<!-- Step 1: Start -->
+			<div class="overtop-promo__block  overtop-promo__img" data-step="start" data-active style="background-image: url(/_tmp/amma-30-img1.jpg);"></div>
+
+
+			<!-- Step 2: Success -->
+			<div class="overtop-promo__block  overtop-promo__result" data-step="success">
+				<div class="overtop-promo__result-label">Ваш промокод:</div>
+				<div class="overtop-promo__result-value">10FORYOU</div>
+			</div>
+
+			<!-- Step 3: Fail -->
+			<div class="overtop-promo__block  overtop-promo__img" data-step="fail" style="background-image: url(/_tmp/amma-30-img2.jpg);"></div>
+
+			<!-- Step 4: Signed -->
+			<div class="overtop-promo__block  overtop-promo__signed" data-step="signed">
+				<img src="/_tmp/amma-30-img3.png" alt="">
+
+				<div class="overtop-promo__signed-top">Дополнительно на изделия с полудрагоценными камнями</div>
+				<div class="overtop-promo__signed-middle">Ваш промокод: <span>КАМЕНЬ</span></div>
+				<div class="overtop-promo__signed-bottom">Скидка не распростроняется на товары с «Шок ценой»</div>
+			</div>
+
+			<!-- Field -->
+			<div class="overtop-promo__field-wrapper" data-field>
+				<input type="text" class="overtop-promo__field-input" placeholder="Введите номер бонусной карты">
+				<div class="overtop-promo__field-hint" data-hint>Введите верный номер карты</div>
+			</div>
+
+			<!-- Buttons -->
+			<div class="overtop-promo__btn-wrapper">
+				<button class="overtop-promo__btn" data-active data-btn="start">Получить промокод</button>
+				<a href="#" class="overtop-promo__btn" data-btn="success">Перейти к акции</a>
+				<a href="#" class="overtop-promo__btn" data-btn="catalog">Смотреть товары</a>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="section__inner">
+
+		<div class="catalog-list h-clearfix">
+			<!-- Row 1 -->
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+
+			<!-- Row 2 (Video banner) -->
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-banner-video.html')
+
+			<!-- Row 3 -->
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+
+			<!-- Row 4 -->
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+
+			<!-- Row 2 (Image banner) -->
+			@@include('./catalog-list-banner-image.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+
+			<!-- Row 6 -->
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+			@@include('./catalog-list-item.html')
+		</div>
+	</div>
+
+	<!-- Recommended -->
+	@@include('./catalog-list-recommended.html')
+</div>

@@ -1,0 +1,221 @@
+.shop-location{
+    background: #fff;
+    &__top{
+        margin-top: -5px;
+        padding: 10px 0;
+        position: relative;
+        &:before,
+        &:after{
+            content: '';
+            display: block;
+            width: 100%;
+            height: 5px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            background: url(@img-thingies-shadow-5) no-repeat;
+        }
+        &:before{
+            top: -5px;
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+        &:after{
+            top: 100%;
+        }
+        .shop-info__list-item{
+            float: left;
+            width: 250px;
+            margin-bottom: 0;
+            line-height: 16px;
+            padding-top: 5px;
+            &--text{
+                padding-top: 12px;
+                font-size: 18px;
+                @media @touch{
+                    float: none;
+                    width: 100%;
+                    font-size: 16px;
+                    padding-top: 0;
+                    padding-bottom: 10px;
+                }
+            }
+            &--gps{
+                padding-left: 20px;
+            }
+            i{
+                margin-top: -5px;
+            }
+            a:not(.button){
+                border-bottom: none;
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+            .button{
+                display: block;
+                font-size: 11px;
+                padding: 0 15px;
+                text-align: center;
+                margin-top: -4px;
+            }
+        }
+    }
+    &__text{
+        .js-toggle-btn{
+            display: none;
+            @media @touch{
+                display: block;
+            }
+        }
+        .js-toggle-content{
+            padding: 15px 0;
+        }
+        p{
+            font-size: 14px;
+            font-weight: 300;
+        }
+    }
+    &__map-header{
+        .font-circe_bold(12px, 1, #333);
+        text-transform: uppercase;
+        border-top: 1px solid #d1d1d1;
+        border-bottom: 1px solid #d1d1d1;
+        padding: 15px 0;
+        @media @touch{
+            border-top: none;
+            border-bottom: none;
+            padding: 0;
+        }
+    }
+}
+
+
+.shop-page{
+    .js-toggle-parent{
+        .js-toggle-btn{
+            @media @touch{
+                .font-circe_bold(16px, 1, #202020);
+                padding: 15px 0;
+                text-transform: uppercase;
+                position: relative;
+                border-top: 1px solid #d1d1d1;
+                &:after,
+                &:before{
+                    border: solid transparent;
+                    content: " ";
+                    height: 0;
+                    width: 0;
+                    position: absolute;
+                    top: 50%;
+                    right: 50%;
+                    margin-right: -375px;
+                    pointer-events: none;
+                }
+                &:not(.is-toggle):after{
+                    border-color: rgba(255, 255, 255, 0);
+                    border-top-color: #fff;
+                    border-width: 4px;
+                    margin-right: -372px;
+                }
+                &:not(.is-toggle):before{
+                    border-color: rgba(169, 169, 169, 0);
+                    border-top-color: #a9a9a9;
+                    border-width: 7px;
+                }
+                &.is-toggle{
+                    &:after,
+                    &:before{
+                        top: 35%;
+                    }
+                    &:after{
+                        border-color: rgba(255, 255, 255, 0);
+                        border-bottom-color: #fff;
+                        border-width: 4px;
+                        margin-right: -372px;
+                        margin-top: 6px;
+                    }
+                    &:before{
+                        border-color: rgba(169, 169, 169, 0);
+                        border-bottom-color: #a9a9a9;
+                        border-width: 7px;
+                    }
+                }
+            }
+            @media @tablet-portrait {
+                &:after,
+                &:before{
+                    margin-right: -310px;
+                }
+                &:not(.is-toggle):after{
+                    margin-right: -307px;
+                }
+                &.is-toggle{
+                    &:after{
+                        margin-right: -307px;
+                    }
+                }
+            }
+            @media @mobile-album {
+                &:after,
+                &:before{
+                    margin-right: -230px;
+                }
+                &:not(.is-toggle):after{
+                    margin-right: -227px;
+                }
+                &.is-toggle{
+                    &:after{
+                        margin-right: -227px;
+                    }
+                }
+            }
+            @media @mobile-portrait {
+                &:after,
+                &:before{
+                    margin-right: -150px;
+                }
+                &:not(.is-toggle):after{
+                    margin-right: -147px;
+                }
+                &.is-toggle{
+                    &:after{
+                        margin-right: -147px;
+                    }
+                }
+            }
+        }
+        .js-toggle-content{
+            @media @touch{
+                display: none;
+                border-top: 1px solid #d1d1d1;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px){
+    .shop-info__availability{
+        display: none;
+    }
+    .shop-info__list-item{
+        display: block;
+        width: 100%;
+
+
+        &--phone {
+            display: none;
+        }
+    }
+    .shop-location__top .shop-info__list-item{
+        float: none;
+        width: 100%;
+        padding-top: 10px;
+    }
+    .shop-location__top .shop-info__list-item--gps{
+        padding-left: 0;
+    }
+}

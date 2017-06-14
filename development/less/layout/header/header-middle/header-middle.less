@@ -5,6 +5,14 @@
 	border-top: 1px solid #d3d3d3;
 	border-bottom: 1px solid #cfcfcf;
 
+	&__inner{
+		@media @touch-between {
+			width: 100%;
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+	}
+
 
 	&__logo {
 		float: left;
@@ -18,6 +26,10 @@
 		& img {
 			width: 100%;
 			height: 100%;
+		}
+
+		@media @touch-between {
+			margin-left: 0;
 		}
 	}
 
@@ -114,6 +126,10 @@
 @media screen and (max-width: @tablet_a-max) {
 	.header-middle {
 		margin-top: 45px;
+
+		.header-top--position_second + & {
+			margin-top: 125px;
+		}
 
 		&__button {
 			&--bonuses {

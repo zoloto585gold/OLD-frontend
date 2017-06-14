@@ -1,4 +1,31 @@
 # ignore node modules
+
+# ENVIROMENT
 node_modules/
+
+
+# LOCAL
 development/css/*.css
+development/less/z585-all-list.prod.less
+development/less/z585-all-list.local.less
+
+# производные сборки библиотеки
+development/js/libs.min.js
+
+# производные сборки Z585
+development/js/app.min.js
+
+# производные сборки шаблонов страниц
+development/js/stores-page.min.js
+development/js/shop-page.min.js
+
+
+
+# (BITRIX) PRODUCTION && DEVELOPMENT
 production/css/*.css
+/production/css/*.css
+/production/js/*.js
+/production/js/**/*.js
+/production/images/*
+/production/js/libs.min.js
+/production/js/libs.min.js

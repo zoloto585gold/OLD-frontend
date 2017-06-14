@@ -32,7 +32,7 @@ header#header .top .right_col {
 }
 header#header .top .right_col .question {
     display: inline-block;
-    background: url(../images/question.png) no-repeat 0 50%;
+    background: url('@{img}/question.png') no-repeat 0 50%;
     margin-bottom: 17px;
     color: #000;
     font-size: 12px;
@@ -202,7 +202,7 @@ footer#footer .social a {
     display: block;
     width: 30px;
     height: 30px;
-    background: url(../images/social.png) no-repeat;
+    background: url('@{img}/social.png') no-repeat;
     margin: 0 0 1px 1px;
     float: left
 }
@@ -262,6 +262,10 @@ footer#footer .social a.ig {
 }
 .breadcrumbs {
     margin: 20px 0 25px;
+
+	@media @desktop{
+		display: none;
+	}
 }
 .breadcrumbs a {
     font-family: 'Circe-Regular';
@@ -329,7 +333,7 @@ footer#footer .social a.ig {
 }
 .pagination a.next,
 .pagination a.prev {
-    background: url(../images/navigation.png) no-repeat;
+    background: url('@{img}/navigation.png') no-repeat;
     height: 13px;
     width: 7px;
     display: inline-block;
@@ -365,7 +369,7 @@ footer#footer .social a.ig {
     height: 31px;
     display: block;
     position: absolute;
-    background: #f2eff0 url(../images/close.png) center center no-repeat;
+    background: #f2eff0 url('@{img}/close.png') center center no-repeat;
     border: 4px solid #f2eff0;
     border-radius: 31px;
     -moz-border-radius: 31px;
@@ -487,7 +491,7 @@ footer#footer .social a.ig {
     padding: 7px 25px 5px 15px;
     color: #fff;
     text-transform: none;
-    background: url(../images/ar_btm.png) no-repeat 97% 50%;
+    background: url('@{img}/ar_btm.png') no-repeat 97% 50%;
     font: 13px 'Circe-Regular', sans-serif;
     cursor: pointer
 }
@@ -567,7 +571,7 @@ footer#footer .social a.ig {
     display: block;
     width: 19px;
     height: 19px;
-    background: url(../images/ok_tovar.png) no-repeat 0 0;
+    background: url('@{img}/ok_tovar.png') no-repeat 0 0;
     margin: 0 auto
 }
 .white-popup-block.podbor_popup table tbody tr td .name {
@@ -691,7 +695,7 @@ footer#footer .social a.ig {
     display: block;
     width: 11px;
     height: 20px;
-    background: url(../images/menu/arrow.png) no-repeat bottom;
+    background: url('@{img}/menu/arrow.png') no-repeat bottom;
     position: absolute;
     top: 50%;
     margin-top: -10px;
@@ -935,7 +939,7 @@ footer#footer .social a.ig {
     vertical-align: middle
 }
 .check input[type="checkbox"]:checked+label span {
-    background: #fff url(../images/check2.png) no-repeat 50% 50%
+    background: #fff url('@{img}/check2.png') no-repeat 50% 50%
 }
 .check-span {
     display: block;
@@ -949,7 +953,7 @@ footer#footer .social a.ig {
     float: left
 }
 .check-span.checked {
-    background: #fff url(../images/check2.png) no-repeat 50% 50%
+    background: #fff url('@{img}/check2.png') no-repeat 50% 50%
 }
 form.load {
     position: relative;
@@ -973,7 +977,7 @@ form.load:before {
     top: -1px
 }
 .dpicker {
-    background: #fff url(../images/cal.png) no-repeat 96% 49%;
+    background: #fff url('@{img}/cal.png') no-repeat 96% 49%;
     padding-right: 50px
 }
 .ui-datepicker {
@@ -1229,7 +1233,7 @@ fieldset.dop .dop_inp {
     margin-bottom: 20px
 }
 .advantages .box .icon {
-    background: url(../images/bg_advantage_icons.png) no-repeat;
+    background: url('@{img}/bg_advantage_icons.png') no-repeat;
     width: 74px;
     height: 63px;
     display: inline-block;
@@ -1396,7 +1400,7 @@ fieldset.dop .dop_inp {
 }
 .card_info:after {
   content: "";
-  background: url(../images/pic/card.png) no-repeat 100% 100%;
+  background: url('@{img}/pic/card.png') no-repeat 100% 100%;
   display: block;
   width: 368px;
   height: 248px;
@@ -1545,10 +1549,10 @@ fieldset.dop .dop_inp {
   vertical-align: middle;
 }
 .shop_card .detail_shop .address span.metro {
-  background: url(../images/metro.png) no-repeat 0 50%;
+  background: url('@{img}/metro.png') no-repeat 0 50%;
 }
 .shop_card .detail_shop .address span.time {
-  background: url(../images/time.png) no-repeat 0 50%;
+  background: url('@{img}/time.png') no-repeat 0 50%;
   width: 39%;
 }
 .shop_card .detail_shop .plus {
@@ -1568,16 +1572,16 @@ fieldset.dop .dop_inp {
   margin-bottom: 20px;
 }
 .shop_card .detail_shop .plus span.lombard {
-  background: url(../images/lomb.png) no-repeat 0 50%;
+  background: url('@{img}/lomb.png') no-repeat 0 50%;
 }
 .shop_card .detail_shop .plus span.credit {
-  background: url(../images/credit.png) no-repeat 0 50%;
+  background: url('@{img}/credit.png') no-repeat 0 50%;
 }
 .shop_card .detail_shop .plus span.bank {
-  background: url(../images/bank.png) no-repeat 0 50%;
+  background: url('@{img}/bank.png') no-repeat 0 50%;
 }
 .shop_card .detail_shop .plus span.uvelir {
-  background: url(../images/uvelir.png) no-repeat 0 50%;
+  background: url('@{img}/uvelir.png') no-repeat 0 50%;
 }
 .shop_card .detail_shop .desc p {
   margin-bottom: 20px;
@@ -1691,14 +1695,14 @@ fieldset.dop .dop_inp {
     height: 67px;
     margin: 20px 0 40px;
     display: inline-block;
-    background: url(../images/bg_arr1.png) 0 50% no-repeat;
+    background: url('@{img}/bg_arr1.png') 0 50% no-repeat;
     font: bold 30px/68px Verdana;
     color: #fff;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, .3);
     text-align: center
 }
 .promo_detail .tizer_arrow:hover {
-    background: url(../images/bg_arr2.png) 0 50% no-repeat
+    background: url('@{img}/bg_arr2.png') 0 50% no-repeat
 }
 .promo_detail .tizer_arrow a {
     color: #fff
@@ -1796,7 +1800,7 @@ fieldset.dop .dop_inp {
     margin: 0 2% 20px
 }
 .promo_detail .box_icon_info .col .icon {
-    background: url(../images/icons.png) no-repeat;
+    background: url('@{img}/icons.png') no-repeat;
     display: block;
     margin: 0 auto 20px
 }
@@ -2225,98 +2229,6 @@ fieldset.dop .dop_inp {
     max-width: 1000px;
     width: 100%
 }
-.catalog .catalog_list .block_sort {
-    margin-bottom: 30px
-}
-.catalog .catalog_list .block_sort div {
-    display: inline-block;
-
-}
-.catalog .catalog_list .block_sort div select {
-   width:240px;
-    display:none;
-
-}
-.catalog .catalog_list .block_sort div label {
-    font: 12px/31px 'Circe-Light';
-    color: #866a6a;
-    margin-right: 8px;
-    display: inline-block;
-    _overflow: hidden;
-    *zoom: 1;
-    *display: inline;
-    vertical-align: top
-}
-.catalog .catalog_list .block_sort div.view {
-    float: left;
-    margin-right: 37px
-}
-.catalog .catalog_list .block_sort div.view a {
-    color: #464646;
-    margin: 0 7px;
-    text-decoration: none;
-    font: 12px/18px 'Circe-Light'
-}
-.catalog .catalog_list .block_sort div.view a:hover,
-.catalog .catalog_list .block_sort div.view a.active {
-    color: #ab0421;
-    font-weight: bold
-}
-.catalog .catalog_list .block_sort div.sort {
-    float: left;
-    margin-right: 30px;
-}
-.catalog .catalog_list .block_sort div.sort div {
-    line-height: normal;
-    height: auto
-}
-.catalog .catalog_list .block_sort div.sort .fancy-select {
-    width: 155px;
-    vertical-align: middle;
-    margin-top: -2px
-}
-.catalog .catalog_list .block_sort div.sort .fancy-select .trigger {
-    border: 1px solid #000
-}
-.catalog .catalog_list .block_sort div.sort .fancy-select .trigger.open {
-    border: none
-}
-.catalog .catalog_list .block_sort div.pagination {
-    float: right
-}
-.catalog .catalog_list .block_sort div.pagination a {
-    color: #464646;
-    margin: 0 2px;
-    text-decoration: none;
-    vertical-align: middle;
-    font-size: 12px
-}
-.catalog .catalog_list .block_sort div.pagination a.next,
-.catalog .catalog_list .block_sort div.pagination a.prev {
-    background: url(../images/navigation.png) no-repeat;
-    height: 13px;
-    width: 7px;
-    display: inline-block;
-    _overflow: hidden;
-    *zoom: 1;
-    *display: inline
-}
-.catalog .catalog_list .block_sort div.pagination a.next {
-    background-position: -7px 0
-}
-.catalog .catalog_list .block_sort div.pagination a.next:hover {
-    background-position: -21px 0
-}
-.catalog .catalog_list .block_sort div.pagination a.prev {
-    background-position: 0 0
-}
-.catalog .catalog_list .block_sort div.pagination a.prev:hover {
-    background-position: -14px 0
-}
-.catalog .catalog_list .block_sort div.pagination a:hover,
-.catalog .catalog_list .block_sort div.pagination a.active {
-    color: #ab0421
-}
 .catalog .catalog_list .item {
     max-width: 194px;
     max-height: 295px;
@@ -2359,7 +2271,7 @@ fieldset.dop .dop_inp {
     _overflow: hidden;
     *zoom: 1;
     *display: inline;
-    background: url(../images/bk.png) no-repeat 0 50%;
+    background: url('@{img}/bk.png') no-repeat 0 50%;
     font: 11px/16px 'Circe-Regular';
     color: #000;
     padding: 5px 0 0 33px;
@@ -2425,7 +2337,7 @@ fieldset.dop .dop_inp {
     float: left;
     width: 35px;
     height: 17px;
-    background: url(../images/product-metki.png) no-repeat;
+    background: url('@{img}/product-metki.png') no-repeat;
     margin-right: 10px;
     cursor: pointer
 }
@@ -2546,7 +2458,7 @@ fieldset.dop .dop_inp {
     display: block;
     width: 35px;
     height: 30px;
-    background: url(../images/product-metki.png) no-repeat;
+    background: url('@{img}/product-metki.png') no-repeat;
     position: absolute;
     top: 50%;
     margin-top: -15px;
@@ -2579,7 +2491,7 @@ fieldset.dop .dop_inp {
     display: inline-block;
     width: 35px;
     height: 30px;
-    background: url(../images/product-metki.png) no-repeat -62px -27px;
+    background: url('@{img}/product-metki.png') no-repeat -62px -27px;
     margin-right: 3px;
     line-height: 1;
     vertical-align: middle;
@@ -2792,7 +2704,7 @@ fieldset.dop .dop_inp {
     text-transform: uppercase;
 }
 .catalog_detail .detail_info .price span.bk_price {
-    background: url(../images/product-bk.png) no-repeat left center;
+    background: url('@{img}/product-bk.png') no-repeat left center;
     background-size: 48px 30px;
     font: 11px/1.2 'Circe-Regular';
     color: #7b7b7b;
@@ -2875,7 +2787,7 @@ fieldset.dop .dop_inp {
 }
 .catalog_detail .detail_info .btns
 {
-    background: url(../images/product-shadow.png) no-repeat top center;
+    background: url('@{img}/product-shadow.png') no-repeat top center;
 }
 .catalog_detail .detail_info .btns a
 {
@@ -2895,12 +2807,12 @@ fieldset.dop .dop_inp {
     top: -1px;
 }
 .catalog_detail .btn_prize {
-    background: #fdb414 url(../images/product-shadow.png) no-repeat top left;
+    background: #fdb414 url('@{img}/product-shadow.png') no-repeat top left;
     border-radius: 0 0 0 4px;
 }
 .catalog_detail .btn_prize:hover
 {
-    background: #fd5105 url(../images/product-shadow.png) no-repeat top left;
+    background: #fd5105 url('@{img}/product-shadow.png') no-repeat top left;
 }
 .catalog_detail .detail_info .btns .btn_prize img
 {
@@ -2908,12 +2820,12 @@ fieldset.dop .dop_inp {
 }
 .catalog_detail .btn_podbor
  {
-    background: #e21630 url(../images/product-shadow.png) no-repeat top right;
+    background: #e21630 url('@{img}/product-shadow.png') no-repeat top right;
     border-radius: 0 0 4px 0px;
 }
 .catalog_detail .btn_podbor:hover
 {
-    background: #ba2d32 url(../images/product-shadow.png) no-repeat top right;
+    background: #ba2d32 url('@{img}/product-shadow.png') no-repeat top right;
 }
 .catalog_detail .btns .wait
 {
@@ -3051,7 +2963,7 @@ fieldset.dop .dop_inp {
 {
     width: 32px;
     height: 32px;
-    background: url(../images/product-soc.png) no-repeat;
+    background: url('@{img}/product-soc.png') no-repeat;
 }
 .catalog_detail .soc-btns .b-share-icon_vkontakte:hover
 {
@@ -3221,7 +3133,7 @@ fieldset.dop .dop_inp {
     top: 0;
     left: 0;
     bottom: 0;
-    background: url("../images/shadow-left.png");
+    background: url("@{img}/shadow-left.png");
     z-index: 2;
 }
 .items-compare.jspScrollable.shadow-r:after
@@ -3234,7 +3146,7 @@ fieldset.dop .dop_inp {
     top: 0;
     right: 0;
     bottom: 0;
-    background: url("../images/shadow-right.png");
+    background: url("@{img}/shadow-right.png");
     z-index: 2;
 }
 .horizontal-only
@@ -3266,7 +3178,7 @@ fieldset.dop .dop_inp {
     display: block;
     width: 14px;
     height: 26px;
-    background: url(../images/scroll-arrows.png) no-repeat;
+    background: url('@{img}/scroll-arrows.png') no-repeat;
     position: relative;
     top: -11px;
 }
@@ -3437,7 +3349,7 @@ fieldset.dop .dop_inp {
     display: inline-block;
     width: 20px;
     height: 16px;
-    background: url(../images/product-metki.png) no-repeat -40px 0;
+    background: url('@{img}/product-metki.png') no-repeat -40px 0;
     vertical-align: middle;
     margin: -5px 10px 0;
 }
@@ -3472,9 +3384,6 @@ fieldset.dop .dop_inp {
 .back_a:hover
 {
     text-decoration: none;
-}
-.block_sort .clear{
-    display: none;
 }
 span.no_card{
     height: 25px;

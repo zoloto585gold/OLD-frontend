@@ -1,11 +1,11 @@
 /*
-	
-*/
+
+ */
 // ==============
 // == forms.js ==
 // ==============
-// 
-// 
+//
+//
 // что делает: стилизует состояния для полей форм,
 // в зависимости от действия/манипуляции с полем формы
 ;$(function () {
@@ -28,15 +28,15 @@
 		$(this).removeClass('form-textline--active');
 	});
 });
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // =======================
 // = ПОПАП ВЫБОРА ГОРОДА =
 // =======================
@@ -52,48 +52,75 @@
 		}
 	}
 
-	$('.top-geo__button').on('click', function () {
+	//
+	// Search
+	//
+	$(document).on('keyup change', '.js-top-geo-form__search input', function() {
+		var query = $.trim($(this).val());
+		var tag = 'span';
+		var regex = RegExp(query, 'gi');
+		var replacement = '<'+ tag +'>$&</'+ tag +'>';
+		var scrollApi = $('.js-top-geo-form__cities').data('jsp');
+
+		$('.js-top-geo-form__cities a[data-city] span').contents().unwrap();
+
+		if (query.length < 2) {
+			return false;
+		}
+
+		$('.js-top-geo-form__cities a[data-city]').each(function() {
+			if ($(this).text().search(regex) != -1 && scrollApi !== false) {
+				scrollApi.scrollToElement(this);
+				scrollApi = false;
+			}
+
+			$(this).html(function() {
+				return $(this).text().replace(regex, replacement);
+			});
+		});
+	});
+
+	$(document).on('click', '.top-geo__button', function () {
 		topGeoModal(true);
 	});
 
-	$('.top-geo-modal__close').on('click', function () {
+	$(document).on('click', '.top-geo-modal__close', function () {
 		topGeoModal(false);
 	});
 
-	$(document).on('click', function (event) {
+	$(document).on('click', '.top-geo-modal', function (event) {
 		if($(event.target).hasClass('top-geo-modal')) topGeoModal(false);
 	});
 
-	$('.top-geo-form__button').on('click', function (event) {
+	$(document).on('click', '.top-geo-form a', function (event) {
 		event.preventDefault();
 
-		var selectKey = $('.top-geo-form__option').find('.form__field-select').val(), // ключ либо идентификатор города
-			selectValue = $('.top-geo-form__option').find('.form__field-select').find('option:selected').text(); // текстовое значание - название города
+		var cityName = $(this).text(); //выбранный город
 
-		//
+		$('.js-top-geo-form__search input').val("").trigger("keyup"); //очистим город в строке поиска
+
 		// код взаимодейтвия с сервером для установки выбранного города
-		//
-
-		$.cookie('city', selectKey, { expires: 365, path: '/' });
+		$.cookie('city', cityName, { expires: 365, path: '/' });
 		set_city();
-		$('.top-geo__button>span').text(selectValue); // устанавлмвает в рзамтке в шапке название выбранного города
+		$('.top-geo__button>span').text(cityName); // устанавлмвает в рзамтке в шапке название выбранного города
+		$('.top-geo-form__chosen-city-result').text(cityName); // для мобильной версии
 		topGeoModal(false); // закрывает окно
 	});
 });
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // ================================
 // = ОБРАБОТЧИК НАВИГАЦИИ В ШАПКЕ =
 // ================================
@@ -107,11 +134,90 @@
 
 
 
+	// ищем элемент с css-классом '.alt-main-nav'
+	// у этого элемента берём значение data-атрибута 'data-main-nav'
+	// парсим эту JSON-строку в нормальный JavaScript-объект
+	// этот объект/структуру называем mainNavData
+	//
+	// объявляем переменную mainNavBanners, которая представляет
+	// массив из html-кусков групп баннеров для каждой вкладки
+	// 8 вкладок = 8 баннеров
+	//
+	
+	var mainNavData; // = JSON.parse($('.alt-main-nav').attr('data-main-nav'));
+	var mainNavBanners = [];
+
+
+
 	// -----------------------
 	// вспомогательные функции
 	// -----------------------
 
-	// закрывает touchnavi и/или сбрасывает настройки активности навгиции, 
+
+
+	//
+	// функция, которая делает html-шаблонизацию для объекта/струтктуры mainNavData
+	// и записвает этот html с данными в массив mainNavBanners
+	//
+	function mainNavBannersHTMLWrapper () {
+		mainNavData.forEach(function (item, index, array) {
+			var bannersHTML = '';
+
+			if(item['nav-banners'] !== undefined) {
+				Array.prototype.forEach.call(item['nav-banners']['nav-banners-item'], function (item, index, array) {
+					var image = '<a class="nav-banners-link" href="' + item['href'] + '"><img class="nav-banners-link__img" src="' + item['img'] + '" alt=""></a>';
+					var button = item['button'] !== false ? ('<a class="b-button nav-banners-button" href="' + item['href'] + '">' + item['button'] + '</a>') : '';
+					var banner = '<div class="nav-banners__item  nav-banners__item--type-' + item['type'] + '">' + image + button + '</div>';
+
+					bannersHTML += banner;
+				});
+				mainNavBanners[item['tab-number']] = '<div class="nav-banners  nav-banners--type-' + item['nav-banners']['nav-banners-type'] + '">' + bannersHTML + '</div>';
+			}
+		});
+
+		return mainNavBanners;
+	}
+
+
+	//
+	// функция, которая вставляет в html-разметку главной навигации на странице
+	// сгенерированную разметку баннеров
+	// каждая группа баннеров вставляется в свой лист
+	//
+	function addMainNavBanners() {
+		if($('.nav-banners').length === 0) {
+			mainNavBanners.forEach(function (item, index, array) {
+				$('.main-nav__item[data-inner-list=' + index + ']').append(item);
+			});
+		}
+	}
+
+
+
+	//
+	// функция, котрая удаляет баннеры из вкладок
+	//
+	function removeMainNavBanners() {
+		$('.nav-banners').remove();
+	}
+
+
+	//
+	// функция, которая устанавливает значение для data-атрибутов фонов и фоновых цветов
+	// выпадающих вкладок главной навигации
+	//
+	function setMainNavBGImages() {
+		mainNavData.forEach(function (item, index, array) {
+			$('.alt-main-nav__item[data-inner-list=' + item['tab-number'] + ']').attr('data-inner-background-image', item['inner-background-image']);
+			$('.alt-main-nav__item[data-inner-list=' + item['tab-number'] + ']').attr('data-inner-background-color', item['inner-background-color']);
+			$('.alt-main-nav__item[data-inner-list=' + item['tab-number'] + ']').attr('data-outer-background-image', item['outer-background-image']);
+			$('.alt-main-nav__item[data-inner-list=' + item['tab-number'] + ']').attr('data-outer-background-color', item['outer-background-color']);
+			console.log(item['tab-number']);
+		});
+	}
+
+
+	// закрывает touchnavi и/или сбрасывает настройки активности навгиции,
 	// которые доступны только для touch-устройств
 	function resetTouchNavi() {
 		$('.section').removeClass('section--offset-left');
@@ -130,7 +236,7 @@
 		$('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');
 	}
 
-	// 
+	//
 	// function openTouchNavi() {}
 
 	// сбрасывает/удаляет элементы присущие навигации только для desktop-устройств
@@ -158,7 +264,7 @@
 				.css({'background-image' : bg})
 				.attr('data-inner-list', innerListId);
 		}
-		
+
 	}
 	function resetDesktopNaviInnerListWrapper() {
 		$('.navi-inner-list-wrapper').removeClass('navi-inner-list-wrapper--active');
@@ -203,7 +309,7 @@
 			if($wanted.hasClass('top-sandwich__button--active')) resetTouchNavi();
 
 			// открываем меню
-			else { 
+			else {
 				$('.section').addClass('section--offset-left');
 				$('.header-bottom').removeClass('section--offset-left');
 
@@ -266,13 +372,13 @@
 	// ---------------------
 	// @DESKTOP NAVI HANDLER
 	// ---------------------
-	// обработка поведения навигации, 
+	// обработка поведения навигации,
 	// для разрешения экрана > 1024px по ширине
 	// т.е. для @desktop
 	var $mainNav = $('.main-nav'),
 		$mainNavItems = $('.main-nav__item'),
 		$altMainNav = $('.alt-main-nav'),
-		
+
 		$headerBottom = $('.header-bottom');
 
 	// #ref
@@ -318,7 +424,7 @@
 	// выпадших вкладок
 	// находит соответствующий "надпункт" из "alt-main-nav", который соответствует данной активной вкладке
 	// и делает этот "надпункт" активным;
-	// 
+	//
 	// оставляет черный треуголник активности на кнопке
 	// когда курсор ушёл с этой кнопке
 	// на выпадающий блок
@@ -334,7 +440,7 @@
 	// рассматривается hover когда
 	// указатель мыши находится или покидает
 	// всю навигацию;
-	// 
+	//
 	// отображает/скрывает
 	// заднюю подложку(которая тянется на весь экран по ширине) для выпадающего блока меню
 	$('.main-nav').hover(function (el) {
@@ -347,9 +453,9 @@
 	});
 
 
-	
 
-	
+
+
 	// #ref
 	function resetNaviInnerList(el) {
 		var innerListId = $(this).attr('data-inner-list');
@@ -362,6 +468,33 @@
 		resetDesktopNaviInnerListWrapper(innerListId);
 		console.log(innerListId);
 	}
+
+
+	//
+	// инициализация баннеров
+	// в главной навигации
+	//
+	mainNavBannersHTMLWrapper();
+	setMainNavBGImages();
+
+	// убираю старые значения которые в верстке есть, в проде убрать строку
+	// removeMainNavBanners();
+
+	// адаптайзер
+	if(parseInt(window.innerWidth) > 1024) {
+		addMainNavBanners();
+	} else {
+		removeMainNavBanners();
+	}
+
+	$(window).on('resize', function () {
+		if(parseInt(window.innerWidth) > 1024) {
+			addMainNavBanners();
+		} else {
+			removeMainNavBanners();
+		}
+	});
+
 
 	// (2) hover
 	// (3) hover
@@ -379,21 +512,26 @@
 			resetTouchNavi();
 		}
 	});
+
+
+
+
+
 });
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // ====================
 // = ПОДБОР УКРАШЕНИЯ =
 // ====================
@@ -417,9 +555,9 @@
 		}
 	});
 });
-// 
-// 
-// 
+//
+//
+//
 // =======================
 // = ФИЛЬТР ДЛЯ КАТАЛОГА =
 // =======================
@@ -440,16 +578,16 @@
 
 	// кнопка reset фильтра
 	$('#catalog-filter-reset-button').on('click', function (event) {
-		
+
 	});
 
 	// кнопка submit фильтра
 	$('#catalog-filter-submit-button').on('click', function (event) {
 		event.preventDefault();
 
-		// 
+		//
 		// отправка значений с формы фильтра на сервер
-		// 
+		//
 
 		$('.filter').addClass('filter--closed');
 	});
@@ -471,6 +609,12 @@ $(function(){
 		}
 	);
 });
-// 
-// 
-// 
+//
+//
+//Toggle function
+$('.js-toggle-btn').on('click', function () {
+	if(parseInt(window.innerWidth) < 1024) {
+		$(this).toggleClass('is-toggle');
+		$(this).parents('.js-toggle-parent').find('.js-toggle-content').slideToggle();
+	}
+});
