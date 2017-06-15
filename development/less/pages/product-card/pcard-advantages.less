@@ -1,7 +1,10 @@
 .pcard-advantanges{
+    display: none;
+
+
     padding: 6px 0;
     border-top: 1px solid #e1e1e1;
-    @media @touch{
+    @media screen and (max-width: @tablet_a-min){
         display: none;
     }
     &__item{
@@ -10,35 +13,41 @@
         height: 48px;
         .font-circe_light(12px, 14px, #333);
         position: relative;
+        padding-left: 55px;
+        @media @touch{
+            line-height: 1;
+        }
     }
     &__img{
-        display: inline-block;
-        vertical-align: middle;
+        display: block;
         width: 48px;
         height: 48px;
+        position: absolute;
+        top: 0;
+        left: 0;
         background: url(@img-sprite-primary) no-repeat;
-        margin-right: 8px;
         &--one{
-            background-position: 0px -393px;
+            background-position: 0px -394px;
         }
         &--two{
-            background-position: -50px -393px;
+            background-position: -51px -394px;
         }
         &--three{
-            background-position: 0px -443px;
+            background-position: 0px -445px;
         }
         &--four{
-            background-position: -50px -443px;
+            background-position: -51px -445px;
         }
-    }
-    &__text{
-        display: inline-block;
-        vertical-align: middle;
     }
     &__title{
         .font-circe_regular(12px, 14px, #333);
         text-transform: uppercase;
         line-height: 14px;
+        padding-top: 10px;
+        @media @touch{
+            padding-top: 3px;
+            margin-bottom: 3px;
+        }
     }
 
 }
