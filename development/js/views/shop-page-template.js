@@ -1,7 +1,7 @@
 $.templates({ 'shop-page-template': ' \
 	<div class="section shop-info__header">\
 		<div class="section__inner">\
-			<h1 class="shop-info__title">Магазин 585Gold</h1>\
+			<h1 class="shop-info__title" itemprop="name">Магазин 585Gold</h1>\
 			<div class="shop-info__availability">в магазине  сейчас в наличии<br>более 1000 ювелирных изделий</div>\
 		</div>\
 	</div>\
@@ -14,15 +14,26 @@ $.templates({ 'shop-page-template': ' \
 			</div>\
 		</div>\
 		<div class="shop-info__locations">\
-			<ul class="shop-info__info-list">\
-			<li class="shop-info__list-item">\
-			<i class="shop-icon shop-icon--point"></i>\
-			<span>город:</span>\
-			<a href="#">{{:CITY}}</a>\
-			</li>\
-			<li class="shop-info__list-item"><span>Адрес:</span>{{:ADDRESS.STREET}}, {{:ADDRESS.HOUSE_FLAT}}</li>\
-			<li class="shop-info__list-item"><i class="shop-icon shop-icon--clock"></i><span>режим работы:</span>{{:SCHEDULE_PREPARE}}</li>\
-			<li class="shop-info__list-item shop-info__list-item--phone"><i class="shop-icon shop-icon--phone"></i>+ 7 000 00 00 00<br><a href="#">заказать обратный звонок</a></li>\
+			<ul class="shop-info__info-list" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">\
+				<li class="shop-info__list-item">\
+					<i class="shop-icon shop-icon--point"></i>\
+					<span>город:</span>\
+					<a href="#" itemprop="addressLocality">{{:CITY}}</a>\
+				</li>\
+				<li class="shop-info__list-item">\
+					<span>Адрес:</span>\
+					<div itemprop="streetAddress">{{:ADDRESS.STREET}}, {{:ADDRESS.HOUSE_FLAT}}</div>\
+				</li>\
+				<li class="shop-info__list-item">\
+					<i class="shop-icon shop-icon--clock"></i>\
+					<span>режим работы:</span>\
+					<time itemprop="openingHours" datetime="{{:SCHEDULE_PREPARE}}">{{:SCHEDULE_PREPARE}}</time>\
+				</li>\
+				<li class="shop-info__list-item shop-info__list-item--phone">\
+					<i class="shop-icon shop-icon--phone"></i>\
+					+ 7 000 00 00 00<br>\
+					<a href="#">заказать обратный звонок</a>\
+				</li>\
 			</ul>\
 		</div>\
 	</div>\
