@@ -35,7 +35,6 @@
         width: 100%;
     }
 
-    &__promo-label,
     &__title,
     &__button_fav,
     &__button_reserve,
@@ -57,13 +56,15 @@
     }
 
     &__promo-label{
+        display: block;
         float: left;
         margin-right: 5px;
         padding: 0 5px;
-        background: #fff;
+        background: #f6f6f6;
         line-height: 10px;
         text-transform: uppercase;
-        .font-circe_regular(11px, 18px, #ed3030);
+
+        .font-circe_regular(11px, 18px, #a7a7a7);
 
         &--discount{
             display: none !important;
@@ -103,7 +104,7 @@
     }
 
     &__button_recommended{
-        display: block;
+        display: none;
         width: 17px;
         height: 17px;
         position: absolute;
@@ -183,8 +184,17 @@
 
      &__price{
         position: absolute;
-        right: 30px;
+        left: auto;
+        right: 16%;
         bottom: 1px;
+
+        @media @touch-between{
+            right: 20%;
+        }
+
+        @media @mobile-portrait{
+            right: 29%;
+        }
 
         span{
             .font-circe_light(18px, 1px, #333);
@@ -200,10 +210,18 @@
 
         &--old{
             right: auto;
-            left: 13px;
+            left: 18%;
 
             span{
                 text-decoration: line-through;
+            }
+
+            @media @touch-between{
+                left: 20%;
+            }
+
+            @media @mobile-portrait{
+                left: 29%;
             }
         }
     }
@@ -248,12 +266,16 @@
             display: none;
         }
 
-        .catalog-item__promo-label,
         .catalog-item__title,
         .catalog-item__button_fav,
         .catalog-item__button_reserve,
-        .catalog-item__banner{
+        /*.catalog-item__banner*/{
             display: block;
+        }
+
+        .catalog-item__promo-label{
+            color: #ed3030;
+            background: #fff;
         }
     }
 
@@ -261,17 +283,12 @@
         border-color: #ed3030;
         z-index: 22;
         margin-bottom: 343px;
-
-        .catalog-item__promo-label{
-            display: block;
-            background: #f6f6f6;
-            color: #a7a7a7;
-        }
     }
 
     /* Banners */
 
     &-banner{
+        display: none;
         width: -webkit-calc(100% / 6 * 2);
         width: -moz-calc(100% / 6 * 2);
         width: calc(100% / 6 * 2);
