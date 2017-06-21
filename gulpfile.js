@@ -300,7 +300,7 @@ gulp.task('watch', function() {
 	gulp.watch( ['development/htmls/**/*.{tmpl,html}'], ['html:build'] );
 
 	// Less
-    gulp.watch('development/less/**/*.less', [ 'css:build' ]);
+    gulp.watch('development/less/**/*.less', [ 'css:build', 'css:adfox' ]);
 
 	// JS
 	gulp.watch('development/js/inc/*.js', [ 'js:msalnikov' ] );
