@@ -13,54 +13,38 @@ const order = require('gulp-order');
 const uglifyjs = require('gulp-uglifyjs');
 // const mainBowerFiles = require('gulp-main-bower-files');
 const sourcemaps = require('gulp-sourcemaps');
+const assign = require('object-assign');
 const browserSync = require('browser-sync');
+const modRewrite = require('connect-modrewrite');
 const reload = browserSync.reload;
 
-const config = {
+// =============================================
+// Если нужно перекрыть объект в конфиге создаем
+// файл gulp.conf.json в корне (подробнее в pr/2017/_10005.md)
+const confPath = './gulp.conf.json';
+const config = assign({
 	connect: {
 		server: {
-			baseDir: './development'
+			baseDir: [ './development', './production' ]
 		},
 		tunnel: false,
 		host: 'localhost',
 		port: 9000,
 		logPrefix: 'Frontend_z585',
+		middleware: [
+			modRewrite([
+				'/bitrix/templates/zoloto/frontend/fonts /fonts [L]',
+				'/bitrix/templates/zoloto/frontend/images /img [L]',
+			])
+		]
 	},
 
 	path: {
 		js: {
 			libs: [
-				'development/js/libs/plugins/picturefill.min.js',
-				//
-				//
 				'development/js/libs/jqueryteam/jquery-1.11.1.min.js',
-				'development/js/libs/jqueryteam/owl.carousel.js',
-				'development/js/libs/jqueryteam/select.js',
-				'development/js/libs/jqueryteam/jquery-ui.js',
-				'development/js/libs/jqueryteam/jquery.ui.touch-punch.min.js',
-				'development/js/libs/jqueryteam/jquery.ui.datepicker-ru.js',
-				'development/js/libs/jqueryteam/jquery.touchSwipe.min.js',
-				'development/js/libs/jqueryteam/jquery.zoom.js',
-				'development/js/libs/jqueryteam/fotorama.js',
-				'development/js/libs/jqueryteam/jquery.mousewheel.js',
-				'development/js/libs/jqueryteam/perfect-scrollbar.js',
-				'development/js/libs/jqueryteam/jquery.magnific-popup.js',
-				'development/js/libs/jqueryteam/jquery.plugin.js',
-				'development/js/libs/jqueryteam/jquery.countdown.js',
-				'development/js/libs/jqueryteam/jquery.countdown-ru.js',
-				'development/js/libs/jqueryteam/jquery.inputmask.js',
-				'development/js/libs/jqueryteam/jquery.validate.min.js',
-				'development/js/libs/jqueryteam/jquery.cookie.js',
-				'development/js/libs/jqueryteam/jquery.jscrollpane.min.js',
-				'development/js/libs/jqueryteam/jquery.formstyler.min.js',
-				'development/js/libs/jqueryteam/jquery.session.js',
-				'development/js/libs/jqueryteam/jquery.easydropdown.js',
-				'development/js/libs/jqueryteam/jquery.maskedinput.min.js',
-				'development/js/libs/jqueryteam/selectivizr-min.js',
-				'development/js/libs/jqueryteam/TweenMax.min.js',
-				//
-				//
-				'development/js/libs/jsrender/jsrender.js',
+				'development/js/libs/**/*.js',
+				'!development/js/libs/jqueryteam/jquery-1.11.0.min.js',
 			],
 
 			app: [
@@ -79,22 +63,68 @@ const config = {
 			views: [
 				'development/js/views/*.js'
 			],
+
+			msalnikov: [
+				'development/js/inc/*.js',
+			],
+		},
+
+		less: [
+			'development/less/mixins/@path-global.less',
+
+			//
+			'development/less/scaffolding/mixins.less',
+			'development/less/scaffolding/layout__fonts.less',
+			'development/less/scaffolding/layout__external.less',
+
+			// старый css
+			'development/less/scaffolding/legacy__all.less',
+
+			// базовые стили макета страниц
+			'development/less/scaffolding/layout__grid.less',
+			'development/less/scaffolding/layout__uikit.less',
+			'development/less/scaffolding/layout__header.less',
+			'development/less/scaffolding/layout__footer.less',
+
+			// стили шаблонов страниц (постранично)
+			'development/less/scaffolding/pages__index.less',
+			'development/less/scaffolding/pages__product-card.less',
+			'development/less/scaffolding/pages__catalog.less',
+			'development/less/scaffolding/pages__page-404.less',
+			'development/less/scaffolding/pages__user-cabinet.less',
+			'development/less/scaffolding/pages__store.less',
+			'development/less/scaffolding/pages__stock.less',
+			'development/less/scaffolding/pages__favorites.less',
+			'development/less/scaffolding/pages__shop.less',
+			'development/less/scaffolding/pages__basket.less',
+
+			// latest legacy
+			'development/less/scaffolding/legacy__latest.less',
+
+			// system
+			'development/less/scaffolding/system__helpers.less',
+		],
+
+		html: [
+			'development/htmls/*.tmpl', 
+			'!development/htmls/your-page.tmpl'
+		],
+
+		adfox: {
+			less: [
+				'development/less/mixins/@path-global.less',
+				'development/less/scaffolding/mixins.less',
+				'development/less/scaffolding/layout__fonts.less',
+				'development/less/scaffolding/layout__adfox.less',
+			],
+			js: [
+				'development/js/jqueryteam/jquery-1.11.1.min.js',
+				'development/js/jqueryteam/TweenMax.min.js',
+				'development/js/countdown.js'
+			]
 		}
 	},
-};
-
-const adfoxList = {
-	css: [
-		'development/less/scaffolding/mixins.less',
-		'development/less/scaffolding/layout__fonts.less',
-		'development/less/scaffolding/layout__adfox.less',
-	],
-	js: [
-		'development/js/jqueryteam/jquery-1.11.1.min.js',
-		'development/js/jqueryteam/TweenMax.min.js',
-		'development/js/countdown.js'
-	]
-};
+}, fs.existsSync(confPath) ? require(confPath) : {});
 
 const helper = {
 
@@ -125,24 +155,13 @@ gulp.task('webserver', function () {
 	browserSync(config.connect);
 });
 
-/*
-	JS
-*/
-gulp.task('make-msalnikov-js', function () {
-	return gulp.src(['development/js/inc/global.forms.js', 'development/js/inc/header.geo-form.js', 'development/js/inc/header.main-nav.js', 'development/js/inc/index.filter.js', 'development/js/inc/catalog.filter.js'])
-		.pipe(concat('msalnikov.js'))
-		.pipe(gulp.dest('development/js'));
-});
+// =================== JavaScript ===================
 
 // JS Libs
 gulp.task('js:libs', function () {
 	return gulp.src(config.path.js.libs)
-		.pipe(sourcemaps.init({loadMaps: true}))
-		.pipe(concat('libs.js'))
+		.pipe(concat('libs.min.js'))
 		.pipe(uglifyjs())
-		.pipe(rename('libs.min.js'))
-		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('development/js/'))
 		.pipe(gulp.dest('production/js/'))
 		.pipe(reload({stream: true}));
 });
@@ -150,12 +169,12 @@ gulp.task('js:libs', function () {
 // JS App
 gulp.task('js:app', function () {
 	return gulp.src(config.path.js.app)
-		.pipe(sourcemaps.init({loadMaps: true}))
-		.pipe(concat('app.js'))
-		.pipe(uglifyjs())
-		.pipe(rename('app.min.js'))
-		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('development/js/'))
+		//.pipe(sourcemaps.init({loadMaps: true}))
+		//.pipe(concat('app.js'))
+		//.pipe(sourcemaps.write())
+		.pipe(uglifyjs('app.min.js', {
+			outSourceMap: true
+		}))
 		.pipe(gulp.dest('production/js/'))
 		.pipe(reload({stream: true}));
 });
@@ -167,12 +186,14 @@ gulp.task('js:pages', function () {
 
 	var tasks = folders.map(function(folder) {
 		return gulp.src(path.join(pagesPath, folder, '/*.js'))
-			.pipe(sourcemaps.init({loadMaps: true}))
-			.pipe(concat(folder + '.js'))
-			.pipe(uglifyjs())
-			.pipe(rename(folder + '.min.js'))
-			.pipe(sourcemaps.write())
-			.pipe(gulp.dest('development/js'))
+			//.pipe(sourcemaps.init({loadMaps: true}))
+			//.pipe(concat(folder + '.js'))
+			//.pipe(sourcemaps.write())
+			//.pipe(gulp.dest('production/js'))
+			//.pipe(rename({ suffix: '.min' }))
+			.pipe(uglifyjs(folder + '.min.js', {
+				outSourceMap: true
+			}))
 			.pipe(gulp.dest('production/js'))
 			.pipe(reload({stream: true}));
 	});
@@ -187,204 +208,102 @@ gulp.task('js:views', function () {
 		.pipe(reload({stream: true}));
 });
 
-// JS Build
+// JS Adfox
+gulp.task('js:adfox', function () {
+	return gulp.src(config.path.adfox.js)
+		//.pipe(sourcemaps.init({loadMaps: true}))
+		//.pipe(concat('adfox.js'))
+		//.pipe(sourcemaps.write())
+		.pipe(uglifyjs('adfox.min.js', {
+			outSourceMap: true
+		}))
+		.pipe(gulp.dest('production/js/'));
+});
+
+// msalnikov.js
+// @todo: переделать, сделать более понятным
+gulp.task('js:msalnikov', function () {
+	return gulp.src(config.path.js.msalnikov)
+		//.pipe(sourcemaps.init({loadMaps: true}))
+		//.pipe(concat('msalnikov.min.js'))
+		//.pipe(sourcemaps.write())
+		.pipe(uglifyjs('msalnikov.min.js', {
+			outSourceMap: true
+		}))
+		.pipe(gulp.dest('production/js'))
+		.pipe(reload({stream: true}));
+});
+
+// JS ALL TASKS
 gulp.task('js:build', [
 	'js:libs',
 	'js:libs',
 	'js:app',
 	'js:pages',
 	'js:views',
+	'js:adfox',
+	'js:msalnikov',
 ]);
 
-//
-//
-/*
- * *************
- * NEW GULP FILE
- * *************
- */
-//
-//
-// HTML Building
-//
-// html:build
+// =================== HTML ===================
+
+// HTML Build
 gulp.task('html:build', function () {
-	return gulp.src(['development/htmls/*.tmpl', '!development/htmls/your-page.tmpl'])
+	return gulp.src(config.path.html)
 		.pipe(fileinclude({
 			prefix: '@@'
 		}))
 		.pipe(rename({
 			extname: '.html'
 		}))
-		.pipe(gulp.dest('development'));
+		.pipe(gulp.dest('development'))
+		.pipe(browserSync.stream({once: true}));
 });
-//
-// CSS Building
-//
-// z585-all-css
-var z585AllScaffoldingList = [
-	//
-	'development/less/scaffolding/mixins.less',
-	'development/less/scaffolding/layout__fonts.less',
-	'development/less/scaffolding/layout__external.less',
 
-	// старый css
-	'development/less/scaffolding/legacy__all.less',
+// =================== LESS/CSS ===================
 
-	// базовые стили макета страниц
-	'development/less/scaffolding/layout__grid.less',
-	'development/less/scaffolding/layout__uikit.less',
-	'development/less/scaffolding/layout__header.less',
-	'development/less/scaffolding/layout__footer.less',
-
-	// стили шаблонов страниц (постранично)
-	'development/less/scaffolding/pages__index.less',
-	'development/less/scaffolding/pages__product-card.less',
-	'development/less/scaffolding/pages__catalog.less',
-	'development/less/scaffolding/pages__page-404.less',
-	'development/less/scaffolding/pages__user-cabinet.less',
-	'development/less/scaffolding/pages__store.less',
-	'development/less/scaffolding/pages__stock.less',
-	'development/less/scaffolding/pages__favorites.less',
-	'development/less/scaffolding/pages__shop.less',
-	'development/less/scaffolding/pages__basket.less',
-
-	// latest legacy
-	'development/less/scaffolding/legacy__latest.less',
-
-	// system
-	'development/less/scaffolding/system__helpers.less',
-];
-
-/*
- Пять "тасков" для работы с LESS, для получения файла z585_all.min.css для локальной версии сайта(та что на localhost дома на компе) и версии, кторая идет на "прод" и "дев" сервера
-
-	z585-css:local-scaff
-	z585-css:local-build
-	z585-css:prod-scaff
-	z585-css:prod-build
- */
-gulp.task('z585-css:prod-scaff', function () {
-	if(z585AllScaffoldingList[0] === 'development/less/_2dev.less') z585AllScaffoldingList.shift();
-	z585AllScaffoldingList.unshift('development/less/_2prod.less');
-
-	return gulp.src(z585AllScaffoldingList)
+// CSS Build
+gulp.task('css:build', function () {
+	return gulp.src(config.path.less)
 		.pipe(sourcemaps.init({loadMaps: true}))
-		.pipe(concat('z585-all-list.prod.less'))
-		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('development/less/'));
+		.pipe(concat('z585_all.min.css'))
+		.pipe(less())
+		.pipe(sourcemaps.write('./'))
+		.pipe(cssmin())
+		.pipe(gulp.dest('production/css'))
+		.pipe(reload({stream: true}));
 });
 
-gulp.task('z585-css:prod-build', function () {
-	return gulp.src('development/less/z585-all-list.prod.less')
+// CSS Adfox
+gulp.task('css:adfox', function () {
+	return gulp.src(config.path.adfox.less)
+		.pipe(concat('z585_adfox.min.css'))
 		.pipe(less())
 		.pipe(cssmin())
-		.pipe(rename('z585_all.min.css'))
-		.pipe(gulp.dest('production/css'));
+		.pipe(gulp.dest('production/css'))
+		.pipe(reload({stream: true}));
 });
 
-gulp.task('z585-css:local-scaff', function () {
-	if(z585AllScaffoldingList[0] === 'development/less/_2prod.less') z585AllScaffoldingList.shift();
-	z585AllScaffoldingList.unshift('development/less/_2dev.less');
 
-	return gulp.src(z585AllScaffoldingList)
-		.pipe(sourcemaps.init({loadMaps: true}))
-		.pipe(concat('z585-all-list.local.less'))
-		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('development/less/'));
-});
+// =================== BUILD ===================
+gulp.task('build', [ 
+	'js:build', 
+	'css:build', 
+	'css:adfox',
+	'html:build', 
+]);
 
-gulp.task('z585-css:local-build', function () {
-	return gulp.src('development/less/z585-all-list.local.less')
-		.pipe(less())
-		// .pipe(cssmin())
-		.pipe(rename('z585_all.min.css'))
-		.pipe(gulp.dest('development/css'));
-});
-
-//
-gulp.task('z585-css', ['z585-css:local-scaff', 'z585-css:prod-scaff', 'z585-css:local-build', 'z585-css:prod-build']);
-
-
-
-/**
- * for Adfox
- */
-gulp.task('adfox:js:local', function () {
-	return gulp.src(adfoxList.js)
-		.pipe(sourcemaps.init({loadMaps: true}))
-		.pipe(concat('adfox.js'))
-		.pipe(uglifyjs())
-		.pipe(rename('z585_adfox.min.js'))
-		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('development/js/'));
-});
-gulp.task('adfox:js:prod', function () {
-	return gulp.src(adfoxList.js)
-		.pipe(sourcemaps.init({loadMaps: true}))
-		.pipe(concat('adfox.js'))
-		.pipe(uglifyjs())
-		.pipe(rename('z585_adfox.min.js'))
-		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('production/js/'));
-});
-
-gulp.task('adfox:css:prod-scaff', function () {
-	if(adfoxList.css[0] === 'development/less/_2dev.less') adfoxList.css.shift();
-	adfoxList.css.unshift('development/less/_2prod.less');
-
-	return gulp.src(adfoxList.css)
-		.pipe(sourcemaps.init({loadMaps: true}))
-		.pipe(concat('z585_adfox.prod.less'))
-		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('development/less/'));
-});
-
-gulp.task('adfox:css:prod-build', function () {
-	return gulp.src('development/less/z585_adfox.prod.less')
-		.pipe(less())
-		.pipe(cssmin())
-		.pipe(rename('z585_adfox.min.css'))
-		.pipe(gulp.dest('production/css'));
-});
-
-gulp.task('adfox:css:local-scaff', function () {
-	if(adfoxList.css[0] === 'development/less/_2prod.less') adfoxList.css.shift();
-	adfoxList.css.unshift('development/less/_2dev.less');
-
-	return gulp.src(adfoxList.css)
-		.pipe(sourcemaps.init({loadMaps: true}))
-		.pipe(concat('z585_adfox.local.less'))
-		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('development/less/'));
-});
-
-gulp.task('adfox:css:local-build', function () {
-	return gulp.src('development/less/z585_adfox.local.less')
-		.pipe(less())
-		.pipe(rename('z585_adfox.min.css'))
-		.pipe(gulp.dest('development/css'));
-});
-
-gulp.task('adfox', ['adfox:js:local', 'adfox:js:prod', 'adfox:css:local-scaff', 'adfox:css:prod-scaff', 'adfox:css:local-build', 'adfox:css:prod-build']);
-
-//
-// Watch
+// =================== WATCH ===================
 gulp.task('watch', function() {
 
 	// HTML
 	gulp.watch( ['development/htmls/**/*.{tmpl,html}'], ['html:build'] );
 
 	// Less
-    gulp.watch( [
-		'development/less/**/*.less',
-		'!development/less/z585-all-list.*',
-	], [
-		'z585-css:local-scaff',
-		'z585-css:local-build',
-	]);
+    gulp.watch('development/less/**/*.less', [ 'css:build' ]);
 
 	// JS
+	gulp.watch('development/js/inc/*.js', [ 'js:msalnikov' ] );
 	gulp.watch('development/js/libs/**/*.js', [ 'js:libs' ] );
 	gulp.watch('development/js/app/*.js', [ 'js:app' ] );
 	gulp.watch('development/js/pages/**/*.js', [ 'js:pages' ] );
@@ -392,4 +311,5 @@ gulp.task('watch', function() {
 
 });
 
+// =================== START ===================
 gulp.task('default', [ 'webserver', 'watch' ]);
