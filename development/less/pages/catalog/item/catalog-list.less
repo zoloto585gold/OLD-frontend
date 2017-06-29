@@ -20,6 +20,13 @@
         padding-left: 30px;
         padding-right: 30px;
     }
+
+    &[data-len='1'] .section__inner,
+    &[data-len='2'] .section__inner,
+    &[data-len='3'] .section__inner,
+    &[data-len='4'] .section__inner{
+        max-width: 1000px !important;
+    }
 }
 
 .catalog-list{
@@ -32,6 +39,14 @@
     -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
             flex-wrap: wrap;
+
+    &[data-len='1'],
+    &[data-len='2'],
+    &[data-len='3'],
+    &[data-len='4']{
+        max-width: 1000px !important;
+        margin: 0 auto;
+    }
 
     &-recommended{
         display: none;
