@@ -32,4 +32,4 @@ production/css/*.css
 /production/images/*
 /production/js/libs.min.js
 /production/js/libs.min.js
-production/**/*.map
+/production/**/*.map
