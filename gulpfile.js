@@ -126,6 +126,7 @@ const config = assign({
 			'development/less/scaffolding/pages__favorites.less',
 			'development/less/scaffolding/pages__shop.less',
 			'development/less/scaffolding/pages__basket.less',
+			'development/less/scaffolding/pages__reg-card.less',
 
 			// latest legacy
 			'development/less/scaffolding/legacy__latest.less',
@@ -337,7 +338,8 @@ gulp.task('watch', function() {
 	gulp.watch( ['development/htmls/**/*.{tmpl,html}'], ['html:build'] );
 
 	// Less
-    gulp.watch('development/less/**/*.less', [ 'css:build', 'css:adfox' ]);
+    //gulp.watch('development/less/**/*.less', [ 'css:build', 'css:adfox' ]);
+    gulp.watch('development/less/**/*.less', [ 'css:build' ]);
 
 	// JS
 	gulp.watch('development/js/inc/*.js', [ 'js:msalnikov' ] );
