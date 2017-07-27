@@ -215,6 +215,27 @@ html, body { margin: 0; padding: 0; }
 		.-t-cnu-(#333);
 	}
 }
+
+/*******************PROMO-LABEL**********************/
+.pcard__promo-label-wrapper{
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	z-index: 2;
+}
+
+.pcard__promo-label{
+	display: block;
+	float: left;
+	margin-right: 5px;
+	padding: 0 5px;
+	background: #ed3030;
+	line-height: 10px;
+	text-transform: uppercase;
+
+	.font-circe_regular(11px, 18px, #fff);
+}
+
 /**************************************************/
 
 
@@ -593,7 +614,8 @@ html, body { margin: 0; padding: 0; }
 .pcard-store-panel__button(@bg-pos-x, @bg-pos-y, @fcolor) {
 	display: inline-block;
 	vertical-align: top;
-	padding-left: 15px;
+	padding-left: 20px;
+	cursor: pointer;
 	.set_pcard_sprite(-8px + @bg-pos-x, @bg-pos-y);
 	.font-circe_light(11px, 20px, @fcolor);
 	text-transform: uppercase;
@@ -604,7 +626,7 @@ html, body { margin: 0; padding: 0; }
 
 .pcard-store-panel__button-favorite {
 	margin: 0px 20px;
-	.pcard-store-panel__button-dflt(-543px);
+	.pcard-store-panel__button-dflt(-682px);
 	@media screen and (max-width: 479px){
 		margin: 0;
 	}
@@ -622,11 +644,11 @@ html, body { margin: 0; padding: 0; }
 	}
 }
 
-.pcard-store-panel__button-favorite:hover { .pcard-store-panel__button-hover(-517px); }
+.pcard-store-panel__button-favorite:hover { .pcard-store-panel__button-hover(-712px); }
 .pcard-store-panel__button-compare:hover { .pcard-store-panel__button-hover(-592px); }
 .pcard-store-panel__button-want_popup:hover { .pcard-store-panel__button-hover(-621px); }
 
-.pcard-store-panel__button-favorite.is-active { .pcard-store-panel__button-hover(-517px); }
+.pcard-store-panel__button-favorite.is-active { .pcard-store-panel__button-hover(-712px); }
 .pcard-store-panel__button-compare.is-active { .pcard-store-panel__button-hover(-569px); }
 .pcard-store-panel__button-want_popup.is-active { .pcard-store-panel__button-hover(-621px); }
 
@@ -1391,4 +1413,13 @@ html, body { margin: 0; padding: 0; }
 	}
 
 }
+
+#prod_card_bigdata{
+	display: none;
+
+	@media @desktop{
+		display: block;
+	}
+}
+
 /*****************************************/

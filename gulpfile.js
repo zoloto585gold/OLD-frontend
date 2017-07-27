@@ -135,7 +135,7 @@ const config = assign({
 		],
 
 		html: [
-			'development/htmls/*.tmpl', 
+			'development/htmls/*.tmpl',
 			'!development/htmls/your-page.tmpl'
 		],
 
@@ -263,6 +263,13 @@ gulp.task('js:msalnikov', function () {
 		.pipe(reload({stream: true}));
 });
 
+gulp.task('js:legacy', function() {
+    return gulp.src('development/js/legacy/*.js')
+       .pipe(concat('legacy.js'))
+       .pipe(gulp.dest('production/js'))
+	   .pipe(reload({stream: true}));
+});
+
 // JS ALL TASKS
 gulp.task('js:build', [
 	'js:libs',
@@ -271,7 +278,8 @@ gulp.task('js:build', [
 	'js:pages',
 	'js:views',
 	'js:adfox',
-	'js:msalnikov',
+	// 'js:msalnikov',
+	'js:legacy',
 ]);
 
 // =================== HTML ===================
@@ -315,11 +323,11 @@ gulp.task('css:adfox', function () {
 
 
 // =================== BUILD ===================
-gulp.task('build', [ 
-	'js:build', 
-	'css:build', 
+gulp.task('build', [
+	'js:build',
+	'css:build',
 	'css:adfox',
-	'html:build', 
+	'html:build',
 ]);
 
 // =================== WATCH ===================
@@ -333,6 +341,7 @@ gulp.task('watch', function() {
 
 	// JS
 	gulp.watch('development/js/inc/*.js', [ 'js:msalnikov' ] );
+	gulp.watch('development/js/inc/*.js', [ 'js:legacy' ] );
 	gulp.watch('development/js/libs/**/*.js', [ 'js:libs' ] );
 	gulp.watch('development/js/app/*.js', [ 'js:app' ] );
 	gulp.watch('development/js/pages/**/*.js', [ 'js:pages' ] );
