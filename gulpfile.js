@@ -308,6 +308,7 @@ gulp.task('css:build', function () {
 		.pipe(sourcemaps.write('./'))
 		.pipe(cssmin())
 		.pipe(gulp.dest('production/css'))
+		.pipe(gulp.dest('development/css'))
 		.pipe(reload({stream: true}));
 });
 
