@@ -8,7 +8,7 @@
 		display: inline-block;
 		vertical-align: top;
 		width: 75px;
-		overflow: hidden;
+		overflow: visible;
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
@@ -33,6 +33,69 @@
 			width: 20px;
 			height: 20px;
 			background: transparent url(@img-sprite-header_20x20) 0 -80px no-repeat;
+		}
+	}
+
+	&__tooltip{
+		display: none;
+		position: absolute;
+		top: -webkit-calc(~'100% + 1px');
+		top: -moz-calc(~'100% + 1px');
+		top: calc(~'100% + 1px');
+		left: 50%;
+		-webkit-transform: translateX(-50%);
+			-moz-transform: translateX(-50%);
+			-ms-transform: translateX(-50%);
+				-o-transform: translateX(-50%);
+				transform: translateX(-50%);
+		z-index: 22;
+		width: 337px;
+		height: 80px;
+		background: #f8f8f8 url(../img/bonus-reg-card.png) no-repeat 16px 100%;
+		border: solid 1px #d5d5d5;
+		padding: 15px 25px 0 155px;
+		line-height: 1;
+		text-align: left;
+
+		&:before{
+			content: '';
+			position: absolute;
+			top: -2px;
+			left: 50%;
+			-webkit-transform: translate(-50%, -100%);
+				-moz-transform: translate(-50%, -100%);
+				-ms-transform: translate(-50%, -100%);
+					-o-transform: translate(-50%, -100%);
+					transform: translate(-50%, -100%);
+			z-index: 23;
+			border: solid 6px transparent;
+			border-bottom-color: #f6ffff;
+		}
+
+		span{
+			.font-circe_regular(11px, 1, #333);
+			text-transform: uppercase;
+		}
+
+		a{
+			display: block;
+			background: #ed1a20;
+			border-radius: 3px;
+			padding: 0 8px;
+			margin: 11px 0 0;
+			text-transform: uppercase;
+			.font-circe_regular(11px, 27px, #fff);
+			.transition();
+
+			&:hover{
+				background: #cb2430;
+			}
+		}
+	}
+
+	&:hover{
+		.top-bonuses__tooltip{
+			display: block;
 		}
 	}
 }
