@@ -92,12 +92,6 @@
 			}
 		}
 	}
-
-	&:hover{
-		.top-bonuses__tooltip{
-			display: block;
-		}
-	}
 }
 
 
@@ -107,6 +101,11 @@
 @media screen and (min-width: @desktop-min) {
 	.top-bonuses {
 
+		&:hover{
+			.top-bonuses__tooltip{
+				display: block;
+			}
+		}
 
 		&__button {
 			height: 31px;
