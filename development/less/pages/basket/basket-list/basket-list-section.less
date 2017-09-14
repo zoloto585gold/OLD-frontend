@@ -1,8 +1,82 @@
 .basket-list-section {
-
-
-	&__inner {
-		padding-top: 50px;
-		padding-bottom: 50px;
+	&__title{
+		padding: 30px 0;
+		font-size: 24px;
+		font-weight: 700;
+		text-transform: uppercase;
+		@media screen and (max-width: @mobile_p-max) {
+			width: 100%;
+			text-align: center;
+			padding: 0;
+			line-height: 50px;
+			position: relative;
+			&:after{
+				content: '';
+	      display: block;
+	      height: 5px;
+	      position: absolute;
+	      top: 100%;
+	      left: 0;
+	      right: 0;
+	      background: url(@img-thingies-shadow-1) no-repeat top center;
+				background-size: 100% auto;
+			}
+		}
+	}
+	.basket-table{
+		display: table;
+		width: 100%;
+		@media screen and (max-width: @mobile_a-max) {
+			display: block;
+		}
+		&__tr{
+			display: table-row;
+			@media screen and (max-width: @mobile_a-max) {
+				display: block;
+				position: relative;
+				padding: 15px 0;
+			}
+		}
+		&__td{
+			display: table-cell;
+			padding: 15px 0 30px;
+			border-bottom: 1px solid #eaeaea;
+			@media screen and (max-width: @mobile_a-max) {
+				display: block;
+				border-bottom: none;
+				padding: 0;
+			}
+			&--info{
+				width: 450px;
+				@media @touch {
+					width: 300px;
+				}
+				@media screen and (max-width: @mobile_a-max) {
+					width: 100%;
+					margin-bottom: 10px;
+				}
+			}
+			&--price{
+				@media @touch {
+					vertical-align: middle;
+				}
+			}
+			&--nal{
+				vertical-align: middle;
+				@media @touch {
+					display: none;
+				}
+			}
+			&--remove{
+				width: 50px;
+				vertical-align: middle;
+				@media screen and (max-width: @mobile_a-max) {
+					width: auto;
+					position: absolute;
+					top: 8px;
+					right: 0;
+				}
+			}
+		}
 	}
 }

@@ -1,0 +1,57 @@
+.basket__header{
+  .basket__logo{
+    display: block;
+    margin: 13px auto 11px;
+    width: 175px;
+    img{
+      width: 100%;
+      height: auto;
+    }
+  }
+  .basket__options{
+    height: 30px;
+    line-height: 30px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #eaeaea;
+    position: relative;
+    &:before{
+      content: '';
+      display: block;
+      height: 5px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: url(@img-thingies-shadow-5) no-repeat top center;
+    }
+    @media screen and (max-width: @mobile_p-max) {
+      text-align: center;
+    }
+    a{
+      font-size: 11px;
+      text-transform: uppercase;
+      &:hover{
+        text-decoration: underline;
+      }
+      &.basket__clearLink{
+        float: right;
+        position: relative;
+        &:before{
+          content: '';
+          display: block;
+          width: 17px;
+          height: 20px;
+          background: url('@{img}/basket/clear.png') no-repeat;
+          position: absolute;
+          top: 50%;
+          margin-top: -10px;
+          left: 0;
+          margin-left: -25px;
+        }
+        @media screen and (max-width: @mobile_p-max){
+          display: none;
+        }
+      }
+    }
+  }
+}

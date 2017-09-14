@@ -1,0 +1,155 @@
+.basket{
+  &__cards {
+
+  }
+}
+
+.basket-card{
+  padding: 25px 0;
+  &--promocode {
+    background: #faf3cc;
+  }
+  &--bonus {
+    background: #f7f7f7;
+    &:after{
+      content: '';
+      display: block;
+      height: 9px;
+      background: url('@{img}/basket/bonus-arrow.png') repeat-x;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+    }
+  }
+  &__inner > * {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  &__text {
+    width: 350px;
+    position: relative;
+    padding-left: 65px;
+    img {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
+    span{
+      display: block;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+    p {
+      font: 300 12px/12px 'Circe';
+      a {
+        color: #333;
+        text-decoration: underline;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  &__input {
+    & > * {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    input {
+      width: 250px;
+      height: 40px;
+      border: 1px solid #c4c4c4;
+      border-radius: 3px;
+      padding: 0 10px;
+      background: #fff;
+      text-transform: uppercase;
+      font-size: 12px;
+      &::placeholder{
+        font: 300 12px/12px 'Circe';
+        font-style: italic;
+      }
+    }
+    .basket-tooltip{
+      margin-right: 20px;
+      &__btn{
+        width: 25px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        font-size: 14px;
+        text-decoration: underline;
+        cursor: pointer;
+        &:hover{
+          text-decoration: none;
+        }
+      }
+      &__content {
+        display: none;
+      }
+    }
+    button {
+      width: 125px;
+      height: 40px;
+      border-radius: 3px;
+      background: #ff6600;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #fff;
+      border: 0;
+      cursor: pointer;
+      &:hover{
+        background: #b32024;
+      }
+    }
+  }
+  &__saleList {
+    margin-left: 8px;
+    li {
+      margin-bottom: 3px;
+      font-size: 10px;
+      text-transform: uppercase;
+      position: relative;
+      background: #ffec00;
+      padding: 0 3px 0 14px;
+      &:before{
+        content: '';
+        display: block;
+        width: 8px;
+        height: 8px;
+        position: absolute;
+        top: 50%;
+        left: 3px;
+        transform: translateY(-50%);
+        background: url('@{img}/basket/mark.png') no-repeat;
+      }
+      &:last-child{
+        margin-bottom: 0;
+      }
+      span {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        margin-left: 3px;
+        background: #ffec00;
+        display: block;
+        width: 15px;
+        height: 15px;
+        text-align: center;
+        line-height: 15px;
+        cursor: pointer;
+        &:before{
+          content: '';
+          display: block;
+          width: 3px;
+          height: 9px;
+          position: absolute;
+          top: 3px;
+          left: -3px;
+          background: #ffec00;
+        }
+      }
+    }
+  }
+}
