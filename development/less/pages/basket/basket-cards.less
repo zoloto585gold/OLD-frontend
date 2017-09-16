@@ -5,7 +5,13 @@
 }
 
 .basket-card{
-  padding: 25px 0;
+  padding-bottom: 10px;
+  &__inner{
+    padding: 25px 0 15px;
+    @media @touch {
+      padding: 10px 0;
+    }
+  }
   &--promocode {
     background: #faf3cc;
   }
@@ -21,15 +27,32 @@
       left: 0;
       right: 0;
     }
+    @media @touch {
+      .basket-card__text {
+        padding-left: 40px;
+        span{
+          font-size: 16px;
+        }
+      }
+    }
   }
   &__inner > * {
     display: inline-block;
     vertical-align: middle;
+    @media @touch {
+      display: block;
+      width: 250px;
+      margin: auto;
+    }
   }
   &__text {
     width: 350px;
     position: relative;
     padding-left: 65px;
+    @media @touch {
+      width: 250px;
+      margin-bottom: 12px;
+    }
     img {
       position: absolute;
       top: 50%;
@@ -43,6 +66,10 @@
     }
     p {
       font: 300 12px/12px 'Circe';
+      &.card-number{
+        font: 300 16px/16px 'Circe';
+        color: #666;
+      }
       a {
         color: #333;
         text-decoration: underline;
@@ -53,6 +80,7 @@
     }
   }
   &__input {
+    position: relative;
     & > * {
       display: inline-block;
       vertical-align: middle;
@@ -71,8 +99,46 @@
         font-style: italic;
       }
     }
+    .card-points{
+      width: 250px;
+      height: 44px;
+      line-height: 46px;
+      text-align: center;
+      border: 1px solid #c4c4c4;
+      border-radius: 3px;
+      text-transform: uppercase;
+      position: relative;
+      span{
+        font: 300 24px/24px 'Circe';
+      }
+      div{
+        position: absolute;
+        top: -8px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        line-height: 1;
+      }
+      i{
+        display: inline-block;
+        padding: 0 5px;
+        background: #f7f7f7;
+        font: 300 12px/12px 'Circe';
+        color: #666;
+        font-style: italic;
+      }
+      span+div{
+        top: auto;
+        bottom: -8px;
+      }
+    }
     .basket-tooltip{
       margin-right: 20px;
+      @media @touch {
+        position: absolute;
+        top: 0;
+        left: 100%;
+      }
       &__btn{
         width: 25px;
         height: 40px;
@@ -102,11 +168,22 @@
       &:hover{
         background: #b32024;
       }
+      @media @touch {
+        width: 250px;
+        margin-top: 12px;
+      }
     }
   }
   &__saleList {
     margin-left: 8px;
+    @media @touch {
+      width: 250px;
+      margin: 12px auto 0;
+    }
     li {
+      @media @touch {
+        width: calc(100% - 7px);
+      }
       margin-bottom: 3px;
       font-size: 10px;
       text-transform: uppercase;
@@ -150,6 +227,61 @@
           background: #ffec00;
         }
       }
+    }
+  }
+  &__reg{
+    display: none;
+    background: #fff;
+    position: relative;
+    padding: 25px 0;
+    &.is-open{
+      display: block;
+    }
+    &:before{
+      content: '';
+      display: block;
+      height: 5px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: url(@img-thingies-shadow-5) no-repeat top center;
+    }
+    &:after{
+      content: '';
+      display: block;
+      height: 5px;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: url(@img-thingies-shadow-5) no-repeat top center;
+      transform: rotate(180deg);
+    }
+    .reg-card-content__form{
+      margin: 0 auto;
+    }
+    form {
+      width: 250px;
+      margin: 0 auto !important;
+    }
+    &-title{
+      font: 400 24px/24px 'Circe';
+      text-align: center;
+      text-transform: uppercase;
+      padding: 0 35px;
+      margin-bottom: 25px;
+    }
+    &-close{
+      display: block;
+      width: 24px;
+      height: 24px;
+      text-align: center;
+      background: #f0f0f0;
+      font: 300 21px/26px 'Circe';
+      position: absolute;
+      top: 0;
+      right: 5px;
     }
   }
 }

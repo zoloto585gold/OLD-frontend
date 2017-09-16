@@ -2,6 +2,10 @@
   &__total{
     margin-top: 20px;
     margin-bottom: 150px;
+    @media @touch {
+      width: 250px;
+      margin: 20px auto 50px;
+    }
     .btn {
       display: block;
       float: right;
@@ -23,6 +27,9 @@
       &:hover{
         background: #b32024;
       }
+      @media @touch {
+        float: none;
+      }
     }
   }
   &__totalTable{
@@ -30,6 +37,7 @@
     td{
       text-align: right;
       padding: 5px 0;
+      vertical-align: middle;
     }
     td+td{
       width: 160px;
@@ -57,10 +65,16 @@
   &__totalTr{
     font: 400 18px/18px 'Circe';
     text-transform: uppercase;
+    @media @touch {
+      font: 400 16px/16px 'Circe';
+    }
     &--old{
       color: #666;
       td{
         font: 300 18px/18px 'Circe';
+        @media @touch {
+          font: 300 16px/16px 'Circe';
+        }
       }
     }
   }
