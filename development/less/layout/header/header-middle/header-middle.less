@@ -109,17 +109,22 @@
 /*
 	DESKTOP
 */
-/* @media screen and (min-width: @desktop-min) {
+@media screen and (min-width: @desktop-min) {
 	.header-middle {
-
-		&__button {
-			&--bonuses {
-				display: block;
+		margin-top: 32px;
+		&__button--sale{
+			width: 131px;
+			text-align: center;
+			padding: 0;
+			&:before{
+				display: inline-block;
+				vertical-align: text-bottom;
+				margin-right: 8px;
+				position: static;
 			}
 		}
 	}
 }
- */
 /*
 	TOUCH
 */

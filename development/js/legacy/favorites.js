@@ -1,5 +1,5 @@
-/** 
- * Работа с избранными товарами 
+/**
+ * Работа с избранными товарами
  */
 function toggleFavorite(itemId, object, successHandlerAdd, successHandlerDelete) {
 	arRequest = {
@@ -26,8 +26,8 @@ function toggleFavorite(itemId, object, successHandlerAdd, successHandlerDelete)
 
 
 /**
- * 
- * 
+ *
+ *
  */
 function markFavorites() {
 	var topCntContainer = $('#top-favirites-cnt');
