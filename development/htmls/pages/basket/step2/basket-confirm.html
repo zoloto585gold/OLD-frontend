@@ -1,0 +1,25 @@
+<div class="section basket__confirm">
+  <div class="section__inner">
+    <h4>подтверждения заказа</h4>
+    <p>Мы гарантируем конфиденциальность данных. Введение номера телефона необходимо для подтверждения бронирования товара.</p>
+    <form class="basket__form">
+      <div class="basket__form-row">
+        <div class="basket__form-input">
+          <label>Телефон <sup>*</sup></label>
+          <span class="error"></span>
+          <input class="phone-input" type="text" placeholder="(000) 000-00-00" maxlength="10">
+          <span class="phone-code">+7</span>
+        </div>
+        <button class="btn">Отправить проверочный код</button>
+      </div>
+      <div class="basket__form-row">
+        <div class="basket__form-input">
+          <label>введите проверочный код из смс <sup>*</sup></label>
+          <span class="error">Неверный код</span>
+          <input type="text">
+        </div>
+        <button class="btn">подтвердить заказ</button>
+      </div>
+    </form>
+  </div>
+</div>
