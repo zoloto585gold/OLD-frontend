@@ -125,20 +125,20 @@ $('.top-basket__remove').on('click', function (e) {
 // 
 // 
 // 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // ================================
 // = ОБРАБОТЧИК НАВИГАЦИИ В ШАПКЕ =
 // ================================
@@ -200,7 +200,7 @@ $('.top-basket__remove').on('click', function (e) {
 			if($wanted.hasClass('top-sandwich__button--active')) resetTouchNavi();
 
 			// открываем меню
-			else { 
+			else {
 				$('.section').addClass('section--offset-left');
 				$('.header-bottom').removeClass('section--offset-left');
 
@@ -263,7 +263,7 @@ $('.top-basket__remove').on('click', function (e) {
 	// ---------------------
 	// @DESKTOP NAVI HANDLER
 	// ---------------------
-	// обработка поведения навигации, 
+	// обработка поведения навигации,
 	// для разрешения экрана > 1024px по ширине
 	// т.е. для @desktop
 	var $mainNav = $('.main-nav'),
@@ -291,7 +291,7 @@ $('.top-basket__remove').on('click', function (e) {
 			$('.alt-main-nav__item[data-inner-list = ' + innerListId + ']').addClass('alt-main-nav__item--active');
 			$headerBottom.addClass('header-bottom--hover');
 		}
-		
+
 	}, function (el) {
 		var innerListId = $(this).attr('data-inner-list');
 
@@ -307,7 +307,7 @@ $('.top-basket__remove').on('click', function (e) {
 	// выпадших вкладок
 	// находит соответствующий "надпункт" из "alt-main-nav", который соответствует данной активной вкладке
 	// и делает этот "надпункт" активным;
-	// 
+	//
 	// оставляет черный треуголник активности на кнопке
 	// когда курсор ушёл с этой кнопке
 	// на выпадающий блок
@@ -327,7 +327,7 @@ $('.top-basket__remove').on('click', function (e) {
 	// рассматривается hover когда
 	// указатель мыши находится или покидает
 	// всю навигацию;
-	// 
+	//
 	// отображает/скрывает
 	// заднюю подложку(которая тянется на весь экран по ширине) для выпадающего блока меню
 	$('.main-nav').hover(function (el) {
@@ -352,6 +352,7 @@ $('.top-basket__remove').on('click', function (e) {
 		else console.log('navi @touch');
 	});
 });
+
 // ====================
 // = ПОДБОР УКРАШЕНИЯ =
 // ====================
