@@ -218,8 +218,12 @@
 			margin: 5px 0;
 		}
 		a{
+			display: inline-block;
 			color: #999;
 			text-decoration: underline;
+			@media @touch {
+				margin: 10px 0;
+			}
 			&:hover{
 				text-decoration: none;
 			}

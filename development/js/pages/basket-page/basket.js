@@ -103,4 +103,17 @@ var JS_DATA = JS_PATH + 'data/';
 		$('.basket-card__reg').removeClass('is-open');
 	});
 
+	$(document).on('click', '.js-openMapModal', function (e) {
+		e.preventDefault();
+		$('.basket-modal').addClass('is-open');
+	});
+
+	$(document).on('click', '.js-closeMapModal', function (e) {
+		$('.basket-modal').removeClass('is-open');
+	});
+
+	$(document).on('click', '.basket-modal__overlay', function (e) {
+		$('.basket-modal').removeClass('is-open');
+	});
+
 }());
