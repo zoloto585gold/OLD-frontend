@@ -254,20 +254,18 @@ gulp.task('js:adfox', function () {
 // @todo: переделать, сделать более понятным
 gulp.task('js:msalnikov', function () {
 	return gulp.src(config.path.js.msalnikov)
-		//.pipe(sourcemaps.init({loadMaps: true}))
-		//.pipe(concat('msalnikov.min.js'))
-		//.pipe(sourcemaps.write())
-		.pipe(uglifyjs('msalnikov.min.js', {
-			outSourceMap: true
-		}))
-		.pipe(gulp.dest('production/js'))
+		.pipe(concat('msalnikov.js'))
+		.pipe(gulp.dest('development/js/legacy'))
 		.pipe(reload({stream: true}));
 });
 
 gulp.task('js:legacy', function() {
     return gulp.src('development/js/legacy/*.js')
-       .pipe(concat('legacy.js'))
-       .pipe(gulp.dest('production/js'))
+			.pipe(uglifyjs('legacy.js', {
+				outSourceMap: true
+			}))
+		 .pipe(gulp.dest('development/js'))
+     .pipe(gulp.dest('production/js'))
 	   .pipe(reload({stream: true}));
 });
 
@@ -344,7 +342,7 @@ gulp.task('watch', function() {
 
 	// JS
 	gulp.watch('development/js/inc/*.js', [ 'js:msalnikov' ] );
-	gulp.watch('development/js/inc/*.js', [ 'js:legacy' ] );
+	gulp.watch('development/js/legacy/*.js', [ 'js:legacy' ] );
 	gulp.watch('development/js/libs/**/*.js', [ 'js:libs' ] );
 	gulp.watch('development/js/app/*.js', [ 'js:app' ] );
 	gulp.watch('development/js/pages/**/*.js', [ 'js:pages' ] );

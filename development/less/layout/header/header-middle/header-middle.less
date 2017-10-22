@@ -65,7 +65,7 @@
 
 		text-decoration: none;
 		text-transform: uppercase;
-		.font-circe_regular(10px, 33px, #666);
+		.font-circe_regular(11px, 33px, #666);
 		&:hover {
 			background-color: #f6f6f6;
 		}
@@ -109,17 +109,21 @@
 /*
 	DESKTOP
 */
-/* @media screen and (min-width: @desktop-min) {
+@media screen and (min-width: @desktop-min) {
 	.header-middle {
-
-		&__button {
-			&--bonuses {
-				display: block;
+		margin-top: 32px;
+		&__button--sale{
+			width: 131px;
+			padding-left: 14px;
+			&:before{
+				display: inline-block;
+				vertical-align: text-bottom;
+				margin-right: 8px;
+				position: static;
 			}
 		}
 	}
 }
- */
 /*
 	TOUCH
 */

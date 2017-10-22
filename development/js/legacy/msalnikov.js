@@ -1,15 +1,49 @@
-/*
+// =======================
+// = ФИЛЬТР ДЛЯ КАТАЛОГА =
+// =======================
+;$(function() { // фильтр для каталога
+	$('.js-filter-group-scroll-pane').jScrollPane({
+		autoReinitialise : true,
+		verticalDragMinHeight: 9,
+		verticalDragMaxHeight: 9,
+		horizontalDragMinWidth: 9,
+		horizontalDragMaxWidth: 9
+	});
 
- */
+	// открытие закрытие фильтра
+	$('#catalog-filter-change-button').on('click', function (event) {
+		event.preventDefault();
+		$('.filter').hasClass('filter--closed') ? $('.filter').removeClass('filter--closed') : $('.filter').addClass('filter--closed');
+	});
+
+	// кнопка reset фильтра
+	$('#catalog-filter-reset-button').on('click', function (event) {
+		
+	});
+
+	// кнопка submit фильтра
+	$('#catalog-filter-submit-button').on('click', function (event) {
+		event.preventDefault();
+
+		// 
+		// отправка значений с формы фильтра на сервер
+		// 
+
+		$('.filter').addClass('filter--closed');
+	});
+
+	// кнопка с выбранным тегом поиска
+	$('.filter-tags__tab').on('click', function (event) {
+		$(this).remove();
+	});
+});
+// 
+// 
+// 
 // ==============
 // == forms.js ==
 // ==============
-//
-//
-// что делает: стилизует состояния для полей форм,
-// в зависимости от действия/манипуляции с полем формы
 ;$(function () {
-	// старый вариант текстовго поля
 	$('.form').on('focusin', function (event) {
 		var $_this = $(event.target);
 		if($_this.hasClass('form__field-input')) $_this.parent().addClass('focus');
@@ -27,16 +61,24 @@
 	$('.form-textline').on('focusout', function (event) {
 		$(this).removeClass('form-textline--active');
 	});
+
+
+	// кастомизированное поле для сообщений  textarea (form-textbox.less)
+	$('.form-textbox').on('focusin', function (event) {
+		$(this).addClass('form-textbox--active');
+	});
+	$('.form-textbox').on('focusout', function (event) {
+		$(this).removeClass('form-textbox--active');
+	});
 });
-//
-//
-//
-//
-//
-//
-//
-//
-//
+// 
+// 
+// 
+$('.top-basket__remove').on('click', function (e) {
+	e.preventDefault();
+	$(this).parent().remove();
+});
+
 // =======================
 // = ПОПАП ВЫБОРА ГОРОДА =
 // =======================
@@ -52,61 +94,37 @@
 		}
 	}
 
-	//
-	// Search
-	//
-	$(document).on('keyup change', '.js-top-geo-form__search input', function() {
-		var query = $.trim($(this).val());
-		var tag = 'span';
-		var regex = RegExp(query, 'gi');
-		var replacement = '<'+ tag +'>$&</'+ tag +'>';
-		var scrollApi = $('.js-top-geo-form__cities').data('jsp');
-
-		$('.js-top-geo-form__cities a[data-city] span').contents().unwrap();
-
-		if (query.length < 2) {
-			return false;
-		}
-
-		$('.js-top-geo-form__cities a[data-city]').each(function() {
-			if ($(this).text().search(regex) != -1 && scrollApi !== false) {
-				scrollApi.scrollToElement(this);
-				scrollApi = false;
-			}
-
-			$(this).html(function() {
-				return $(this).text().replace(regex, replacement);
-			});
-		});
-	});
-
-	$(document).on('click', '.top-geo__button', function () {
+	$('.top-geo__button').on('click', function () {
 		topGeoModal(true);
 	});
 
-	$(document).on('click', '.top-geo-modal__close', function () {
+	$('.top-geo-modal__close').on('click', function () {
 		topGeoModal(false);
 	});
 
-	$(document).on('click', '.top-geo-modal', function (event) {
+	$(document).on('click', function (event) {
 		if($(event.target).hasClass('top-geo-modal')) topGeoModal(false);
 	});
 
-	$(document).on('click', '.top-geo-form a', function (event) {
+	$('.top-geo-form__button').on('click', function (event) {
 		event.preventDefault();
 
-		var cityName = $(this).text(); //выбранный город
+		var selectKey = $('.top-geo-form__option').find('.form__field-select').val(), // ключ либо идентификатор города
+			selectValue = $('.top-geo-form__option').find('.form__field-select').find('option:selected').text(); // текстовое значание - название города
 
-		$('.js-top-geo-form__search input').val("").trigger("keyup"); //очистим город в строке поиска
-
+		//
 		// код взаимодейтвия с сервером для установки выбранного города
-		$.cookie('city', cityName, { expires: 365, path: '/' });
+		//
+
+		$.cookie('city', selectKey, { expires: 365, path: '/' });
 		set_city();
-		$('.top-geo__button>span').text(cityName); // устанавлмвает в рзамтке в шапке название выбранного города
-		$('.top-geo-form__chosen-city-result').text(cityName); // для мобильной версии
+		$('.top-geo__button>span').text(selectValue); // устанавлмвает в рзамтке в шапке название выбранного города
 		topGeoModal(false); // закрывает окно
 	});
 });
+// 
+// 
+// 
 //
 //
 //
@@ -125,153 +143,6 @@
 // = ОБРАБОТЧИК НАВИГАЦИИ В ШАПКЕ =
 // ================================
 ;$(document).ready(function() {
-
-	// --------------------------
-	// вспомогательные переменные
-	// --------------------------
-	var $altMainNavItems = $('.alt-main-nav__item'),
-		$naviInnerListWrapper = $('.navi-inner-list-wrapper');
-
-
-
-	// ищем элемент с css-классом '.alt-main-nav'
-	// у этого элемента берём значение data-атрибута 'data-main-nav'
-	// парсим эту JSON-строку в нормальный JavaScript-объект
-	// этот объект/структуру называем mainNavData
-	//
-	// объявляем переменную mainNavBanners, которая представляет
-	// массив из html-кусков групп баннеров для каждой вкладки
-	// 8 вкладок = 8 баннеров
-	//
-	
-	var mainNavData; // = JSON.parse($('.alt-main-nav').attr('data-main-nav'));
-	var mainNavBanners = [];
-
-
-
-	// -----------------------
-	// вспомогательные функции
-	// -----------------------
-
-
-
-	//
-	// функция, которая делает html-шаблонизацию для объекта/струтктуры mainNavData
-	// и записвает этот html с данными в массив mainNavBanners
-	//
-	function mainNavBannersHTMLWrapper () {
-		mainNavData.forEach(function (item, index, array) {
-			var bannersHTML = '';
-
-			if(item['nav-banners'] !== undefined) {
-				Array.prototype.forEach.call(item['nav-banners']['nav-banners-item'], function (item, index, array) {
-					var image = '<a class="nav-banners-link" href="' + item['href'] + '"><img class="nav-banners-link__img" src="' + item['img'] + '" alt=""></a>';
-					var button = item['button'] !== false ? ('<a class="b-button nav-banners-button" href="' + item['href'] + '">' + item['button'] + '</a>') : '';
-					var banner = '<div class="nav-banners__item  nav-banners__item--type-' + item['type'] + '">' + image + button + '</div>';
-
-					bannersHTML += banner;
-				});
-				mainNavBanners[item['tab-number']] = '<div class="nav-banners  nav-banners--type-' + item['nav-banners']['nav-banners-type'] + '">' + bannersHTML + '</div>';
-			}
-		});
-
-		return mainNavBanners;
-	}
-
-
-	//
-	// функция, которая вставляет в html-разметку главной навигации на странице
-	// сгенерированную разметку баннеров
-	// каждая группа баннеров вставляется в свой лист
-	//
-	function addMainNavBanners() {
-		if($('.nav-banners').length === 0) {
-			mainNavBanners.forEach(function (item, index, array) {
-				$('.main-nav__item[data-inner-list=' + index + ']').append(item);
-			});
-		}
-	}
-
-
-
-	//
-	// функция, котрая удаляет баннеры из вкладок
-	//
-	function removeMainNavBanners() {
-		$('.nav-banners').remove();
-	}
-
-
-	//
-	// функция, которая устанавливает значение для data-атрибутов фонов и фоновых цветов
-	// выпадающих вкладок главной навигации
-	//
-	function setMainNavBGImages() {
-		mainNavData.forEach(function (item, index, array) {
-			$('.alt-main-nav__item[data-inner-list=' + item['tab-number'] + ']').attr('data-inner-background-image', item['inner-background-image']);
-			$('.alt-main-nav__item[data-inner-list=' + item['tab-number'] + ']').attr('data-inner-background-color', item['inner-background-color']);
-			$('.alt-main-nav__item[data-inner-list=' + item['tab-number'] + ']').attr('data-outer-background-image', item['outer-background-image']);
-			$('.alt-main-nav__item[data-inner-list=' + item['tab-number'] + ']').attr('data-outer-background-color', item['outer-background-color']);
-			console.log(item['tab-number']);
-		});
-	}
-
-
-	// закрывает touchnavi и/или сбрасывает настройки активности навгиции,
-	// которые доступны только для touch-устройств
-	function resetTouchNavi() {
-		$('.section').removeClass('section--offset-left');
-
-		$('.top-sandwich__button').removeClass('top-sandwich__button--active');
-		$('.header-bottom').removeClass('header-bottom--active');
-		$('.header-bottom__inner').removeClass('header-bottom__inner--active');
-
-		// убирает заморозку вертикального скролла для страницы
-		$('body').removeClass('h-canvas-freeze-for-touch-navi');
-
-		// сбрасывает меню до дефолтного состояния(все вкладки становятся закрытыми)
-		$('.main-nav-level-1__header').removeClass('main-nav-level-1__header--active');
-		$('.main-nav-level-1__list').removeClass('main-nav-level-1__list--active');
-		$('.main-nav-level-2__header').removeClass('main-nav-level-2__header--active');
-		$('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');
-	}
-
-	//
-	// function openTouchNavi() {}
-
-	// сбрасывает/удаляет элементы присущие навигации только для desktop-устройств
-	function resetDesktopNavi() {}
-
-	// фон тянущийся на всю ширину для каждой вкладки
-	function setDesktopNaviOuterBackground(innerListId) {
-		var bg = $('.alt-main-nav__item[data-inner-list = ' + innerListId + ']').attr('data-outer-background-image') === 'none' ? 'none' : 'url(' + $('.alt-main-nav__item[data-inner-list = ' + innerListId + ']').attr('data-outer-background-image') + ')';
-		if(innerListId != 0) {
-			$('.navi-inner-list-wrapper').addClass('navi-inner-list-wrapper--active');
-			$('.navi-inner-list-wrapper').css({'background-image' : bg});
-		}
-		// console.log(bg);
-	}
-	// убирает фон тянущийся на всю ширину
-	function resetDesktopNaviOuterBackground(innerListId) {
-		$('.navi-inner-list-wrapper').removeClass('navi-inner-list-wrapper--active');
-	}
-
-	function setDesktopNaviInnerListWrapper(innerListId) {
-		var bg = $('.alt-main-nav__item[data-inner-list = ' + innerListId + ']').attr('data-outer-background-image') === 'none' ? 'none' : 'url(' + $('.alt-main-nav__item[data-inner-list = ' + innerListId + ']').attr('data-outer-background-image') + ')';
-		if(innerListId != 0) {
-			$naviInnerListWrapper
-				.addClass('navi-inner-list-wrapper--active')
-				.css({'background-image' : bg})
-				.attr('data-inner-list', innerListId);
-		}
-
-	}
-	function resetDesktopNaviInnerListWrapper() {
-		$('.navi-inner-list-wrapper').removeClass('navi-inner-list-wrapper--active');
-	}
-
-
-
 
 	// -------------------
 	// @TOUCH NAVI HANDLER
@@ -296,6 +167,26 @@
 			$('.main-nav-level-2__list').first().addClass('main-nav-level-2__list--active');
 		}
 
+		function resetTouchNavi() {
+			$('.section').removeClass('section--offset-left');
+
+			$('.top-sandwich__button').removeClass('top-sandwich__button--active');
+			$('.header-bottom').removeClass('header-bottom--active');
+			$('.header-bottom__inner').removeClass('header-bottom__inner--active');
+
+			// убирает заморозку вертикального скролла для страницы
+			$('body').removeClass('h-canvas-freeze-for-touch-navi');
+
+			// сбрасывает меню до дефолтного состояния(все вкладки становятся закрытыми)
+			$('.main-nav-level-1__header').removeClass('main-nav-level-1__header--active');
+			$('.main-nav-level-1__list').removeClass('main-nav-level-1__list--active');
+			$('.main-nav-level-2__header').removeClass('main-nav-level-2__header--active');
+			$('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');
+		}
+
+		function openTouchNavi() {
+
+		}
 
 
 		var wanted = el.target,
@@ -352,7 +243,7 @@
 			}
 		}
 
-		// уровень вложенности 2
+		// уровень вложенности 1
 		if($wanted.hasClass('main-nav-level-2__header')) {
 			if($(wanted).hasClass('main-nav-level-2__header--active')) { // закрываем открытое
 				$('.main-nav-level-2__header').removeClass('main-nav-level-2__header--active');
@@ -378,43 +269,35 @@
 	var $mainNav = $('.main-nav'),
 		$mainNavItems = $('.main-nav__item'),
 		$altMainNav = $('.alt-main-nav'),
-
+		$altMainNavItems = $('.alt-main-nav__item'),
 		$headerBottom = $('.header-bottom');
 
-	// #ref
-	function showInnerListForDesktop(el) {
-		var innerListId = $(this).attr('data-inner-list'),
-			bg = $('.alt-main-nav__item[data-inner-list = ' + innerListId + ']').attr('data-outer-background-image') === 'none' ? 'none' : 'url(' + $('.alt-main-nav__item[data-inner-list = ' + innerListId + ']').attr('data-outer-background-image') + ')';
 
-		$('.alt-main-nav__item').removeClass('alt-main-nav__item--active');
-		if(innerListId != 0) {
-			$('.main-nav').addClass('main-nav--hover');
-			$('.main-nav__item').removeClass('main-nav__item--active');
-			$('.main-nav__item[data-inner-list = ' + innerListId + ']').addClass('main-nav__item--active');
-			$('.alt-main-nav__item[data-inner-list = ' + innerListId + ']').addClass('alt-main-nav__item--active');
-			$('.navi-inner-list-wrapper').attr('data-inner-list', innerListId);
-			$('.navi-inner-list-wrapper[data-inner-list = ' + innerListId + ']')
-				.addClass('navi-inner-list-wrapper--active')
-				.css({'background-image' : bg});
-			$('.header-bottom').addClass('header-bottom--hover');
-		}
-	}
 
 	// (1) hover
 	// рассматривается hover когда
 	// указатель мыши находится над одной из
-	// кнопок "КАТАЛОГ", "КОЛЬЦА", "СЕРbГИ", ..., для варианта в десктоп-версии
+	// кнопок "КАТАЛОГ", "КОЛЬЦА", "СЕРьГИ", ..., для варианта в десктоп-версии
 	// и открывает соответствующее кнопке внутренне подменю;
-	$('.alt-main-nav__item').hover(showInnerListForDesktop, function (el) {
+	$('.alt-main-nav__item').hover(function (el) {
+		var innerListId = $(this).attr('data-inner-list');
+
+		$altMainNavItems.removeClass('alt-main-nav__item--active');
+
+		if(innerListId != 0) {
+			$mainNav.addClass('main-nav--hover');
+			$mainNavItems.removeClass('main-nav__item--active');
+			$('.main-nav__item[data-inner-list = ' + innerListId + ']').addClass('main-nav__item--active');
+			$('.alt-main-nav__item[data-inner-list = ' + innerListId + ']').addClass('alt-main-nav__item--active');
+			$headerBottom.addClass('header-bottom--hover');
+		}
+
+	}, function (el) {
 		var innerListId = $(this).attr('data-inner-list');
 
 		$mainNav.removeClass('main-nav--hover');
 		$headerBottom.removeClass('header-bottom--hover');
 		$altMainNavItems.removeClass('alt-main-nav__item--active');
-
-
-		// test
-		resetDesktopNaviOuterBackground(innerListId);
 	});
 
 
@@ -428,11 +311,15 @@
 	// оставляет черный треуголник активности на кнопке
 	// когда курсор ушёл с этой кнопке
 	// на выпадающий блок
-	$('.main-nav__item').hover(showInnerListForDesktop, function (el) {
+	$('.main-nav__item').hover(function (el) {
+		var innerListId = $(this).attr('data-inner-list');
+
+		$('.alt-main-nav__item[data-inner-list = ' + innerListId + ']').addClass('alt-main-nav__item--active');
+
+	}, function (el) {
 		var innerListId = $(this).attr('data-inner-list');
 
 		$('.alt-main-nav__item[data-inner-list = ' + innerListId + ']').removeClass('alt-main-nav__item--active');
-		resetDesktopNaviOuterBackground(innerListId);
 	});
 
 
@@ -454,84 +341,18 @@
 
 
 
-
-
-	// #ref
-	function resetNaviInnerList(el) {
-		var innerListId = $(this).attr('data-inner-list');
-
-		$mainNav.removeClass('main-nav--hover');
-		$mainNavItems.removeClass('main-nav__item--active');
-		$('.main-nav__item[data-inner-list = ' + innerListId + ']').removeClass('main-nav__item--active');
-		$('.alt-main-nav__item[data-inner-list = ' + innerListId + ']').removeClass('alt-main-nav__item--active');
-		$headerBottom.removeClass('header-bottom--hover');
-		resetDesktopNaviInnerListWrapper(innerListId);
-		console.log(innerListId);
-	}
-
-
-	//
-	// инициализация баннеров
-	// в главной навигации
-	//
-	mainNavBannersHTMLWrapper();
-	setMainNavBGImages();
-
-	// убираю старые значения которые в верстке есть, в проде убрать строку
-	// removeMainNavBanners();
-
-	// адаптайзер
-	if(parseInt(window.innerWidth) > 1024) {
-		addMainNavBanners();
-	} else {
-		removeMainNavBanners();
-	}
-
-	$(window).on('resize', function () {
-		if(parseInt(window.innerWidth) > 1024) {
-			addMainNavBanners();
-		} else {
-			removeMainNavBanners();
-		}
-	});
-
-
-	// (2) hover
-	// (3) hover
-	// (4) hover
-	// для naviInnerListWrapper
-	$naviInnerListWrapper.hover(showInnerListForDesktop, resetNaviInnerList);
-
-
-
 	// ---------
 	// ADAPTIZER
 	// ---------
 	$(window).on('resize', function () {
 		if(parseInt(window.innerWidth) > 1024) {
-			resetTouchNavi();
+			console.log('navi @desktop: reset touch-active');
+			$('body').removeClass('h-canvas-freeze-for-touch-navi');
 		}
+		else console.log('navi @touch');
 	});
-
-
-
-
-
 });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 // ====================
 // = ПОДБОР УКРАШЕНИЯ =
 // ====================
@@ -555,66 +376,6 @@
 		}
 	});
 });
-//
-//
-//
-// =======================
-// = ФИЛЬТР ДЛЯ КАТАЛОГА =
-// =======================
-;$(function() { // фильтр для каталога
-	$('.js-filter-group-scroll-pane').jScrollPane({
-		autoReinitialise : true,
-		verticalDragMinHeight: 9,
-		verticalDragMaxHeight: 9,
-		horizontalDragMinWidth: 9,
-		horizontalDragMaxWidth: 9
-	});
-
-	// открытие закрытие фильтра
-	$('#catalog-filter-change-button').on('click', function (event) {
-		event.preventDefault();
-		$('.filter').hasClass('filter--closed') ? $('.filter').removeClass('filter--closed') : $('.filter').addClass('filter--closed');
-	});
-
-	// кнопка reset фильтра
-	$('#catalog-filter-reset-button').on('click', function (event) {
-
-	});
-
-	// кнопка submit фильтра
-	$('#catalog-filter-submit-button').on('click', function (event) {
-		event.preventDefault();
-
-		//
-		// отправка значений с формы фильтра на сервер
-		//
-
-		$('.filter').addClass('filter--closed');
-	});
-
-	// кнопка с выбранным тегом поиска
-	$('.filter-tags__tab').on('click', function (event) {
-		$(this).remove();
-	});
-});
-// Юля Остапенко
-$(function(){
-	$('#catalog_filter_form .js-scroll-pane').jScrollPane(
-		{
-			autoReinitialise : true,
-			verticalDragMinHeight: 9,
-			verticalDragMaxHeight: 9,
-			horizontalDragMinWidth: 9,
-			horizontalDragMaxWidth: 9
-		}
-	);
-});
-//
-//
-//Toggle function
-$('.js-toggle-btn').on('click', function () {
-	if(parseInt(window.innerWidth) < 1024) {
-		$(this).toggleClass('is-toggle');
-		$(this).parents('.js-toggle-parent').find('.js-toggle-content').slideToggle();
-	}
-});
+// 
+// 
+// 
