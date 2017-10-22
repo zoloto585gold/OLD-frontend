@@ -22,6 +22,8 @@ development/js/app.min.js
 development/js/stores-page.min.js
 development/js/shop-page.min.js
 development/js/basket-page.min.js
+development/js/legacy.js
+development/js/legacy.js.map
 
 
 
