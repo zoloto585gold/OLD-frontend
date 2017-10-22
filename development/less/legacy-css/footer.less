@@ -190,7 +190,7 @@ header .favorite .act {
 /*     display: none; /прячем блок пока нет на него функционала */
 }
 .block-header-bottom .block-link.block-hp {
-	margin-right: 44px; 
+	margin-right: 44px;
 	width: 200px;
 	display: none;
 }
@@ -810,8 +810,8 @@ form.form-question div.fancy-select ul.options li.selected
 .rouble
 {
     font-family: 'Rubl';
-    display: inline-block; 
-    font-size: 18px; 
+    display: inline-block;
+    font-size: 18px;
     font-style: normal;
 }
 .after-sl
@@ -1290,7 +1290,7 @@ header .inner #search input[type="image"] {
 	#header-call {
 		border-left: 0;
 	}
-	
+
 	header .inner #search
 	{
 		margin-right: 10px;
@@ -1426,7 +1426,7 @@ header .inner #search input[type="image"] {
 	header .inner #search {
 		display: none;
 	}
-	
+
 	header .header-profile {
 		position: absolute;
 		right: 100px;
@@ -1522,7 +1522,7 @@ header .inner #search input[type="image"] {
 		border-left: 1px solid #ffffff;
 		top: 114px;
 	}
-	
+
 	.search_m:before {
 		position: absolute;
 		top: 0;
@@ -1658,14 +1658,14 @@ header .inner #search input[type="image"] {
 .footer-accordions form input,
 .form-question input
 {
-	height: 21px;
+	height: 30px;
 	border: 1px solid #dad2d3;
 	border-radius: 2px;
-	background: url("@{img}/new/news2.png") #fff 3px 2px no-repeat;
+	background: url("@{img}/new/news2.png") #fff 3px 5px no-repeat;
 	padding-left: 22px;
 	padding-right: 4px;
 	/*vertical-align: top;*/
-	margin-right: 7px;
+	margin-right: 0;
 	font-size: 11px;
 }
 .footer-accordions form button,
@@ -1676,8 +1676,8 @@ header .inner #search input[type="image"] {
 	padding: 0;
 	color: white;
 	text-align: center;
-	width: 24px;
-	height: 22px;
+	width: 34px;
+	height: 32px;
 	border-radius: 2px;
 	/*vertical-align: top;*/
 	font-size: 11px;
@@ -1944,7 +1944,7 @@ form.form-question div.fancy-select ul.options li
 	.footer-accordions .item {
 		display: block;
 		float: left;
-		width: 200px;
+		width: 250px;
 		vertical-align: top;
 		margin-top: -27px;
 		background-color: transparent;
@@ -1961,12 +1961,6 @@ form.form-question div.fancy-select ul.options li
 		right: 20px;
 		top: 20px;
 	}
-	.footer-accordions .item:first-child {
-		width: 200px;
-	}
-	.footer-accordions .item:nth-child(2) {
-		width: 285px;
-	}
 	.footer-accordions .item:nth-child(3):after {
 		right: -20px;
 	}
@@ -1982,10 +1976,13 @@ form.form-question div.fancy-select ul.options li
 	}
 	.footer-accordions .item.block-newsletter {
 		position: absolute;
-		right: 0;
+		right: 0px;
 		width: 200px;
 		top: 37px;
 		padding-left: 0;
+		&:after{
+			display: none;
+		}
 	}
 	.footer-accordions .item.block-quest {
 		width: 175px;
@@ -2011,11 +2008,11 @@ form.form-question div.fancy-select ul.options li
 		/*margin-top: -18px;*/
 	}
 	.footer-accordions .item.block-newsletter input {
-		max-width: 125px;
+		max-width: 160px;
 	}
 	.footer-contacts {
 		position: absolute;
-		right: 0;
+		right: 50px;
 		width: 200px;
 		padding: 0;
 		top: 62px;
@@ -2025,7 +2022,7 @@ form.form-question div.fancy-select ul.options li
 		float: none;
 	}
 
-	.footer-accordions .item > .item-inne > span, 
+	.footer-accordions .item > .item-inne > span,
 	.footer-accordions .item > .item-inne > span a {
 		line-height: 28px;
 	}
@@ -2037,6 +2034,7 @@ form.form-question div.fancy-select ul.options li
 	}
 	.footer-accordions form.form-newsletter .input-div {
 		display: inline-block;
+		vertical-align: middle;
 	}
 	.footer-accordions .item > .item-inner > span i {
 		display: none;
@@ -2210,7 +2208,7 @@ form.form-question div.fancy-select ul.options li
 	{
 		color: #fff;
 	}
-	.footer-accordions form.form-question input, 
+	.footer-accordions form.form-question input,
 	.footer-accordions form.form-question div.fancy-select div.trigger,
 	.footer-accordions form.form-question textarea
 	{
@@ -2485,5 +2483,3 @@ form.form-question div.fancy-select ul.options li
 	}
 	*/
 }
-
-
