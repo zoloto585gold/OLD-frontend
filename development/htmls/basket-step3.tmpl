@@ -12,24 +12,14 @@
 	<!-- НАПРИМЕР: <link rel="stylesheet" href="css/catalog.min.css"> -->
 </head>
 <body>
-	<div class="page">
-		<header class="page__header">
-			@@include('scaff/layout__header.html')
-		</header>
-
-
+	<div class="page basket">
 		<main class="page__content">
-			@@include('scaff/pages__basket.html')
+			@@include('scaff/pages__basket-step3.html')
 		</main>
-
-
-		<footer class="page__footer">
-			@@include('scaff/layout__footer.html')
-		</footer>
 	</div>
 
 
 	@@include('scaff/layout__js-list.html')
-	<script src="js/render/basket.js"></script>
+	<script src="js/pages/basket-page/basket.js"></script>
 </body>
 </html>
