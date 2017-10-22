@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	@@include('scaff/layout__meta-tags.html')
+	@@include('scaff/layout__css-list.html')
+
+
+	<title>Title your page</title>
+
+
+	<!-- здесь подключай свои стили -->
+	<!-- НАПРИМЕР: <link rel="stylesheet" href="css/catalog.min.css"> -->
+</head>
+<body>
+	<div class="page basket">
+		<main class="page__content">
+			@@include('scaff/pages__basket-step2.html')
+		</main>
+	</div>
+
+
+	@@include('scaff/layout__js-list.html')
+	<script src="js/pages/basket-page/basket.js"></script>
+</body>
+</html>

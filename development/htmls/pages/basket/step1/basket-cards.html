@@ -1,0 +1,300 @@
+<!-- "BASKET-CARDS" -->
+<div class="basket__cards">
+  <div class="section basket-card basket-card--promocode">
+    <div class="section__inner basket-card__inner">
+      <div class="basket-card__text">
+        <img src="img/basket/promocode.png" alt="">
+        <span>Есть промокод?</span>
+      </div>
+      <div class="basket-card__input">
+        <input type="text" placeholder="введите промокод, если есть">
+        <div class="basket-tooltip">
+          <div class="basket-tooltip__btn">
+            ?
+          </div>
+          <div class="basket-tooltip__content">
+            dasdasdsadsadsad
+          </div>
+        </div>
+        <button>Применить</button>
+      </div>
+      <ul class="basket-card__saleList">
+        <li>
+          применен купон: SALE4u401
+          <span>X</span>
+        </li>
+        <li>
+          применен купон: 90sale
+          <span>X</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="section basket-card basket-card--bonus">
+    <div class="section__inner basket-card__inner">
+      <div class="basket-card__text">
+        <img src="img/basket/bonus-card.png" alt="">
+        <span>Ваша бонусная карта:</span>
+        <p class="card-number">
+          1234567899876543
+        </p>
+      </div>
+      <div class="basket-card__input">
+        <div class="card-points">
+          <div><i>на вашем счете:</i></div>
+          <span><b>11 000</b> Баллов</span>
+          <div><i>списать в счет оплаты?</i></div>
+        </div>
+        <div class="basket-tooltip">
+          <div class="basket-tooltip__btn">
+            ?
+          </div>
+          <div class="basket-tooltip__content">
+            dasdasdsadsadsad
+          </div>
+        </div>
+        <button>Списать баллы</button>
+      </div>
+      <div class="basket-card__thx">
+        Спасибо, ваши баллы учтены
+      </div>
+    </div>
+  </div>
+  <div class="section basket-card basket-card--bonus">
+    <div class="section__inner basket-card__inner">
+      <div class="basket-card__text">
+        <img src="img/basket/bonus-card.png" alt="">
+        <span>Есть бонусная карта?</span>
+        <p>
+          Нет бонусной карты?<br> <a href="#" class="js-openRegForm">Оформите карту онлайн</a><br> для получения дополнительной скидки
+        </p>
+      </div>
+      <div class="basket-card__input">
+        <input type="text" placeholder="введите номер бонусной карты" maxlength="16">
+        <div class="basket-tooltip">
+          <div class="basket-tooltip__btn">
+            ?
+          </div>
+          <div class="basket-tooltip__content">
+            dasdasdsadsadsad
+          </div>
+        </div>
+        <button>Применить</button>
+      </div>
+    </div>
+    <div class="basket-card__reg">
+      <div class="section__inner reg-card-content__form">
+        <a href="#" class="basket-card__reg-close js-closeRegForm">X</a>
+        <div class="basket-card__reg-title">регистрация бонусной карты</div>
+                <form id="reg_card">
+                    <div class="reg-card-content__form-field">
+                        <label>Фамилия <sup>*</sup></label>
+                        <span class="error"></span>
+                        <input class="name-part" type="text" id="surname" name="fn" value="" maxlength="100">
+                    </div>
+
+                    <div class="reg-card-content__form-field">
+                        <label>Имя <sup>*</sup></label>
+                        <span class="error"></span>
+                        <input class="autocomplete name-part" data-source="/registraciya_karty/autocomplete/autocomplete.php?type=name" type="text" id="name" name="sn" value="" maxlength="100">
+                    </div>
+
+                    <div class="reg-card-content__form-field">
+                        <label>Отчество <sup>*</sup></label>
+                        <span class="error"></span>
+                        <input class="autocomplete name-part" data-source="/registraciya_karty/autocomplete/autocomplete.php?type=surname" type="text" id="patronymic" name="tn" value="" maxlength="100">
+                    </div>
+
+                    <div class="reg-card-content__form-field / select">
+                        <label>Пол <sup>*</sup></label>
+                        <span class="error"></span>
+                        <select id="gender" name="sex" class="select_drop">
+                            <option value="0">- Выберите пол -</option>
+                            <option value="2">Мужской</option>
+                            <option value="1">Женский</option>
+                        </select>
+                    </div>
+
+                    <div class="reg-card-content__form-field / select">
+                        <label>Дата рождения <sup>*</sup></label>
+                        <span class="error"></span>
+                        <div class="reg-card-content__form-date">
+                            <select name="birth_date[day]" id="birth_date_day" class="birth_date-select" data-placeholder="День">
+                                <option></option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+
+                            <select name="birth_date[month]" id="birth_date_month" class="birth_date-select" data-placeholder="Месяц">
+                                <option></option>
+                                <option value="01">Январь</option>
+                                <option value="02">Февраль</option>
+                                <option value="03">Март</option>
+                                <option value="04">Апрель</option>
+                                <option value="05">Май</option>
+                                <option value="06">Июнь</option>
+                                <option value="07">Июль</option>
+                                <option value="08">Август</option>
+                                <option value="09">Сентябрь</option>
+                                <option value="10">Октябрь</option>
+                                <option value="11">Ноябрь</option>
+                                <option value="12">Декабрь</option>
+                            </select>
+
+                            <select name="birth_date[year]" id="birth_date_year" class="birth_date-select" data-placeholder="Год">
+                                <option value=""></option>
+                                <option value="1999">1999</option>
+                                <option value="1998">1998</option>
+                                <option value="1997">1997</option>
+                                <option value="1996">1996</option>
+                                <option value="1995">1995</option>
+                                <option value="1994">1994</option>
+                                <option value="1993">1993</option>
+                                <option value="1992">1992</option>
+                                <option value="1991">1991</option>
+                                <option value="1990">1990</option>
+                                <option value="1989">1989</option>
+                                <option value="1988">1988</option>
+                                <option value="1987">1987</option>
+                                <option value="1986">1986</option>
+                                <option value="1985">1985</option>
+                                <option value="1984">1984</option>
+                                <option value="1983">1983</option>
+                                <option value="1982">1982</option>
+                                <option value="1981">1981</option>
+                                <option value="1980">1980</option>
+                                <option value="1979">1979</option>
+                                <option value="1978">1978</option>
+                                <option value="1977">1977</option>
+                                <option value="1976">1976</option>
+                                <option value="1975">1975</option>
+                                <option value="1974">1974</option>
+                                <option value="1973">1973</option>
+                                <option value="1972">1972</option>
+                                <option value="1971">1971</option>
+                                <option value="1970">1970</option>
+                                <option value="1969">1969</option>
+                                <option value="1968">1968</option>
+                                <option value="1967">1967</option>
+                                <option value="1966">1966</option>
+                                <option value="1965">1965</option>
+                                <option value="1964">1964</option>
+                                <option value="1963">1963</option>
+                                <option value="1962">1962</option>
+                                <option value="1961">1961</option>
+                                <option value="1960">1960</option>
+                                <option value="1959">1959</option>
+                                <option value="1958">1958</option>
+                                <option value="1957">1957</option>
+                                <option value="1956">1956</option>
+                                <option value="1955">1955</option>
+                                <option value="1954">1954</option>
+                                <option value="1953">1953</option>
+                                <option value="1952">1952</option>
+                                <option value="1951">1951</option>
+                                <option value="1950">1950</option>
+                                <option value="1949">1949</option>
+                                <option value="1948">1948</option>
+                                <option value="1947">1947</option>
+                                <option value="1946">1946</option>
+                                <option value="1945">1945</option>
+                                <option value="1944">1944</option>
+                                <option value="1943">1943</option>
+                                <option value="1942">1942</option>
+                                <option value="1941">1941</option>
+                                <option value="1940">1940</option>
+                                <option value="1939">1939</option>
+                                <option value="1938">1938</option>
+                                <option value="1937">1937</option>
+                                <option value="1936">1936</option>
+                                <option value="1935">1935</option>
+                                <option value="1934">1934</option>
+                                <option value="1933">1933</option>
+                                <option value="1932">1932</option>
+                                <option value="1931">1931</option>
+                                <option value="1930">1930</option>
+                                <option value="1929">1929</option>
+                                <option value="1928">1928</option>
+                                <option value="1927">1927</option>
+                                <option value="1926">1926</option>
+                                <option value="1925">1925</option>
+                            </select>
+                        </div>
+                        <div class="reg-card-content__form-tip">Дарим подарки <br>в Ваш День  Рождения!</div>
+                    </div>
+
+                    <div class="reg-card-content__form-field">
+                        <label for="">Город проживания <sup>*</sup></label>
+                        <span class="error"></span>
+                        <input class="autocomplete" data-source="/registraciya_karty/autocomplete/autocomplete.php?type=city" id="city" name="sl" type="text" value="" maxlength="100" />
+                    </div>
+
+                    <div class="reg-card-content__form-field" data-input="phone">
+                        <label>Телефон <sup>*</sup></label>
+                        <span class="error"></span>
+                        <input type="text" id="phone" name="phone" value="" placeholder="(000) 000-00-00" maxlength="10">
+                        <span data-code>+7</span>
+                    </div>
+
+                    <div class="reg-card-content__form-field" data-input="email">
+                        <label>E-mail <sup>*</sup></label>
+                        <span class="error"></span>
+                        <input type="text" id="email" name="email" value="" maxlength="100">
+                    </div>
+
+                    <div class="reg-card-content__form-agree">
+                        Нажимая кнопку Зарегистрироваться,
+                        Я подтверждаю свою дееспособность, ознакомление с <a href="#">правилами программы лояльности</a>,
+                        и даю согласие <a href="/assets/docs/sogl_form.pdf">установленной формы</a>
+                        на обработку моих персональных данных.
+                    </div>
+
+                    <button class="reg-card-content__form-btn" type="submit">Зарегистрировать карту</button>
+                </form>
+
+                <form style="display: none" id="reg_confirm" action="" method="">
+                    <div data-fields>
+                        <h2 class="reg-card-content__form-title / reg-card-content__form-title--lower">Для завершения регистрации введите промо-код, который придет на&nbsp;номер телефона, указанный вами в&nbsp;анкете</h2>
+                        <div class="reg-card-content__form-field" data-input="promokey">
+                            <label for="Confirm_promokey">Промо код</label>
+                            <input type="text" name="promokey" id="Confirm_promokey">
+                        </div>
+                        <button class="reg-card-content__form-btn" type="submit">Продолжить</button>
+                    </div>
+
+                    <div class="reg-card-content__form-status" data-status></div>
+                </form>
+            </div>
+    </div>
+  </div>
+</div>
+<!-- END-of-"BASKET-CARDS" -->

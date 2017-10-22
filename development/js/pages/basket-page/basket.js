@@ -54,7 +54,7 @@ var JS_DATA = JS_PATH + 'data/';
 	var NODE = 'basket';
 	var PAGE = NODE + '/';
 	var VIEWS_PATH = JS_VIEWS + PAGE;
-	// var PAGE = 
+	// var PAGE =
 
 	$.when(
 			lazyGetTemplate('basket-list-template', VIEWS_PATH)
@@ -92,4 +92,28 @@ var JS_DATA = JS_PATH + 'data/';
 
 		document.querySelector('#basket-total-value').innerHTML = total;
 	}
+
+	$(document).on('click', '.js-openRegForm', function (e) {
+		e.preventDefault();
+		$('.basket-card__reg').addClass('is-open');
+	});
+
+	$(document).on('click', '.js-closeRegForm', function (e) {
+		e.preventDefault();
+		$('.basket-card__reg').removeClass('is-open');
+	});
+
+	$(document).on('click', '.js-openMapModal', function (e) {
+		e.preventDefault();
+		$('.basket-modal').addClass('is-open');
+	});
+
+	$(document).on('click', '.js-closeMapModal', function (e) {
+		$('.basket-modal').removeClass('is-open');
+	});
+
+	$(document).on('click', '.basket-modal__overlay', function (e) {
+		$('.basket-modal').removeClass('is-open');
+	});
+
 }());
