@@ -97,15 +97,15 @@
 	text-transform: uppercase;
 }
 .pcard-store__price {
-	.a-pos_tl(18px, 220px);
+	.a-pos_tl(22px, 22px);
 }
 .pcard-store__price-old {
-	.font-circe_light(13px, 13px, #7b7b7b);
+	.font-circe_light(14px, 20px, #7b7b7b);
 	text-transform: uppercase;
 	text-decoration: line-through;
 }
 .pcard-store__price-current {
-	.font-circe_light(18px, 25px, #303030);
+	.font-circe_light(20px, 20px, #303030);
 	text-transform: uppercase;
 }
 
@@ -122,40 +122,43 @@
 	.font-circe_bold(18px, 16px, #ff1037);
 }
 .pcard-store__bonuses {
-	width: 140px;
-	height: 42px;
+	height: 50px;
 
 	border: 1px dotted #ababab;
+	background: #f9f9f9;
 	border-radius: 3px;
-	.a-pos_tl(12px, 323px);
+	position: absolute;
+	top: 15px;
+	left: 155px;
+	right: 15px;
+
+	padding: 5px 20px 0 10px;
 }
 .pcard-store__bonuses-count {
-	padding-right: 15px;
-	.font-circe_light(18px, 18px, #303030);
+	display: inline-block;
+	.font-circe_regular(9px, 1, #333);
 	text-transform: uppercase;
-	.a-pos_tl(6px, 7px);
-
-
-	&:after {
-		position: absolute;
-		top: 50%;
-		right: 0;
-		margin-top: -8.5px;
-
-		content: '';
-
+	span{
 		display: block;
-		width: 11px;
-		height: 14px;
-
-		.set_pcard_sprite(-10px, -188px);
+		.font-circe_regular(32px, 1,#ff1037);
+		small{
+			font-size: 14px;
+		}
 	}
 }
 
 .pcard-store__bonuses-text {
-	.font-circe_light(11px, 11px, #303030);
+	float: right;
+	.font-circe_light(11px, 16px, #333);
 	text-transform: uppercase;
-	.a-pos_tl(27px, 7px);
+	margin-top: 5px;
+	a{
+		text-decoration: underline;
+		&:hover{
+			text-decoration: none;
+			color: #ed3030;
+		}
+	}
 }
 
 .pcard-store__bonuses-about {
@@ -220,10 +223,6 @@
 			top: 22px;
 			font-size: 14px;
 		}
-		&__price {
-			top: 22px;
-			left: 270px;
-		}
 		&__price-old{
 			.font-circe_light(15px, 15px, #7b7b7b);
 		}
@@ -233,8 +232,9 @@
 		&__card { top: 27px; }
 		&__bonuses {
 			top: 18px;
-			left: auto;
+			left: 250px;
 			right: 22px;
+			width: 320px;
 		}
 
 
@@ -249,8 +249,12 @@
 
 }
 
-@media screen and (min-width: 640px) and (max-width: 767px) {
-
+@media screen and (max-width: 767px) {
+	.pcard-store {
+		&__bonuses {
+			width: auto;
+		}
+	}
 }
 
 @media screen and  (max-width: 639px) {
@@ -259,7 +263,30 @@
 			display: none;
 		}
 		&__price{
+			top: 12px;
 			left: 22px;
+		}
+		&__bonuses {
+			border: none;
+			background: none;
+			top: 10px;
+			left: 0;
+			right: 0;
+			padding: 0 0 0 50%;
+			&-text{
+				position: absolute;
+				top: 100%;
+				left: 0;
+				right: 0;
+				background: #f9f9f9;
+				line-height: 36px;
+				font-size: 12px;
+				text-align: center;
+				margin-top: 0;
+				br{
+					display: none;
+				}
+			}
 		}
 	}
 }
@@ -271,6 +298,10 @@
 
 		&__card {
 			.-tl-(17px, 137px);
+		}
+
+		&__bonuses {
+			padding: 0 0 0 50%;
 		}
 	}
 }
