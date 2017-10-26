@@ -509,7 +509,7 @@ html, body { margin: 0; padding: 0; }
 }
 
 .pcard-store-prices {
-	height: 66px;
+	height: 80px;
 	font-size: 0;
 	position: relative;
 }
@@ -1217,8 +1217,6 @@ html, body { margin: 0; padding: 0; }
 	}
 	.pcard-store-info { .-dn-; }
 
-	.pcard-store-prices { height: 80px; }
-
 
 	.pcard-properties {
 		margin-top: 15px;
@@ -1374,10 +1372,15 @@ html, body { margin: 0; padding: 0; }
 			&-value { width: 330px; }
 		}
 	}
-
 }
+
+@media screen and (max-width: 639px) {
+	.pcard-store-prices { height: 95px; }
+}
+
 @media screen and (max-width: 479px) {
 	.pcard-store-info { .-dn-; }
+
 	.pcard-store-fitting {
 		.-bgpos-y-(-1px);
 		.-bgsz-(350px, 9px);
