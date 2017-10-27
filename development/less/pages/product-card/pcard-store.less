@@ -205,6 +205,28 @@
 	}
 }
 
+/* В корзину */
+.pcard-store__buy-button {
+	.-box-(block, 100%, 37px);
+	background: #ed3030 url(@img-thingies-shadow-2) center top no-repeat;
+	.-brad-ad-(4px);
+	.font-circe_light(12px, 37px, #fff);
+	.-t-cnu-(#fff);
+}
+.pcard-store__buy-button:hover { background-color: #b32023; }
+
+.pcard-store__buy-result{
+	display: none;
+	width: 100%;
+	text-align: center;
+	.font-circe_light(15px, 40px, #000);
+
+	a{
+		background: #ed3030;
+		color: #fff;
+		padding: 0 5px;
+	}
+}
 
 @media screen and (max-width: 1024px) {
 	.pcard-store {
@@ -238,7 +260,8 @@
 		}
 
 
-		&__reserve-button {
+		&__reserve-button,
+		&__buy-button{
 			height: 60px;
 			.font-circe_regular(16px, 60px, #fff);
 		}
