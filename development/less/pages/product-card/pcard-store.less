@@ -97,16 +97,28 @@
 	text-transform: uppercase;
 }
 .pcard-store__price {
-	.a-pos_tl(22px, 22px);
+	.a-pos_tl(18px, 220px);
 }
 .pcard-store__price-old {
-	.font-circe_light(14px, 20px, #7b7b7b);
+	.font-circe_light(13px, 13px, #7b7b7b);
 	text-transform: uppercase;
 	text-decoration: line-through;
 }
 .pcard-store__price-current {
-	.font-circe_light(20px, 20px, #303030);
+	.font-circe_light(18px, 25px, #303030);
 	text-transform: uppercase;
+}
+
+.pcard-store-prices--new{
+	.pcard-store__price {
+		.a-pos_tl(22px, 22px);
+	}
+	.pcard-store__price-old {
+		.font-circe_light(14px, 20px, #7b7b7b);
+	}
+	.pcard-store__price-current {
+		.font-circe_light(20px, 20px, #303030);
+	}
 }
 
 .pcard-store__card {
@@ -122,22 +134,29 @@
 	.font-circe_bold(18px, 16px, #ff1037);
 }
 .pcard-store__bonuses {
-	height: 50px;
+	width: 140px;
+	height: 42px;
 
 	border: 1px dotted #ababab;
-	background: #f9f9f9;
 	border-radius: 3px;
-	position: absolute;
-	top: 15px;
-	left: 155px;
-	right: 15px;
-
-	padding: 5px 20px 0 10px;
+	.a-pos_tl(12px, 323px);
 }
 .pcard-store__bonuses-count {
-	display: inline-block;
-	.font-circe_regular(9px, 1, #333);
+	padding-right: 15px;
+	.font-circe_light(18px, 18px, #303030);
 	text-transform: uppercase;
+	.a-pos_tl(6px, 7px);
+	&:after{
+		position: absolute;
+		top: 50%;
+		right: 0;
+		margin-top: -8.5px;
+		display: block;
+		content: '';
+		width: 11px;
+		height: 14px;
+		.set_pcard_sprite(-10px, -188px);
+	}
 	span{
 		display: block;
 		.font-circe_regular(32px, 1,#ff1037);
@@ -148,17 +167,9 @@
 }
 
 .pcard-store__bonuses-text {
-	float: right;
-	.font-circe_light(11px, 16px, #333);
+	.font-circe_light(11px, 11px, #303030);
 	text-transform: uppercase;
-	margin-top: 5px;
-	a{
-		text-decoration: underline;
-		&:hover{
-			text-decoration: none;
-			color: #ed3030;
-		}
-	}
+	.a-pos_tl(27px, 7px);
 }
 
 .pcard-store__bonuses-about {
@@ -168,6 +179,48 @@
 	font-size: 0;
 	cursor: pointer;
 }
+
+.pcard-store-prices--new{
+	.pcard-store__bonuses{
+		width: auto;
+		height: 50px;
+		background: #f9f9f9;
+		position: absolute;
+ 		top: 15px;
+ 		left: 155px;
+ 		right: 15px;
+ 		padding: 5px 20px 0 10px;
+	}
+
+	.pcard-store__bonuses-count{
+		display: inline-block;
+ 		.font-circe_regular(9px, 1, #333);
+		span{
+			.font-circe_regular(32px, 1,#ff1037);
+			small{
+				font-size: 14px;
+			}
+		}
+		&:after{
+			display: none;
+		}
+	}
+
+	.pcard-store__bonuses-text{
+		float: right;
+		.font-circe_light(11px, 16px, #333);
+		margin-top: 5px;
+		position: static;
+		a{
+			text-decoration: underline;
+			&:hover{
+				text-decoration: none;
+				color: #ed3030;
+			}
+		}
+	}
+}
+
 .pcard-store__reserve-button {
 	.-box-(block, 100%, 37px);
 	background: #ed3030 url(@img-thingies-shadow-2) center top no-repeat;
@@ -245,6 +298,10 @@
 			top: 22px;
 			font-size: 14px;
 		}
+		&__price{
+			top: 22px;
+			left: 270px;
+		}
 		&__price-old{
 			.font-circe_light(15px, 15px, #7b7b7b);
 		}
@@ -254,9 +311,8 @@
 		&__card { top: 27px; }
 		&__bonuses {
 			top: 18px;
-			left: 250px;
+			left: auto;
 			right: 22px;
-			width: 320px;
 		}
 
 
@@ -264,6 +320,16 @@
 		&__buy-button{
 			height: 60px;
 			.font-circe_regular(16px, 60px, #fff);
+		}
+
+		.pcard-store-prices--new{
+			.pcard-store__price{
+				left: 22px;
+			}
+			.pcard-store__bonuses{
+				left: 250px;
+				width: 320px;
+			}
 		}
 	}
 }
@@ -274,8 +340,10 @@
 
 @media screen and (max-width: 767px) {
 	.pcard-store {
-		&__bonuses {
-			width: auto;
+		.pcard-store-prices--new{
+			.pcard-store__bonuses{
+				width: auto;
+			}
 		}
 	}
 }
@@ -286,28 +354,35 @@
 			display: none;
 		}
 		&__price{
-			top: 12px;
 			left: 22px;
 		}
-		&__bonuses {
-			border: none;
-			background: none;
-			top: 10px;
-			left: 0;
-			right: 0;
-			padding: 0 0 0 50%;
-			&-text{
-				position: absolute;
-				top: 100%;
+		.pcard-store-prices--new{
+			.pcard-store__price{
+				top: 12px;
+			}
+			.pcard-store__bonuses {
+				border: none;
+				background: none;
+				top: 10px;
 				left: 0;
 				right: 0;
-				background: #f9f9f9;
-				line-height: 36px;
-				font-size: 12px;
-				text-align: center;
-				margin-top: 0;
-				br{
-					display: none;
+				padding: 0 0 0 50%;
+				&-text{
+					position: absolute;
+					top: 100%;
+					left: 0;
+					right: 0;
+					background: #f9f9f9;
+					line-height: 36px;
+					font-size: 12px;
+					text-align: center;
+					margin-top: 0;
+					br{
+						display: none;
+					}
+				}
+				&-count{
+					position: static;
 				}
 			}
 		}
@@ -322,9 +397,10 @@
 		&__card {
 			.-tl-(17px, 137px);
 		}
-
-		&__bonuses {
-			padding: 0 0 0 50%;
+		.pcard-store-prices--new {
+			.pcard-store__bonuses {
+				padding: 0 0 0 50%;
+			}
 		}
 	}
 }
