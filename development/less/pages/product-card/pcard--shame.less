@@ -544,6 +544,9 @@ html, body { margin: 0; padding: 0; }
 	.font-circe_light(12px, 34px, @color-red);
 	text-transform: uppercase;
 	.pos-abs_tl(12px, 22px);
+	&--grey{
+		color: #333;
+	}
 }
 
 
@@ -562,6 +565,12 @@ html, body { margin: 0; padding: 0; }
 	&:hover,
 	&:focus { .-solid-(#c93232); }
 }
+
+.pcard-store-fitting-select__size{
+	.pos-abs_tl(18px, 205px);
+	.font-circe_light(20px, 1, #b9b6b8);
+}
+
 
 .pcard-store-fitting__popup-but {/* кнопка для попАпа "Как узнать свой размер" */
 	.font-circe_light(11px, 16px, #999);
@@ -826,13 +835,13 @@ html, body { margin: 0; padding: 0; }
 		}
 		&__label {
 			.font-circe_bold(14px, 1, #333);
-			top: 1px;
+			top: 4px;
+			padding-bottom: 5px;
 		}
 		&__value {
 			display: inline-block;
 			.font-circe_bold(24px, 1, #ec2f2f);
 			float: right;
-			margin-top: -5px;
 			padding-left: 5px;
 		}
 	}
@@ -1195,7 +1204,7 @@ html, body { margin: 0; padding: 0; }
 		.-bgsz-(400px, 20px);
 
 		&-select{
-			&__label { .-pos-tl-(24px, 22px); .font-circe_regular(16px, 34px, #ed3030); }
+			&__label { .-pos-tl-(24px, 22px); font-size: 16px; line-height: 34px;}
 			&__menu_default {
 				.-pos-tl-(12px, 250px);
 				outline: none;
@@ -1203,6 +1212,10 @@ html, body { margin: 0; padding: 0; }
 				.-box-border-(#e2e1e2, 2px);
 				.-block-(auto, 50px, 0 15px);
 				.font-circe_light(18px, 40px, #666);
+			}
+			&__size{
+				.-pos-tl-(22px, 250px);
+				line-height: 34px;
 			}
 		}
 
@@ -1352,6 +1365,9 @@ html, body { margin: 0; padding: 0; }
 	.pcard-store-fitting {
 		.-bgpos-y-(-3px);
 		height: 100px;
+		&--oneSize{
+			height: 80px;
+		}
 	 }
 	.pcard-store-fitting-select {
 		&__menu_default {
@@ -1381,6 +1397,14 @@ html, body { margin: 0; padding: 0; }
 
 @media screen and (max-width: 639px) {
 	.pcard-store-prices--new { height: 95px; }
+	.pcard-store-fitting {
+		&--oneSize{
+			.pcard-store-fitting__popup-but,
+			.pcard-store-fitting__size-info{
+				display: none;
+			}
+		}
+	 }
 }
 
 @media screen and (max-width: 479px) {
@@ -1411,6 +1435,17 @@ html, body { margin: 0; padding: 0; }
 		&__size-info:hover{
 			line-height: 1;
 			height: 115px;
+		}
+
+		&--oneSize{
+			.pcard-store-fitting-select__label{
+					margin-bottom: 0;
+			}
+			.pcard-store-fitting-select__size{
+				left: auto;
+				right: 22px;
+				top: 10px;
+			}
 		}
 	}
 
