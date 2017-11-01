@@ -42,6 +42,7 @@ const config = assign({
 	path: {
 		js: {
 			libs: [
+				// @todo: gulp-order
 				'development/js/libs/plugins/picturefill.min.js',
 				//
 				'development/js/libs/jqueryteam/jquery-1.11.1.min.js',
@@ -77,12 +78,14 @@ const config = assign({
 			],
 
 			app: [
+				// @todo: gulp-order
 				'development/js/app/z585.js',
 				'development/js/app/z585.main.js',
 				'development/js/app/z585.data.js',
 				'development/js/app/z585.htmlrender.js',
 				'development/js/app/z585.debug.js',
 				'development/js/app/z585.yamaps.js',
+				'development/js/app/z585.basket.js',
 			],
 
 			pages: [
@@ -99,6 +102,7 @@ const config = assign({
 		},
 
 		less: [
+			// @todo: gulp-order
 			'development/less/mixins/@path-global.less',
 
 			//

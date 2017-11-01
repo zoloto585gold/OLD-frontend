@@ -1,4 +1,10 @@
 .basket__confirm{
+  &.is-open{
+    display: block;
+  }
+  &.is-close{
+    display: none;
+  }
   background: #f7f7f7;
   padding: 30px 0;
   text-align: center;
@@ -32,6 +38,10 @@
   margin-top: 25px;
   &-row{
     margin-bottom: 20px;
+
+    &--confirm{
+      display: none;
+    }
   }
   &-input{
     display: inline-block;
@@ -49,7 +59,7 @@
       text-align: left;
     }
     .error{
-      display: block;
+      display: none;
       font-size: 11px;
       color: #ee3b3b;
       text-align: left;
