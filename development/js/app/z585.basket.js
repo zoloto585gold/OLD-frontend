@@ -39,7 +39,6 @@
 
 			// Выбор шага
 			self.elements.page.on('click', '[data-btn=step]', function (e) {
-				var $content = self.elements.page.find('[data-partial=content]');
 				var method = $(this).data('method');
 				var template = $(this).data('template');
 				var partial = {
@@ -47,10 +46,9 @@
 					state: $(this).data('state'),
 				};
 
-				$content.data('template', template);
-
 				self.requestAPI(method, {}, {
-					partial: partial
+					partial: partial,
+					template: template
 				});
 
 				e.preventDefault();
@@ -228,19 +226,21 @@
 			// Смотреть на карте адрес магазина
 			self.elements.page.on('click', '[data-btn=open-map]', function (e) {
 				var $wrap = $(this).closest('[data-el=shop-wrapper]');
-				var $option = $wrap.find('option:selected');
+				var $selector = $wrap.find('select');
+				var $option = $selector.find('option:selected');
+				var content = '<div id="shop-map"></div>';
 				var mapParams;
 
 				e.preventDefault();
 
-				if ($option.length) {
+				if ($selector.val() != 0 && $option.length) {
 					mapParams = {
-						GPS_N: $option.data('lon'),
-						GPS_S: $option.data('lat'),
+						GPS_N: $option.data('lat'),
+						GPS_S: $option.data('lon'),
 					};
 
-					self.showModal('map');
-					Z585.yamaps.init(mapParams);
+					self.showModal('map', content);
+					ymaps.ready(Z585.yamaps.init(mapParams));
 				} else {
 					alert('Пожалуйста, выберите адрес');
 				}
@@ -272,21 +272,29 @@
 			// Подтверждение заказа. Отправка проверочного кода
 			self.elements.page.on('click', '[data-btn=checkout]', function (e) {
 				var $form  = self.elements.page.find('[data-el=confirm-form]');
-				var $input = $form.find('[data-el=input]');
+				var $input = $form.find('[data-el=smscode]');
 				var $error = $form.find('[data-el=error]');
 				var $phone = self.elements.page.find('[data-el=phone]');
 				var $content = self.elements.page.find('[data-partial=content]');
 
 				e.preventDefault();
 
-				$content.data('template', 'orders');
+				$error.hide();
 
 				self.requestAPI('checkout', {
 					phone:   $.trim($phone.val()),
 					ch_code: $.trim($input.val()),
 				}, {
-					partial: {
-						name: 'content'
+					callback: function (json) {
+						var invalid = json.orders.response.error == 'INVALID_CHECK_CODE';
+
+						if (invalid) {
+							$error.show();
+						} else {
+							self.loadPartial('content', json, {
+								template: 'orders',
+							});
+						}
 					}
 				});
 			});
