@@ -24,8 +24,8 @@
 		};
 
 		self.elements = {
-			brief: $('.header-top__item.top-basket'),
-			page: $('.page.basket'),
+			brief: $('.top-basket'),
+			page:  $('.page.basket'),
 		};
 
 		// На стринце с корзиной /basket
