@@ -192,11 +192,15 @@
     &__price{
         position: absolute;
         left: auto;
-        right: 18%;
+        right: 10%;
         bottom: 1px;
 
+        @media @touch-between{
+            right: 10%;
+        }
+
         @media @mobile-portrait{
-            right: 24%;
+            right: 15%;
         }
 
         span{
@@ -213,14 +217,18 @@
 
         &--old{
             right: auto;
-            left: 18%;
+            left: 10%;
 
             span{
                 text-decoration: line-through;
             }
 
+            @media @touch-between{
+                left: 10%;
+            }
+
             @media @mobile-portrait{
-                left: 24%;
+                left: 15%;
             }
         }
     }
