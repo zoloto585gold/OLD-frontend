@@ -11,6 +11,7 @@
 
 		self.router = {
 			add: 'post',
+			xadd: 'post',
 			clear: 'get',
 			briefview: 'get',
 			view: 'get',
