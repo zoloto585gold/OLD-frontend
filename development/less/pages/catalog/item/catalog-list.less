@@ -26,6 +26,11 @@
     &[data-len='3'] .section__inner,
     &[data-len='4'] .section__inner{
         max-width: 1000px !important;
+        @media screen and (min-width: 768px){
+          .catalog-item{
+            min-width: 250px;
+          }
+        }
     }
     &--main{
       .catalog-item{
