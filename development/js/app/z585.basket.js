@@ -40,15 +40,13 @@
 			// Выбор шага
 			self.elements.page.on('click', '[data-btn=step]', function (e) {
 				var method = $(this).data('method');
-				var template = $(this).data('template');
-				var partial = {
-					name:  'content',
-					state: $(this).data('state'),
-				};
 
 				self.requestAPI(method, {}, {
-					partial: partial,
-					template: template
+					partial: {
+						name:  'content',
+						state: $(this).data('state'),
+						template: $(this).data('template'),
+					},
 				});
 
 				e.preventDefault();
@@ -311,7 +309,7 @@
 			self.elements.brief.on('click', '[data-btn=remove]', function (e) {
 				e.preventDefault();
 
-				if (confirm('Вы уверены, что хотите удалить этот товар из корзины?')) {
+				//if (confirm('Вы уверены, что хотите удалить этот товар из корзины?')) {
 					self.requestAPI('remove', {
 						sapcode: $(this).data('sapcode')
 					}, {
@@ -319,7 +317,7 @@
 							name: 'topbasket'
 						}
 					});
-				}
+				//}
 			});
 		}
 	}
