@@ -262,7 +262,7 @@
 						callback: function () {
 							self.elements.page
 								.find('[data-el=confirm-form]').slideDown(200)
-								.find('[data-el=input]').trigger('focus');
+								.find('[data-el=smscode]').trigger('focus');
 						}
 					});
 				}
