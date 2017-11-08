@@ -9,7 +9,7 @@
 		self.debug = true;
 		self.urlAPI = 'https://d03.zoloto585.ru/restapi/v1/basket/';
 
-		self.router = {
+		self.methods = {
 			add: 'post',
 			xadd: 'post',
 			clear: 'get',
@@ -29,298 +29,393 @@
 			page:  $('.page.basket'),
 		};
 
-		// На стринце с корзиной /basket
-		if (self.elements.page.length) {
-			// Загрузка первого шага
-			self.requestAPI('view', {}, {
-				partial: {
-					name: 'content'
-				}
-			});
+		$.each(self.elements, function (k, $el) {
+			var fname;
 
-			// Выбор шага
-			self.elements.page.on('click', '[data-btn=step]', function (e) {
-				var method = $(this).data('method');
+			if ($el.length) {
+				fname = k + 'Init';
 
-				self.requestAPI(method, {}, {
-					partial: {
-						name:  'content',
-						state: $(this).data('state'),
-						template: $(this).data('template'),
-					},
-				});
-
-				e.preventDefault();
-			});
-
-			// Вернуться к покупкам (назад)
-			self.elements.page.on('click', '[data-btn=goback]', function (e) {
-				e.preventDefault();
-
-				/*
-				if (window.history.length) {
-					window.history.go(-1);
+				if (self[fname]) {
+					self[fname]();
 				} else {
-					window.location = '/catalog';
+					console.log('Z585.basket error: '+ fname +' is not a function');
 				}
-				*/
+			} else {
+				console.log('Z585.basket notify: elements.' + k + ' is undefined');
+			}
+		});
+	}
 
-				window.location = document.referrer || '/catalog';
+	/**
+	 * Отдельная страница с корзиной /basket
+	 */
+	basket.pageInit = function () {
+		var self = this;
+
+		// Загрузка первого шага
+		self.requestAPI('view', {}, {
+			partial: {
+				name: 'content'
+			}
+		});
+
+		// Выбор шага
+		self.elements.page.on('click', '[data-btn=step]', function (e) {
+			var method = $(this).data('method');
+
+			self.requestAPI(method, {}, {
+				partial: {
+					name:  'content',
+					state: $(this).data('state'),
+					template: $(this).data('template'),
+				},
 			});
 
-			// Очистить корзину
-			self.elements.page.on('click', '[data-btn=clear]', function (e) {
-				e.preventDefault();
+			e.preventDefault();
+		});
 
-				if (confirm('Вы уверены, что хотите удалить все товары из корзины?')) {
-					self.requestAPI('clear', {}, {
-						partial: {
-							name: 'content'
-						}
-					});
-				}		
-			});
+		// Вернуться к покупкам (назад)
+		self.elements.page.on('click', '[data-btn=goback]', function (e) {
+			e.preventDefault();
 
-			// Выбор магазина
-			self.elements.page.on('change', '[data-el=item-shops]', function (e) {
-				var $wrap = $(this).closest('[data-el=shop-wrapper]');
-				var showConfirm = self.elements.page.find('[data-el=not-available]').length == 0;
-				var shopid = parseInt($(this).val());
+			/*
+			if (window.history.length) {
+				window.history.go(-1);
+			} else {
+				window.location = '/catalog';
+			}
+			*/
 
-				self.requestAPI('setshop', {
-					sapcode: $(this).data('sapcode'),
-					city: $(this).data('city'),
-					shopid: shopid,
-				});
+			window.location = document.referrer || '/catalog';
+		});
 
-				// Устанавливаем статус
-				$wrap.attr('data-status', shopid == 0 ? 'null' : 'selected');
+		// Очистить корзину
+		self.elements.page.on('click', '[data-btn=clear]', function (e) {
+			e.preventDefault();
 
-				// Показываем или скрываем форму подтверждения если все магазины выбраны 
-				self.elements.page.find('[data-el=item-shops]').each(function () {
-					if ($(this).val() == 0) {
-						showConfirm = false;
-						return false;
+			if (confirm('Вы уверены, что хотите удалить все товары из корзины?')) {
+				self.requestAPI('clear', {}, {
+					partial: {
+						name: 'content'
 					}
 				});
+			}		
+		});
 
-				self.elements.page.find('[data-el=confirm-wrapper]')[showConfirm ? 'slideDown':'slideUp'](200);
+		// Выбор магазина
+		self.elements.page.on('change', '[data-el=item-shops]', function (e) {
+			var $wrap = $(this).closest('[data-el=shop-wrapper]');
+			var showConfirm = self.elements.page.find('[data-el=not-available]').length == 0;
+			var shopid = parseInt($(this).val());
+
+			self.requestAPI('setshop', {
+				sapcode: $(this).data('sapcode'),
+				city: $(this).data('city'),
+				shopid: shopid,
 			});
 
-			// Удаление товара со страницы конрзины
-			self.elements.page.on('click', '[data-btn=remove]', function (e) {
-				e.preventDefault();
+			// Устанавливаем статус
+			$wrap.attr('data-status', shopid == 0 ? 'null' : 'selected');
 
-				if (confirm('Вы уверены, что хотите удалить этот товар из корзины?')) {
-					self.requestAPI('remove', {
-						sapcode: $(this).data('sapcode')
-					}, {
-						partial: {
-							name: 'content'
-						}
-					});
+			// Показываем или скрываем форму подтверждения если все магазины выбраны 
+			self.elements.page.find('[data-el=item-shops]').each(function () {
+				if ($(this).val() == 0) {
+					showConfirm = false;
+					return false;
 				}
 			});
 
-			// Применение купона
-			self.elements.page.on('click', '[data-btn=applycoupon]', function (e) {
-				var $input = self.elements.page.find('[data-el=coupon-input]');
-				var value  = $.trim($input.val());
+			self.elements.page.find('[data-el=confirm-wrapper]')[showConfirm ? 'slideDown':'slideUp'](200);
+		});
 
-				if (value.length == 0) {
-					$input.trigger('focus');
-				} else {
-					self.requestAPI('applycoupon', {
-						coupon: value
-					}, {
-						partial: {
-							name: 'content',
-							toTop: false,
-							callback: function () {
-								$input.prop('disabled', true);
-							}
-						}
-					});
-				}
-			});
+		// Удаление товара со страницы конрзины
+		self.elements.page.on('click', '[data-btn=remove]', function (e) {
+			e.preventDefault();
 
-			// Удаление купона
-			self.elements.page.on('click', '[data-btn=clearcoupon]', function (e) {
-				var $input = self.elements.page.find('[data-el=coupon-input]');
-				var value  = $(this).data('coupon');
-				
-				self.requestAPI('clearcoupon', {
+			if (confirm('Вы уверены, что хотите удалить этот товар из корзины?')) {
+				self.requestAPI('remove', {
+					sapcode: $(this).data('sapcode')
+				}, {
+					partial: {
+						name: 'content'
+					}
+				});
+			}
+		});
+
+		// Применение купона
+		self.elements.page.on('click', '[data-btn=applycoupon]', function (e) {
+			var $input = self.elements.page.find('[data-el=coupon-input]');
+			var value  = $.trim($input.val());
+
+			if (value.length == 0) {
+				$input.trigger('focus');
+			} else {
+				self.requestAPI('applycoupon', {
 					coupon: value
 				}, {
 					partial: {
 						name: 'content',
 						toTop: false,
 						callback: function () {
-							$input.prop('disabled', false);
+							$input.prop('disabled', true);
 						}
 					}
 				});
-			});
+			}
+		});
 
-			// Форма регистрации бонусной карты
-			self.elements.page.on('click', '[data-btn=reg-card]', function (e) {
-				e.preventDefault();
-
-				self.elements.page
-					.find('[data-el=reg-card]').addClass('is-open')
-					.find('[data-btn=reg-card-close]').on('click', function (e) {
-						e.preventDefault();
-						$(this).closest('[data-wrap]').removeClass('is-open');
-					});
-
-				self.loadPartial('regform', {}, {
-					reLoad: false,
+		// Удаление купона
+		self.elements.page.on('click', '[data-btn=clearcoupon]', function (e) {
+			var $input = self.elements.page.find('[data-el=coupon-input]');
+			var value  = $(this).data('coupon');
+			
+			self.requestAPI('clearcoupon', {
+				coupon: value
+			}, {
+				partial: {
+					name: 'content',
 					toTop: false,
-					showPreloader: false,
-				});
-			});
-
-			// Применение бонусной карты
-			self.elements.page.on('click', '[data-btn=applybcard]', function (e) {
-				var $input = self.elements.page.find('[data-el=bonus-input]');
-				var value  = $.trim($input.val());
-
-				e.preventDefault();
-
-				if (value.length == 0) {
-					$input.trigger('focus');
-				} else {
-					self.requestAPI('applybcard', {
-						bonus_card: value
-					}, {
-						partial: {
-							name: 'content',
-							toTop: false,
-							callback: function () {
-								$input.prop('disabled', true);
-							}
-						}
-					});
+					callback: function () {
+						$input.prop('disabled', false);
+					}
 				}
 			});
+		});
 
-			// Удаление бонусной карты
-			self.elements.page.on('click', '[data-btn=clearbcard]', function (e) {
-				var $input = self.elements.page.find('[data-el=bonus-input]');
-				var value  = $(this).data('bonus-card');
-				
-				self.requestAPI('clearbcard', {
+		// Форма регистрации бонусной карты
+		self.elements.page.on('click', '[data-btn=reg-card]', function (e) {
+			e.preventDefault();
+
+			self.elements.page
+				.find('[data-el=reg-card]').addClass('is-open')
+				.find('[data-btn=reg-card-close]').on('click', function (e) {
+					e.preventDefault();
+					$(this).closest('[data-wrap]').removeClass('is-open');
+				});
+
+			self.loadPartial('regform', {}, {
+				reLoad: false,
+				toTop: false,
+				showPreloader: false,
+			});
+		});
+
+		// Применение бонусной карты
+		self.elements.page.on('click', '[data-btn=applybcard]', function (e) {
+			var $input = self.elements.page.find('[data-el=bonus-input]');
+			var value  = $.trim($input.val());
+
+			e.preventDefault();
+
+			if (value.length == 0) {
+				$input.trigger('focus');
+			} else {
+				self.requestAPI('applybcard', {
 					bonus_card: value
 				}, {
 					partial: {
 						name: 'content',
 						toTop: false,
 						callback: function () {
-							$input.prop('disabled', false);
+							$input.prop('disabled', true);
 						}
 					}
 				});
-			});
+			}
+		});
 
-			// Смотреть на карте адрес магазина
-			self.elements.page.on('click', '[data-btn=open-map]', function (e) {
-				var $wrap = $(this).closest('[data-el=shop-wrapper]');
-				var $selector = $wrap.find('select');
-				var $option = $selector.find('option:selected');
-				var content = '<div id="shop-map"></div>';
-				var mapParams;
-
-				e.preventDefault();
-
-				if ($selector.val() != 0 && $option.length) {
-					mapParams = {
-						GPS_N: $option.data('lat'),
-						GPS_S: $option.data('lon'),
-					};
-
-					self.showModal('map', content);
-					ymaps.ready(Z585.yamaps.init(mapParams));
-				} else {
-					alert('Пожалуйста, выберите адрес');
-				}
-			});
-
-			// Подтверждение заказа. Отправка смс
-			self.elements.page.on('click', '[data-btn=send-sms]', function (e) {
-				var $input = self.elements.page.find('[data-el=phone]');
-				var value  = $.trim($input.val());
-
-				e.preventDefault();
-
-				if (value.length == 0) {
-					$input.trigger('focus');
-				} else {
-					self.requestAPI('checkout', {
-						phone: value,
-						ch_code: '',
-					}, {
-						callback: function () {
-							self.elements.page
-								.find('[data-el=confirm-form]').slideDown(200)
-								.find('[data-el=smscode]').trigger('focus');
-						}
-					});
-				}
-			});
-
-			// Подтверждение заказа. Отправка проверочного кода
-			self.elements.page.on('click', '[data-btn=checkout]', function (e) {
-				var $form  = self.elements.page.find('[data-el=confirm-form]');
-				var $input = $form.find('[data-el=smscode]');
-				var $error = $form.find('[data-el=error]');
-				var $phone = self.elements.page.find('[data-el=phone]');
-				var $content = self.elements.page.find('[data-partial=content]');
-
-				e.preventDefault();
-
-				$error.hide();
-
-				self.requestAPI('checkout', {
-					phone:   $.trim($phone.val()),
-					ch_code: $.trim($input.val()),
-				}, {
-					callback: function (json) {
-						var invalid = json.orders.response.error == 'INVALID_CHECK_CODE';
-
-						if (invalid) {
-							$error.show();
-						} else {
-							self.loadPartial('content', json, {
-								template: 'orders',
-							});
-						}
-					}
-				});
-			});
+		// Удаление бонусной карты
+		self.elements.page.on('click', '[data-btn=clearbcard]', function (e) {
+			var $input = self.elements.page.find('[data-el=bonus-input]');
+			var value  = $(this).data('bonus-card');
 			
-		} else {
-			// Мини корзина на всех страницах
-			self.requestAPI('briefview', {}, {
+			self.requestAPI('clearbcard', {
+				bonus_card: value
+			}, {
 				partial: {
-					name: 'topbasket'
+					name: 'content',
+					toTop: false,
+					callback: function () {
+						$input.prop('disabled', false);
+					}
+				}
+			});
+		});
+
+		// Смотреть на карте адрес магазина
+		self.elements.page.on('click', '[data-btn=open-map]', function (e) {
+			var $modal = self.elements.page.find('[data-el=modal][data-name=map]');
+			var $wrap = $(this).closest('[data-el=shop-wrapper]');
+			var $selector = $wrap.find('select');
+			var $options = $selector.find('option');
+			var content = {
+				list: '',
+			};
+			var mapOptions = {
+				zoom: 10,
+				onBalloonClick: function (e, obj) {
+					var shopid  = obj.properties.get('shopid');
+					var $listEl = $modal.find('[data-el=list] [data-shopid="'+ shopid +'"]');
+
+					if ($listEl.length) {
+						$listEl
+							.addClass('active')
+							.siblings().removeClass('active');
+					}
+				}
+			};
+			var mapData = [];
+
+			e.preventDefault();
+
+			$options.each(function () {
+				var lat, lon, time, addr;
+
+				if (this.value != 0) {
+					lat  = $(this).data('lat');
+					lon  = $(this).data('lon');
+					time = $(this).data('time');
+					addr = $(this).text();
+					content.list += 
+						'<li '+
+							'data-shopid="'+ this.value +'" '+
+							'data-lat="'+  lat  +'" '+
+							'data-lon="'+  lon  +'" '+
+							'data-time="'+ time +'">'+ $(this).text() +'</li>';
+
+					mapData.push({
+						shopid: this.value,
+						coords: [ lat, lon ],
+						address: addr,
+						time: time,
+					});
 				}
 			});
 
-			// Удаление товара из мини корзины
-			self.elements.brief.on('click', '[data-btn=remove]', function (e) {
-				e.preventDefault();
+			if (typeof self.yaMap === 'undefined') {
+				// Назначаем экземпляр карты и события
 
-				//if (confirm('Вы уверены, что хотите удалить этот товар из корзины?')) {
-					self.requestAPI('remove', {
-						sapcode: $(this).data('sapcode')
-					}, {
-						partial: {
-							name: 'topbasket'
+				self.yaMap = new Z585.yamaps.instance(mapOptions);
+
+				// Клик по адресу магазина в списке
+				// Установка центра карты и приблежение
+				$modal.on('click', '[data-el=list] li', function (e) {
+					var $listEl = $(this);
+					var coords = [
+						$(this).data('lat'),
+						$(this).data('lon'),
+					];
+
+					$listEl
+						.addClass('active')
+						.siblings().removeClass('active');
+
+					self.yaMap.setCenter(coords, 16);
+
+					self.yaMap.placemarks.forEach(function (e) {
+						if ($listEl.data('shopid') == e.properties.get('shopid')) {
+							e.balloon.open();
 						}
 					});
-				//}
+				});
+
+				// Кнопка "Выбрать магазин" в баллуне карты
+				$modal.on('click', '[data-btn=select-shop]', function (e) {
+					var $wrap = $(this).closest('[data-wrap]');
+
+					$selector.val($wrap.data('shopid')).trigger('change');
+					self.toggleModal('map', false);
+				});
+			}
+
+			self.toggleModal('map', true, content);
+
+			self.yaMap.destroyMap();
+			self.yaMap.showMap(mapData, $modal.find('[data-el=map-balloon]'));
+		});
+
+		// Подтверждение заказа. Отправка смс
+		self.elements.page.on('click', '[data-btn=send-sms]', function (e) {
+			var $input = self.elements.page.find('[data-el=phone]');
+			var value  = $.trim($input.val());
+
+			e.preventDefault();
+
+			if (value.length == 0) {
+				$input.trigger('focus');
+			} else {
+				self.requestAPI('checkout', {
+					phone: value,
+					ch_code: '',
+				}, {
+					callback: function () {
+						self.elements.page
+							.find('[data-el=confirm-form]').slideDown(200)
+							.find('[data-el=smscode]').trigger('focus');
+					}
+				});
+			}
+		});
+
+		// Подтверждение заказа. Отправка проверочного кода
+		self.elements.page.on('click', '[data-btn=checkout]', function (e) {
+			var $form  = self.elements.page.find('[data-el=confirm-form]');
+			var $input = $form.find('[data-el=smscode]');
+			var $error = $form.find('[data-el=error]');
+			var $phone = self.elements.page.find('[data-el=phone]');
+			var $content = self.elements.page.find('[data-partial=content]');
+
+			e.preventDefault();
+
+			$error.hide();
+
+			self.requestAPI('checkout', {
+				phone:   $.trim($phone.val()),
+				ch_code: $.trim($input.val()),
+			}, {
+				callback: function (json) {
+					var invalid = json.orders.response.error == 'INVALID_CHECK_CODE';
+
+					if (invalid) {
+						$error.show();
+					} else {
+						self.loadPartial('content', json, {
+							template: 'orders',
+						});
+					}
+				}
 			});
-		}
+		});
+	}
+
+	/**
+	 * Мини корзина
+	 */
+	basket.briefInit = function () {
+		var self = this;
+
+		// Мини корзина на всех страницах
+		self.requestAPI('briefview', {}, {
+			partial: {
+				name: 'topbasket'
+			}
+		});
+
+		// Удаление товара из мини корзины
+		self.elements.brief.on('click', '[data-btn=remove]', function (e) {
+			e.preventDefault();
+
+			//if (confirm('Вы уверены, что хотите удалить этот товар из корзины?')) {
+				self.requestAPI('remove', {
+					sapcode: $(this).data('sapcode')
+				}, {
+					partial: {
+						name: 'topbasket'
+					}
+				});
+			//}
+		});
 	}
 
 	/**
@@ -328,7 +423,7 @@
 	 */
 	basket.requestAPI = function (method, data, options) {
 		var self = this;
-		var type = self.router[method] || 'post';
+		var type = self.methods[method] || 'post';
 
 		data = data || {};
 		data['ZOLOTO585_USER_ID'] = $.cookie('ZOLOTO585_USER_ID');
@@ -359,7 +454,7 @@
 						case 3:
 						case 4:
 						default:
-							console.log('basket.requestAPI error ('+ method +'): ' + JSON.stringify(json.response.error));
+							console.log('Z585.basket.requestAPI error ('+ method +'): ' + JSON.stringify(json.response.error));
 					}
 				} else {
 					if (options.partial) {
@@ -372,7 +467,7 @@
 				}
 			},
 			error: function (xhr, status) {
-				console.log('basket.request error ('+ method +'): ' + JSON.stringify(xhr));
+				console.log('Z585.basket.requestAPI error ('+ method +'): ' + JSON.stringify(xhr));
 			}
 		});
 	}
@@ -399,7 +494,7 @@
 			template = options.template || $partial.data('template');
 
 			if (loaded === true && options.reLoad === false) {
-				console.log('basket.loadPartial: The partial was already loaded. '+ name +' = ('+ JSON.stringify(options) +')');
+				console.log('Z585.basket.loadPartial: The partial was already loaded. '+ name +' = ('+ JSON.stringify(options) +')');
 				return true;
 			}
 
@@ -442,11 +537,11 @@
 					}
 				},
 				error: function (xhr, status) {
-					console.log('basket.loadPartial "'+ name +'" error: ' + JSON.stringify(xhr));
+					console.log('Z585.basket.loadPartial "'+ name +'" error: ' + JSON.stringify(xhr));
 				}
 			});
 		} else {
-			console.log('basket.loadPartial: Partial "'+ name +'" is not defined');
+			console.log('Z585.basket.loadPartial: Partial "'+ name +'" is undefined');
 		}
 	}
 
@@ -466,22 +561,38 @@
 	/**
 	 * Модальное окно
 	 */
-	basket.showModal = function (name, content) {
+	basket.toggleModal = function (name, visible, content) {
 		var self = this;
 		var $target = self.elements.page.find('[data-el=modal][data-name="'+ name +'"]');
 
 		if ($target.length) {
+			if (visible === false) {
+				$target.removeClass('is-open');
+				return true;
+			}
+
 			$target
 				.addClass('is-open')
 				.find('[data-el=modal-overlay], [data-btn=modal-close]').one('click', function () {
 					$target.removeClass('is-open');
 				});
-			
-			if (typeof content !== 'undefined') {
+				
+			if (content instanceof Object) {
+				$.each(content, function (k, val) {
+					var $contEl = $target.find('[data-el=content] [data-el="'+ k +'"]');
+
+					if ($contEl.length) {
+						$contEl.html(val);
+					} else {
+						console.log('Z585.basket.toggleModal: content "'+ k +'" is undefined');
+					}
+				});
+			}
+			else if (typeof content !== 'undefined') {
 				$target.find('[data-el=content]').html(content);
 			}
 		} else {
-			console.log('basket.showModal: "'+ name +'" is not defined');
+			console.log('Z585.basket.toggleModal: "'+ name +'" is undefined');
 		}
 	}
 
