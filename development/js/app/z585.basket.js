@@ -245,25 +245,94 @@
 
 		// Смотреть на карте адрес магазина
 		self.elements.page.on('click', '[data-btn=open-map]', function (e) {
+			var $modal = self.elements.page.find('[data-el=modal][data-name=map]');
 			var $wrap = $(this).closest('[data-el=shop-wrapper]');
 			var $selector = $wrap.find('select');
-			var $option = $selector.find('option:selected');
-			var content = '<div id="shop-map"></div>';
-			var mapParams;
+			var $options = $selector.find('option');
+			var content = {
+				list: '',
+			};
+			var mapOptions = {
+				zoom: 10,
+				onBalloonClick: function (e, obj) {
+					var shopid  = obj.properties.get('shopid');
+					var $listEl = $modal.find('[data-el=list] [data-shopid="'+ shopid +'"]');
+
+					if ($listEl.length) {
+						$listEl
+							.addClass('active')
+							.siblings().removeClass('active');
+					}
+				}
+			};
+			var mapData = [];
 
 			e.preventDefault();
 
-			if ($selector.val() != 0 && $option.length) {
-				mapParams = {
-					GPS_N: $option.data('lat'),
-					GPS_S: $option.data('lon'),
-				};
+			$options.each(function () {
+				var lat, lon, time, addr;
 
-				self.showModal('map', content);
-				ymaps.ready(Z585.yamaps.init(mapParams));
-			} else {
-				alert('Пожалуйста, выберите адрес');
+				if (this.value != 0) {
+					lat  = $(this).data('lat');
+					lon  = $(this).data('lon');
+					time = $(this).data('time');
+					addr = $(this).text();
+					content.list += 
+						'<li '+
+							'data-shopid="'+ this.value +'" '+
+							'data-lat="'+  lat  +'" '+
+							'data-lon="'+  lon  +'" '+
+							'data-time="'+ time +'">'+ $(this).text() +'</li>';
+
+					mapData.push({
+						shopid: this.value,
+						coords: [ lat, lon ],
+						address: addr,
+						time: time,
+					});
+				}
+			});
+
+			if (typeof self.yaMap === 'undefined') {
+				// Назначаем экземпляр карты и события
+
+				self.yaMap = new Z585.yamaps.instance(mapOptions);
+
+				// Клик по адресу магазина в списке
+				// Установка центра карты и приблежение
+				$modal.on('click', '[data-el=list] li', function (e) {
+					var $listEl = $(this);
+					var coords = [
+						$(this).data('lat'),
+						$(this).data('lon'),
+					];
+
+					$listEl
+						.addClass('active')
+						.siblings().removeClass('active');
+
+					self.yaMap.setCenter(coords, 16);
+
+					self.yaMap.placemarks.forEach(function (e) {
+						if ($listEl.data('shopid') == e.properties.get('shopid')) {
+							e.balloon.open();
+						}
+					});
+				});
+
+				// Кнопка "Выбрать магазин" в баллуне карты
+				$modal.on('click', '[data-btn=select-shop]', function (e) {
+					var $wrap = $(this).closest('[data-wrap]');
+
+					$selector.val($wrap.data('shopid')).trigger('change');
+					self.toggleModal('map', false);
+				});
 			}
+
+			self.toggleModal('map', true, content);
+
+			self.yaMap.destroyMap();
+			self.yaMap.showMap(mapData, $modal.find('[data-el=map-balloon]'));
 		});
 
 		// Подтверждение заказа. Отправка смс
@@ -492,22 +561,38 @@
 	/**
 	 * Модальное окно
 	 */
-	basket.showModal = function (name, content) {
+	basket.toggleModal = function (name, visible, content) {
 		var self = this;
 		var $target = self.elements.page.find('[data-el=modal][data-name="'+ name +'"]');
 
 		if ($target.length) {
+			if (visible === false) {
+				$target.removeClass('is-open');
+				return true;
+			}
+
 			$target
 				.addClass('is-open')
 				.find('[data-el=modal-overlay], [data-btn=modal-close]').one('click', function () {
 					$target.removeClass('is-open');
 				});
-			
-			if (typeof content !== 'undefined') {
+				
+			if (content instanceof Object) {
+				$.each(content, function (k, val) {
+					var $contEl = $target.find('[data-el=content] [data-el="'+ k +'"]');
+
+					if ($contEl.length) {
+						$contEl.html(val);
+					} else {
+						console.log('Z585.basket.toggleModal: content "'+ k +'" is undefined');
+					}
+				});
+			}
+			else if (typeof content !== 'undefined') {
 				$target.find('[data-el=content]').html(content);
 			}
 		} else {
-			console.log('Z585.basket.showModal: "'+ name +'" is undefined');
+			console.log('Z585.basket.toggleModal: "'+ name +'" is undefined');
 		}
 	}
 
