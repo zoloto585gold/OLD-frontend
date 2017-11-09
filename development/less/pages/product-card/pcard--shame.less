@@ -305,6 +305,22 @@ html, body { margin: 0; padding: 0; }
 	}
 	&__html .zoom { height: 100%; }
 	&__html img:first-child { .-posa-c-(300px, 300px); }
+	&--bigImg{
+		.fotorama__html{
+			img:first-child{
+				max-width: 480px;
+				max-height: 480px;
+				width: 100%;
+				height: auto;
+				.-posa-c-(480px, 480px);
+				@media screen and (max-width: 1024px){
+					width: auto;
+					height: 100%;
+					.-posa-c-(296px, 296px);
+				}
+			}
+		}
+	}
 	&__nav {
 		text-align: left;
 		&__frame{
