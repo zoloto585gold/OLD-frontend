@@ -9,13 +9,7 @@
 	z-index: 222;
 	background: #f8f8f8;
 	border: solid 1px #e7e8e6;
-	-webkit-box-shadow: 0 0 2px -2px #000;
-	   -moz-box-shadow: 0 0 2px -2px #000;
-	        box-shadow: 0 0 2px -2px #000;
-
-	@media @touch{
-		display: none;
-	}
+	box-shadow: 0 0 2px -2px #000;
 
 	&__inner{
 		width: 999px;
@@ -24,16 +18,43 @@
 		background: url(../img/bonus-reg-card.png) no-repeat 125px 6px;
 		background-size: 111px auto;
 		position: relative;
+
+		@media @touch{
+			width: 100%;
+			padding: 15px 25px 0 160px;
+			background-position: 25px 6px;
+		}
+
+		@media @tablet-portrait{
+			background: none;
+			padding-left: 25px;
+		}
+
+		@media @mobile{
+			height: 100%;
+			background: none;
+			padding-left: 25px;
+			padding-top: 9px;
+		}
 	}
 
 	&__title{
 		.font-circe_regular(25px, 1, #333);
 		text-transform: uppercase;
+
+		@media @mobile{
+			font-size: 14px;
+			text-align: center;
+		}
 	}
 
 	&__descr{
 		.font-circe_regular(14px, 22px, #333);
 		text-transform: uppercase;
+
+		@media @mobile{
+			display: none;
+		}
 	}
 
 	&__getcard{
@@ -53,6 +74,16 @@
 
 		&:hover{
 			background: #b32023;
+		}
+
+		@media @mobile{
+			top: auto;
+			right: auto;
+			left: 50%;
+			bottom: 10px;
+			line-height: 28px;
+			transform: translateX(-50%);
+			white-space: nowrap;
 		}
 	}
 
