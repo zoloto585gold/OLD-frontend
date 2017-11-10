@@ -335,6 +335,16 @@
 			self.yaMap.showMap(mapData, $modal.find('[data-el=map-balloon]'));
 		});
 
+		// Копирование GPS координат в буфер
+		self.elements.page.on('click', '[data-btn=copy-gps]', function (e) {
+			var $temp = $('<input>');
+			$('body').append($temp);
+			$temp.val($(this).data('coords')).select();
+			document.execCommand('copy');
+			$temp.remove();
+			e.preventDefault();
+		});
+
 		// Подтверждение заказа. Отправка смс
 		self.elements.page.on('click', '[data-btn=send-sms]', function (e) {
 			var $input = self.elements.page.find('[data-el=phone]');
