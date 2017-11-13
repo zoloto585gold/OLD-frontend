@@ -121,6 +121,11 @@
 			// Показываем или скрываем форму подтверждения если все магазины выбраны
 			// и выбираем такой же магазин в соседнем товаре
 			self.elements.page.find('[data-el=item-shops]').each(function () {
+				/*
+					Выбор этого же магазина в соседних селекторах
+					Временно отключено
+					@TODO: $sibling.each
+					====================
 				if ($(this).is(el) == false) {
 					var $sibling = $(this).find('option[value="'+ shopid +'"]');
 					var $sibSelector = $sibling.length ? $sibling.closest('select') : null;
@@ -137,6 +142,7 @@
 						$sibSelector.closest('[data-el=shop-wrapper]').attr('data-status', 'selected');
 					}
 				}
+				*/
 
 				if ($(this).val() == 0) {
 					showConfirm = false;
@@ -262,7 +268,7 @@
 			});
 		});
 
-		// Смотреть на карте адрес магазина
+		// Выбрать на карте адрес магазина
 		self.elements.page.on('click', '[data-btn=open-map]', function (e) {
 			var $modal = self.elements.page.find('[data-el=modal][data-name=map]');
 			var $wrap = $(this).closest('[data-el=shop-wrapper]');
@@ -338,15 +344,14 @@
 						}
 					});
 				});
-
-				// Кнопка "Выбрать магазин" в баллуне карты
-				$modal.on('click', '[data-btn=select-shop]', function (e) {
-					var $wrap = $(this).closest('[data-wrap]');
-
-					$selector.val($wrap.data('shopid')).trigger('change');
-					self.toggleModal('map', false);
-				});
 			}
+
+			// Кнопка "Выбрать магазин" в баллуне карты
+			// назначаем каждый раз при клике "выбрать на карте", чтобы попадал правельный селектор
+			$modal.one('click', '[data-btn=select-shop]', function (e) {
+				$selector.val($(this).attr('data-shopid').toString()).trigger('change');
+				self.toggleModal('map', false);
+			});
 
 			self.toggleModal('map', true, content);
 
