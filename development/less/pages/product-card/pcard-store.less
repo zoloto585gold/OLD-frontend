@@ -121,6 +121,18 @@
 	}
 }
 
+.pcard-store-prices--onlyPrice{
+	.pcard-store__price {
+		.a-pos_tl(22px, 165px);
+	}
+	.pcard-store__price-old {
+		.font-circe_light(17px, 20px, #7b7b7b);
+	}
+	.pcard-store__price-current {
+		.font-circe_light(22px, 22px, #303030);
+	}
+}
+
 .pcard-store__card {
 	padding-left: 50px;
 	.set_pcard_sprite(0px, -90px);
@@ -338,6 +350,12 @@
 				width: 320px;
 			}
 		}
+
+		.pcard-store-prices--onlyPrice{
+			.pcard-store__price{
+				left: 270px;
+			}
+		}
 	}
 }
 
@@ -393,6 +411,12 @@
 				}
 			}
 		}
+		.pcard-store-prices--onlyPrice{
+			.pcard-store__price{
+				top: 28px;
+				left: 260px;
+			}
+		}
 	}
 }
 @media screen and (max-width: 479px) {
@@ -407,6 +431,14 @@
 		.pcard-store-prices--new {
 			.pcard-store__bonuses {
 				padding: 0 0 0 50%;
+			}
+		}
+		.pcard-store-prices--onlyPrice {
+			.pcard-store__price {
+				left: 50%;
+				-webkit-transform: translateX(-50%);
+				    -ms-transform: translateX(-50%);
+				        transform: translateX(-50%);
 			}
 		}
 	}
