@@ -274,8 +274,18 @@
         }
     }
 
+    .catalog_list{
+      & > div:not(.catalog-list){
+        display: none !important;
+      }
+    }
+
     .catalog-list{
         flex-wrap: nowrap;
+    }
+
+    .jspScrollable{
+      height: 265px;
     }
 
     .jspHorizontalBar{
