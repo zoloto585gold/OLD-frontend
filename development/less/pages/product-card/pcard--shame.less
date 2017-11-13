@@ -1018,8 +1018,19 @@ html, body { margin: 0; padding: 0; }
 	margin: 15px 3px 10px 0;
 	font-size: 0;
 	.ya-share2{
-		display: inline-block;
 		vertical-align: middle;
+	}
+	&--desctop{
+		display: inline-block;
+		@media @touch {
+			display: none;
+		}
+	}
+	&--touch{
+		display: none;
+		@media @touch {
+			display: inline-block;
+		}
 	}
 }
 .pcard-socials__text {
@@ -1283,8 +1294,6 @@ html, body { margin: 0; padding: 0; }
 
 		.pcard-properties__header { .-solid-b-(#efefef); }
 	}
-
-	.pcard-socials { .-dn-; }
 
 
 	.pcard-video { .-dn-; }
