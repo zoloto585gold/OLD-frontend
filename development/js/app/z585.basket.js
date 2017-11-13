@@ -104,9 +104,10 @@
 
 		// Выбор магазина
 		self.elements.page.on('change', '[data-el=item-shops]', function (e) {
+			var el = this;
 			var $wrap = $(this).closest('[data-el=shop-wrapper]');
 			var showConfirm = self.elements.page.find('[data-el=not-available]').length == 0;
-			var shopid = parseInt($(this).val());
+			var shopid = $(this).val().toString();
 
 			self.requestAPI('setshop', {
 				sapcode: $(this).data('sapcode'),
@@ -117,8 +118,26 @@
 			// Устанавливаем статус
 			$wrap.attr('data-status', shopid == 0 ? 'null' : 'selected');
 
-			// Показываем или скрываем форму подтверждения если все магазины выбраны 
+			// Показываем или скрываем форму подтверждения если все магазины выбраны
+			// и выбираем такой же магазин в соседнем товаре
 			self.elements.page.find('[data-el=item-shops]').each(function () {
+				if ($(this).is(el) == false) {
+					var $sibling = $(this).find('option[value="'+ shopid +'"]');
+					var $sibSelector = $sibling.length ? $sibling.closest('select') : null;
+
+					if (!!$sibSelector) {
+						$sibSelector.val(shopid);
+
+						self.requestAPI('setshop', {
+							sapcode: $sibSelector.data('sapcode'),
+							city: $sibSelector.data('city'),
+							shopid: shopid,
+						});
+
+						$sibSelector.closest('[data-el=shop-wrapper]').attr('data-status', 'selected');
+					}
+				}
+
 				if ($(this).val() == 0) {
 					showConfirm = false;
 					return false;
@@ -333,6 +352,16 @@
 
 			self.yaMap.destroyMap();
 			self.yaMap.showMap(mapData, $modal.find('[data-el=map-balloon]'));
+		});
+
+		// Копирование GPS координат в буфер
+		self.elements.page.on('click', '[data-btn=copy-gps]', function (e) {
+			var $temp = $('<input>');
+			$('body').append($temp);
+			$temp.val($(this).data('coords')).select();
+			document.execCommand('copy');
+			$temp.remove();
+			e.preventDefault();
 		});
 
 		// Подтверждение заказа. Отправка смс
