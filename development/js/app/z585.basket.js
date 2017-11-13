@@ -421,6 +421,16 @@
 				}
 			});
 		});
+
+		// Инпуты связанные с кнопками
+		self.elements.page.on('keyup', '[data-send-btn]', function (e) {
+			var $btn = self.elements.page.find('[data-btn="'+ $(this).data('send-btn') +'"]');
+
+			// Клик по кнопке по нажатию enter
+			if (e.keyCode == 13 && $btn.length) {
+				$btn.trigger('click');
+			}
+		});
 	}
 
 	/**
