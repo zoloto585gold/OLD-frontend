@@ -121,6 +121,11 @@
 			// Показываем или скрываем форму подтверждения если все магазины выбраны
 			// и выбираем такой же магазин в соседнем товаре
 			self.elements.page.find('[data-el=item-shops]').each(function () {
+				/*
+					Выбор этого же магазина в соседних селекторах
+					Временно отключено
+					@TODO: $sibling.each
+					====================
 				if ($(this).is(el) == false) {
 					var $sibling = $(this).find('option[value="'+ shopid +'"]');
 					var $sibSelector = $sibling.length ? $sibling.closest('select') : null;
@@ -137,6 +142,7 @@
 						$sibSelector.closest('[data-el=shop-wrapper]').attr('data-status', 'selected');
 					}
 				}
+				*/
 
 				if ($(this).val() == 0) {
 					showConfirm = false;
@@ -343,7 +349,7 @@
 				$modal.on('click', '[data-btn=select-shop]', function (e) {
 					var $wrap = $(this).closest('[data-wrap]');
 
-					$selector.val($wrap.data('shopid')).trigger('change');
+					$selector.val($wrap.data('shopid').toString()).trigger('change');
 					self.toggleModal('map', false);
 				});
 			}
