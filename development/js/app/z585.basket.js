@@ -183,7 +183,7 @@
 						name: 'content',
 						toTop: false,
 						callback: function () {
-							$input.prop('disabled', true);
+							//$input.prop('disabled', true);
 						}
 					}
 				});
