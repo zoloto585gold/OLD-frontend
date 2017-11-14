@@ -223,6 +223,22 @@
 				reLoad: false,
 				toTop: false,
 				showPreloader: false,
+				callback: function ($partial) {
+					var $type = $partial.find('input[name=type]');
+					var $cardnum = $partial.find('input[name=dc]');
+
+					if ($type.length) {
+						$type.val('new');
+					} else {
+						console.log('Z585.basket [data-btn=reg-card] error: $type is undefined');
+					}
+
+					if ($cardnum.length) {
+						$cardnum.val('0000000000000');
+					} else {
+						console.log('Z585.basket [data-btn=reg-card] error: $cardnum is undefined');
+					}
+				}
 			});
 		});
 
@@ -577,7 +593,7 @@
 					$partial.html(response).data('loaded', 1);
 	
 					if ($.isFunction(options.callback)) {
-						options.callback();
+						options.callback($partial);
 					}
 				},
 				error: function (xhr, status) {
