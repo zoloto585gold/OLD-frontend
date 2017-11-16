@@ -36,6 +36,12 @@
       }
     }
   }
+  &--bonus-result{
+    display: none;
+    &.is-visible{
+      display: block;
+    }
+  }
   &__inner > * {
     display: inline-block;
     vertical-align: middle;
@@ -81,6 +87,9 @@
   }
   &__input {
     position: relative;
+    &--bonus{
+      visibility: hidden;
+    }
     & > * {
       display: inline-block;
       vertical-align: middle;
