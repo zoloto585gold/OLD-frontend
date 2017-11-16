@@ -52,12 +52,13 @@
 	basket.pageInit = function () {
 		var self = this;
 
-		// Загрузка первого шага
-		self.requestAPI('view', {}, {
-			partial: {
-				name: 'content'
-			}
+		/*
+		self.load('view', 'content', function () {
+			var template = self.elements.page.find('[data-partial=content]').data('template');
+			return template == 'start';
 		});
+		*/
+		self.load('view', 'content', false);
 
 		// Выбор шага
 		self.elements.page.on('click', '[data-btn=step]', function (e) {
@@ -105,52 +106,62 @@
 		// Выбор магазина
 		self.elements.page.on('change', '[data-el=item-shops]', function (e) {
 			var el = this;
-			var $wrap = $(this).closest('[data-el=shop-wrapper]');
+			var $itemWrap = $(this).closest('[data-el=item-wrapper]');
+			var $shopWrap = $(this).closest('[data-el=shop-wrapper]');
 			var showConfirm = self.elements.page.find('[data-el=not-available]').length == 0;
 			var shopid = $(this).val().toString();
 
-			self.requestAPI('setshop', {
-				sapcode: $(this).data('sapcode'),
-				city: $(this).data('city'),
-				shopid: shopid,
-			});
-
-			// Устанавливаем статус
-			$wrap.attr('data-status', shopid == 0 ? 'null' : 'selected');
-
-			// Показываем или скрываем форму подтверждения если все магазины выбраны
-			// и выбираем такой же магазин в соседнем товаре
-			self.elements.page.find('[data-el=item-shops]').each(function () {
-				/*
-					Выбор этого же магазина в соседних селекторах
-					Временно отключено
-					@TODO: $sibling.each
-					====================
-				if ($(this).is(el) == false) {
-					var $sibling = $(this).find('option[value="'+ shopid +'"]');
-					var $sibSelector = $sibling.length ? $sibling.closest('select') : null;
-
-					if (!!$sibSelector) {
-						$sibSelector.val(shopid);
-
-						self.requestAPI('setshop', {
-							sapcode: $sibSelector.data('sapcode'),
-							city: $sibSelector.data('city'),
-							shopid: shopid,
+			self.requestAPI('setshop', 
+				{
+					sapcode: $(this).data('sapcode'),
+					city: $(this).data('city'),
+					shopid: shopid,
+				}, {
+					callback: function (json) {
+						if (json.response.code == 2) {
+							// Товара уже нет в корзине
+							$itemWrap.remove();
+						} else {
+							// Устанавливаем статус
+							$shopWrap.attr('data-status', shopid == 0 ? 'null' : 'selected');
+						}
+				
+						// Показываем или скрываем форму подтверждения если все магазины выбраны
+						// и выбираем такой же магазин в соседнем товаре
+						self.elements.page.find('[data-el=item-shops]').each(function () {
+							/*
+								Выбор этого же магазина в соседних селекторах
+								Временно отключено
+								@TODO: $sibling.each
+								====================
+							if ($(this).is(el) == false) {
+								var $sibling = $(this).find('option[value="'+ shopid +'"]');
+								var $sibSelector = $sibling.length ? $sibling.closest('select') : null;
+			
+								if (!!$sibSelector) {
+									$sibSelector.val(shopid);
+			
+									self.requestAPI('setshop', {
+										sapcode: $sibSelector.data('sapcode'),
+										city: $sibSelector.data('city'),
+										shopid: shopid,
+									});
+			
+									$sibSelector.closest('[data-el=shop-wrapper]').attr('data-status', 'selected');
+								}
+							}
+							*/
+			
+							if ($(this).val() == 0) {
+								showConfirm = false;
+								return false;
+							}
 						});
-
-						$sibSelector.closest('[data-el=shop-wrapper]').attr('data-status', 'selected');
+			
+						self.elements.page.find('[data-el=confirm-wrapper]')[showConfirm ? 'slideDown':'slideUp'](200);
 					}
 				}
-				*/
-
-				if ($(this).val() == 0) {
-					showConfirm = false;
-					return false;
-				}
-			});
-
-			self.elements.page.find('[data-el=confirm-wrapper]')[showConfirm ? 'slideDown':'slideUp'](200);
+			);
 		});
 
 		// Удаление товара со страницы конрзины
@@ -430,8 +441,14 @@
 					if (invalid) {
 						$error.show();
 					} else {
+						// Последний шаг
 						self.loadPartial('content', json, {
 							template: 'orders',
+						});
+
+						// Очистка корзины
+						self.requestAPI('setcity', {
+							city: json.city
 						});
 					}
 				}
@@ -450,17 +467,12 @@
 	}
 
 	/**
-	 * Мини корзина
+	 * Мини корзина на всех страницах в шапке
 	 */
 	basket.briefInit = function () {
 		var self = this;
 
-		// Мини корзина на всех страницах
-		self.requestAPI('briefview', {}, {
-			partial: {
-				name: 'topbasket'
-			}
-		});
+		self.load('briefview', 'topbasket', true);
 
 		// Удаление товара из мини корзины
 		self.elements.brief.on('click', '[data-btn=remove]', function (e) {
@@ -479,7 +491,56 @@
 	}
 
 	/**
+	 * 
+	 * @param {String} method - api метод
+	 * @param {String} partial - имя шаблона
+	 * @param {Function|Bool} visChangeCond - bool для перезагрузки
+	 * @param {Number} visDelay - задержка в сек. для перезагрузки
+	 */
+	basket.load = function (method, partial, visChangeCond, visDelay) {
+		var self = this;
+		var stopwatch = 0;
+		var loaded = false;
+		var sendRequest = function () {
+			if (visChangeCond instanceof Function) {
+				visChangeCond = visChangeCond();
+			}
+
+			if (visChangeCond || loaded === false) {
+				self.requestAPI(method, {}, {
+					partial: {
+						name: partial
+					}
+				});
+
+				loaded = true;
+			}
+		}
+
+		visDelay = visDelay || 5;
+
+		sendRequest();
+
+		setInterval(function () {
+			stopwatch++;
+		}, 1000);
+
+		if (document.addEventListener) {
+			// Перезагрузка корзины при возвращении на вкладку браузера через visDelay сек.
+			document.addEventListener('visibilitychange', function () {
+				if (document.hidden == false && stopwatch > visDelay) {
+					sendRequest();
+					stopwatch = 0;
+				}
+			}, false);
+		}
+	}
+
+	/**
 	 * Запрос к API
+	 * @param {String} method  - api метод
+	 * @param {Object} data - объект для отправки в api
+	 * @param {Object} options - partial, callback, etc
 	 */
 	basket.requestAPI = function (method, data, options) {
 		var self = this;
@@ -506,24 +567,20 @@
 				self.setPreloader(false);
 
 				if (json.response.code != 1) {
-					switch (json.response.code) {
-						case 5:
-							alert('Не удалось загрузить корзину (UID)');
-							break;
-						case 2:
-						case 3:
-						case 4:
-						default:
-							console.log('Z585.basket.requestAPI error ('+ method +'): ' + JSON.stringify(json.response.error));
+					if (json.response.code == 5) {
+						alert('Не удалось загрузить корзину (UID)');
+						return false;
+					} else {
+						console.log('Z585.basket.requestAPI error ('+ method +'): ' + JSON.stringify(json.response.error));
 					}
-				} else {
-					if (options.partial) {
-						self.loadPartial(options.partial.name, json, options.partial);
-					}
+				}
 
-					if ($.isFunction(options.callback)) {
-						options.callback(json);
-					}
+				if (options.partial) {
+					self.loadPartial(options.partial.name, json, options.partial);
+				}
+
+				if ($.isFunction(options.callback)) {
+					options.callback(json);
 				}
 			},
 			error: function (xhr, status) {
@@ -533,7 +590,10 @@
 	}
 
 	/**
-	 * Отрисовка блока корзины
+	 * Загрузка блока корзины
+	 * @param {String} name - имя файла с шаблоном
+	 * @param {Object} data - объект для отправки в шаблон
+	 * @param {Object} options - доп. опции
 	 */
 	basket.loadPartial = function (name, data, options) {
 		var self = this;
@@ -567,6 +627,8 @@
 			if (typeof options.state !== 'undefined') {
 				history = '/basket?' + options.state;
 			}
+
+			$partial.data('template', template);
 			
 			$.ajax({
 				url: url,
@@ -607,6 +669,7 @@
 
 	/**
 	 * Показывает/скрывает прелоадер на странице корзины
+	 * @param {Bool} show - показать/скрыть
 	 */
 	basket.setPreloader = function (show) {
 		if (this.elements.page.length) {
@@ -620,6 +683,9 @@
 
 	/**
 	 * Модальное окно
+	 * @param {String} name - название в аттрибуте data-name
+	 * @param {Bool} visible - показать/скрыть 
+	 * @param {String|Object} content - строка контента или объект элементов в контейнере контента
 	 */
 	basket.toggleModal = function (name, visible, content) {
 		var self = this;
