@@ -36,6 +36,12 @@
       }
     }
   }
+  &--bonus-result{
+    display: none;
+    &.is-visible{
+      display: block;
+    }
+  }
   &__inner > * {
     display: inline-block;
     vertical-align: middle;
@@ -81,6 +87,9 @@
   }
   &__input {
     position: relative;
+    &--bonus{
+      visibility: hidden;
+    }
     & > * {
       display: inline-block;
       vertical-align: middle;
@@ -276,8 +285,16 @@
       background: url(@img-thingies-shadow-5) no-repeat top center;
       transform: rotate(180deg);
     }
-    .reg-card-content__form{
+    .reg-card-content__form-wrapper{
       margin: 0 auto;
+    }
+    .reg-card-content__form{ 
+      margin: 0;
+
+      &-title,
+      &-field[form-input="cardnumber"]{
+        display: none;
+      }
     }
     form {
       width: 250px;

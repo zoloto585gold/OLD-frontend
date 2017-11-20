@@ -173,12 +173,6 @@
         display: block;
         width: 100%;
         position: relative;
-        // top: 50%;
-        // -webkit-transform: translateY(-50%);
-        //    -moz-transform: translateY(-50%);
-        //     -ms-transform: translateY(-50%);
-        //      -o-transform: translateY(-50%);
-        //         transform: translateY(-50%);
         text-align: center;
 
         img{
@@ -187,6 +181,7 @@
             width: auto;
             height: 218px;
             vertical-align: bottom;
+            transform: scaleZ(1);
         }
     }
 
@@ -198,15 +193,15 @@
     &__price{
         position: absolute;
         left: auto;
-        right: 16%;
+        right: 10%;
         bottom: 1px;
 
         @media @touch-between{
-            right: 20%;
+            right: 10%;
         }
 
         @media @mobile-portrait{
-            right: 29%;
+            right: 15%;
         }
 
         span{
@@ -223,18 +218,18 @@
 
         &--old{
             right: auto;
-            left: 18%;
+            left: 10%;
 
             span{
                 text-decoration: line-through;
             }
 
             @media @touch-between{
-                left: 20%;
+                left: 10%;
             }
 
             @media @mobile-portrait{
-                left: 29%;
+                left: 15%;
             }
         }
     }
@@ -259,91 +254,6 @@
         color: #999;
     }
 
-
-    @media screen and (min-width: 1439px){
-      &.catalog-item-ecommerce:nth-child(6),
-      &.catalog-item-ecommerce:nth-child(17),
-      &.catalog-item-ecommerce:nth-child(23){
-        &:hover{
-          .catalog-item__inner{
-            left: -100%;
-          }
-          &:after{
-            left: -100%;
-          }
-        }
-      }
-
-      //for 1 banner
-      &.catalog-item-ecommerce:nth-child(29),
-      &.catalog-item-ecommerce:nth-child(35){
-        &:hover{
-          .catalog-item__inner{
-            left: -100%;
-          }
-          &:after{
-            left: -100%;
-          }
-        }
-      }
-
-      // for 2 banners
-      // &.catalog-item-ecommerce:nth-child(28),
-      // &.catalog-item-ecommerce:nth-child(34){
-      //   &:hover{
-      //     .catalog-item__inner{
-      //       left: -100%;
-      //     }
-      //     &:after{
-      //       left: -100%;
-      //     }
-      //   }
-      // }
-    }
-    @media @desktop-laptop{
-      &.catalog-item-ecommerce:nth-child(4),
-      &.catalog-item-ecommerce:nth-child(8),
-      &.catalog-item-ecommerce:nth-child(15),
-      &.catalog-item-ecommerce:nth-child(19),
-      &.catalog-item-ecommerce:nth-child(23){
-        &:hover{
-          .catalog-item__inner{
-            left: -100%;
-          }
-          &:after{
-            left: -100%;
-          }
-        }
-      }
-
-      //for 1 banner
-      &.catalog-item-ecommerce:nth-child(27),
-      &.catalog-item-ecommerce:nth-child(31),
-      &.catalog-item-ecommerce:nth-child(35),{
-        &:hover{
-          .catalog-item__inner{
-            left: -100%;
-          }
-          &:after{
-            left: -100%;
-          }
-        }
-      }
-
-      //for 2 banners
-      // &.catalog-item-ecommerce:nth-child(26),
-      // &.catalog-item-ecommerce:nth-child(30),
-      // &.catalog-item-ecommerce:nth-child(34){
-      //   &:hover{
-      //     .catalog-item__inner{
-      //       left: -100%;
-      //     }
-      //     &:after{
-      //       left: -100%;
-      //     }
-      //   }
-      // }
-    }
 
     &:hover{
         @media @desktop{
@@ -393,6 +303,10 @@
         .catalog-item__promo-label{
             color: #ed3030;
             background: #fff;
+            &--blackFriday{
+              color: #fff;
+              background: #3b3b3b;
+            }
         }
     }
 

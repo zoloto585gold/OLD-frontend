@@ -305,6 +305,22 @@ html, body { margin: 0; padding: 0; }
 	}
 	&__html .zoom { height: 100%; }
 	&__html img:first-child { .-posa-c-(300px, 300px); }
+	&--bigImg{
+		.fotorama__html{
+			img:first-child{
+				max-width: 480px;
+				max-height: 480px;
+				width: 100%;
+				height: auto;
+				.-posa-c-(480px, 480px);
+				@media screen and (max-width: 1024px){
+					width: auto;
+					height: 100%;
+					.-posa-c-(296px, 296px);
+				}
+			}
+		}
+	}
 	&__nav {
 		text-align: left;
 		&__frame{
@@ -513,6 +529,9 @@ html, body { margin: 0; padding: 0; }
 	font-size: 0;
 	position: relative;
 	&--new{
+		height: 80px;
+	}
+	&--onlyPrice{
 		height: 80px;
 	}
 }
@@ -1008,8 +1027,19 @@ html, body { margin: 0; padding: 0; }
 	margin: 15px 3px 10px 0;
 	font-size: 0;
 	.ya-share2{
-		display: inline-block;
 		vertical-align: middle;
+	}
+	&--desctop{
+		display: inline-block;
+		@media @touch {
+			display: none;
+		}
+	}
+	&--touch{
+		display: none;
+		@media @touch {
+			display: inline-block;
+		}
 	}
 }
 .pcard-socials__text {
@@ -1076,7 +1106,7 @@ html, body { margin: 0; padding: 0; }
 		left: 0;
 	}
 	&.is-show{
-		top: 0;
+		top: 32px;
 		@media @touch {
 			top: 45px;
 		}
@@ -1233,7 +1263,9 @@ html, body { margin: 0; padding: 0; }
 	}
 	.pcard-store-info { .-dn-; }
 
-	.pcard-store-prices { height: 80px; }
+	.pcard-store-prices {
+		height: 80px;
+	}
 
 
 	.pcard-properties {
@@ -1275,8 +1307,6 @@ html, body { margin: 0; padding: 0; }
 
 		.pcard-properties__header { .-solid-b-(#efefef); }
 	}
-
-	.pcard-socials { .-dn-; }
 
 
 	.pcard-video { .-dn-; }
@@ -1405,6 +1435,7 @@ html, body { margin: 0; padding: 0; }
 			}
 		}
 	 }
+	.pcard-store-prices--onlyPrice { height: 95px; }
 }
 
 @media screen and (max-width: 479px) {

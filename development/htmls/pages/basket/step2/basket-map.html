@@ -1,12 +1,28 @@
-<div class="basket-modal">
+<div class="basket-modal" data-el="modal" data-name="map">
 	<div class="basket-modal__overlay"></div>
 	<div class="basket-modal__inner">
 		<div class="basket-modal__header">
-			Ваш Город: <a href="#">Санкт-Петербург</a>
+			Ваш Город: Санкт-Петербург
 			<span class="basket-modal__close js-closeMapModal">X</span>
 		</div>
-		<div class="basket-modal__body">
-			<div id="map" style="500px;">map</div>
+		<div class="basket-modal__body basket-shops" data-el="content">
+			<ul class="basket-shops__list" data-el="list"></ul>
+
+			<div id="shop-map" class="basket-shops__map" data-el="map"></div>
+
+			<div data-el="map-balloon">
+				<div class="basket-shops__balloon" data-wrap data-shopid="$[properties.shopid]">
+					<div class="basket-shops__balloon-header">
+						<div class="basket-shops__balloon-address">$[properties.address]</div>
+						<div class="basket-shops__balloon-close-but" data-btn="close-balloon">X</div>
+					</div>
+					<div class="basket-shops__balloon-content">
+						<div class="basket-shops__balloon-when">можно забрать:</div>
+						<div class="basket-shops__balloon-time">$[properties.time]</div>
+						<div class="basket-shops__balloon-button" data-btn="select-shop">выбрать магазин</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

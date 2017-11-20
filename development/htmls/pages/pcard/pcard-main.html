@@ -7,24 +7,24 @@
 		<!-- Если есть видео товара, то нужно добавить к классу pcard-fotorama класс is-video и заменить у блока pcard-fotorama__canvas значение data-navwidth="480px" на data-navwidth="387px" -->
 		<div class="pcard-fotorama is-video">
 			<div class="label_discount">-45%</div>
-			<div class="pcard-fotorama__canvas fotorama" data-width="100%" data-nav="thumbs" data-navposition="bottom" data-navwidth="387" data-thumbwidth="95" data-thumbheight="95" data-thumbmargin="3" data-thumbborderwidth="1" data-arrows="false">
+			<div class="pcard-fotorama__canvas fotorama fotorama--bigImg" data-width="100%" data-nav="thumbs" data-navposition="bottom" data-navwidth="387" data-thumbwidth="95" data-thumbheight="95" data-thumbmargin="3" data-thumbborderwidth="1" data-arrows="false">
 				<div data-thumb="content/images/slider_pic/img_01.jpg" class="zoom">
-					<img src="content/images/slider_pic/img_01.jpg" width="300" height="300" itemprop="image">
+					<img src="content/images/slider_pic/img_01.jpg" width="480" height="480" itemprop="image">
 				</div>
 				<div data-thumb="content/images/slider_pic/img_02.jpg" class="zoom">
-					<img src="content/images/slider_pic/img_02.jpg" width="300" height="300" itemprop="image">
+					<img src="content/images/slider_pic/img_02.jpg" width="480" height="480" itemprop="image">
 				</div>
 				<div data-thumb="content/images/slider_pic/img_03.jpg" class="zoom">
-					<img src="content/images/slider_pic/img_03.jpg" width="300" height="300" itemprop="image">
+					<img src="content/images/slider_pic/img_03.jpg" width="480" height="480" itemprop="image">
 				</div>
 				<div data-thumb="content/images/slider_pic/img_01.jpg" class="zoom">
-					<img src="content/images/slider_pic/img_01.jpg" width="300" height="300" itemprop="image">
+					<img src="content/images/slider_pic/img_01.jpg" width="480" height="480" itemprop="image">
 				</div>
 				<div data-thumb="content/images/slider_pic/img_02.jpg" class="zoom">
-					<img src="content/images/slider_pic/img_02.jpg" width="300" height="300" itemprop="image">
+					<img src="content/images/slider_pic/img_02.jpg" width="480" height="480" itemprop="image">
 				</div>
 				<div data-thumb="content/images/slider_pic/img_03.jpg" class="zoom">
-					<img src="content/images/slider_pic/img_03.jpg" width="300" height="300" itemprop="image">
+					<img src="content/images/slider_pic/img_03.jpg" width="480" height="480" itemprop="image">
 				</div>
 			</div>
 			<a class="pcard-fotorama__video-btn"></a>
@@ -49,7 +49,9 @@
 				</div>
 			</div> -->
 			<!-- end old pcard-store-prices -->
-			<div class="pcard-store-prices pcard-store-prices--new">
+
+			<!-- start new pcard-store-prices -->
+			<!-- <div class="pcard-store-prices pcard-store-prices--new">
 				<div class="pcard-store__price">
 					<div class="pcard-store__price-old">8 430 руб.</div>
 					<div class="pcard-store__price-current">3 960 РУБ.</div>
@@ -64,8 +66,19 @@
 						<a href="https://zoloto585.ru/registraciya_karty/#getcard" target="_blank">Получи здесь</a>
 					</div>
 				</div>
+			</div> -->
+			<!-- end new pcard-store-prices -->
+
+			<!-- start onlyPrice pcard-store-prices -->
+			<div class="pcard-store-prices pcard-store-prices--onlyPrice">
+				<div class="pcard-store__price">
+					<div class="pcard-store__price-old">8 430 руб.</div>
+					<div class="pcard-store__price-current">3 960 РУБ.</div>
+				</div>
 			</div>
-			
+
+			<!-- end onlyPrice pcard-store-prices -->
+
 			<!-- ТОВАР ЕСТЬ В НАЛИЧИИ -->
 			<!-- with select -->
 			<!-- <div class="pcard-store-fitting">
@@ -258,7 +271,8 @@
 		<!-- socials -->
 		<div class="pcard-socials">
 			<span class="pcard-socials__text">Поделиться</span>
-			<div class="ya-share2" data-services="vkontakte,facebook,gplus" data-counter=""></div>
+			<div class="ya-share2 pcard-socials--desctop" data-services="vkontakte,facebook,gplus" data-counter=""></div>
+			<div class="ya-share2 pcard-socials--touch" data-services="viber,whatsapp,skype" data-counter=""></div>
 		</div>
 
 		<!-- end;socials -->

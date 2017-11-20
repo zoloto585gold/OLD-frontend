@@ -26,6 +26,99 @@
     &[data-len='3'] .section__inner,
     &[data-len='4'] .section__inner{
         max-width: 1000px !important;
+        @media screen and (min-width: 768px){
+          .catalog-item{
+            min-width: 250px;
+          }
+        }
+    }
+    &--main{
+      .catalog-item{
+        @media screen and (min-width: 1439px){
+          &.catalog-item-ecommerce:nth-child(6),
+          &.catalog-item-ecommerce:nth-child(17),
+          &.catalog-item-ecommerce:nth-child(23){
+            &:hover{
+              .catalog-item__inner{
+                left: -100%;
+              }
+              &:after{
+                left: -100%;
+              }
+            }
+          }
+
+          //for 1 banner
+          &.catalog-item-ecommerce:nth-child(29),
+          &.catalog-item-ecommerce:nth-child(35){
+            &:hover{
+              .catalog-item__inner{
+                left: -100%;
+              }
+              &:after{
+                left: -100%;
+              }
+            }
+          }
+
+          // for 2 banners
+          // &.catalog-item-ecommerce:nth-child(28),
+          // &.catalog-item-ecommerce:nth-child(34){
+          //   &:hover{
+          //     .catalog-item__inner{
+          //       left: -100%;
+          //     }
+          //     &:after{
+          //       left: -100%;
+          //     }
+          //   }
+          // }
+        }
+        @media @desktop-laptop{
+          &.catalog-item-ecommerce:nth-child(4),
+          &.catalog-item-ecommerce:nth-child(8),
+          &.catalog-item-ecommerce:nth-child(15),
+          &.catalog-item-ecommerce:nth-child(19),
+          &.catalog-item-ecommerce:nth-child(23){
+            &:hover{
+              .catalog-item__inner{
+                left: -100%;
+              }
+              &:after{
+                left: -100%;
+              }
+            }
+          }
+
+          //for 1 banner
+          &.catalog-item-ecommerce:nth-child(27),
+          &.catalog-item-ecommerce:nth-child(31),
+          &.catalog-item-ecommerce:nth-child(35),{
+            &:hover{
+              .catalog-item__inner{
+                left: -100%;
+              }
+              &:after{
+                left: -100%;
+              }
+            }
+          }
+
+          //for 2 banners
+          // &.catalog-item-ecommerce:nth-child(26),
+          // &.catalog-item-ecommerce:nth-child(30),
+          // &.catalog-item-ecommerce:nth-child(34){
+          //   &:hover{
+          //     .catalog-item__inner{
+          //       left: -100%;
+          //     }
+          //     &:after{
+          //       left: -100%;
+          //     }
+          //   }
+          // }
+        }
+      }
     }
 }
 
@@ -169,6 +262,7 @@
     }
 }
 
+
 .catalog-list-scrollwrap{
 
     .section__inner{
@@ -180,8 +274,18 @@
         }
     }
 
+    .catalog_list{
+      & > div:not(.catalog-list){
+        display: none !important;
+      }
+    }
+
     .catalog-list{
         flex-wrap: nowrap;
+    }
+
+    .jspScrollable{
+      height: 265px;
     }
 
     .jspHorizontalBar{
@@ -197,16 +301,28 @@
     }
 
     .catalog-item{
-
+        min-width: 250px;
+        @media screen and (min-width: 1000px) {
+          &:last-child{
+            &:hover{
+              .catalog-item__inner{
+                left: -100%;
+              }
+              &:after{
+                left: -100%;
+              }
+            }
+          }
+        }
         @media @mobile-portrait{
 
             &__price{
                 left: auto;
-                right: 20%;
+                right: 10%;
             }
 
             &__price--old{
-                left: 20%;
+                left: 10%;
                 right: auto;
             }
 
