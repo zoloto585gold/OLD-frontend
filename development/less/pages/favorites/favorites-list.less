@@ -1,5 +1,6 @@
 .favorites{
     .catalog-item{
+        min-width: 250px;
         &__fav{
             display: none;
             top: 5px;
@@ -18,6 +19,9 @@
             }
         }
         &:hover{
+            .catalog-item__inner{
+              width: 100%;
+            }
             .catalog-item__img{
                 &:after{
                     display: none;
