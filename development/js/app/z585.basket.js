@@ -555,6 +555,7 @@
 			url: self.urlAPI + method,
 			type: type,
 			data: JSON.stringify(data || {}),
+			cache: false,
 			xhrFields: {
 				withCredentials: true
 			},
