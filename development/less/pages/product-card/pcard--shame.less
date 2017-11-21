@@ -557,6 +557,10 @@ html, body { margin: 0; padding: 0; }
 	height: 54px;
 	background: url(@img-thingies-shadow-2) center top no-repeat;
 	position: relative;
+
+	&--oneSize{
+		display: none;
+	}
 }
 .pcard-store-fitting-select { display: block; }
 .pcard-store-fitting-select__label {
@@ -588,10 +592,6 @@ html, body { margin: 0; padding: 0; }
 .pcard-store-fitting-select__size{
 	.pos-abs_tl(18px, 205px);
 	.font-circe_light(20px, 1, #b9b6b8);
-}
-
-.pcard-store-fitting--oneSize select{
-	display: none;
 }
 
 .pcard-store-fitting__popup-but {/* кнопка для попАпа "Как узнать свой размер" */
