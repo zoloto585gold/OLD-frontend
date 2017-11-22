@@ -1,9 +1,14 @@
+<!-- Шаблон КТ для сборки -->
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	@@include('scaff/layout__meta-tags.html')
-	@@include('scaff/layout__css-list.html')
 
+	<!-- подключение мета тегов -->
+	@@include('scaff/layout__meta-tags.html')
+	
+	<!-- подключение стилей -->
+	@@include('scaff/layout__css-list.html')
 
 	<title>Product card</title>
 
@@ -13,6 +18,9 @@
 </head>
 <body>
 	<div class="page">
+		
+		<!-- Подключене блока шапки -->
+		
 		<header class="page__header">
 			@@include('scaff/layout__header.html')
 		</header>
