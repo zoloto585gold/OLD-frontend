@@ -17,13 +17,7 @@
 .dib-square(@size) { display: inline-block; width: @size; height: @size; }/* элементы у которых высота = ширине */
 
 /* position */
-.pos-abs_center_hor(@width, @top) {
-	width: @width;
-	position: absolute;
-	top: @top;
-	left: 50%;
-	margin-left: -@width/2;
-}
+
 .pos-abs_center_all(@width, @height) {
 	width: @width;
 	height: @height;
@@ -34,19 +28,7 @@
 	margin-top: -@height/2;
 	margin-left: -@width/2;
 }
-.pos-abs_tl(@t, @l) { position: absolute; top: @t; left: @l; }
-.pos-abs_tr(@t, @r) { position: absolute; top: @t; right: @r;; }
 
-.pos-fix_center_all(@width, @height) {
-	width: @width;
-	height: @height;
-
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin-top: -@height/2;
-	margin-left: -@width/2;
-}
 
 /* оформление */
 .set-order-sprite(@hor, @ver) { background: url(@img-sprite-pcard-order) @hor @ver no-repeat; }
@@ -71,7 +53,7 @@
 
 	&__return {
 		.db-square(40px);
-		.pos-abs_tl(0px, 0px);
+		.-posa-tl-(0px, 0px);
 		.set-order-sprite(4px, -681px);
 		cursor: pointer;
 
@@ -84,13 +66,13 @@
 			background-color: #f53333;
 			border-right: 1px solid #e32d2d;
 
-			.pos-abs_tr(0px, 0px);
+			.-posa-tr-(0px, 0px);
 		}
 	}
 
 	&__close-but {
 		.db-square(37px);
-		.pos-abs_tr(0px, 0px);
+		.-posa-tr-(0px, 0px);
 		.set-order-sprite(10px, -590px);
 		z-index: 12;
 		cursor: pointer;
@@ -143,7 +125,7 @@
 			display: block;
 			width: 30px;
 			height: 30px;
-			.pos-abs_tl(-1px, -14px);
+			.-posa-tl-(-1px, -14px);
 			.set-order-sprite(0px, -20px);
 		}
 		
@@ -219,10 +201,10 @@
 
 /* ШАГ3 */
 .pcard-order-form {
-	.pos-abs_center_hor(525px, 80px);
+	.-posa-cht-(525px, 80px);
 	/*height: 80px;*/
 	&__label {
-		.pos-abs_tl(0px, 0px);
+		.-posa-tl-(0px, 0px);
 		.font-circe_regular(11px, 20px, #666);
 		text-transform: uppercase;
 	}
@@ -235,7 +217,7 @@
 		.-posa-tl-(29px, 0, 10);
 	}
 	&__field {
-		.pos-abs_tl(28px, px);
+		.-posa-tl-(28px, px);
 		.-block-(300px, 50px, 15px 20px 15px 65px);
 		.-box-border-(#e6e6e6, 2px);
 
@@ -247,7 +229,7 @@
 		&:focus { .-solid-(#c93232); }
 	}
 	&__button {
-		.pos-abs_tr(28px, 0px);
+		.-posa-tr-(28px, 0px);
 		width: 220px;
 		height: 50px;
 		overflow: hidden;
@@ -286,7 +268,7 @@
 
 .pcard-order-form__notice {
 	width: 300px;
-	.pos-abs_tl(157px, 103px);
+	.-posa-tl-(157px, 103px);
 	.font-circe_regular(10px, 12px, #999);
 }
 .pcard-order-form__message {
@@ -295,7 +277,7 @@
 	.font-circe_regular(14px, 26px, #333);
 	background-color: #fff;
 	height: 106px;
-	.pos-abs_center_hor(540px, 83px);
+	.-posa-cht-(540px, 83px);
 	z-index: 50;
 	-webkit-box-shadow: 0 0 25px 0px rgba(0, 0, 0, .2);
 	box-shadow: 0 0 25px 0px rgba(0, 0, 0, .2);
@@ -396,7 +378,7 @@
 
 			&__message {
 				.-wh-(@width-inner + 10px, 175px);
-				.-posa-cht-(60px, @width-inner + 10px, 50);
+				.-posa-cht-(@width-inner + 10px, 60px, 50);
 				padding: 30px;
 			}
 
@@ -494,7 +476,7 @@
 
 			&__message {
 				.-wh-(98%, 200px);
-				.-posa-cht-(10px, 98%, 50);
+				.-posa-cht-(98%, 10px, 50);
 			}
 
 			&__fild,
@@ -630,7 +612,7 @@
 
 		.pcard-order-step__title {
 			&:before {
-				.pos-abs_tl(2px, -18px);
+				.-posa-tl-(2px, -18px);
 			}
 		}
 	}
@@ -741,7 +723,7 @@
 
 		.pcard-order-step__title {
 			&:before {
-				.pos-abs_tl(2px, -18px);
+				.-posa-tl-(2px, -18px);
 			}
 		}
 	}

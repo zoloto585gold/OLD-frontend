@@ -36,41 +36,80 @@
 .-bxszbb-() { .-bxsz-(border-box); }
 .-bxszcb-() { .-bxsz-(content-box); }
 .-bxszpb-() { .-bxsz-(padding-box); }
+
 /*----------end;box-sizing---------------------------------*/
 
 
 
-/*position*/
+
+
+/* ---------------------------------*/
+/* POSITIONS -----------------------*/
+/* ---------------------------------*/
+
 .-pos-(@pos: static) { position: @pos; }
 .-posa-(@z: auto) { position: absolute; z-index: @z;}
 .-posf-(@z: auto) { position: fixed; z-index: @z;}
 .-posr-(@z: auto) { position: relative; z-index: @z;}
 
+
+// ABSOLUTE ================================================
+
+// TOP LEFT
 .-posa-tl-(@t, @l, @z: auto) { .-posa-(@z); top: @t; left: @l; }
+
+// TOP RIGHT
 .-posa-tr-(@t, @r, @z: auto) { .-posa-(@z); top: @t; right: @r; }
+
+// BOTTOM LEFT
 .-posa-bl-(@b, @l, @z: auto) { .-posa-(@z); bottom: @b; left: @l; }
+
+// BOTTOM RIGHT
 .-posa-br-(@b, @r, @z: auto) { .-posa-(@z); bottom: @b; right: @r; }
 
-.-posf-tl-(@t, @l, @z: auto) { .-posf-(@z); top: @t; left: @l; }
-.-posf-tr-(@t, @r, @z: auto) { .-posf-(@z); top: @t; right: @r; }
-.-posf-bl-(@b, @l, @z: auto) { .-posf-(@z); bottom: @b; left: @l; }
-.-posf-br-(@b, @r, @z: auto) { .-posf-(@z); bottom: @b; right: @r; }
-
+// CENTER CENTER
 .-posa-c-(@w, @h, @z: auto) { .-posa-(@z); top: 50%; left: 50%; margin-top: -@h/2; margin-left: -@w/2; }
 
+//CENTER HORIZONTAL
 .-posa-ch-(@w, @z: auto) { .-posa-(@z); left: 50%; margin-left: -@w/2; }
-.-posa-cht-(@t: auto, @w, @z: auto) { .-posa-ch-(@w, @z); top: @t; }
-.-posa-chb-(@b: auto, @w, @z: auto) { .-posa-ch-(@w, @z); bottom: @b; }
 
+// CENTER TOP
+.-posa-cht-(@w, @t: auto, @z: auto) { .-posa-ch-(@w, @z); top: @t; }
+
+// CENTER BOTTOM
+.-posa-chb-(@w, @b: auto, @z: auto) { .-posa-ch-(@w, @z); bottom: @b; }
+
+// CENTER VERTICAL
 .-posa-cv-(@h, @z: auto) { .-posa-(@z); top: 50%; margin-top: -@h/2; }
-.-posa-cvl-(@l: auto, @h, @z: auto) { .-posa-cv-(@h, @z); left: @l; }
-.-posa-cvr-(@r: auto, @h, @z: auto) { .-posa-cv-(@h, @z); right: @r; }
 
+// CENTER VERT + LEFT
+.-posa-cvl-(@h, @l: auto, @z: auto) { .-posa-cv-(@h, @z); left: @l; }
+
+// CENTER VERT + RIGHT
+.-posa-cvr-(@h, @r: auto, @z: auto) { .-posa-cv-(@h, @z); right: @r; }
+
+
+// FIXED ====================================================
+
+// TOP LEFT
+.-posf-tl-(@t, @l, @z: auto) { .-posf-(@z); top: @t; left: @l; }
+
+// TOP RIGHT
+.-posf-tr-(@t, @r, @z: auto) { .-posf-(@z); top: @t; right: @r; }
+
+// BOTTOM LEFT
+.-posf-bl-(@b, @l, @z: auto) { .-posf-(@z); bottom: @b; left: @l; }
+
+// BOTTOM RIGHT
+.-posf-br-(@b, @r, @z: auto) { .-posf-(@z); bottom: @b; right: @r; }
+
+// CENTER
 .-posf-c-(@w, @h, @z: auto) { .-posf-(@z); top: 50%; left: 50%; margin-top: -@h/2; margin-left: -@w/2; }
 
+// CENTER HORIZONTAL
 .-posf-ch-(@w, @z: auto) { .-posf-(@z); left: 50%; margin-left: @w/2; }
-.-posf-cht-(@t: auto, @w, @z: auto) { .-posf-ch-(@w, @z); top: @t; }
-.-posf-chb-(@b: auto, @w, @z: auto) { .-posf-ch-(@w, @z); bottom: @b; }
+.-posf-cht-(@w, @t: auto, @z: auto) { .-posf-ch-(@w, @z); top: @t; }
+.-posf-chb-(@w, @b: auto, @z: auto) { .-posf-ch-(@w, @z); bottom: @b; }
 
 .-posf-cv-(@h, @z: auto) { .-posf-(@z); top: 50%; margin-top: -@h/2; }
 .-posf-cvl-(@l: auto, @h, @z: auto) { .-posf-cv-(@h, @z); left: @l; }
