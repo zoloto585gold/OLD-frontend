@@ -29,6 +29,19 @@
 
 	background: transparent url(@img-sprite-primary) @x @y no-repeat;
 }
+
+// PCARD SPRITES
+.set_pcard_sprite(@hor, @ver) { background: url(@img-sprite-pcard) @hor @ver no-repeat; }
+.set_pcard_sprite_mob(@hor: 0, @ver: 0) { background: url(@img-sprite-pcard_mob) @hor @ver no-repeat; }
+
+.set_pcard_socials(@hor, @ver) {
+	background: url(@img-sprite-socials-1) @hor @ver no-repeat;
+	-webkit-background-size: 148px 48px;
+	background-size: 148px 48px;
+}ы
+
+// ---------------------------------------------------------------------------
+
 .primary-sprite-icon__1() {.img-sprite-primary-icon(20px, 20px, -25px, -59px);}
 .primary-sprite-icon__2() {.img-sprite-primary-icon(43px, 29px, -60px, -53px);}
 .primary-sprite-icon__3() {.img-sprite-primary-icon(30px, 29px, 0, -172px);}
@@ -38,7 +51,7 @@
 .primary-sprite-icon__7() {.img-sprite-primary-icon(23px, 22px, 0, -204px);}
 .primary-sprite-icon__8() {.img-sprite-primary-icon(18px, 12px, -42px, -142px);}
 
-/* значкм с доставкой и т.п. в футере */
+/* значки с доставкой и т.п. в футере */
 .primary-sprite-icon__9()  {.img-sprite-primary-icon(17px, 22px, 0, -145px);}
 .primary-sprite-icon__10() {.img-sprite-primary-icon(23px, 23px, -17px, -144px);}
 .primary-sprite-icon__11() {.img-sprite-primary-icon(33px, 12px, -40px, -155px);}
@@ -57,7 +70,6 @@
 
 
 
-
 /* для личного кабинета */
 @img-sprite-ucab-icos: '@{img-sprites}/sprite__ucab-icos.png';
 @img-sprite-ucab-icos-2: '@{img-sprites}/sprite__ucab-icos--profile.png';
@@ -73,10 +85,6 @@
 
 
 
-
-
-
-
 /*
 	PATTERNS
 	********
@@ -84,7 +92,6 @@
 */
 @img-pattern-1: '@{img-patterns}/pattern-1.jpg';
 /*@img-pattern-...*/
-
 
 
 
@@ -116,15 +123,14 @@
 @img-thingies-shadow-5: '@{img-thingies}/shadow-5.png';
 @img-thingies-shadow-6: '@{img-thingies}/shadow-6.png';
 
-
 @img-thingies-surface-01: '@{img-thingies}/surface-01.png';
 
 @img-thingies-ribbon-1: '@{img-thingies}/ribbon-1.jpg';
 @img-thingies-ribbon-2: '@{img-thingies}/ribbon-2.jpg';
 @img-thingies-infoblock: '@{img-thingies}/infoblock_bg--50.jpg';
 
-
 /* используется в кабинете */
+
 @img-thingies-promocard-2: '@{img-thingies}/promoaction_card2.png';
 @img-thingies-bonus-card-small: '@{img-thingies}/bonus-card--s.png';
 @img-thingies-bonus-card-middle: '@{img-thingies}/bonus-card--m.png';
