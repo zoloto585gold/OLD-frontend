@@ -7,24 +7,6 @@
 	=====================================
 */
 
-/* геометрия */
-.db-square(@size) { display: block; width: @size; height: @size; }/* элементы у которых высота = ширине */
-.dib-square(@size) { display: inline-block; width: @size; height: @size; }/* элементы у которых высота = ширине */
-
-/* position */
-
-.pos-abs_center_all(@width, @height) {
-	width: @width;
-	height: @height;
-
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-top: -@height/2;
-	margin-left: -@width/2;
-}
-
-
 /* оформление */
 .set-order-sprite(@hor, @ver) { background: url(@img-sprite-pcard-order) @hor @ver no-repeat; }
 
@@ -47,7 +29,7 @@
 
 
 	&__return {
-		.db-square(40px);
+		.-block-sqr-(40px);
 		.-posa-tl-(0px, 0px);
 		.set-order-sprite(4px, -681px);
 		cursor: pointer;
@@ -66,7 +48,7 @@
 	}
 
 	&__close-but {
-		.db-square(37px);
+		.-block-sqr-(37px);
 		.-posa-tr-(0px, 0px);
 		.set-order-sprite(10px, -590px);
 		z-index: 12;
@@ -241,7 +223,7 @@
 	}
 
 	&-message__close-but {
-		.db-square(37px);
+		.-block-sqr-(37px);
 		.-posa-tr-(0, 0, 10);
 		.set-order-sprite(10px, -590px);
 		cursor: pointer;
@@ -334,7 +316,7 @@
 .step-4-text-4,
 .step-4-text-5 { padding: @step-4-text-padding; }
 
-.step-4-text-1 { margin-top: @step-4-text-1-top; .font-circe_light(@step-4-fsz, @step-4-lh, #ed3030); text-transform: uppercase; }
+.step-4-text-1 { margin-top: @step-4-text-1-top; .font-circe_light(@step-4-fsz, @step-4-lh, @color-red); text-transform: uppercase; }
 .step-4-text-2 { margin-top: @step-4-text-2-top; }
 .step-4-text-3 { margin-top: @step-4-text-3-top; }
 .step-4-text-4 { margin-top: @step-4-text-4-top; }
@@ -440,7 +422,7 @@
 	.step-4-text-4,
 	.step-4-text-5 { padding: @step-4-text-padding; }
 
-	.step-4-text-1 { margin-top: @step-4-text-1-top; .font-circe_light(@step-4-fsz, @step-4-lh, #ed3030); text-transform: uppercase; }
+	.step-4-text-1 { margin-top: @step-4-text-1-top; .font-circe_light(@step-4-fsz, @step-4-lh, @color-red); text-transform: uppercase; }
 	.step-4-text-2 { margin-top: @step-4-text-2-top; }
 	.step-4-text-3 { margin-top: @step-4-text-3-top; }
 	.step-4-text-4 { margin-top: @step-4-text-4-top; }
@@ -544,7 +526,7 @@
 	.step-4-text-4,
 	.step-4-text-5 { padding: @step-4-text-padding; }
 
-	.step-4-text-1 { margin-top: @step-4-text-1-top; .font-circe_light(@step-4-fsz, @step-4-lh, #ed3030); text-transform: uppercase; }
+	.step-4-text-1 { margin-top: @step-4-text-1-top; .font-circe_light(@step-4-fsz, @step-4-lh, @color-red); text-transform: uppercase; }
 	.step-4-text-2 { margin-top: @step-4-text-2-top; }
 	.step-4-text-3 { margin-top: @step-4-text-3-top; }
 	.step-4-text-4 { margin-top: @step-4-text-4-top; }
@@ -660,7 +642,7 @@
 	.step-4-text-4,
 	.step-4-text-5 { padding: @step-4-text-padding; }
 
-	.step-4-text-1 { margin-top: @step-4-text-1-top; .font-circe_light(@step-4-fsz, @step-4-lh, #ed3030); text-transform: uppercase; }
+	.step-4-text-1 { margin-top: @step-4-text-1-top; .font-circe_light(@step-4-fsz, @step-4-lh, @color-red); text-transform: uppercase; }
 	.step-4-text-2 { margin-top: @step-4-text-2-top; }
 	.step-4-text-3 { margin-top: @step-4-text-3-top; }
 	.step-4-text-4 { margin-top: @step-4-text-4-top; }
@@ -772,7 +754,7 @@
 	.step-4-text-4,
 	.step-4-text-5 { padding: @step-4-text-padding; }
 
-	.step-4-text-1 { margin-top: @step-4-text-1-top; .font-circe_light(@step-4-fsz, @step-4-lh, #ed3030); text-transform: uppercase; }
+	.step-4-text-1 { margin-top: @step-4-text-1-top; .font-circe_light(@step-4-fsz, @step-4-lh, @color-red); text-transform: uppercase; }
 	.step-4-text-2 { margin-top: @step-4-text-2-top; }
 	.step-4-text-3 { margin-top: @step-4-text-3-top; }
 	.step-4-text-4 { margin-top: @step-4-text-4-top; }

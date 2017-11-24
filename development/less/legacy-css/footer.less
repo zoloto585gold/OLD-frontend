@@ -16,7 +16,7 @@ header *:after {
 	box-sizing: border-box;
 }
 .block-header-top {
-	background-color: #ED3030;
+	background-color: @color-red;
 	color: white;
 	box-shadow: 0 2px 1.58px 0.42px rgba(0, 0, 0, 0.15);
 	height: 32px;
@@ -73,7 +73,7 @@ header .inner {
 	background-color: #cb2430;
 }
 .block-header-top .block-main-links li.active a {
-	background-color: #B32023;
+	background-color: @color-dark_red;
 }
 .block-header-top .block-main-links li.active a:after {
 	position: absolute;
@@ -338,13 +338,13 @@ header .favorite .act {
 {
 	line-height: 44px;
 	color: #fff;
-	background: #ed3030;
+	background: @color-red;
 	border-top: 1px solid #bc2e2e;
 	font-size: 11px;
 }
 .block-header-bottom .block-link.block-basket .basket-div .basket-inner a.btn:hover
 {
-	background: #b32023;
+	background: @color-dark_red;
 }
 .block-header-bottom .block-basket a.basket:after {
 	content:"";
@@ -476,7 +476,7 @@ main
 }
 .index-sl .item .hover-a:hover
 {
-	background: #b32023;
+	background: @color-dark_red;
 }
 .index-sl .item:hover .hover-a
 {
@@ -549,7 +549,7 @@ main
 .main-filter span
 {
     font-size: 14px;
-    color: #ed3030;
+    color: @color-red;
     text-transform: uppercase;
 }
 .main-filter ul
@@ -641,7 +641,7 @@ form.form-question div.fancy-select ul.options li.selected
 {
     float: right;
     width: 120px;
-    background: #ed3030;
+    background: @color-red;
     border-radius: 3px;
     color: #fff;
     font-size: 11px;
@@ -651,7 +651,7 @@ form.form-question div.fancy-select ul.options li.selected
 }
 .main-filter .btn:hover
 {
-    background: #b32023;
+    background: @color-dark_red;
 }
 .main-product-list
 {
@@ -793,7 +793,7 @@ form.form-question div.fancy-select ul.options li.selected
     bottom: 0;
     left: 0;
     right: 0;
-    background: #ed3030;
+    background: @color-red;
     margin-bottom: 0;
     line-height: 40px;
     color: #fff;
@@ -1637,7 +1637,7 @@ header .inner #search input[type="image"] {
 }
 .footer-contacts .footer-contacts-phone a {
 	font-size: 19px;
-	color: #ed3030;
+	color: @color-red;
 }
 .footer-contacts .footer-contacts-phone span {
 	display: block;
@@ -1914,7 +1914,7 @@ form.form-question div.fancy-select ul.options li
 		position: absolute;
 		top: -30px;
 		left: 0;
-		background-color: #ed3030;
+		background-color: @color-red;
 	}
 	footer > .inner:after {
 		content: "";
@@ -2302,12 +2302,12 @@ form.form-question div.fancy-select ul.options li
 .catalog-control-panel__print:hover,
 .catalog-control-panel__print--active {
     background-position: -12px -160px;
-    color: #ed3030;
+    color: @color-red;
 }
 .catalog-control-panel__mail:hover,
 .catalog-control-panel__mail--active {
     background-position: -12px -224px;
-    color: #ed3030;
+    color: @color-red;
 }
 /* Список предметов */
 /*
@@ -2419,14 +2419,14 @@ form.form-question div.fancy-select ul.options li
 .catalog-item-info__bonus-price-number {
     display: inline-block;
     font: 16px/16px "Circe-Bold";
-    color: #ed3030;
+    color: @color-red;
     position: relative;
 }
 .catalog-item-info__bonus-price-number:after {
     content: "РУБ.";
     display: block;
     font: 10px "Circe-Bold";
-    color: #ed3030;
+    color: @color-red;
     position: absolute;
     right: -23px;
     bottom: -1px;

@@ -12,13 +12,12 @@
 }
 
 
-
-
 /************************************************
 ******* ГРУППЫ СВОЙСТВ **************************
 *************************************************/
 
 /*display*/
+
 .-d-(@d: block) { display: @d; }
 .-dn- { .-d-(none); }
 .-db- { .-d-(block); }
@@ -27,8 +26,47 @@
 .-dt- { .-d-(table); }
 .-dtc- { .-d-(table-cell); }
 .-dtr- { .-d-(table-row); }
-/*----------end;display---------------------------------*/
 
+/*********************************************
+********* UI-элементы и модификации***********
+*********************************************/
+
+.-wh-(@w: auto, @h: height) { width: @w; height: @h; }
+.-wh-imp-(@w: auto, @h: height) { width: @w !important; height: @h !important; }
+
+.-sqr-(@s: 25px) { width: @s; height: @s; }
+.-sqr-imp-(@s: 0) { width: @s !important; height: @s !important; }
+
+/* Box */
+
+.-box-(@d: block, @w: auto, @h: auto, @p: 0, @m: 0) {
+	display: @d; width: @w; height: @h;
+	padding: @p; margin: @m;
+	.-bxszbb-();
+}
+
+.-box-sqr-(@d: block, @s, @p: 0, @m: 0) {
+	display: @d; width: @s; height: @s;
+	padding: @p; margin: @m;
+	.-bxszbb-();
+}
+
+//------------------------
+
+.-block-(@w: auto, @h: auto, @p: 0, @m: 0) { .-box-(block, @w, @h, @p, @m); }
+.-iblock-(@w: auto, @h: auto, @p: 0, @m: 0) { .-box-(inline-block, @w, @h, @p, @m); }
+
+.-block-sqr-(@s: auto, @p: 0, @m: 0) { .-box-(block, @s, @s, @p, @m); }
+.-iblock-sqr-(@s: auto, @p: 0, @m: 0) { .-box-(inline-block, @s, @s, @p, @m); }
+
+.-box-border-(@color: #ccc, @radius: 0, @width: 1px, @type: solid) {
+	border: @width @type @color;
+	border-radius: @radius;
+}
+
+.-button-(@d: block, @w: 120px, @h: 40px, bgcol, border, brad) {
+	.-box-(@d, @w, @h, @p, @m);
+}
 
 
 /*box-sizing*/
@@ -38,8 +76,6 @@
 .-bxszpb-() { .-bxsz-(padding-box); }
 
 /*----------end;box-sizing---------------------------------*/
-
-
 
 
 
@@ -108,33 +144,42 @@
 
 // CENTER HORIZONTAL
 .-posf-ch-(@w, @z: auto) { .-posf-(@z); left: 50%; margin-left: @w/2; }
+
+// CENTER HORIZONTAL TOP
 .-posf-cht-(@w, @t: auto, @z: auto) { .-posf-ch-(@w, @z); top: @t; }
+
+// CENTER HORIZONTAL BOTTOM
 .-posf-chb-(@w, @b: auto, @z: auto) { .-posf-ch-(@w, @z); bottom: @b; }
 
+// CENTER VERTICAL
 .-posf-cv-(@h, @z: auto) { .-posf-(@z); top: 50%; margin-top: -@h/2; }
+
+// CENTER VERT + LEFT
 .-posf-cvl-(@l: auto, @h, @z: auto) { .-posf-cv-(@h, @z); left: @l; }
+
+// CENTER VERT + RIGHT
 .-posf-cvr-(@r: auto, @h, @z: auto) { .-posf-cv-(@h, @z); right: @r; }
 
 
-.-pos-tl-(@t: 0, @l: 0) { top: @t; left: @l; }
-.-pos-tr-(@t: 0, @r: 0) { top: @t; right: @r; }
-.-pos-bl-(@b: 0, @l: 0) { bottom: @b; left: @l; }
-.-pos-br-(@b: 0, @r: 0) { bottom: @b; right: @r; }
-
-.-z-(@z: 9999) { z-index: @z; }
-
-
-
+// TOP + LEFT
 .-tl-(@t: 0, @l: 0) { top: @t; left: @l; }
+
+// TOP + RIGHT
 .-tr-(@t: 0, @r: 0) { top: @t; right: @r; }
+
+// BOTTOM LEFT
 .-bl-(@b: 0, @l: 0) { bottom: @b; left: @l; }
+
+// BOTTOM RIGHT
 .-br-(@b: 0, @r: 0) { bottom: @b; right: @r; }
 
 
+
+// PADDING + MARGIN
 .-pm-(@p: 0, @m: 0) { padding: @p; margin: @m; }
-/*----------end;position---------------------------------*/
 
-
+// Z-INDEX
+.-z-(@z: 9999) { z-index: @z; }
 
 
 
@@ -259,54 +304,3 @@
 .-bxshad-(@set: 1px 1px 3px 0px, @alfa: .5) { -webkit-box-shadow: @set rgba(0, 0, 0, @alfa); box-shadow: @set rgba(0, 0, 0, @alfa); }
 .-bxshadn- { -webkit-box-shadow:none; box-shadow:none; }
 /*----------end;box-shadow---------------------------------*/
-
-
-
-
-
-
-
-/*********************************************
-********* UI-элементы и модификации***********
-*********************************************/
-.-wh-(@w: auto, @h: height) { width: @w; height: @h; }
-.-wh-imp-(@w: auto, @h: height) { width: @w !important; height: @h !important; }
-
-
-.-sqr-(@s: 25px) { width: @s; height: @s; }
-.-sqr-imp-(@s: 0) { width: @s !important; height: @s !important; }
-
-/* Box */
-.-box-(@d: block, @w: auto, @h: auto, @p: 0, @m: 0) {
-	display: @d;
-	width: @w;
-	height: @h;
-	padding: @p;
-	margin: @m;
-	.-bxszbb-();
-}
-.-box-sqr-(@d: block, @s, @p: 0, @m: 0) {
-	display: @d;
-	width: @s;
-	height: @s;
-	padding: @p;
-	margin: @m;
-	.-bxszbb-();
-}
-
-.-block-(@w: auto, @h: auto, @p: 0, @m: 0) { .-box-(block, @w, @h, @p, @m); }
-.-iblock-(@w: auto, @h: auto, @p: 0, @m: 0) { .-box-(inline-block, @w, @h, @p, @m); }
-
-.-block-sqr-(@s: auto, @p: 0, @m: 0) { .-box-(block, @s, @s, @p, @m); }
-.-iblock-sqr-(@s: auto, @p: 0, @m: 0) { .-box-(inline-block, @s, @s, @p, @m); }
-
-
-.-box-border-(@color: #ccc, @radius: 0, @width: 1px, @type: solid) {
-	border: @width @type @color;
-	border-radius: @radius;
-}
-/*.-box-bg-() {}*/
-
-.-button-(@d: block, @w: 120px, @h: 40px, bgcol, border, brad) {
-	.-box-(@d, @w, @h, @p, @m);
-}

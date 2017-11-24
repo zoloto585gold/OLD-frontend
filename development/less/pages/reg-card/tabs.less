@@ -1,9 +1,9 @@
 
 .reg-card__tabs{
 	border-bottom: solid 1px #dbdbdb;
-	-webkit-box-shadow: 0 1px 0px 0px #ed3030;
-	   -moz-box-shadow: 0 1px 0px 0px #ed3030;
-	        box-shadow: 0 1px 0px 0px #ed3030;
+	-webkit-box-shadow: 0 1px 0px 0px @color-red;
+	   -moz-box-shadow: 0 1px 0px 0px @color-red;
+	        box-shadow: 0 1px 0px 0px @color-red;
 	background: #f8f8f8;
 	position: relative;
 
@@ -52,32 +52,32 @@
 		.transition();
 
 		&:hover:not([data-active]){
-			background: #ed3030;
+			background: @color-red;
 			color: #fff;
 
 			&:first-child{
-				-webkit-box-shadow: -500px 0 0 0 #ed3030;
-				   -moz-box-shadow: -500px 0 0 0 #ed3030;
-				        box-shadow: -500px 0 0 0 #ed3030;
+				-webkit-box-shadow: -500px 0 0 0 @color-red;
+				   -moz-box-shadow: -500px 0 0 0 @color-red;
+				        box-shadow: -500px 0 0 0 @color-red;
 			}
 
 			&:last-child{
-				-webkit-box-shadow: 500px 0 0 0 #ed3030;
-				   -moz-box-shadow: 500px 0 0 0 #ed3030;
-				        box-shadow: 500px 0 0 0 #ed3030;
+				-webkit-box-shadow: 500px 0 0 0 @color-red;
+				   -moz-box-shadow: 500px 0 0 0 @color-red;
+				        box-shadow: 500px 0 0 0 @color-red;
 			}
 
 			@media @touch{
 				&:first-child{
-					-webkit-box-shadow: -200px 0 0 0 #ed3030;
-					   -moz-box-shadow: -200px 0 0 0 #ed3030;
-					        box-shadow: -200px 0 0 0 #ed3030;
+					-webkit-box-shadow: -200px 0 0 0 @color-red;
+					   -moz-box-shadow: -200px 0 0 0 @color-red;
+					        box-shadow: -200px 0 0 0 @color-red;
 				}
 
 				&:last-child{
-					-webkit-box-shadow: 200px 0 0 0 #ed3030;
-					   -moz-box-shadow: 200px 0 0 0 #ed3030;
-					        box-shadow: 200px 0 0 0 #ed3030;
+					-webkit-box-shadow: 200px 0 0 0 @color-red;
+					   -moz-box-shadow: 200px 0 0 0 @color-red;
+					        box-shadow: 200px 0 0 0 @color-red;
 				}
 			}
 		}
