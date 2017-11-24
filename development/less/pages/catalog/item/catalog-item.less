@@ -94,12 +94,12 @@
         .transition();
 
         &:hover{
-            background-color: #ed3030;
+            background-color: @color-red;
         }
     }
 
     &__button_fav.is-active{
-         background-color: #ed3030;
+         background-color: @color-red;
     }
 
     &__button_recommended{
@@ -123,7 +123,7 @@
     &__button_reserve,
     &__button_soon{
         width: 100%;
-        background: #ed3030;
+        background: @color-red;
         -webkit-border-radius: 5px;
            -moz-border-radius: 5px;
                 border-radius: 5px;
@@ -155,7 +155,7 @@
         }
 
         &:hover{
-            background-color: #b32023;
+            background-color: @color-dark_red;
         }
     }
 
@@ -301,7 +301,7 @@
         }
 
         .catalog-item__promo-label{
-            color: #ed3030;
+            color: @color-red;
             background: #fff;
             &--blackFriday{
               color: #fff;
@@ -311,7 +311,7 @@
     }
 
     &[data-selected]{
-        border-color: #ed3030;
+        border-color: @color-red;
         z-index: 22;
         margin-bottom: 343px;
     }
