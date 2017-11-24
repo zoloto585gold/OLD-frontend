@@ -1,7 +1,4 @@
-@color-red: #ed3030;
-@color-dark_red: #b32023;
-
-
+// Add mixins
 .set_pcard_sprite(@hor, @ver) { background: url(@img-sprite-pcard) @hor @ver no-repeat; }
 .set_pcard_sprite_mob(@hor: 0, @ver: 0) { background: url(@img-sprite-pcard_mob) @hor @ver no-repeat; }
 
@@ -11,15 +8,6 @@
 	background-size: 148px 48px;
 }
 
-
-
-/* геометрия */
-.box-b() { 
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box; }
-/*.box-p() { -webkit-box-sizing: padding-box;-moz-box-sizing: padding-box;box-sizing: padding-box; }*/
-/*.box-c() { -webkit-box-sizing: content-box;-moz-box-sizing: content-box;box-sizing: content-box; }*/
 
 .db-square(@size) { display: block; width: @size; height: @size; }/* элементы у которых высота = ширине */
 .dib-square(@size) { display: inline-block; width: @size; height: @size; }/* элементы у которых высота = ширине */
