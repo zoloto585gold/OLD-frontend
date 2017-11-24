@@ -11,10 +11,7 @@
 	=============================
 */
 
-
-@color-red: #ed3030;
-@color-dark_red: #b32023;
-
+// ADD MIXINS ------------------------------------
 
 .set_pcard_sprite(@hor, @ver) { background: url(@img-sprite-pcard) @hor @ver no-repeat; }
 .set_pcard_sprite_mob(@hor: 0, @ver: 0) { background: url(@img-sprite-pcard_mob) @hor @ver no-repeat; }
@@ -24,57 +21,6 @@
 	-webkit-background-size: 148px 48px;
 	background-size: 148px 48px;
 }
-
-
-
-/* позиционирование */
-/* .a-pos_tl(@t, @l) { position: absolute; top: @t; left: @l; } */
-/* .a-pos_tr(@t, @r) { position: absolute; top: @t; right: @r; } */
-.a-pos_bl(@b, @l) { position: absolute; bottom: @b; left: @l; }
-.a-pos_br(@b, @r) { position: absolute; bottom: @b; right: @r; }
-
-.a-pos-center_all(@width, @height) {
-	width: @width;
-	height: @height;
-
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-top: -@height/2;
-	margin-left: -@width/2;
-}
-.a-pos-center_hor(@width, @top) { width: @width; position: absolute; top: @top; left: 50%; margin-left: -@width/2; }
-/*.a-pos-center_ver() { position: absolute;  }*/
-
-/* position */
-.pos-abs_center_hor(@width, @top) {
-	width: @width;
-	position: absolute;
-	top: @top;
-	left: 50%;
-	margin-left: -@width/2;
-}
-.pos-abs_tl(@t, @l) { position: absolute; top: @t; left: @l; }
-.pos-abs_tr(@t, @r) { position: absolute; top: @t; right: @r;; }
-.pos-abs_bl(@b, @l) { position: absolute; bottom: @b; left: @l; }
-.pos-abs_br(@b, @r) { position: absolute; bottom: @b; right: @r; }
-
-.pos-fix_center_all(@width, @height) {
-	width: @width;
-	height: @height;
-
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin-top: -@height/2;
-	margin-left: -@width/2;
-}
-
-
-/* геометрия */
-.box-b() { -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box; }
-/*.box-p() { -webkit-box-sizing: padding-box;-moz-box-sizing: padding-box;box-sizing: padding-box; }*/
-/*.box-c() { -webkit-box-sizing: content-box;-moz-box-sizing: content-box;box-sizing: content-box; }*/
 
 .db-square(@size) { display: block; width: @size; height: @size; }/* элементы у которых высота = ширине */
 .dib-square(@size) { display: inline-block; width: @size; height: @size; }/* элементы у которых высота = ширине */
@@ -155,7 +101,7 @@ html, body { margin: 0; padding: 0; }
 	}
 	&__close-but {
 		.db-square(40px);
-		.pos-abs_tr(0px, 0px);
+		.-posa-tr-(0px, 0px);
 		.set_pcard_sprite(6px, -467px);
 		background-color: #e73437;
 		cursor: pointer;
@@ -570,7 +516,7 @@ html, body { margin: 0; padding: 0; }
 .pcard-store-fitting-select__label {
 	.font-circe_light(12px, 34px, @color-red);
 	text-transform: uppercase;
-	.pos-abs_tl(12px, 22px);
+	.-posa-tl-(12px, 22px);
 	&--grey{
 		color: #333;
 	}
@@ -581,7 +527,7 @@ html, body { margin: 0; padding: 0; }
 	.-wh-(162px, 28px);
 	padding: 0 6px;
 	.-bxsz-(border-box);
-	.pos-abs_tl(13px, 155px);
+	.-posa-tl-(13px, 155px);
 	.font-circe_light(16px, 28px, #b9b6b8);
 
 	.-box-border-(#e3e3e3, 2px);
@@ -594,13 +540,13 @@ html, body { margin: 0; padding: 0; }
 }
 
 .pcard-store-fitting-select__size{
-	.pos-abs_tl(18px, 205px);
+	.-posa-tl-(18px, 205px);
 	.font-circe_light(20px, 1, #b9b6b8);
 }
 
 .pcard-store-fitting__popup-but {/* кнопка для попАпа "Как узнать свой размер" */
 	.font-circe_light(11px, 16px, #999);
-	.pos-abs_tr(21px, 40px);
+	.-posa-tr-(21px, 40px);
 	text-transform: uppercase;
 	text-decoration: none;
 	&:hover {
@@ -610,7 +556,7 @@ html, body { margin: 0; padding: 0; }
 		content: '';
 		display: table;
 		width: 112px;
-		.pos-abs_bl(2px, 0px);
+		.-posa-bl-(2px, 0px);
 		border-bottom: 1px dotted #999;
 	}
 }
@@ -644,7 +590,7 @@ html, body { margin: 0; padding: 0; }
 
 
 .pcard-store-panel {
-	.a-pos_bl(-35px, 0px);
+	.-posa-bl-(-35px, 0px);
 	text-align: justify;
 	width: 100%;
 }
@@ -734,7 +680,7 @@ html, body { margin: 0; padding: 0; }
 }
 .pcard-properties__header {
 	padding: 12px 5px 12px 25px;
-	.box-b();
+	.-bxszbb-();
 	.font-circe_regular(12px, 17px, #303030);
 	margin: 0;
 	text-transform: uppercase;
@@ -744,23 +690,23 @@ html, body { margin: 0; padding: 0; }
 .pcard-properties__item {
 	border-bottom: 1px solid #ececec;
 	.font-circe_light(14px, 17px, #333);
-	.box-b();
+	.-bxszbb-();
 	margin: 0;
 }
 .pcard-properties__item-name {
 	display: inline-block;
 	width: 130px;
 	padding: 12px 5px 12px 25px;
-	.box-b();
+	.-bxszbb-();
 }
 .pcard-properties__item-value {
 	display: inline-block;
 	padding: 12px 5px 12px 25px;
-	.box-b();
+	.-bxszbb-();
 }
 
 .pcard-properties__id {
-	.pos-abs_tr(5px, 25px);
+	.-posa-tr-(5px, 25px);
 	border: 0;
 	&-name {
 		width: auto;
@@ -921,7 +867,7 @@ html, body { margin: 0; padding: 0; }
 			margin-bottom: 20px;
 			i{
 				.-block-(36px, 36px);
-				.pos-abs_tl(1px, 1px);
+				.-posa-tl-(1px, 1px);
 				.-solid-r-(#e7e7e7);
 				.-brad-ab-(2px);
 				background-color: #f4f4f4;
@@ -998,7 +944,7 @@ html, body { margin: 0; padding: 0; }
 
 			.-box-border-(#e7e7e7, 2px);
 
-			.pos-abs_tl(210px, 0px);
+			.-posa-tl-(210px, 0px);
 			.font-circe_regular(11px, 16px, #999);
 			text-transform: uppercase;
 			outline: none;
@@ -1053,8 +999,6 @@ html, body { margin: 0; padding: 0; }
 	display: inline-block;
 	vertical-align: middle;
 	width: 90px;
-	text-decoration: underline;
-
 	text-transform: uppercase;
 	.font-circe_light(12px, 30px, #333);
 }
@@ -1088,7 +1032,7 @@ html, body { margin: 0; padding: 0; }
 	&__inner {}
 	&__frame {
 		height: 565px;
-		.a-pos-center_hor(1000px, 50px);
+		.-posa-cht-(1000px, 50px);
 	}
 }
 /***************************************************/
@@ -1206,7 +1150,7 @@ html, body { margin: 0; padding: 0; }
 
 .pcard-gift-form-placement(@width: 275px, @top) {
 	width: @width;
-	.-posa-cht-(@top, @width);
+	.-posa-cht-(@width, @top);
 }
 
 
