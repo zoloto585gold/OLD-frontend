@@ -24,13 +24,17 @@
 	&__name {
 		display: block;
 		width: 275px;
-
 		text-transform: uppercase;
 		font: 300 11px/14px 'Circe';
 		color: #333;
 		margin-bottom: 10px;
+
 		@media @touch {
 			font: 300 14px/14px 'Circe';
+		}
+
+		&:hover {
+			text-decoration: underline;
 		}
 	}
 
@@ -38,14 +42,20 @@
 	&__pic {
 		display: inline-block;
 		vertical-align: middle;
-
 		width: 122px;
+
 		img {
 			display: block;
 			width: 100%;
 			height: auto;
 			border: 1px solid #f0f0f0;
 			border-radius: 3px;
+		}
+
+		&:hover {
+			img {
+				border: 1px solid @color-red;
+			}
 		}
 	}
 

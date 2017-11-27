@@ -89,6 +89,7 @@
 			position: relative;
 		}
 	}
+	
 	&__img {
 		float: left;
 		vertical-align: top;
@@ -98,7 +99,12 @@
 			max-width: 100%;
 			height: auto;
 		}
+
+		&:hover {
+			border-color: @color-red;
+		}
 	}
+
 	&__info{
 		display: block;
 		vertical-align: top;
@@ -107,16 +113,21 @@
 		margin-left: 75px;
 		padding-right: 10px;
 		line-height: 1.2;
+		
 		> span:last-child{
 			display: block;
 			margin-top: 12px;
 			font-size: 14px;
-			color: #cc3333;
+			color: #cc3333;			
 		}
-		&:hover{
-			color: @color-red;
-		}
+
+		.top-basket__info-text {
+			&:hover{
+		 		text-decoration: underline;			
+		 	}
+		}		
 	}
+	
 	&__remove {
 		position: absolute;
 		top: 11px;
