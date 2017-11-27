@@ -62,12 +62,54 @@
 
 	&__info {
 		display: inline-block;
-		vertical-align: middle;
+		vertical-align: top;
 		margin-left: 20px;
 		font-size: 11px;
 		font-weight: 300;
 		@media screen and (max-width: @mobile_a-max) {
 			margin-left: 28px;
+		}
+	}
+
+	&__quantity{
+		color: #999;
+
+		[data-el='quantity']{
+			width: 100px;
+			margin: 5px 0 0;
+			display: flex;
+			flex-wrap: nowrap;
+			justify-content: space-between;
+		}
+
+		input,
+		button{
+			height: 30px;
+			border: solid 1px #dcdcdc;
+			background: #fff;
+		}
+
+		input{
+			width: 42px;
+			margin: 0 -1px;
+			text-align: center;
+		}
+
+		button{
+			width: 30px;
+			border-radius: 2px 0 0 2px;
+			position: relative;
+			z-index: 2;
+			cursor: pointer;
+
+			&:last-of-type{
+				border-radius: 0 2px 2px 0;
+			}
+
+			&:hover{
+				border-color: @color-red;
+				color: @color-red;
+			}
 		}
 	}
 
@@ -194,6 +236,51 @@
 			vertical-align: middle;
 			font: 300 11px/11px 'Circe';
 			margin-left: 3px;
+		}
+	}
+
+	&__shops{
+		width: 260px;
+		padding-left: 50px;
+
+		&-total{
+			font: 300 11px/11px 'Circe';
+			font-weight: bold;
+			text-transform: uppercase;
+			color: #333;
+		}
+
+		&-list{
+			margin: 5px 0 0;
+			li {
+				font: 300 11px/11px 'Circe';
+				text-transform: uppercase;
+				color: #999;
+				margin: 4px 0 0;
+			}
+		}
+
+		&-tip{
+			font: 300 11px/11px 'Circe';
+			text-transform: none;
+			color: #999;
+			margin: 25px 0 0;
+			width: 80%;
+		}
+
+		@media @touch{
+			width: auto;
+			padding: 0;
+
+			&-total{
+				font-weight: 300;
+				color: #999;
+			}
+
+			&-list li,
+			&-tip{
+				display: none;
+			}
 		}
 	}
 
