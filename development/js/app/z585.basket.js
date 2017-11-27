@@ -22,6 +22,7 @@
 			checkout: 'post',
 			setshop: 'post',
 			setcity: 'post',
+			setqnt: 'post',
 		};
 
 		self.elements = {
@@ -168,6 +169,8 @@
 		self.elements.page.on('click', '[data-btn=remove]', function (e) {
 			e.preventDefault();
 
+			var $item = $(this).closest('[data-el=item]');
+
 			if (confirm('Вы уверены, что хотите удалить этот товар из корзины?')) {
 				self.requestAPI('remove', {
 					sapcode: $(this).data('sapcode')
@@ -176,7 +179,58 @@
 						name: 'content'
 					}
 				});
+			} else {
+				$item.find('[data-el=quantity] input').val(1);
 			}
+		});
+
+		// Фокус на инпут кол-ва выделяет значение
+		self.elements.page.on('focus', '[data-el=quantity] input', function (e) {
+			$(this).select();
+		});
+
+		// Изменения значения кол-ва
+		self.elements.page.on('keyup change', '[data-el=quantity] input', function (e) {
+			var $wrap = $(this).closest('[data-el]');
+			var $item = $(this).closest('[data-el=item]');
+			var val = parseInt($(this).val().replace(/\D/g, ''));
+			var limit = 99999;
+
+			if (isNaN(val)) {
+				val = 1;
+			}
+
+			if (parseInt(val) > limit) {
+				val = limit;
+			}
+
+			$(this).val(val);
+
+			if (val == 0) {
+				$item.find('[data-btn=remove]').trigger('click');
+			} else {
+				self.requestAPI('setqnt', {
+					sapcode: $wrap.data('sapcode'),
+					qnt: val,
+				}, {
+					partial: {
+						name: 'content',
+						toTop: false,
+					}
+				});
+			}
+		});
+
+		// Изменение кол-ва кнопкой
+		self.elements.page.on('click', '[data-el=quantity] button', function (e) {
+			e.preventDefault();
+
+			var $wrap = $(this).closest('[data-el]');
+			var val = parseInt($wrap.find('input').val().replace(/\D/g, ''));
+
+			val += $(this).index() == 0 ? -1 : 1;
+
+			$wrap.find('input').val(val).trigger('change');
 		});
 
 		// Применение купона
@@ -564,9 +618,10 @@
 			beforeSend: function () {
 				self.setPreloader(true);
 			},
-			success: function (json) {	
+			complete: function () {
 				self.setPreloader(false);
-
+			},
+			success: function (json) {
 				if (json.response.code != 1) {
 					if (json.response.code == 5) {
 						alert('Не удалось загрузить корзину (UID)');

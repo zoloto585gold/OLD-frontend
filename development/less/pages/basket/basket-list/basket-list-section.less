@@ -7,7 +7,7 @@
 		}
 		&__tr{
 			display: table-row;
-			@media screen and (max-width: @mobile_a-max) {
+			@media @touch{
 				display: block;
 				position: relative;
 				padding: 15px 0;
@@ -51,6 +51,7 @@
 				width: 450px;
 				@media @touch {
 					width: 300px;
+					border: none;
 				}
 				@media screen and (max-width: @mobile_a-max) {
 					width: 100%;
@@ -60,6 +61,7 @@
 			&--price{
 				@media @touch {
 					vertical-align: middle;
+					border: none;
 				}
 			}
 			&--nal{
@@ -68,14 +70,29 @@
 					display: none;
 				}
 			}
+			&--shops{
+				@media @touch {
+					display: block;
+					position: absolute;
+					bottom: -25px;
+					left: 0;
+					border: none;
+				}
+
+				@media @mobile{
+					position: static;
+					padding: 10px 0 0;
+				}
+			}
 			&--remove{
 				width: 50px;
 				vertical-align: middle;
-				@media screen and (max-width: @mobile_a-max) {
+				@media @touch {
 					width: auto;
 					position: absolute;
 					top: 8px;
 					right: 0;
+					border: none;
 				}
 			}
 			&--city{
