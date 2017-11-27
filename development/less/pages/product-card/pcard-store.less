@@ -208,14 +208,24 @@
 	.-brad-ad-(4px);
 	.font-circe_light(12px, 37px, #fff);
 	.-t-cnu-(#fff);
-}
 
-.pcard-store__buy-button:hover { background-color: @color-dark_red; }
-.pcard-store__buy-button.added{
-	background: #ff6600;
-	
-	&:hover{
-		background: #ef6508;
+	&:hover { 
+		background-color: @color-dark_red;
+	}
+
+	&.waiting{
+		text-indent: -9999em;
+		cursor: default;
+		background: #fff url("@{img}/basket/btn-wait.gif") no-repeat 50% 50%;
+		height: 40px;
+	}
+
+	&.added{
+		background: #ff6600;
+		
+		&:hover{
+			background: #ef6508;
+		}
 	}
 }
 
