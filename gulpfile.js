@@ -323,7 +323,7 @@ gulp.task('watch', function() {
 
 	// Less
     //gulp.watch('development/less/**/*.less', [ 'css:build', 'css:adfox' ]);
-    //gulp.watch('development/less/**/*.less', [ 'css:build' ]);
+    gulp.watch('development/less/**/*.less', [ 'css:build' ]);
 
 	// JS
 	gulp.watch('development/js/inc/*.js', [ 'js:msalnikov' ] );
