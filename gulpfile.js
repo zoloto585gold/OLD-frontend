@@ -17,6 +17,7 @@ const assign = require('object-assign');
 const browserSync = require('browser-sync');
 const modRewrite = require('connect-modrewrite');
 const reload = browserSync.reload;
+const imagemin = require('gulp-imagemin');
 
 // =============================================
 // Если нужно перекрыть объект в конфиге создаем
@@ -102,41 +103,7 @@ const config = assign({
 		},
 
 		less: [
-			// @todo: gulp-order
-			'development/less/mixins/@path-global.less',
-
-			//
-			'development/less/scaffolding/mixins.less',
-			'development/less/scaffolding/layout__fonts.less',
-			'development/less/scaffolding/layout__external.less',
-
-			// старый css
-			'development/less/scaffolding/legacy__all.less',
-
-			// базовые стили макета страниц
-			'development/less/scaffolding/layout__grid.less',
-			'development/less/scaffolding/layout__uikit.less',
-			'development/less/scaffolding/layout__header.less',
-			'development/less/scaffolding/layout__footer.less',
-
-			// стили шаблонов страниц (постранично)
-			'development/less/scaffolding/pages__index.less',
-			'development/less/scaffolding/pages__product-card.less',
-			'development/less/scaffolding/pages__catalog.less',
-			'development/less/scaffolding/pages__page-404.less',
-			'development/less/scaffolding/pages__user-cabinet.less',
-			'development/less/scaffolding/pages__store.less',
-			'development/less/scaffolding/pages__stock.less',
-			'development/less/scaffolding/pages__favorites.less',
-			'development/less/scaffolding/pages__shop.less',
-			'development/less/scaffolding/pages__basket.less',
-			'development/less/scaffolding/pages__reg-card.less',
-
-			// latest legacy
-			'development/less/scaffolding/legacy__latest.less',
-
-			// system
-			'development/less/scaffolding/system__helpers.less',
+			'development/less/scaffolding/z585-all.less',
 		],
 
 		html: [
@@ -325,13 +292,27 @@ gulp.task('css:adfox', function () {
 		.pipe(reload({stream: true}));
 });
 
+// =============== IMAGE MIN ==================
+// Для вызова наберите в консоли gulp img:min
+
+gulp.task('img:min', function() {
+	gulp.src('development/img/**/*.*')
+  	.pipe(imagemin({
+	    interlaced: true,
+	    progressive: true,
+	    optimizationLevel: 5,
+	    svgoPlugins: [{removeViewBox: true}]
+	}))
+    .pipe(gulp.dest('production/images/'));
+});
+
 
 // =================== BUILD ===================
 gulp.task('build', [
 	'js:build',
 	'css:build',
 	'css:adfox',
-	'html:build',
+	'html:build'	
 ]);
 
 // =================== WATCH ===================
