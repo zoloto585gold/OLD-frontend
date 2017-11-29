@@ -21,8 +21,6 @@
 
 
 
-
-
 /* DESKTOP */
 @media @desktop {
 
@@ -53,7 +51,6 @@
 		}
 	}
 
-
 	/* модификатор для десктопа, выдирает блок из потока элементов */
 	.main-nav-level-2--by-price {
 		position: absolute;
@@ -70,11 +67,7 @@
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
 
-
-		.main-nav-level-2__header {
-			display: none;
-		}
-
+		.main-nav-level-2__header { display: none; }
 
 		.main-nav-level-2__list {
 			display: flex;
@@ -85,11 +78,9 @@
 			height: 38px;
 		}
 
-
 		.main-nav-level-2__item {
 			display: inline-block;
 		}
-
 
 		.main-nav-level-2__link {
 			position: relative;
@@ -100,7 +91,6 @@
 			line-height: 22px;
 
 			text-decoration: underline;
-
 
 			&:after {
 				position: absolute;
@@ -126,11 +116,7 @@
 	.main-nav-level-2--like-numerics {
 		width: 150px;
 
-
-		.main-nav-level-2__list {
-			font-size: 0;
-		}
-
+		.main-nav-level-2__list { font-size: 0; }
 
 		.main-nav-level-2__item {
 			display: inline-block;
@@ -139,7 +125,6 @@
 			margin-top: 4px;
 			margin-right: 10px;
 		}
-
 
 		.main-nav-level-2__link {
 			display: inline-block;
@@ -167,8 +152,6 @@
 
 
 
-
-
 /* TOUCH */
 @media @touch {
 
@@ -187,9 +170,7 @@
 
 			cursor: pointer;
 
-			&--active {
-				border-bottom: 1px solid #d0433f;
-			}
+			&--active { border-bottom: 1px solid #d0433f; }
 		}
 
 		&__list {
@@ -198,10 +179,7 @@
 			background-color: #c53e3a;
 			border-top: 1px solid #8f2d2a;
 
-
-			&--active {
-				display: block;
-			}
+			&--active { display: block; }
 		}
 
 		&__item {
@@ -214,14 +192,10 @@
 			border-bottom: 1px solid #b33b37;
 
 			&--first-item,
-			&:first-child {
-				border-top: 1px solid #af3733;
-			}
+			&:first-child { border-top: 1px solid #af3733; }
 
 			&--last-item,
-			&:last-child {
-				border-bottom: 1px solid #af3733;
-			}
+			&:last-child { border-bottom: 1px solid #af3733; }
 		}
 
 		&__link {
