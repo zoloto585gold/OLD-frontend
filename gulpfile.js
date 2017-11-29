@@ -269,8 +269,17 @@ gulp.task('html:build', function () {
 
 // =================== LESS/CSS ===================
 
-// CSS Build
-gulp.task('css:build', function () {
+// CSS Build Development
+gulp.task('css:build--dev', function () {
+	return gulp.src(config.path.less)
+		.pipe(concat('z585_all.css'))
+		.pipe(less())
+		.pipe(gulp.dest('production/css'))
+		.pipe(reload({stream: true}));
+});
+
+// CSS Build Production
+gulp.task('css:build--prod', function () {
 	return gulp.src(config.path.less)
 		.pipe(sourcemaps.init({loadMaps: true}))
 		.pipe(concat('z585_all.min.css'))
@@ -278,7 +287,6 @@ gulp.task('css:build', function () {
 		.pipe(sourcemaps.write('./'))
 		.pipe(cssmin())
 		.pipe(gulp.dest('production/css'))
-		.pipe(gulp.dest('development/css'))
 		.pipe(reload({stream: true}));
 });
 
@@ -293,9 +301,7 @@ gulp.task('css:adfox', function () {
 });
 
 // =============== IMAGE MIN ==================
-// Для вызова наберите в консоли gulp img:min
-
-gulp.task('img:min', function() {
+gulp.task('img:build', function() {
 	gulp.src('development/img/**/*.*')
   	.pipe(imagemin({
 	    interlaced: true,
@@ -310,20 +316,22 @@ gulp.task('img:min', function() {
 // =================== BUILD ===================
 gulp.task('build', [
 	'js:build',
-	'css:build',
+	'css:build--dev',
+	'css:build--prod',
 	'css:adfox',
-	'html:build'	
+	'html:build',
+	'img:build',
 ]);
 
 // =================== WATCH ===================
-gulp.task('watch', function() {
+gulp.task('watch', [ 'build' ], function() {
 
 	// HTML
 	gulp.watch( ['development/htmls/**/*.{tmpl,html}'], ['html:build'] );
 
 	// Less
     //gulp.watch('development/less/**/*.less', [ 'css:build', 'css:adfox' ]);
-    gulp.watch('development/less/**/*.less', [ 'css:build' ]);
+    gulp.watch('development/less/**/*.less', [ 'css:build--dev' ]);
 
 	// JS
 	gulp.watch('development/js/inc/*.js', [ 'js:msalnikov' ] );
