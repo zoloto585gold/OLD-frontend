@@ -131,6 +131,7 @@ const config = assign({
 			'development/less/scaffolding/pages__shop.less',
 			'development/less/scaffolding/pages__basket.less',
 			'development/less/scaffolding/pages__reg-card.less',
+			'development/less/scaffolding/pages__promo.less',
 
 			// latest legacy
 			'development/less/scaffolding/legacy__latest.less',

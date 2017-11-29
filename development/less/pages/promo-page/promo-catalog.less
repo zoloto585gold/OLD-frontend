@@ -1,0 +1,192 @@
+.catalog-list-section--promo{
+  padding: 30px 0 50px;
+  background-repeat: no-repeat;
+  background-position: top center;
+  border-top: 0;
+  @media @touch{
+      padding: 0;
+  }
+  .section__inner{
+    max-width: 1000px;
+  }
+  .catalog-item{
+    min-width: 250px;
+    &__inner{
+      @media screen and (max-width: 500px) {
+        padding: 5px 13px 12.468%;
+      }
+    }
+    &__price{
+      display: none;
+      @media @touch{
+        display: block;
+      }
+      @media screen and (max-width: 500px) {
+        left: 0;
+        right: 0;
+        text-align: center;
+        span{
+          font-size: 14px;
+        }
+        &--old{
+          display: none;
+        }
+      }
+    }
+    @media @touch{
+        width: -webkit-calc(100% / 2);
+        width: -moz-calc(100% / 2);
+        width: calc(100% / 2);
+        min-width: 0;
+    }
+    @media screen and (max-width: 500px) {
+        height: auto;
+    }
+    &:hover{
+      z-index: 11;
+    }
+    &:nth-child(4):hover{
+      .catalog-item__inner{
+        left: -100%;
+      }
+    }
+    &:nth-child(17):hover{
+      .catalog-item__inner{
+        left: -100%;
+      }
+    }
+    &:nth-child(21):hover{
+      .catalog-item__inner{
+        left: -100%;
+      }
+    }
+    &--banner{
+      width: 50%;
+      z-index: 10;
+      @media @touch{
+        width: 100%;
+        height: auto;
+        &First{
+          display: none;
+        }
+      }
+      .catalog-item__promoBanner{
+        display: block;
+        position: relative;
+        height: 500px;
+        overflow: hidden;
+        @media @touch{
+          display: none;
+        }
+        img{
+          position: absolute;
+          top: 0;
+          left: 50%;
+          margin-left: -500px;
+        }
+      }
+      .js-catalogBanner-carousel{
+        display: none !important;
+        @media @touch{
+          display: block  !important;
+        }
+        .owl-item{
+          height: 500px;
+          overflow: hidden;
+          position: relative;
+          img{
+            position: absolute;
+            top: 0;
+            left: 50%;
+            margin-left: -500px;
+          }
+        }
+        .owl-controls{
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 8px;
+        }
+        .owl-pagination{
+          text-align: center;
+          .owl-page{
+            display: inline-block;
+            margin: 0 5px;
+            span{
+              display: block;
+              width: 10px;
+              height: 10px;
+              background: #999;
+            }
+            &.active{
+              span{
+                background: #fff;
+              }
+            }
+          }
+        }
+      }
+    }
+    &--empty{
+      @media @touch{
+        display: none;
+      }
+    }
+    &--comment{
+      background: #fbf8f8;
+      width: 50%;
+      padding: 40px 15px 0;
+      @media @touch{
+        width: 100%;
+        height: auto;
+      }
+    }
+    &__qoute{
+      position: relative;
+      .font-circe_light(14px, 16px, #333);
+      text-align: justify;
+      @media @touch{
+        margin-bottom: 25px;
+      }
+      &:before,
+      &:after{
+        content: '';
+        display: block;
+        width: 19px;
+        height: 16px;
+        margin: 0 auto;
+        text-align: center;
+        background: url('@{img}/promo-page/quote.png') no-repeat;
+      }
+      &:before{
+        margin-bottom: 15px;
+      }
+      &:after{
+        transform: rotate(180deg);
+        @media @touch{
+          margin-top: 15px;
+        }
+      }
+    }
+    &__author{
+      width: 100%;
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 14px;
+      line-height: 16px;
+      @media @touch{
+        position: static;
+        padding-bottom: 15px;
+      }
+      span{
+        display: block;
+        color: #999;
+        text-transform: none;
+      }
+    }
+  }
+}

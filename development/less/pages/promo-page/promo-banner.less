@@ -1,0 +1,57 @@
+.promo-banner{
+  height: 400px;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: auto 100%;
+  @media @touch{
+      height: 280px;
+  }
+  @media screen and (max-width: 749px) {
+      height: 230px;
+  }
+  @media screen and (max-width: 599px) {
+      height: 390px;
+      background: none !important;
+  }
+  .js-promo-carousel{
+    display: none !important;
+    @media screen and (max-width: 599px){
+      display: block !important;
+    }
+    .owl-item{
+      height: 390px;
+      overflow: hidden;
+      position: relative;
+      img{
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-left: -299.5px;
+      }
+    }
+    .owl-controls{
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 8px;
+    }
+    .owl-pagination{
+      text-align: center;
+      .owl-page{
+        display: inline-block;
+        margin: 0 5px;
+        span{
+          display: block;
+          width: 10px;
+          height: 10px;
+          background: #999;
+        }
+        &.active{
+          span{
+            background: #fff;
+          }
+        }
+      }
+    }
+  }
+}
