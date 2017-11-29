@@ -22,9 +22,7 @@
 	/* первый уровень вложенности элементов каталога */
 	.main-nav-level-1 {
 
-		&__header {
-			display: none;
-		}
+		&__header { display: none; }
 
 		&__list {
 			/* отработка */
@@ -43,7 +41,6 @@
 		}
 
 		&__link {
-
 
 			&--all-items {
 				position: absolute;
@@ -78,16 +75,11 @@
 				-moz-appearance: none;
 				appearance: none;
 
-
-				&:hover {
-					background-color: #b32024;
-				}
+				&:hover { background-color: @color-dark_red; }
 			}
 		}
 	}
 }
-
-
 
 
 
@@ -97,7 +89,6 @@
 
 		&__header {
 			position: relative;
-
 			display: block;
 			height: 45px;
 			-webkit-box-sizing: border-box;
@@ -105,12 +96,9 @@
 			box-sizing: border-box;
 			margin: 0 auto;
 			padding: 0 10px;
-
 			background-color: @color-red;
-
 			text-transform: uppercase;
 			.font-circerou_regular(12px, 46px, #fff);
-
 			cursor: pointer;
 
 			&:after {
@@ -136,7 +124,6 @@
 			}
 		}
 
-
 		&__list {
 			display: block;
 			height: 0;
@@ -146,17 +133,13 @@
 			border-top: 1px solid #dc2a2b;
 			border-bottom: 1px solid #fb3535;
 
-			&--active {
-				height: auto;
-			}
+			&--active { height: auto; }
 		}
-
 
 		&__item {
 			border-bottom: 1px solid #8f2d2a;
 			border-top: 1px solid #d0433f;
 		}
-
 
 		&__link {
 			display: none;
