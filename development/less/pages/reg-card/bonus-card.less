@@ -1,12 +1,20 @@
 .reg-card__bonusCard{
   background: #f8f8f8;
   padding-bottom: 45px;
+  .section__inner{
+    @media @touch{
+      width: 750px;
+    }
+    @media @tablet-under{
+      width: 620px;
+    }
+    @media @mobile{
+      width: 100%;
+    }
+  }
   @media @mobile{
     background: #fff;
     padding-bottom: 0;
-    .section__inner{
-      width: 100%;
-    }
   }
   &Text{
     text-align: center;
@@ -121,7 +129,9 @@
     font-size: 11px;
     line-height: 11px;
     color: #999;
-    position: relative;
+    &[data-type]{
+      position: relative;
+    }
     @media @mobile{
       width: 100%;
       padding: 20px 25px;
