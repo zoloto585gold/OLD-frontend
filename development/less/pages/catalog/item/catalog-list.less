@@ -1,22 +1,22 @@
-.catalog-list-section{
+.catalog-list-section {
     width: 100%;
     position: relative;
     border-top: solid 1px #f5f5f5;
 
-    .section__inner{
+    .section__inner {
         width: 100%;
         max-width: 1500px;
         margin: 0 auto;
     }
 
-    h1{
+    h1 {
         max-width: 1000px;
         margin-left: auto;
         margin-right: auto;
     }
 
     &__tags,
-    &__preview-text{
+    &__preview-text {
         padding-left: 30px;
         padding-right: 30px;
     }
@@ -24,41 +24,38 @@
     &[data-len='1'] .section__inner,
     &[data-len='2'] .section__inner,
     &[data-len='3'] .section__inner,
-    &[data-len='4'] .section__inner{
+    &[data-len='4'] .section__inner {
         max-width: 1000px !important;
-        @media screen and (min-width: 768px){
-          .catalog-item{
-            min-width: 250px;
-          }
+        
+        @media screen and (min-width: 768px) {
+          .catalog-item { min-width: 250px; }
         }
     }
-    &--main{
-      .catalog-item{
-        @media screen and (min-width: 1439px){
+
+    &--main {
+      .catalog-item {
+        
+        @media screen and (min-width: 1439px) {
           &.catalog-item-ecommerce:nth-child(6),
           &.catalog-item-ecommerce:nth-child(17),
           &.catalog-item-ecommerce:nth-child(23){
-            &:hover{
-              .catalog-item__inner{
-                left: -100%;
-              }
-              &:after{
-                left: -100%;
-              }
+           
+            &:hover {
+              .catalog-item__inner { left: -100%; }
+              
+              &:after { left: -100%; }
             }
           }
 
           //for 1 banner
           &.catalog-item-ecommerce:nth-child(29),
           &.catalog-item-ecommerce:nth-child(35){
-            &:hover{
-              .catalog-item__inner{
-                left: -100%;
-              }
-              &:after{
-                left: -100%;
-              }
+            
+            &:hover {
+              .catalog-item__inner { left: -100%; }
+              &:after { left: -100%; }
             }
+
           }
 
           // for 2 banners
@@ -74,33 +71,30 @@
           //   }
           // }
         }
-        @media @desktop-laptop{
+
+        @media @desktop-laptop {
           &.catalog-item-ecommerce:nth-child(4),
           &.catalog-item-ecommerce:nth-child(8),
           &.catalog-item-ecommerce:nth-child(15),
           &.catalog-item-ecommerce:nth-child(19),
-          &.catalog-item-ecommerce:nth-child(23){
-            &:hover{
-              .catalog-item__inner{
-                left: -100%;
-              }
-              &:after{
-                left: -100%;
-              }
+          &.catalog-item-ecommerce:nth-child(23) {
+            
+            &:hover {
+              .catalog-item__inner { left: -100%; }
+             
+              &:after{ left: -100%; }
             }
           }
 
           //for 1 banner
           &.catalog-item-ecommerce:nth-child(27),
           &.catalog-item-ecommerce:nth-child(31),
-          &.catalog-item-ecommerce:nth-child(35),{
-            &:hover{
-              .catalog-item__inner{
-                left: -100%;
-              }
-              &:after{
-                left: -100%;
-              }
+          &.catalog-item-ecommerce:nth-child(35) {
+            
+            &:hover {
+              .catalog-item__inner { left: -100%; }
+              
+              &:after { left: -100%; }
             }
           }
 
@@ -122,7 +116,7 @@
     }
 }
 
-.catalog-list{
+.catalog-list {
     position: relative;
     display: -webkit-box;
     display: -webkit-flex;
@@ -136,12 +130,12 @@
     &[data-len='1'],
     &[data-len='2'],
     &[data-len='3'],
-    &[data-len='4']{
+    &[data-len='4'] {
         max-width: 1000px !important;
         margin: 0 auto;
     }
 
-    &--favorites{
+    &--favorites {
         -webkit-box-pack: center;
         -webkit-justify-content: center;
            -moz-box-pack: center;
@@ -149,7 +143,7 @@
                 justify-content: center;
     }
 
-    &-recommended{
+    &-recommended {
         display: none;
         width: 100%;
         max-height: 347px;
@@ -162,7 +156,7 @@
         overflow: hidden;
 
         &:before,
-        &:after{
+        &:after {
             content: '';
             width: 100%;
             height: 10px;
@@ -179,21 +173,21 @@
                     border-radius: 50%;
         }
 
-        &:before{
+        &:before {
             top: -11px;
             -webkit-box-shadow: 0 0 10px 0 #000;
                -moz-box-shadow: 0 0 10px 0 #000;
                     box-shadow: 0 0 10px 0 #000;
         }
 
-        &:after{
+        &:after {
             bottom: -11px;
             -webkit-box-shadow: 0 0 6px -2px #000;
                -moz-box-shadow: 0 0 6px -2px #000;
                     box-shadow: 0 0 6px -2px #000;
         }
 
-        &__inner{
+        &__inner {
             width: 100%;
             max-width: 1495px;
             max-height: 347px;
@@ -201,20 +195,18 @@
             padding: 20px 0;
         }
 
-        &__title{
+        &__title {
             text-transform: uppercase;
             .font-circe_bold(14px, 1, #666);
         }
 
-        .catalog-list-section{
-            border: none;
-        }
+        .catalog-list-section { border: none; }
 
-        .catalog-list{
+        .catalog-list {
             height: 280px;
-	        margin: 20px 0 0;
+            margin: 20px 0 0;
 
-            .jspPane{
+            .jspPane {
                 display: -webkit-box;
                 display: -webkit-flex;
                 display: -moz-box;
@@ -225,7 +217,7 @@
                         flex-wrap: nowrap;
             }
 
-            .jspHorizontalBar{
+            .jspHorizontalBar {
                 bottom: 0;
                 height: 10px;
                 border-top: solid 4px #eee;
@@ -233,95 +225,72 @@
                 background: none;
             }
 
-            .jspTrack{
-                background: #fff;
-            }
+            .jspTrack { background: #fff; }
 
-            .jspDrag{
-                background: #656565;
-            }
+            .jspDrag { background: #656565; }
 
-            .catalog-list-section{
-                margin: 0;
-            }
+            .catalog-list-section { margin: 0; }
 
-            .bx_sidebar{
-                display: none;
-            }
+            .bx_sidebar { display: none; }
         }
 
-        .catalog-item{
+        .catalog-item {
             min-width: 250px;
             max-width: 250px;
             margin-top: 1px;
         }
 
-        .catalog-item__button_recommended{
-            display: none;
-        }
+        .catalog-item__button_recommended { display: none; }
     }
 }
 
 
-.catalog-list-scrollwrap{
+.catalog-list-scrollwrap {
 
-    .section__inner{
+    .section__inner {
         max-width: 1000px;
         max-height: 250px;
 
-        @media @touch{
-            max-width: 95%;
-        }
+        @media @touch { max-width: 95%; }
     }
 
-    .catalog_list{
-      & > div:not(.catalog-list){
-        display: none !important;
-      }
+    .catalog_list {
+      & > div:not(.catalog-list) { display: none !important; }
     }
 
-    .catalog-list{
-        flex-wrap: nowrap;
-    }
+    .catalog-list { flex-wrap: nowrap; }
 
-    .jspScrollable{
-      height: 265px;
-    }
+    .jspScrollable { height: 265px; }
 
-    .jspHorizontalBar{
-        height: 7px;
-    }
+    .jspHorizontalBar { height: 7px; }
 
-    .jspTrack{
-        background: #e8e8e8
-    }
+    .jspTrack { background: #e8e8e8; }
 
-    .jspDrag{
-        background: #656565;
-    }
+    .jspDrag { background: #656565; }
 
-    .catalog-item{
+    .catalog-item {
         min-width: 250px;
+        
         @media screen and (min-width: 1000px) {
-          &:last-child{
-            &:hover{
-              .catalog-item__inner{
-                left: -100%;
-              }
-              &:after{
-                left: -100%;
-              }
+          
+          &:last-child {
+            
+            &:hover {
+              .catalog-item__inner { left: -100%; }
+              &:after { left: -100%; }
             }
+
           }
         }
-        @media @mobile-portrait{
 
-            &__price{
+        @media @mobile-portrait {
+
+            &__price {
                 left: auto;
                 right: 10%;
             }
 
-            &__price--old{
+            &__price--old {
                 left: 10%;
                 right: auto;
             }

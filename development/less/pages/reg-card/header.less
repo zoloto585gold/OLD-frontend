@@ -1,54 +1,44 @@
 
-.reg-card__header{
+.reg-card__header {
 	background: #f8f8f8;
 	min-height: 128px;
 	padding: 40px 0 0;
 
-	@media @touch{
+	@media @touch {
 		padding: 15px 0 0;
 		min-height: 55px;
 	}
 
-	@media @mobile{
-		display: none;
-	}
+	@media @mobile { display: none; }
 
 	h1,
-	h2{
+	h2 {
 		margin: 0;
 		line-height: 1;
 		text-align: center;
 		text-transform: uppercase;
 	}
 
-	&-title{
+	&-title {
 		font-weight: bold;
 		font-size: 24px;
 
-		br{
+		br {
 			position: absolute;
 
-			@media @mobile{
-				position: static;
-			}
+			@media @mobile { position: static; }
 		}
 
-		@media @touch{
-			font-size: 14px;
-		}
+		@media @touch { font-size: 14px; }
 	}
 
-	&-subtitle{
+	&-subtitle {
 		font-weight: normal;
 		font-size: 14px;
 		padding: 11px 0 0;
 
-		a{
-			text-decoration: underline;
-		}
+		a { text-decoration: underline; }
 
-		@media @touch{
-			display: none;
-		}
+		@media @touch { display: none; }
 	}
 }

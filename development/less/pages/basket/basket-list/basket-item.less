@@ -5,21 +5,15 @@
 	text-transform: uppercase;
 	color: #333;
 
-	.hide-mobile{
-		@media @touch {
-			display: none;
-		}
+	.hide-mobile {
+		@media @touch { display: none; }
 	}
-	.show-mobile{
+	.show-mobile {
 		display: none;
-		@media @touch {
-			display: block;
-		}
+		@media @touch { display: block; }
 	}
 
-	&:last-child {
-		border: 0;
-	}
+	&:last-child { border: 0; }
 
 	&__name {
 		display: block;
@@ -29,13 +23,9 @@
 		color: #333;
 		margin-bottom: 10px;
 
-		@media @touch {
-			font: 300 14px/14px 'Circe';
-		}
+		@media @touch { font: 300 14px/14px 'Circe'; }
 
-		&:hover {
-			text-decoration: underline;
-		}
+		&:hover { text-decoration: underline; }
 	}
 
 
@@ -66,15 +56,16 @@
 		margin-left: 20px;
 		font-size: 11px;
 		font-weight: 300;
+		
 		@media screen and (max-width: @mobile_a-max) {
 			margin-left: 28px;
 		}
 	}
 
-	&__quantity{
+	&__quantity {
 		color: #999;
 
-		[data-el='quantity']{
+		[data-el='quantity'] {
 			width: 100px;
 			margin: 5px 0 0;
 			display: flex;
@@ -83,38 +74,37 @@
 		}
 
 		input,
-		button{
+		button {
 			height: 30px;
 			border: solid 1px #dcdcdc;
 			background: #fff;
 		}
 
-		input{
+		input {
 			width: 42px;
 			margin: 0 -1px;
 			text-align: center;
 		}
 
-		button{
+		button {
 			width: 30px;
 			border-radius: 2px 0 0 2px;
 			position: relative;
 			z-index: 2;
 			cursor: pointer;
 
-			&:last-of-type{
-				border-radius: 0 2px 2px 0;
-			}
+			&:last-of-type { border-radius: 0 2px 2px 0; }
 
-			&:hover{
+			&:hover { 
 				border-color: @color-red;
 				color: @color-red;
 			}
 		}
 	}
 
-	&__size{
+	&__size {
 		margin-top: 20px;
+		
 		select {
 			display: block;
 			width: 80px;
@@ -125,60 +115,61 @@
 		}
 	}
 
-	&__article{
+	&__article {
 		font: 300 14px/14px 'Circe';
 		color: #333;
 		margin-bottom: 35px;
 	}
-	&__article2{
+
+	&__article2 {
 		display: inline-block;
 		font: 300 14px/14px 'Circe';
 		color: #333;
 		margin-left: 20px;
 		padding: 15px 0 0;
 
-		div{
+		div {
 			position: relative;
 			top: 20px;
 			margin: 0 0 5px;
 		}
 
-		&-price{
-			font: 400 24px/28px Circe;
-		}
+		&-price { font: 400 24px/28px Circe; }
 	}
 
 	&__price {
 		font: 400 11px/30px 'Circe';
+		
 		@media screen and (max-width: @mobile_a-max) {
 			display: inline-block;
 			line-height: 24px;
 		}
-		> span{
+		
+		> span {
 			font: 300 11px/28px 'Circe';
 			padding: 0 3px;
 			background: #ffec00;
 			position: relative;
 			left: -3px;
-			@media screen and (max-width: @mobile_a-max) {
-				line-height: 24px;
-			}
+			
+			@media screen and (max-width: @mobile_a-max) { line-height: 24px; }
 		}
-		div{
+		
+		div {
 			font: 400 30px/28px 'Circe';
-			@media screen and (max-width: @mobile_a-max) {
-				font: 400 24px/24px 'Circe';
-			}
+			
+			@media screen and (max-width: @mobile_a-max) { font: 400 24px/24px 'Circe'; }
 			small {
 				font-size: 18px;
-				@media screen and (max-width: @mobile_a-max) {
-					font-size: 16px;
-				}
+				
+				@media screen and (max-width: @mobile_a-max) { font-size: 16px; }
 			}
-			s{
+
+			s {
 				text-decoration: none;
 				position: relative;
-				&:before{
+			
+				&:before {
 					content: '';
 					display: block;
 					width: 100%;
@@ -189,23 +180,25 @@
 					top: 50%;
 				}
 			}
+
 		}
+
 		&--old {
 			margin-top: -20px;
-			@media @touch {
-				margin-top: 14px;
-			}
+		
+			@media @touch { margin-top: 14px; }
+			
 			@media screen and (max-width: @mobile_a-max) {
 				width: 122px;
 				margin-top: 0;
 				margin-right: 28px;
 			}
+			
 			div {
 				font: 300 30px/28px 'Circe';
 				color: #666;
-				@media screen and (max-width: @mobile_a-max) {
-					font: 300 20px/24px 'Circe';
-				}
+			
+				@media screen and (max-width: @mobile_a-max) { font: 300 20px/24px 'Circe'; }
 			}
 		}
 	}
@@ -217,32 +210,26 @@
 			display: inline-block;
 			vertical-align: middle;
 			width: 11px;
+
 			li {
 				display: block;
 				height: 4px;
 				margin-bottom: 1px;
 				background: #f0f0f0;
-				&:last-child{
-					margin-bottom: 0;
-				}
+			
+				&:last-child{ margin-bottom: 0; }
 			}
-			&[data-nal='1'] li:last-child{
-				background: #cf2a2a;
-			}
-			&[data-nal='2'] li+li+li+li{
-				background: #cf2a2a;
-			}
-			&[data-nal='3'] li+li+li{
-				background: #cf2a2a;
-			}
-			&[data-nal='4'] li+li{
-				background: #cf2a2a;
-			}
-			&[data-nal='5'] li{
+			
+			&[data-nal='1'] li:last-child,
+			&[data-nal='2'] li+li+li+li,
+			&[data-nal='3'] li+li+li,
+			&[data-nal='4'] li+li,
+			&[data-nal='5'] li {
 				background: #cf2a2a;
 			}
 		}
-		span{
+
+		span {
 			display: inline-block;
 			vertical-align: middle;
 			font: 300 11px/11px 'Circe';
@@ -250,19 +237,20 @@
 		}
 	}
 
-	&__shops{
+	&__shops {
 		width: 260px;
 		padding-left: 50px;
 
-		&-total{
+		&-total {
 			font: 300 11px/11px 'Circe';
 			font-weight: bold;
 			text-transform: uppercase;
 			color: #333;
 		}
 
-		&-list{
+		&-list {
 			margin: 5px 0 0;
+			
 			li {
 				font: 300 11px/11px 'Circe';
 				text-transform: uppercase;
@@ -271,7 +259,7 @@
 			}
 		}
 
-		&-tip{
+		&-tip {
 			font: 300 11px/11px 'Circe';
 			text-transform: none;
 			color: #999;
@@ -279,23 +267,21 @@
 			width: 80%;
 		}
 
-		@media @touch{
+		@media @touch {
 			width: auto;
 			padding: 0;
 
-			&-total{
+			&-total {
 				font-weight: 300;
 				color: #999;
 			}
 
 			&-list li,
-			&-tip{
-				display: none;
-			}
+			&-tip { display: none; }
 		}
 	}
 
-	&__remove{
+	&__remove {
 		width: 24px;
 		height: 24px;
 		text-align: center;
@@ -303,62 +289,65 @@
 		background: #f0f0f0;
 		cursor: pointer;
 		margin: 0 auto;
-		&:hover{
+		
+		&:hover {
 			background: @color-red;
 			color: #fff;
 		}
 	}
 
-	&__city{
+	&__city {
 		display: inline-block;
 		vertical-align: middle;
 		width: 300px;
 		font-size: 11px;
-		@media screen and (max-width: @mobile_a-max) {
-			width: 100%;
-		}
-		select{
+		
+		@media screen and (max-width: @mobile_a-max) { width: 100%; }
+		
+		select {
 			display: block;
 			width: 100%;
 			height: 40px;
 			border: 1px solid #c4c4c4;
-    	border-radius: 3px;
-    	padding: 0 10px;
+    		border-radius: 3px;
+    		padding: 0 10px;
 			font-size: 12px;
 			text-transform: uppercase;
 			margin: 5px 0;
 		}
-		a{
+
+		a {
 			display: inline-block;
 			color: #999;
 			text-decoration: underline;
-			@media @touch {
-				margin: 10px 0;
-			}
-			&:hover{
-				text-decoration: none;
-			}
+		
+			@media @touch { margin: 10px 0; }
+			
+			&:hover{ text-decoration: none; }
 		}
-		& + span{
+
+		& + span {
 			display: inline-block;
 			margin-left: 45px;
 			font-size: 13px;
 			background: #ffec00;
 			padding: 0 4px;
+			
 			@media @touch {
 				margin-left: 0;
 				margin-top: 5px;
 			}
 		}
+		
 		a[data-btn='modal'],
-		& + [data-el='shop-selected']{
+		& + [data-el='shop-selected'] {
 			display: none;
 		}
 	}
 
-	&__city[data-status='selected']{
+	&__city[data-status='selected'] {
 		a[data-btn='modal'],
-		& + [data-el='shop-selected']{
+		& + [data-el='shop-selected'] {
 			display: inline-block;
 		}
 	}

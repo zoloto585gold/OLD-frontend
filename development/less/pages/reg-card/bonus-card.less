@@ -1,45 +1,45 @@
-.reg-card__bonusCard{
+.reg-card__bonusCard {
   background: #f8f8f8;
   padding-bottom: 45px;
-  @media @mobile{
+  
+  @media @mobile {
     background: #fff;
     padding-bottom: 0;
-    .section__inner{
-      width: 100%;
-    }
+    
+    .section__inner { width: 100%; }
   }
-  &Text{
+
+  &Text {
     text-align: center;
     font-size: 12px;
     line-height: 14px;
-    @media @mobile{
-      display: none;
-    }
-    a{
+    
+    @media @mobile { display: none; }
+
+    a {
       text-decoration: underline;
-      &:hover{
-        text-decoration: none;
-      }
+      
+      &:hover { text-decoration: none; }
     }
   }
 }
 
-.checkBonusCard{
+.checkBonusCard {
   border: 2px dotted #000;
   position: relative;
   padding: 25px 165px;
   margin-bottom: 20px;
-  @media @touch{
-    padding: 25px 50px;
-  }
-  @media @tablet-under{
-    padding: 20px 25px;
-  }
-  @media @mobile{
+  
+  @media @touch { padding: 25px 50px;  }
+  
+  @media @tablet-under { padding: 20px 25px; }
+  
+  @media @mobile { 
     border: 0;
     padding: 0;
   }
-  &__title{
+
+  &__title {
     width: 350px;
     position: absolute;
     top: -10px;
@@ -51,7 +51,8 @@
     text-transform: uppercase;
     color: #121212;
     text-align: center;
-    @media @mobile{
+    
+    @media @mobile {
       position: static;
       margin-left: 0;
       width: 100%;
@@ -60,14 +61,15 @@
       border-bottom: 1px solid #dbdbdb;
     }
   }
-  &__nav{
+
+  &__nav {
     display: none;
     border-bottom: 1px solid #ed3030;
     height: 42px;
-    @media @mobile{
-      display: block;
-    }
-    button{
+    
+    @media @mobile { display: block; }
+    
+    button {
       display: block;
       width: 50%;
       float: left;
@@ -76,16 +78,19 @@
       background: #f7f7f7;
       border: 0;
       padding: 0 0 0 15px;
-      &:first-child{
+    
+      &:first-child {
         border-right: 1px solid #dbdbdb !important;
         padding: 0 15px 0 0;
       }
-      &.is-active{
+
+      &.is-active {
         background: #fff;
         cursor: default;
         position: relative;
         border-color: #fff;
-        &:before{
+        
+        &:before {
           content: '';
           position: absolute;
           bottom: -1px;
@@ -94,10 +99,12 @@
           border: 8px solid transparent;
           border-bottom-color: red;
         }
+
       }
     }
   }
-  &__column{
+
+  &__column {
     display: inline-block;
     vertical-align: top;
     width: 250px;
@@ -105,31 +112,32 @@
     line-height: 11px;
     color: #999;
     position: relative;
-    @media @mobile{
+    
+    @media @mobile {
       width: 100%;
       padding: 20px 25px;
     }
-    &--right{
+
+    &--right {
       margin-left: 162px;
-      @media @touch{
-        margin-left: 142px;
-      }
-      @media @tablet-under{
-        margin-left: 62px;
-      }
-      @media @mobile{
-  			margin-left: 0;
-        display: none;
-  		}
+      
+      @media @touch         { margin-left: 142px; }
+      
+      @media @tablet-under  { margin-left: 62px; }
+      
+      @media @mobile        { margin-left: 0; display: none; }
+
     }
-    b{
+    
+    b {
       display: block;
       text-transform: uppercase;
       font-size: 13px;
       color: #000;
       margin-bottom: 2px;
     }
-    input{
+
+    input {
       display: block;
       width: 100%;
       height: 38px;
@@ -139,21 +147,21 @@
       font-weight: 100;
       margin-top: 5px;
     }
-    .button{
+
+    .button {
       display: block;
       text-align: center;
       margin-top: 12px;
     }
-    &--error{
-      input{
-        border-color: #ed1630;
-      }
-      .checkBonusCard__errorMsg{
-        display: block;
-      }
+
+    &--error {
+      
+      input { border-color: #ed1630; }
+      .checkBonusCard__errorMsg { display: block; }
     }
   }
-  &__errorMsg{
+
+  &__errorMsg {
     display: none;
     position: absolute;
     top: -1px;
@@ -164,15 +172,18 @@
     line-height: 25px;
     padding-left: 10px;
     color: #333;
-    @media @mobile{
+    
+    @media @mobile {
       left: 25px;
       right: 25px;
       top: 19px;
     }
   }
-  &__phoneField{
+
+  &__phoneField {
     position: relative;
-    span{
+    
+    span {
       position: absolute;
       left: 0;
       bottom: 0;
@@ -185,11 +196,11 @@
       font: 700 18px/35px Circe;
       color: #333;
     }
-    input{
-      padding-left: 60px
-    }
+
+    input { padding-left: 60px; }
   }
-  &__or{
+
+  &__or {
     width: 35px;
     height: 35px;
     line-height: 35px;
@@ -204,14 +215,14 @@
     left: 50%;
     transform: translateX(-50%);
 
-    @media @mobile{
+    @media @mobile {
       top: 45px;
       background: #f8f8f8;
       z-index: 2;
     }
   }
 
-  &__currentCart{
+  &__currentCart {
     padding-left: 60px;
     text-transform: uppercase;
     font-size: 18px;
@@ -219,11 +230,13 @@
     margin-bottom: 20px;
     white-space: nowrap;
     position: relative;
-    @media @mobile{
+    
+    @media @mobile {
       margin-bottom: 0;
       padding-left: 50px;
     }
-    &:before{
+
+    &:before {
       content: 'бонус карта';
       display: block;
       width: 40px;
@@ -240,15 +253,18 @@
       top: 2px;
       left: 0;
     }
-    span{
+
+    span {
       display: block;
       font-weight: 100;
       font-size: 16px;
     }
-    & + a{
+
+    & + a {
       text-transform: uppercase;
       text-decoration: underline;
-      @media @mobile{
+      
+      @media @mobile {
         position: absolute;
         bottom: 0;
         left: 0;
@@ -257,15 +273,16 @@
         margin: 0 auto;
         width: 205px;
       }
-      &:hover{
-        text-decoration: none;
-      }
+
+      &:hover { text-decoration: none; }
     }
   }
-  &__currentBonuses{
+
+  &__currentBonuses {
     text-transform: uppercase;
     color: #999;
-    div{
+    
+    div {
       background: #fff;
       border: 1px dashed #000;
       border-radius: 5px;
@@ -274,30 +291,28 @@
       padding: 5px 7px;
       line-height: 1;
       margin-bottom: 15px;
-      span{
+      
+      span {
         display: block;
         .font-circe_light(18px, 18px, #333);
         margin-bottom: 3px;
       }
+
     }
-    & > span{
-      color: #333;
-    }
+
+    & > span { color: #333; }
   }
-  &--step2{
-    @media @mobile{
-      padding-bottom: 25px;
+
+  &--step2 {
+    
+    @media @mobile { padding-bottom: 25px; }
+    
+    .checkBonusCard__column {
+      @media @mobile { padding: 20px 25px 5px 25px; }
     }
-    .checkBonusCard__column{
-      @media @mobile{
-        padding: 20px 25px 5px 25px;
-      }
-    }
-    .checkBonusCard__column--right{
-      @media @mobile{
-        display: block;
-        padding: 5px 25px 5px 25px;
-      }
+
+    .checkBonusCard__column--right {
+      @media @mobile { display: block; padding: 5px 25px 5px 25px; }
     }
   }
 }

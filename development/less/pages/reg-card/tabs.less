@@ -1,5 +1,5 @@
 
-.reg-card__tabs{
+.reg-card__tabs {
 	border-bottom: solid 1px #dbdbdb;
 	-webkit-box-shadow: 0 1px 0px 0px @color-red;
 	   -moz-box-shadow: 0 1px 0px 0px @color-red;
@@ -7,7 +7,7 @@
 	background: #f8f8f8;
 	position: relative;
 
-	&:before{
+	&:before {
 		content: '';
 		position: absolute;
 		top: 0;
@@ -18,7 +18,7 @@
 		background: url(/bitrix/templates/zoloto/frontend/images/thingies/shadow-5.png) no-repeat top center;
 	}
 
-	.section__inner{
+	.section__inner {
 		position: relative;
 		display: -webkit-box;
 		display: -webkit-flex;
@@ -32,7 +32,7 @@
 		        justify-content: space-between;
 	}
 
-	button{
+	button {
 		display: block;
 		width: 50%;
 		height: 48px;
@@ -51,30 +51,30 @@
 		        transform: scale(1.0);
 		.transition();
 
-		&:hover:not([data-active]){
+		&:hover:not([data-active]) {
 			background: @color-red;
 			color: #fff;
 
-			&:first-child{
+			&:first-child {
 				-webkit-box-shadow: -500px 0 0 0 @color-red;
 				   -moz-box-shadow: -500px 0 0 0 @color-red;
 				        box-shadow: -500px 0 0 0 @color-red;
 			}
 
-			&:last-child{
+			&:last-child {
 				-webkit-box-shadow: 500px 0 0 0 @color-red;
 				   -moz-box-shadow: 500px 0 0 0 @color-red;
 				        box-shadow: 500px 0 0 0 @color-red;
 			}
 
-			@media @touch{
-				&:first-child{
+			@media @touch {
+				&:first-child {
 					-webkit-box-shadow: -200px 0 0 0 @color-red;
 					   -moz-box-shadow: -200px 0 0 0 @color-red;
 					        box-shadow: -200px 0 0 0 @color-red;
 				}
 
-				&:last-child{
+				&:last-child {
 					-webkit-box-shadow: 200px 0 0 0 @color-red;
 					   -moz-box-shadow: 200px 0 0 0 @color-red;
 					        box-shadow: 200px 0 0 0 @color-red;
@@ -82,29 +82,27 @@
 			}
 		}
 
-		&:first-child{
-			border-right: solid 1px #dadada;
-		}
+		&:first-child { border-right: solid 1px #dadada; }
 
-		&[data-active]{
+		&[data-active] {
 			background: #fff;
 			cursor: default;
 			position: relative;
 			border-color: #fff;
 
-			&:first-child{
+			&:first-child {
 				-webkit-box-shadow: -500px 0 0 0 #fff;
 				   -moz-box-shadow: -500px 0 0 0 #fff;
 				        box-shadow: -500px 0 0 0 #fff;
 			}
 
-			&:last-child{
+			&:last-child {
 				-webkit-box-shadow: 500px 0 0 0 #fff;
 				   -moz-box-shadow: 500px 0 0 0 #fff;
 				        box-shadow: 500px 0 0 0 #fff;
 			}
 
-			&:before{
+			&:before {
 				content: '';
 				position: absolute;
 				bottom: -1px;
@@ -118,14 +116,14 @@
 				border-bottom-color: red;
 			}
 
-			@media @touch{
-				&:first-child{
+			@media @touch {
+				&:first-child {
 					-webkit-box-shadow: -200px 0 0 0 #fff;
 					   -moz-box-shadow: -200px 0 0 0 #fff;
 					        box-shadow: -200px 0 0 0 #fff;
 				}
 
-				&:last-child{
+				&:last-child {
 					-webkit-box-shadow: 200px 0 0 0 #fff;
 					   -moz-box-shadow: 200px 0 0 0 #fff;
 					        box-shadow: 200px 0 0 0 #fff;
@@ -133,19 +131,15 @@
 			}
 		}
 
-		br{
-			display: none;
-		}
+		br { display: none; }
 
-		@media @touch{
-			font-size: 14px;
-		}
+		@media @touch { font-size: 14px; }
 
-		@media @mobile{
+		@media @mobile {
 			font-size: 11px;
 			line-height: 12px;
 
-			br{
+			br {
 				display: block;
 				line-height: 1;
 			}
