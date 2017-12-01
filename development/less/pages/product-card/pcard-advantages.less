@@ -1,41 +1,40 @@
-.pcard-advantanges{
+.pcard-advantanges {
     padding: 6px 0;
     border-top: 1px solid #e1e1e1;
-    @media @touch{
-        display: none;
-    }
-    &__item{
+    
+    @media @touch { display: none; }
+    
+    &__item {
         float: left;
         width: 25%;
         height: 48px;
         .font-circe_light(12px, 14px, #333);
         position: relative;
     }
-    &__img{
+
+    &__img {
         display: inline-block;
         vertical-align: middle;
         width: 48px;
         height: 48px;
         background: url(@img-sprite-primary) no-repeat;
         margin-right: 8px;
-        &--one{
-            background-position: 0px -393px;
-        }
-        &--two{
-            background-position: -50px -393px;
-        }
-        &--three{
-            background-position: 0px -443px;
-        }
-        &--four{
-            background-position: -50px -443px;
-        }
+        
+        &--one      { background-position: 0px -393px; }
+        
+        &--two      { background-position: -50px -393px; }
+        
+        &--three    { background-position: 0px -443px; }
+
+        &--four     { background-position: -50px -443px; }
     }
-    &__text{
+
+    &__text {
         display: inline-block;
         vertical-align: middle;
     }
-    &__title{
+
+    &__title {
         .font-circe_regular(12px, 14px, #333);
         text-transform: uppercase;
         line-height: 14px;
