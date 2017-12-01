@@ -1,5 +1,5 @@
-.basket{
-  &__total{
+.basket {
+  &__total {
     margin-top: 20px;
     margin-bottom: 150px;
     @media @touch {
@@ -24,31 +24,31 @@
       cursor: pointer;
       position: relative;
       z-index: 9;
-      &:hover{
-        background: @color-dark_red;
-      }
-      @media @touch {
-        float: none;
-      }
+      
+      &:hover { background: @color-dark_red; }
+      @media @touch { float: none; }      
     }
   }
-  &__totalTable{
+
+  &__totalTable {
     width: 100%;
-    td{
+
+    td {
       text-align: right;
       padding: 5px 0;
       vertical-align: middle;
     }
-    td+td{
+
+    td+td {
       width: 160px;
       font-size: 24px;
-      small{
-        font-size: 20px;
-      }
+      
+      small { font-size: 20px; }
       s {
         display: inline-block;
         text-decoration: none;
         position: relative;
+       
         &:before{
           content: '';
           display: block;
@@ -62,19 +62,20 @@
       }
     }
   }
-  &__totalTr{
+
+  &__totalTr {
     font: 400 18px/18px 'Circe';
     text-transform: uppercase;
-    @media @touch {
-      font: 400 16px/16px 'Circe';
-    }
-    &--old{
+    
+    @media @touch { font: 400 16px/16px 'Circe'; }
+
+    &--old {
       color: #666;
-      td{
+      
+      td {
         font: 300 18px/18px 'Circe';
-        @media @touch {
-          font: 300 16px/16px 'Circe';
-        }
+        
+        @media @touch { font: 300 16px/16px 'Circe'; }
       }
     }
   }

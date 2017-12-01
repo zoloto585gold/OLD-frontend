@@ -1,5 +1,5 @@
 
-.overtop-promo{
+.overtop-promo {
 	width: 100%;
 	height: auto;
 	display: none;
@@ -11,11 +11,9 @@
 	text-align: left;
 	border-bottom: solid 1px #d7d7d7;
 
-	@media @desktop {
-		display: block;
-	}
+	@media @desktop { display: block; }
 
-	&::after{
+	&::after {
 		content: '';
 		display: block;
 		width: 100%;
@@ -26,29 +24,34 @@
 		left: 0;
 	}
 
-	&__inner{
+	&__inner {
 		width: 100%;
 		max-width: 1000px;
 		margin: 0 auto;
 		padding: 3px 40px 3px 0;
 		position: relative;
+		
 		display: -webkit-box;
 		display: -webkit-flex;
 		display: -moz-box;
 		display: -ms-flexbox;
 		display: flex;
+		
 		-webkit-flex-wrap: nowrap;
 		    -ms-flex-wrap: nowrap;
 		        flex-wrap: nowrap;
-		-webkit-box-pack: justify;
-		-webkit-justify-content: space-between;
-		   -moz-box-pack: justify;
+		
+		 -webkit-box-pack: justify;
+		    -moz-box-pack: justify;
 		    -ms-flex-pack: justify;
-		        justify-content: space-between;
+		    
+			    justify-content: space-between;
+		-webkit-justify-content: space-between;
+		
 		background: #fff;
 	}
 
-	&__close-btn{
+	&__close-btn {
 		width: 30px;
 		height: 30px;
 		position: absolute;
@@ -64,14 +67,13 @@
 		.font-circe_regular(20px, 1, #666);
 		.transition();
 		
-
-		&:hover{
+		&:hover {
 			background: #666;
 			color: #f2f2f2;
 		}
 	}
 
-	&__img{
+	&__img {
 		width: 430px;
 		height: 55px;
 		background-repeat: no-repeat;
@@ -79,7 +81,7 @@
 		background-size: cover;
 	}
 
-	&__btn{
+	&__btn {
 		display: none;
 		width: 200px;
 		height: 37px;
@@ -96,22 +98,18 @@
 		.font-circe_bold(12px, 37px, #fff);
 		.transition();
 
-		&:hover{
-			background: @color-dark_red;
-		}
+		&:hover { background: @color-dark_red; }
 
-		&[data-active]{
-			display: block;
-		}
+		&[data-active] { display: block; }
 	}
 
-	&__field-wrapper{
+	&__field-wrapper {
 		width: 240px;
 		margin: 14px 0 0 70px;
 		overflow: hidden;
 	}
 
-	&__field-input{
+	&__field-input {
 		display: block;
 		width: 100%;
 		height: 35px;
@@ -124,16 +122,12 @@
 		.font-circe_light(12px, 17px, #999);
 		.transition();
 
-		&:focus{
-			border-color: #666;
-		}
+		&:focus { border-color: #666; }
 
-		&:invalid{
-			border-color: #ee3b3b;
-		}
+		&:invalid { border-color: #ee3b3b; }
 	}
 
-	&__field-hint{
+	&__field-hint {
 		display: none;
 		text-transform: uppercase;
 		margin: 0 0 0 3px;
@@ -142,22 +136,20 @@
 		.font-circe_light(10px, 1, @color-red);
 	}
 
-	&__block{
+	&__block {
 		display: none;
 		min-height: 60px;
 		
-		&[data-active]{
-			display: block;
-		}
+		&[data-active] { display: block; }
 	}
 
-	&__result{
+	&__result {
 		width: 750px;
 		text-align: center;
 		position: relative;
 
 		&-label,
-		&-value{
+		&-value {
 			display: inline-block;
 			margin: 0;
 			text-transform: uppercase;
@@ -166,41 +158,33 @@
 			transform: translateY(-50%);
 		}
 
-		&-label{
-			.font-circe_thin(28px, 1, #333);
-		}
+		&-label { .font-circe_thin(28px, 1, #333); }
 
-		&-value{
-			.font-circe_regular(28px, 1, #333);
-		}
+		&-value { .font-circe_regular(28px, 1, #333); }
 	}
 
-	&__signed{
+	&__signed {
 		width: 750px;
 		height: 55px;
 		background: #b2f0f5;
 		overflow: hidden;
 
-		&-top{
+		&-top {
 			margin-top: 2px;
 			text-transform: uppercase;
 			.font-circe_thin(12px, 17px, #333);
 		}
 
-		&-middle{
+		&-middle {
 			text-transform: uppercase;
 			.font-circe_thin(24px, 17px, #333);
 
-			span{
-				.font-circe_light(24px, 20px, #333);
-			}
+			span { .font-circe_light(24px, 20px, #333); }
 		}
 
-		&-bottom{
-			.font-circe_thin(12px, 17px, #6e6e6e);
-		}
+		&-bottom { .font-circe_thin(12px, 17px, #6e6e6e); }
 
-		img{
+		img {
 			float:left;
 			margin-left: 5px;
 			margin-right: 33px;
