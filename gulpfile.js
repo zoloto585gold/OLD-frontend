@@ -17,6 +17,7 @@ const assign = require('object-assign');
 const browserSync = require('browser-sync');
 const modRewrite = require('connect-modrewrite');
 const reload = browserSync.reload;
+const imagemin = require('gulp-imagemin');
 
 // =============================================
 // Если нужно перекрыть объект в конфиге создаем
@@ -102,42 +103,7 @@ const config = assign({
 		},
 
 		less: [
-			// @todo: gulp-order
-			'development/less/mixins/@path-global.less',
-
-			//
-			'development/less/scaffolding/mixins.less',
-			'development/less/scaffolding/layout__fonts.less',
-			'development/less/scaffolding/layout__external.less',
-
-			// старый css
-			'development/less/scaffolding/legacy__all.less',
-
-			// базовые стили макета страниц
-			'development/less/scaffolding/layout__grid.less',
-			'development/less/scaffolding/layout__uikit.less',
-			'development/less/scaffolding/layout__header.less',
-			'development/less/scaffolding/layout__footer.less',
-
-			// стили шаблонов страниц (постранично)
-			'development/less/scaffolding/pages__index.less',
-			'development/less/scaffolding/pages__product-card.less',
-			'development/less/scaffolding/pages__catalog.less',
-			'development/less/scaffolding/pages__page-404.less',
-			'development/less/scaffolding/pages__user-cabinet.less',
-			'development/less/scaffolding/pages__store.less',
-			'development/less/scaffolding/pages__stock.less',
-			'development/less/scaffolding/pages__favorites.less',
-			'development/less/scaffolding/pages__shop.less',
-			'development/less/scaffolding/pages__basket.less',
-			'development/less/scaffolding/pages__reg-card.less',
-			'development/less/scaffolding/pages__promo.less',
-
-			// latest legacy
-			'development/less/scaffolding/legacy__latest.less',
-
-			// system
-			'development/less/scaffolding/system__helpers.less',
+			'development/less/scaffolding/z585-all.less',
 		],
 
 		html: [
@@ -303,8 +269,17 @@ gulp.task('html:build', function () {
 
 // =================== LESS/CSS ===================
 
-// CSS Build
-gulp.task('css:build', function () {
+// CSS Build Development
+gulp.task('css:build--dev', function () {
+	return gulp.src(config.path.less)
+		.pipe(concat('z585_all.css'))
+		.pipe(less())
+		.pipe(gulp.dest('production/css'))
+		.pipe(reload({stream: true}));
+});
+
+// CSS Build Production
+gulp.task('css:build--prod', function () {
 	return gulp.src(config.path.less)
 		.pipe(sourcemaps.init({loadMaps: true}))
 		.pipe(concat('z585_all.min.css'))
@@ -312,7 +287,6 @@ gulp.task('css:build', function () {
 		.pipe(sourcemaps.write('./'))
 		.pipe(cssmin())
 		.pipe(gulp.dest('production/css'))
-		.pipe(gulp.dest('development/css'))
 		.pipe(reload({stream: true}));
 });
 
@@ -326,24 +300,38 @@ gulp.task('css:adfox', function () {
 		.pipe(reload({stream: true}));
 });
 
+// =============== IMAGE MIN ==================
+gulp.task('img:build', function() {
+	gulp.src('development/img/**/*.*')
+  	.pipe(imagemin({
+	    interlaced: true,
+	    progressive: true,
+	    optimizationLevel: 5,
+	    svgoPlugins: [{removeViewBox: true}]
+	}))
+    .pipe(gulp.dest('production/images/'));
+});
+
 
 // =================== BUILD ===================
 gulp.task('build', [
 	'js:build',
-	'css:build',
+	'css:build--dev',
+	'css:build--prod',
 	'css:adfox',
 	'html:build',
+	//'img:build',
 ]);
 
 // =================== WATCH ===================
-gulp.task('watch', function() {
+gulp.task('watch', [ 'build' ], function() {
 
 	// HTML
 	gulp.watch( ['development/htmls/**/*.{tmpl,html}'], ['html:build'] );
 
 	// Less
     //gulp.watch('development/less/**/*.less', [ 'css:build', 'css:adfox' ]);
-    gulp.watch('development/less/**/*.less', [ 'css:build' ]);
+    gulp.watch('development/less/**/*.less', [ 'css:build--dev' ]);
 
 	// JS
 	gulp.watch('development/js/inc/*.js', [ 'js:msalnikov' ] );

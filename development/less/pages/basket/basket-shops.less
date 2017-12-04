@@ -1,21 +1,19 @@
-.basket-shops{
+.basket-shops {
 	display: flex;
 	flex-wrap: nowrap;
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
 
-	&__list{
+	&__list {
 		min-width: 30%;
 		height: 100%;
 		overflow-y: auto;
 		background: #f4f4f4;
 
-		@media @touch{
-			display: none;
-		}
+		@media @touch { display: none; }
 
-		li{
+		li {
 			padding: 14px 0 7px 42px;
 			margin: 0;
 			list-style: none;
@@ -24,32 +22,30 @@
 			text-transform: uppercase;
 			.set-order-sprite(20px, -162px);
 			&.active,
-			&:hover {
-				.set-order-sprite(20px, -55px);
-			}
-			&.active{
-				font-weight: bold;
-			}
+			&:hover { .set-order-sprite(20px, -55px); }
+			&.active{ font-weight: bold; }
 		}
 	}
 
-	&__map{
+	&__map {
 		flex: 1 0 70%;
 		min-height: 100%;
 		height: 100%;
 
-		@media @touch{
-			width: 100%;
-		}
+		@media @touch{ width: 100%; }
 	}
 
-	[data-el='map-balloon']{
-		display: none;
-	}
+	[data-el='map-balloon'] { display: none; }
 
-	.basket-shops__balloon{
+	&__balloon {
 		display: block;
-		.-posa-c-(270px, 140px);
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 270px;
+		height: 140px;
+		margin-top: -70px;
+		margin-left: -135px;
 		z-index: 100;
 		background-color: #fff;
 		.boxing(border-box);
@@ -79,6 +75,7 @@
 			.font-circe_light(9px, 10px, #666);
 			.-posa-tl-(48px, 40px);
 			text-transform: uppercase;
+
 			&_strike {
 				.font-circe_light(9px, 10px, #666);
 				.-posa-tl-(59px, 40px);
@@ -96,6 +93,7 @@
 
 		&-button {
 			display: block;
+			width: 208px;
 			height: 38px;
 			background-color: @color-red;
 			border-radius: 3px;
@@ -103,13 +101,11 @@
 			cursor: pointer;
 			text-align: center;
 			text-transform: uppercase;
+			margin: 0 auto;
 			.-posa-cht-(208px, 84px);
 			.font-circe_regular(14px, 38px, #fff);
 	
-	
-			&:hover {
-				background-color: @color-dark_red;
-			}
+			&:hover { background-color: @color-dark_red; }
 		}
 	}
 }

@@ -1,23 +1,21 @@
-.basket{
-  &__cards {
-
-  }
+.basket {
+  &__cards { }
 }
 
-.basket-card{
+.basket-card {
   padding-bottom: 10px;
-  &__inner{
+  
+  &__inner {
     padding: 25px 0 15px;
-    @media @touch {
-      padding: 10px 0;
-    }
+    
+    @media @touch { padding: 10px 0; }
   }
-  &--promocode {
-    background: #faf3cc;
-  }
+
+  &--promocode { background: #faf3cc; }
   &--bonus {
     background: #f7f7f7;
-    &:after{
+    
+    &:after {
       content: '';
       display: block;
       height: 9px;
@@ -27,73 +25,83 @@
       left: 0;
       right: 0;
     }
+
     @media @touch {
       .basket-card__text {
         padding-left: 40px;
-        span{
-          font-size: 16px;
-        }
+    
+        span { font-size: 16px; }
       }
     }
   }
-  &--bonus-result{
+
+  &--bonus-result {
     display: none;
-    &.is-visible{
-      display: block;
-    }
+    
+    &.is-visible { display: block; }
   }
+
   &__inner > * {
     display: inline-block;
     vertical-align: middle;
+  
     @media @touch {
       display: block;
       width: 250px;
       margin: auto;
     }
   }
+
   &__text {
     width: 350px;
     position: relative;
     padding-left: 65px;
+  
     @media @touch {
       width: 250px;
       margin-bottom: 12px;
     }
+
     img {
       position: absolute;
       top: 50%;
       left: 0;
       transform: translateY(-50%);
     }
-    span{
+    
+    span {
       display: block;
       font-size: 18px;
       text-transform: uppercase;
     }
+
     p {
       font: 300 12px/12px 'Circe';
-      &.card-number{
+    
+      &.card-number {
         font: 300 16px/16px 'Circe';
         color: #666;
       }
+
       a {
         color: #333;
         text-decoration: underline;
-        &:hover {
-          text-decoration: none;
-        }
+      
+        &:hover { text-decoration: none; }
       }
     }
   }
+
   &__input {
     position: relative;
-    &--bonus{
-      visibility: hidden;
-    }
+  
+    &--bonus { visibility: hidden; }
+    
     & > * {
       display: inline-block;
       vertical-align: middle;
     }
+
     input {
       width: 250px;
       height: 40px;
@@ -103,12 +111,14 @@
       background: #fff;
       text-transform: uppercase;
       font-size: 12px;
-      &::placeholder{
+    
+      &::placeholder {
         font: 300 12px/40px 'Circe';
         font-style: italic;
       }
     }
-    .card-points{
+
+    .card-points {
       width: 250px;
       height: 44px;
       line-height: 46px;
@@ -117,10 +127,10 @@
       border-radius: 3px;
       text-transform: uppercase;
       position: relative;
-      span{
-        font: 300 24px/24px 'Circe';
-      }
-      div{
+      
+      span { font: 300 24px/24px 'Circe'; }
+      
+      div {
         position: absolute;
         top: -8px;
         left: 0;
@@ -128,7 +138,8 @@
         text-align: center;
         line-height: 1;
       }
-      i{
+
+      i {
         display: inline-block;
         padding: 0 5px;
         background: #f7f7f7;
@@ -136,19 +147,24 @@
         color: #666;
         font-style: italic;
       }
-      span+div{
+
+      span+div {
         top: auto;
         bottom: -8px;
       }
+
     }
-    .basket-tooltip{
+
+    .basket-tooltip {
       display: none;
+      
       @media @touch {
         position: absolute;
         top: 0;
         left: 100%;
       }
-      &__btn{
+
+      &__btn {
         width: 25px;
         height: 40px;
         line-height: 40px;
@@ -156,14 +172,13 @@
         font-size: 14px;
         text-decoration: underline;
         cursor: pointer;
-        &:hover{
-          text-decoration: none;
-        }
+
+        &:hover { text-decoration: none; }
       }
-      &__content {
-        display: none;
-      }
+
+      &__content { display: none; }
     }
+
     button {
       width: 125px;
       height: 40px;
@@ -175,9 +190,9 @@
       border: 0;
       cursor: pointer;
       margin-left: 20px;
-      &:hover{
-        background: #b32024;
-      }
+    
+      &:hover { background: @color-dark_red; }
+      
       @media @touch {
         width: 250px;
         margin-top: 12px;
@@ -185,24 +200,29 @@
       }
     }
   }
+
   &__saleList {
     margin-left: 8px;
+    
     @media @touch {
       width: 250px;
       margin: 12px auto 0;
     }
+
     li {
       @media @touch {
         width: calc(100% - 9px);
         font-size: 13px;
       }
+
       margin-bottom: 3px;
       font-size: 10px;
       text-transform: uppercase;
       position: relative;
       background: #ffec00;
       padding: 0 3px 0 14px;
-      &:before{
+      
+      &:before {
         content: '';
         display: block;
         width: 8px;
@@ -213,9 +233,9 @@
         transform: translateY(-50%);
         background: url('@{img}/basket/mark.png') no-repeat;
       }
-      &:last-child{
-        margin-bottom: 0;
-      }
+      
+      &:last-child { margin-bottom: 0; }
+      
       span {
         position: absolute;
         top: 0;
@@ -228,12 +248,14 @@
         text-align: center;
         line-height: 15px;
         cursor: pointer;
+        
         @media @touch {
           width: 19px;
           height: 19px;
           line-height: 19px;
         }
-        &:before{
+
+        &:before {
           content: '';
           display: block;
           width: 3px;
@@ -243,28 +265,32 @@
           left: -3px;
           background: #ffec00;
         }
+
       }
     }
   }
-  &__thx{
+  
+  &__thx {
     margin-left: 8px;
     text-transform: uppercase;
     font-size: 12px;
+    
     @media @touch {
       width: 250px;
       margin: 12px auto 0;
       text-align: center;
     }
   }
-  &__reg{
+
+  &__reg {
     display: none;
     background: #fff;
     position: relative;
     padding: 25px 0;
-    &.is-open{
-      display: block;
-    }
-    &:before{
+    
+    &.is-open { display: block; }
+    
+    &:before {
       content: '';
       display: block;
       height: 5px;
@@ -274,7 +300,8 @@
       right: 0;
       background: url(@img-thingies-shadow-5) no-repeat top center;
     }
-    &:after{
+
+    &:after {
       content: '';
       display: block;
       height: 5px;
@@ -285,29 +312,30 @@
       background: url(@img-thingies-shadow-5) no-repeat top center;
       transform: rotate(180deg);
     }
-    .reg-card-content__form-wrapper{
-      margin: 0 auto;
-    }
-    .reg-card-content__form{ 
+
+    .reg-card-content__form-wrapper { margin: 0 auto; }
+    
+    .reg-card-content__form { 
       margin: 0;
 
       &-title,
-      &-field[form-input="cardnumber"]{
-        display: none;
-      }
+      &-field[form-input="cardnumber"] { display: none; }
     }
+
     form {
       width: 250px;
       margin: 0 auto !important;
     }
-    &-title{
+
+    &-title {
       font: 400 24px/24px 'Circe';
       text-align: center;
       text-transform: uppercase;
       padding: 0 35px;
       margin-bottom: 25px;
     }
-    &-close{
+
+    &-close {
       display: block;
       width: 24px;
       height: 24px;
@@ -318,5 +346,6 @@
       top: 0;
       right: 5px;
     }
+    
   }
 }

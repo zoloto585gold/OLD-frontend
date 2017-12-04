@@ -1,0 +1,40 @@
+// Склеивание файлов
+
+// @todo: gulp-order
+@import "../mixins/@path-global.less";
+
+// Mixins
+@import "mixins.less";
+@import "layout__fonts.less";
+@import "layout__external.less";
+
+// старый css
+@import "legacy__all.less";
+
+// базовые стили макета страниц
+@import "layout__grid.less";
+@import "layout__uikit.less";
+@import "layout__header.less";
+@import "layout__footer.less";
+
+// стили шаблонов страниц (постранично)
+@import "pages__index.less";
+@import "pages__product-card.less";
+@import "pages__catalog.less";
+@import "pages__page-404.less";
+@import "pages__user-cabinet.less";
+@import "pages__store.less";
+@import "pages__stock.less";
+@import "pages__favorites.less";
+@import "pages__shop.less";
+@import "pages__basket.less";
+@import "pages__reg-card.less";
+
+// latest legacy
+@import "legacy__latest.less";
+
+// components
+@import "components.less";
+
+// system
+@import "system__helpers.less";

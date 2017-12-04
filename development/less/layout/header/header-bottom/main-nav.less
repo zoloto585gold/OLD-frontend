@@ -1,9 +1,7 @@
 /* нулевой уровень вложенности элементов каталога */
 .main-nav {
 
-
 	&__header {}
-
 
 	&__list {
 		list-style: none;
@@ -12,9 +10,7 @@
 		display: block;
 	}
 
-
 	&__item {}
-
 
 	&__link {}
 }
@@ -22,10 +18,9 @@
 
 
 
-
-
 /* DESKTOP */
 @media @desktop {
+
 	/* нулевой уровень вложенности элементов каталога */
 	.main-nav {
 		position: absolute;
@@ -46,26 +41,18 @@
 		border-top: 1px solid #992528;
 		/*border-bottom: 1px solid #992528;*/
 
+		&__header { display: none; }
 
-		&__header {
-			display: none;
-		}
-
-		&__list {
-			
-		}
+		&__list {	}
 
 		&__item {
 			display: none;
 			/*width: 50%;*/
 			height: 402px;
 
-
 			&--active {
 				position: relative;
-
 				display: block;
-
 
 				&:after {
 					position: absolute;
@@ -93,15 +80,10 @@
 
 		&__link {}
 
-
 		&:hover,
-		&--hover {
-			display: block;
-		}
+		&--hover { display: block; }
 	}
 }
-
-
 
 
 
@@ -115,15 +97,10 @@
 			top: 0;
 		}
 
-
 		&__list {}
-
 
 		&__item {}
 
-
-		&__link {
-			display: none;
-		}
+		&__link { display: none; }
 	}
 }

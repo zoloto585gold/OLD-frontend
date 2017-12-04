@@ -1,44 +1,45 @@
 .basket-list-section {
-	.basket-table{
+	.basket-table {
 		display: table;
 		width: 100%;
-		@media screen and (max-width: @mobile_a-max) {
-			display: block;
-		}
-		&__tr{
+		
+		@media screen and (max-width: @mobile_a-max) { display: block; }
+		
+		&__tr {
 			display: table-row;
-			@media @touch{
+			
+			@media @touch {
 				display: block;
 				position: relative;
 				padding: 15px 0;
 			}
-			&:last-child{
-				.basket-table__td{
-					border-bottom: none;
-				}
+
+			&:last-child {
+				.basket-table__td { border-bottom: none; }
 			}
 		}
-		&--step2{
-			.basket-table__td{
-				padding-bottom: 15px;
-			}
-			.basket-table__td--info{
+
+		&--step2 {
+			.basket-table__td { padding-bottom: 15px; }
+			.basket-table__td--info {
 				width: 375px;
-				@media screen and (max-width: @mobile_a-max) {
-					width: auto;
-				}
+				
+				@media screen and (max-width: @mobile_a-max) { width: auto; }
 			}
 		}
-		&__td{
+
+		&__td {
 			display: table-cell;
 			padding: 15px 0 30px;
 			border-bottom: 1px solid #eaeaea;
+			
 			@media screen and (max-width: @mobile_a-max) {
 				display: block;
 				border-bottom: none;
 				padding: 0;
 			}
-			&-inner{
+
+			&-inner {
 				position: relative;
 
 				[data-btn]{
@@ -47,30 +48,35 @@
 					left: 145px;
 				}
 			}
-			&--info{
+
+			&--info {
 				width: 450px;
+				
 				@media @touch {
 					width: 300px;
 					border: none;
 				}
+
 				@media screen and (max-width: @mobile_a-max) {
 					width: 100%;
 					margin-bottom: 10px;
 				}
 			}
-			&--price{
+
+			&--price {
 				@media @touch {
 					vertical-align: middle;
 					border: none;
 				}
 			}
-			&--nal{
+
+			&--nal {
 				vertical-align: middle;
-				@media @touch {
-					display: none;
-				}
+				
+				@media @touch { display: none; }
 			}
-			&--shops{
+
+			&--shops {
 				@media @touch {
 					display: block;
 					position: absolute;
@@ -79,14 +85,16 @@
 					border: none;
 				}
 
-				@media @mobile{
+				@media @mobile {
 					position: static;
 					padding: 10px 0 0;
 				}
 			}
-			&--remove{
+
+			&--remove {
 				width: 50px;
 				vertical-align: middle;
+				
 				@media @touch {
 					width: auto;
 					position: absolute;
@@ -95,9 +103,8 @@
 					border: none;
 				}
 			}
-			&--city{
-				vertical-align: middle;
-			}
+
+			&--city { vertical-align: middle; }
 		}
 	}
 }

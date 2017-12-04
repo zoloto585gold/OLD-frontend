@@ -1,15 +1,6 @@
-/*	=====================================
-	=====================================
-	=====                           =====
-	=====  БРОНИРОВАНИЕ ИНТЕРФЕЙСА  =====
-	=====                           =====
-	=====================================
-	=====================================
-*/
 
 /* оформление */
 .set-order-sprite(@hor, @ver) { background: url(@img-sprite-pcard-order) @hor @ver no-repeat; }
-
 
 
 /***********************************************/
@@ -25,8 +16,6 @@
 
 /* Общие */
 .pcard-order {
-
-
 
 	&__return {
 		.-block-sqr-(40px);
@@ -108,14 +97,14 @@
 		
 	}
 
-	.pcard-order__content {
-		display: none;
-	}
-}
-.pcard-order__step_active { .-db-; }
-.pcard-order__step_hidden {
-	.pcard-order__header { display: none; }
 	.pcard-order__content { display: none; }
+}
+
+.pcard-order__step_active { .-db-; }
+
+.pcard-order__step_hidden {
+	.pcard-order__header 	{ display: none; }
+	.pcard-order__content 	{ display: none; }
 }
 
 /* КАРТА СЕРОГО ЦВЕТА */
@@ -127,13 +116,14 @@
 }
 
 
-/* ШАГ2 */
+/* ШАГ 2 */
 .pcard-order-scheme {
 	.-dn-;
 	height: 36px;
 	background: #f4f4f4 url(@img-thingies-shadow-4) center bottom no-repeat;
 	text-align: center;
 	font-size: 0;
+
 	&__metro,
 	&__map {
 		display: inline-block;
@@ -143,8 +133,9 @@
 		text-align: center;
 		cursor: pointer;
 		position: relative;
+
 		&:after,
-		&:before{
+		&:before {
 			content: '';
 			display: block;
 			height: 33px;
@@ -154,14 +145,17 @@
 			top: 0;
 			left: 0;
 		}
+
 		&.active {
 			.set-order-sprite(center, -260px);
 			color: @color-red;
 		}
 	}
+
 	&__map {
 		&:after { right: 0; z-index: 4; }
 	}
+
 	&__metro {
 		&:before { display: none; }
 		&:after { right: 0; }
@@ -176,15 +170,17 @@
 
 
 
-/* ШАГ3 */
+/* ШАГ 3 */
 .pcard-order-form {
 	.-posa-cht-(525px, 80px);
 	/*height: 80px;*/
+	
 	&__label {
 		.-posa-tl-(0px, 0px);
 		.font-circe_regular(11px, 20px, #666);
 		text-transform: uppercase;
 	}
+	
 	&__label:before {
 		content: '';
 		.-block-(49px, 48px);
@@ -193,6 +189,7 @@
 		background-color: #f4f4f4;
 		.-posa-tl-(29px, 0, 10);
 	}
+	
 	&__field {
 		.-posa-tl-(28px, px);
 		.-block-(300px, 50px, 15px 20px 15px 65px);
@@ -231,11 +228,13 @@
 		&:hover { background-position-x: -28px; }
 	}
 }
+
 .pcard-order__user-phone {
 	.pcard-order-form__label:before {
 		.set-order-sprite(9px, -721px);
 	}
 }
+
 .pcard-order__sms-code {
 	top: 214px;
 	.pcard-order-form__label:before {
@@ -248,6 +247,7 @@
 	.-posa-tl-(157px, 103px);
 	.font-circe_regular(10px, 12px, #999);
 }
+
 .pcard-order-form__message {
 	display: none;
 	text-align: center;
@@ -265,11 +265,18 @@
 
 	padding-top: 28px;
 }
+
 .pcard-order-form__message p {
 	padding: 0;
 	margin: 0;
 }
 
+// ==============================================================================================
+// ==============================================================================================
+//								С ЭТИМ НАДО ЧТО ТО ДЕЛАТЬ !!
+// 								5 повторов шага 4
+// ==============================================================================================
+// ==============================================================================================
 
 /* ШАГ 4 */
 @step-4-width: 730px;
@@ -288,7 +295,6 @@
 
 @step-4-text-padding: 0 35px;
 /*@step-4-*/
-
 
 .pcard-order {
 	&__step-4 {
@@ -310,6 +316,7 @@
 	.font-circe_light(@step-4-fsz, @step-4-lh, #333);
 	text-align: center;
 }
+
 .step-4-text-1,
 .step-4-text-2,
 .step-4-text-3,
@@ -347,9 +354,7 @@
 			width: @width-inner;
 			.-posa-ch-(@width-inner);
 
-			&__label {
-				font-size: 12px;
-			}
+			&__label { font-size: 12px; }
 
 			&__notice { .-tl-(137px, 144px); }
 
@@ -364,17 +369,17 @@
 
 			&__button { top: 100px; }
 		}
+
 		&__user-phone {
 			top: 60px;
-
 			.pcard-order-form__button { top: 120px; }
 		}
-		&__sms-code {
-			top: 250px;
-		}
+
+		&__sms-code { top: 250px; }
 	}
 
 	/* ШАГ 4 */
+
 	@step-4-width: 580px;
 	@step-4-height: 630px;
 
@@ -416,6 +421,7 @@
 		.font-circe_light(@step-4-fsz, @step-4-lh, #333);
 		text-align: center;
 	}
+
 	.step-4-text-1,
 	.step-4-text-2,
 	.step-4-text-3,
@@ -461,14 +467,13 @@
 
 			&__button { top: 100px; }
 		}
+
 		&__user-phone {
 			top: 30px;
-
 			.pcard-order-form__button { top: 120px; }
 		}
-		&__sms-code {
-			top: 230px;
-		}
+
+		&__sms-code { top: 230px; }
 
 		&__step-4 {
 			width: 100%;
@@ -771,3 +776,10 @@
 	.step-4-img { margin-top: @step-4-img-top; }
 	.step-4-img img { width: @step-4-img-width; height: @step-4-img-height; }
 }
+
+/* 
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+*/
