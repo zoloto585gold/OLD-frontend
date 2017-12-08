@@ -17,7 +17,19 @@ const assign = require('object-assign');
 const browserSync = require('browser-sync');
 const modRewrite = require('connect-modrewrite');
 const reload = browserSync.reload;
+// Image Optimize
 const imagemin = require('gulp-imagemin');
+// Autoprefixer
+const autoprefixer = require('gulp-autoprefixer');
+ 
+// gulp.task('default', () =>
+//     gulp.src('src/app.css')
+//         .pipe(autoprefixer({
+//             browsers: ['last 2 versions'],
+//             cascade: false
+//         }))
+//         .pipe(gulp.dest('dist'))
+// );
 
 // =============================================
 // Если нужно перекрыть объект в конфиге создаем
@@ -274,6 +286,10 @@ gulp.task('css:build--dev', function () {
 	return gulp.src(config.path.less)
 		.pipe(concat('z585_all.css'))
 		.pipe(less())
+		.pipe(autoprefixer({
+            browsers: ['last 3 versions'],
+            cascade: true
+        }))        
 		.pipe(gulp.dest('production/css'))
 		.pipe(reload({stream: true}));
 });
@@ -284,9 +300,13 @@ gulp.task('css:build--prod', function () {
 		.pipe(sourcemaps.init({loadMaps: true}))
 		.pipe(concat('z585_all.min.css'))
 		.pipe(less())
-		.pipe(sourcemaps.write('./'))
+		.pipe(autoprefixer({
+            browsers: ['last 3 versions'],
+            cascade: true
+        }))				
+        .pipe(sourcemaps.write('./'))
 		.pipe(cssmin())
-		.pipe(gulp.dest('production/css'))
+		.pipe(gulp.dest('production/css'))		
 		.pipe(reload({stream: true}));
 });
 
