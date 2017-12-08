@@ -36,3 +36,5 @@ production/css/*.css
 /production/js/libs.min.js
 /production/js/libs.min.js
 /production/**/*.map
+/development/js/legacy.min.js.map
+/development/js/legacy.min.js

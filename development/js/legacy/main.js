@@ -140,21 +140,19 @@ jQuery(document).ready(function ($) {
             $(this).css('display', 'none');
             $('#overlay').fadeOut(400);
         });
-        $.cookie("city", $('.jq-selectbox__select-text').text(), { expires : 365, path: '/' });
         if($('#region_id').length){
             $('#region_id option:contains("'+$('.jq-selectbox__select-text').text()+'")').attr('selected', 'selected');
             $('#region_id').trigger('change');
         } 
-        set_city();
+        set_city($('.jq-selectbox__select-text').text());
         return false;
     });
     $(document).on('click', '.choose-city-m a[data-city]', function(){
-        $.cookie('city', $(this).data('city'), { expires: 365, path: '/' });
         if($('#region_id').length){
             $('#region_id option:contains("'+$(this).data('city')+'")').attr('selected', 'selected');
             $('#region_id').trigger('change');
         } 
-        set_city();
+        set_city( $(this).data('city'));
         $('.container').toggleClass("open-sidebar");
         return false;
     });
@@ -713,83 +711,22 @@ function getval(sel) {
     $(this).html(b);
 }
 
-/**
- * Скроем фильтр "Доступно к бронированию" для Санкт-Петербурга
- */
-function setBronFilterVisibility()
-{
-	var filterBlock = $('#bron-available-label');
-	var city = $.cookie('city');
-	if (city == 'Санкт-Петербург') {
-		filterBlock.hide();
-		/** Если уже установлен фильтр, уберем */
-		if (window.location.search.indexOf('bookingFilter=1') != -1) {
-			window.location.search = window.location.search.replace('&bookingFilter=1', '');
-		}
-	} else {
-		filterBlock.show();
-	}	
+function get_city() {
+    var city = $("#choose-city").text();
+    if (!city) city = "Санкт-Петербург";
+    return city;
 }
 
-$(function(){
-	setBronFilterVisibility();
-});
+function set_city(city){
+    $.ajax({
+        url: "/ajax/set_city.php",
+        data: {city: city},
+        type: "post",
+    }).done(function() {
+        location.reload();
+    });
 
-function set_city(){
-    var city = $.cookie('city');
-    setBronFilterVisibility();
-    $('.choose-city-m > a').text(city);
-    $('#choose-city a span').text(city);
-    $('select.select_city option:contains("'+city+'")').attr('selected', 'selected');
-    var item = $('.catalog_detail'), id = item.data('id');
-
-	if($(".pcard-store").length>0)
-	{
-		getOfferData();
-	}
-
-    if($(".bron_yes").length>0) bron_button();
-    if($(".bron_yes_viewed").length>0) bron_button_viewed();
-
-
-  	if( item.length > 0 && !!id ){
-        $('#podbor_modal').addClass('non');
-        $.ajax({
-            url: "/about/address/get_city_availible.php",
-            data: {id: id},
-            type: "post",
-            success: function(data){
-                $('#podbor_popup').html(data);
-            }
-        }).done(function() {
-            if( $(document).find('#perfect_scroll_bar tr').length ){
-                $(document).find('.btn_prize,#podbor_modal').removeClass('non');
-                $(document).find('.wait').addClass('non');
-            }else{
-                $(document).find('.btn_prize,#podbor_modal').addClass('non');
-                $(document).find('.wait').removeClass('non');
-            }
-        });
-    }else{
-        $.ajax({
-            url: "/bitrix/templates/.default/iblock/special_collection.php",
-            data: {city: city},
-            type: "get",
-            success: function(data){
-                $('.special_collection .wrp.inner_slider').html(data);
-                $("#carousel_special_col").owlCarousel({
-                    autoPlay: false,
-                    items: 5, //10 items above 1000px browser width
-                    itemsDesktop: [900, 3], //5 items between 1000px and 901px
-                    itemsDesktopSmall: [500, 2], // betweem 900px and 601px
-                    itemsTablet: [400, 3], //2 items between 600 and 0
-                    itemsMobile: false, // itemsMobile disabled - inherit from itemsTablet option
-                    navigation: true,
-                    pagination: false
-                });
-            }
-        });
-    }
+    return;
 }
 
 

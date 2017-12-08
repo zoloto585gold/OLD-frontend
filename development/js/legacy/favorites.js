@@ -1,100 +1,111 @@
 /**
  * Работа с избранными товарами
  */
-function toggleFavorite(itemId, object, successHandlerAdd, successHandlerDelete) {
-	arRequest = {
-		url: "/favorites/ajaxHandler.php",
-		type: "post",
-		dataType: "text",
-		context: object,
+
+function initFavoritesActions() {
+	// Счетчик избранных продуктов в шапке
+	var topCntContainer = $('#top-favirites-cnt');
+
+	// Параметры запроса
+	var reqParams = {
+		url: '/favorites/ajaxHandler.php',
+		type: 'post',
+		dataType: 'text',
 		data: {
-			id: itemId
+			id: 0
 		}
 	};
-	//$(object).toggleClass('catalog-item__fav--active');
-	//
-	if ($(object).hasClass('catalog-item__fav--active')) {
-		arRequest.data.action = 'delete';
-		arRequest.success = successHandlerDelete;
-	} else {
-		arRequest.data.action = 'add';
-		arRequest.success = successHandlerAdd;
-	}
-	$.ajax(arRequest);
-}
+	
+	/**
+	 * События для кнопки в карточке товаров и в списке продуктов
+	 * Функция вызывается несколько раз при подгрузке данных,
+	 * поэтому сначала снимаем событие через .off
+	 */
+	$(document)
+		.off('click', '.js-fav-btn, .catalog-item__fav')
+		.on('click', '.js-fav-btn, .catalog-item__fav', function (e) {
 
+		var $btn = $(this);
+		var $list = $btn.closest('.catalog-list');
+		var $item = $btn.closest('.catalog-item');
+		var $nextPage = $('.catalog .pagination_list__item__link-next');
+		var itemsLen = $list.find('.catalog-item').length;
+		var isActive = $(this).hasClass('is-active');
+		var isDisabled = typeof $btn.attr('disabled') !== 'undefined';
+		var isFavPage = $list.hasClass('catalog-list--favorites');
 
+		e.preventDefault();
 
-/**
- *
- *
- */
-function markFavorites() {
-	var topCntContainer = $('#top-favirites-cnt');
-	$.post('/favorites/ajaxHandler.php', {'action': 'list'}, function(data){
+		if (isDisabled) {
+			return false;
+		}
+
+		reqParams.data.id = $(this).data('id');
+		reqParams.data.action = isActive ? 'delete':'add';
+
+		// Чтобы не ждать ответа сразу меняем текст и класс кнопки
+		// Также защищаем от повторного нажатия
+		reqParams.beforeSend = function() {
+			var text = isActive ? 'Добавить в избранное' : 'Убрать из избранного';
+
+			$btn[isActive ? 'removeClass':'addClass']('is-active');
+			$btn.attr('disabled', 'disabled').text(text);
+		}
+
+		// Снимаем disabled с кнопки
+		reqParams.complete = function() {
+			$btn.removeAttr('disabled');
+		}
+
+		// Обновляем счетчик в шапке после ответа
+		reqParams.success = function(response) {
+			topCntContainer.html(response);
+		}
+
+		$.ajax(reqParams);
+
+		if (isFavPage) {
+			// Если находимся на странице избранное
+
+			$item.remove();
+
+			if (--itemsLen == 0) {
+				if ($nextPage.length) {
+					// Обновляем страницу, чтобы перейти на следующую
+					window.location.reload();
+					$('.favorites .catalog .wait').show();
+				} else {
+					// Показываем сообщение, что ничего нет
+					$('.favorites .catalog .no_faves').show();
+				}
+			}
+		}
+	});
+
+	// =====================================================
+	// Отмечаем уже избранные 
+	$.post(reqParams.url, {'action': 'list'}, function(data){
 		try {
 			var oFavorites = $.parseJSON(data);
+
+			console.log(JSON.stringify(oFavorites));
+			
 			topCntContainer.text(oFavorites.length);
+
 			$.each(oFavorites, function(k, itemId) {
 				var item = $('#favorites_item_' + itemId + ', .favorites_item_' + itemId);
 				if (item.length) {
-					$('.catalog-item__fav', item)
-						.addClass('catalog-item__fav--active')
-						.attr('title', 'Убрать из избранного');
+					item.addClass('is-active')
+						.attr('title', 'Убрать из избранного')
+						.data('favorite-text', 'Убрать из избранного')
+						.text('Убрать из избранного');
 				}
 			});
 		} catch (e) {
 			topCntContainer.text(0);
 		}
 
-		// $('.catalog-item__fav').show();
 	});
-}
-
-/**
- * В крточке товара метод вызывается дважды
- * Один раз при загрузке страницы, другой раз в компоненте catalog.bigdata.products
- * Чтобы навесить обработчики на загруженные рекомендации
- * Поэтому сначала снимаем обработчичи через off
- */
-function initFavoritesActions() {
-	// работа с "фаворитами"" в шапке сайта(красная "полоска" в шапке сайте, элемент с кинкой в виде "звездочки")
-	var topCntContainer = $('#top-favirites-cnt');
-
-	$(document).on('click','.catalog-item__fav', function() {
-		var itemId = $(this).data('id');
-
-		toggleFavorite(itemId, this, function(result) {
-			$(this).addClass('catalog-item__fav--active');
-			$(this).text('Убрать из избранного');
-			topCntContainer.html(result);
-		}, function(result) {
-			$(this).removeClass('catalog-item__fav--active');
-			$(this).text('Добавить в избранное');
-			topCntContainer.html(result);
-		});
-		return false;
-	});
-
-
-
-
-
-
-	$(document).on('click','.catalog-item__fav--active', function() {
-		var itemId = $(this).data('id');
-
-		toggleFavorite(itemId, this, null, function(result) {
-			//$(this).parent().parent().remove();
-			topCntContainer.html(result);
-			if ($('.favorites .catalog_list .catalog-item').length == 0) {
-				$('.favorites .no_faves').show();
-				$('.favorites .no_faves').html('<p>К сожалению, вы пока не отметили ни один товар.</p><p>Мы будем очень рады, если вы посетите наш каталог и выберете что-нибудь интересное.</p>');
-			}
-		});
-	});
-
-	markFavorites();
 }
 
 if (window.frameCacheVars !== undefined) {
