@@ -244,7 +244,7 @@ gulp.task('js:msalnikov', function () {
 
 gulp.task('js:legacy', function() {
     return gulp.src('development/js/legacy/*.js')
-			.pipe(uglifyjs('legacy.js', {
+			.pipe(uglifyjs('legacy.min.js', {
 				outSourceMap: true
 			}))
 		 .pipe(gulp.dest('development/js'))
@@ -254,7 +254,6 @@ gulp.task('js:legacy', function() {
 
 // JS ALL TASKS
 gulp.task('js:build', [
-	'js:libs',
 	'js:libs',
 	'js:app',
 	'js:pages',
