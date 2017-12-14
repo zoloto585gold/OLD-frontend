@@ -2,6 +2,8 @@
 
 # ENVIROMENT
 node_modules/
+logs/
+gulp.conf.json
 
 
 #########

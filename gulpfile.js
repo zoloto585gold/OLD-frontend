@@ -1,6 +1,7 @@
 'use strict';
 
 const gulp = require('gulp');
+const gutil = require('gulp-util');
 const less = require('gulp-less');
 const concat = require('gulp-concat');
 const cssmin = require('gulp-cssmin');
@@ -17,19 +18,11 @@ const assign = require('object-assign');
 const browserSync = require('browser-sync');
 const modRewrite = require('connect-modrewrite');
 const reload = browserSync.reload;
-// Image Optimize
 const imagemin = require('gulp-imagemin');
-// Autoprefixer
 const autoprefixer = require('gulp-autoprefixer');
- 
-// gulp.task('default', () =>
-//     gulp.src('src/app.css')
-//         .pipe(autoprefixer({
-//             browsers: ['last 2 versions'],
-//             cascade: false
-//         }))
-//         .pipe(gulp.dest('dist'))
-// );
+const ftp = require('vinyl-ftp');
+const gulpSSH = require('gulp-ssh');
+const expandTilde = require('expand-tilde');
 
 // =============================================
 // Если нужно перекрыть объект в конфиге создаем
@@ -50,6 +43,30 @@ const config = assign({
 				'/bitrix/templates/zoloto/frontend/images /img [L]',
 			])
 		]
+	},
+
+	ssh: {
+		// Перекрывается в confPath
+		host: '',
+		port: 22,
+		username: '',
+		password: '',
+		privateKey: '',
+		passphrase: '',
+	},
+
+	deploy: {
+		// Перекрывается в confPath
+		path: ''
+	},
+
+	autoprefixer: {
+		dev: {
+			browsers: ['last 2 versions'],
+		},
+		prod: {
+			browsers: ['> 2%'],
+		},
 	},
 
 	path: {
@@ -98,7 +115,7 @@ const config = assign({
 				'development/js/app/z585.htmlrender.js',
 				'development/js/app/z585.debug.js',
 				'development/js/app/z585.yamaps.js',
-				'development/js/app/z585.basket.js',
+				'development/js/app/**/*.js',
 			],
 
 			pages: [
@@ -107,11 +124,7 @@ const config = assign({
 
 			views: [
 				'development/js/views/*.js'
-			],
-
-			msalnikov: [
-				'development/js/inc/*.js',
-			],
+			]
 		},
 
 		less: [
@@ -139,6 +152,13 @@ const config = assign({
 	},
 }, fs.existsSync(confPath) ? require(confPath) : {});
 
+// подключение по ssh
+const ssh = new gulpSSH({
+	ignoreErrors: false,
+	sshConfig: config.ssh
+});
+
+// Общие ф-ции
 const helper = {
 
 	/**
@@ -170,7 +190,7 @@ gulp.task('webserver', function () {
 
 // =================== JavaScript ===================
 
-// JS Libs
+// Вендоры
 gulp.task('js:libs', function () {
 	return gulp.src(config.path.js.libs)
 		.pipe(concat('libs.min.js'))
@@ -179,7 +199,7 @@ gulp.task('js:libs', function () {
 		.pipe(reload({stream: true}));
 });
 
-// JS App
+// Основные скрипты
 gulp.task('js:app', function () {
 	return gulp.src(config.path.js.app)
 		//.pipe(sourcemaps.init({loadMaps: true}))
@@ -192,7 +212,7 @@ gulp.task('js:app', function () {
 		.pipe(reload({stream: true}));
 });
 
-// JS Pages
+// Скрипты для отдельных страниц
 gulp.task('js:pages', function () {
 	var pagesPath = 'development/js/pages/';
 	var folders = helper.getFolders(pagesPath);
@@ -233,15 +253,7 @@ gulp.task('js:adfox', function () {
 		.pipe(gulp.dest('production/js/'));
 });
 
-// msalnikov.js
-// @todo: переделать, сделать более понятным
-gulp.task('js:msalnikov', function () {
-	return gulp.src(config.path.js.msalnikov)
-		.pipe(concat('msalnikov.js'))
-		.pipe(gulp.dest('development/js/legacy'))
-		.pipe(reload({stream: true}));
-});
-
+// Устаревшие скрипты
 gulp.task('js:legacy', function() {
 	return gulp.src('development/js/legacy/*.js')
 		.pipe(order([
@@ -256,7 +268,7 @@ gulp.task('js:legacy', function() {
 		.pipe(reload({stream: true}));
 });
 
-// JS ALL TASKS
+// Сборка скриптов
 gulp.task('js:build', [
 	'js:libs',
 	'js:app',
@@ -268,7 +280,7 @@ gulp.task('js:build', [
 
 // =================== HTML ===================
 
-// HTML Build
+// Шаблоны
 gulp.task('html:build', function () {
 	return gulp.src(config.path.html)
 		.pipe(fileinclude({
@@ -283,29 +295,23 @@ gulp.task('html:build', function () {
 
 // =================== LESS/CSS ===================
 
-// CSS Build Development
+// CSS сборка без минификации
 gulp.task('css:build--dev', function () {
 	return gulp.src(config.path.less)
 		.pipe(concat('z585_all.css'))
 		.pipe(less())
-		.pipe(autoprefixer({
-            browsers: ['last 3 versions'],
-            cascade: true
-        }))        
+		.pipe(autoprefixer(config.autoprefixer.dev))
 		.pipe(gulp.dest('production/css'))
 		.pipe(reload({stream: true}));
 });
 
-// CSS Build Production
+// CSS сборка для прода
 gulp.task('css:build--prod', function () {
 	return gulp.src(config.path.less)
 		.pipe(sourcemaps.init({loadMaps: true}))
 		.pipe(concat('z585_all.min.css'))
 		.pipe(less())
-		.pipe(autoprefixer({
-            browsers: ['last 3 versions'],
-            cascade: true
-        }))				
+		.pipe(autoprefixer(config.autoprefixer.prod))
         .pipe(sourcemaps.write('./'))
 		.pipe(cssmin())
 		.pipe(gulp.dest('production/css'))		
@@ -317,12 +323,14 @@ gulp.task('css:adfox', function () {
 	return gulp.src(config.path.adfox.less)
 		.pipe(concat('z585_adfox.min.css'))
 		.pipe(less())
+		.pipe(autoprefixer(config.autoprefixer.prod))
 		.pipe(cssmin())
 		.pipe(gulp.dest('production/css'))
 		.pipe(reload({stream: true}));
 });
 
 // =============== IMAGE MIN ==================
+// Оптимизация картинок
 gulp.task('img:build', function() {
 	gulp.src('development/img/**/*.*')
   	.pipe(imagemin({
@@ -336,6 +344,7 @@ gulp.task('img:build', function() {
 
 
 // =================== BUILD ===================
+// Сборка проекта
 gulp.task('build', [
 	'js:build',
 	'css:build--dev',
@@ -346,6 +355,7 @@ gulp.task('build', [
 ]);
 
 // =================== WATCH ===================
+// Слежение за изменениями в файлах
 gulp.task('watch', [ 'build' ], function() {
 
 	// HTML
@@ -356,7 +366,6 @@ gulp.task('watch', [ 'build' ], function() {
     gulp.watch('development/less/**/*.less', [ 'css:build--dev' ]);
 
 	// JS
-	gulp.watch('development/js/inc/*.js', [ 'js:msalnikov' ] );
 	gulp.watch('development/js/legacy/*.js', [ 'js:legacy' ] );
 	gulp.watch('development/js/libs/**/*.js', [ 'js:libs' ] );
 	gulp.watch('development/js/app/*.js', [ 'js:app' ] );
@@ -365,5 +374,44 @@ gulp.task('watch', [ 'build' ], function() {
 
 });
 
+// =================== DEPLOY ===================
+// Выгрузка на сервер
+gulp.task('deploy', [
+	'deploy--css',
+	'deploy--js',
+	'deploy--img',
+]);
+
+gulp.task('deploy--css', function() {
+	return gulp.src('production/css/**/')
+		.pipe(ssh.dest(config.deploy.path + '/css'));
+});
+
+gulp.task('deploy--js', function() {
+	return gulp.src('production/js/**/')
+		.pipe(ssh.dest(config.deploy.path + '/js'));
+});
+
+gulp.task('deploy--img', function() {
+	return gulp.src('production/images/**/')
+		.pipe(ssh.dest(config.deploy.path + '/images'));
+});
+
+// =================== GIT ===================
+
+// Создание новой ветки
+// @TODO: чекаут на мастера, пулл, чекаут на новую ветку
+gulp.task('git-start', function() {
+	const cmdList = [
+		'cd '+ config.deploy.path,
+		'git status -uno'
+	];
+
+	return ssh
+		.shell(cmdList, { filePath: 'git-start.log' })
+		.pipe(gulp.dest('logs'))
+});
+
 // =================== START ===================
+// Запуск локального сервера и слежение
 gulp.task('default', [ 'webserver', 'watch' ]);
