@@ -243,13 +243,17 @@ gulp.task('js:msalnikov', function () {
 });
 
 gulp.task('js:legacy', function() {
-    return gulp.src('development/js/legacy/*.js')
-			.pipe(uglifyjs('legacy.min.js', {
-				outSourceMap: true
-			}))
-		 .pipe(gulp.dest('development/js'))
-     .pipe(gulp.dest('production/js'))
-	   .pipe(reload({stream: true}));
+	return gulp.src('development/js/legacy/*.js')
+		.pipe(order([
+			'news.js',
+			'main.js',
+			'**/*.js',
+		]))
+		.pipe(uglifyjs('legacy.min.js', {
+			outSourceMap: true
+		}))
+		.pipe(gulp.dest('production/js'))
+		.pipe(reload({stream: true}));
 });
 
 // JS ALL TASKS
@@ -259,7 +263,6 @@ gulp.task('js:build', [
 	'js:pages',
 	'js:views',
 	'js:adfox',
-	// 'js:msalnikov',
 	'js:legacy',
 ]);
 
