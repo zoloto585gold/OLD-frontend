@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "zoloto585",
   "version": "1.0.0",
   "description": "zoloto585 build",
@@ -9,6 +9,7 @@
     "browser-sync": "^2.18.12",
     "connect-modrewrite": "^0.10.1",
     "cssnano": "^3.10.0",
+    "expand-tilde": "^2.0.2",
     "fs": "0.0.1-security",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
@@ -20,10 +21,13 @@
     "gulp-order": "^1.1.1",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^2.4.1",
+    "gulp-ssh": "^0.6.0",
     "gulp-uglifyjs": "^0.6.2",
+    "gulp-util": "^3.0.8",
     "gulp-zip": "^3.2.0",
     "object-assign": "^4.1.1",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "vinyl-ftp": "^0.6.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
