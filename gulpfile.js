@@ -33,9 +33,9 @@ const config = assign({
 		server: {
 			baseDir: [ './development', './production' ]
 		},
-		tunnel: false,
+		tunnel: true,
 		host: 'localhost',
-		port: 9000,
+		port: 8000,
 		logPrefix: 'Frontend_z585',
 		middleware: [
 			modRewrite([
@@ -414,4 +414,4 @@ gulp.task('git-start', function() {
 
 // =================== START ===================
 // Запуск локального сервера и слежение
-gulp.task('default', [ 'webserver', 'watch' ]);
+gulp.task('default', [ 'watch', 'webserver' ]);
