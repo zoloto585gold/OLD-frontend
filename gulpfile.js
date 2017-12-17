@@ -1,3 +1,7 @@
+/**
+ * @version 1.5.0
+ */
+
 'use strict';
 
 const gulp = require('gulp');
@@ -12,7 +16,6 @@ const zip = require('gulp-zip');
 const fileinclude = require('gulp-file-include');
 const order = require('gulp-order');
 const uglifyjs = require('gulp-uglifyjs');
-// const mainBowerFiles = require('gulp-main-bower-files');
 const sourcemaps = require('gulp-sourcemaps');
 const assign = require('object-assign');
 const browserSync = require('browser-sync');
@@ -20,9 +23,10 @@ const modRewrite = require('connect-modrewrite');
 const reload = browserSync.reload;
 const imagemin = require('gulp-imagemin');
 const autoprefixer = require('gulp-autoprefixer');
-const ftp = require('vinyl-ftp');
 const gulpSSH = require('gulp-ssh');
 const expandTilde = require('expand-tilde');
+const plato = require('gulp-plato');
+const exec = require('child_process').exec;
 
 // =============================================
 // Если нужно перекрыть объект в конфиге создаем
@@ -124,7 +128,12 @@ const config = assign({
 
 			views: [
 				'development/js/views/*.js'
-			]
+			],
+			
+			report: [
+				'development/js/app/**/*.js',
+				'development/js/legacy/**/*.js',
+			],
 		},
 
 		less: [
@@ -202,9 +211,6 @@ gulp.task('js:libs', function () {
 // Основные скрипты
 gulp.task('js:app', function () {
 	return gulp.src(config.path.js.app)
-		//.pipe(sourcemaps.init({loadMaps: true}))
-		//.pipe(concat('app.js'))
-		//.pipe(sourcemaps.write())
 		.pipe(uglifyjs('app.min.js', {
 			outSourceMap: true
 		}))
@@ -219,11 +225,6 @@ gulp.task('js:pages', function () {
 
 	var tasks = folders.map(function(folder) {
 		return gulp.src(path.join(pagesPath, folder, '/*.js'))
-			//.pipe(sourcemaps.init({loadMaps: true}))
-			//.pipe(concat(folder + '.js'))
-			//.pipe(sourcemaps.write())
-			//.pipe(gulp.dest('production/js'))
-			//.pipe(rename({ suffix: '.min' }))
 			.pipe(uglifyjs(folder + '.min.js', {
 				outSourceMap: true
 			}))
@@ -244,9 +245,6 @@ gulp.task('js:views', function () {
 // JS Adfox
 gulp.task('js:adfox', function () {
 	return gulp.src(config.path.adfox.js)
-		//.pipe(sourcemaps.init({loadMaps: true}))
-		//.pipe(concat('adfox.js'))
-		//.pipe(sourcemaps.write())
 		.pipe(uglifyjs('adfox.min.js', {
 			outSourceMap: true
 		}))
@@ -257,7 +255,7 @@ gulp.task('js:adfox', function () {
 gulp.task('js:legacy', function() {
 	return gulp.src('development/js/legacy/*.js')
 		.pipe(order([
-			'news.js',
+			'new.js',
 			'main.js',
 			'**/*.js',
 		]))
@@ -266,6 +264,21 @@ gulp.task('js:legacy', function() {
 		}))
 		.pipe(gulp.dest('production/js'))
 		.pipe(reload({stream: true}));
+});
+
+// Аналитика кода. Складывается в папку report
+gulp.task('js:report', function () {
+	return gulp.src(config.path.js.report)
+		.pipe(plato('report', {
+			jshint: {
+				options: {
+					strict: true
+				}
+			},
+			complexity: {
+				trycatch: true
+			}
+		}));
 });
 
 // Сборка скриптов
@@ -401,7 +414,7 @@ gulp.task('deploy--img', function() {
 
 // Создание новой ветки
 // @TODO: чекаут на мастера, пулл, чекаут на новую ветку
-gulp.task('git-start', function() {
+gulp.task('git-start-test', function() {
 	const cmdList = [
 		'cd '+ config.deploy.path,
 		'git status -uno'
@@ -410,6 +423,28 @@ gulp.task('git-start', function() {
 	return ssh
 		.shell(cmdList, { filePath: 'git-start.log' })
 		.pipe(gulp.dest('logs'))
+});
+
+gulp.task('git-start', function () {
+	var gitUpdate = [
+		'git checkout master',
+		'git pull upstream master',
+		'git checkout -b test-171217',
+		'npm i',
+	];
+
+	exec('git ls-files -m', function(code, stdout, stderr) {
+		console.log(stdout.length);
+
+		if (stdout.length) {
+			console.log('Невозможно продолжить, найдены измененные файлы:');
+			console.log(stdout);
+		} else {
+			exec(gitUpdate.join(' && '), function(code, stdout, stderr) {
+				console.log(stdout);
+			});	
+		}
+	});	
 });
 
 // =================== START ===================

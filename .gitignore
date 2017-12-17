@@ -3,6 +3,7 @@
 # ENVIROMENT
 node_modules/
 logs/
+report/
 gulp.conf.json
 
 
