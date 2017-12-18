@@ -219,7 +219,7 @@
 			$('.alt-main-nav__item[data-inner-list=' + item['tab-number'] + ']').attr('data-inner-background-color', item['inner-background-color']);
 			$('.alt-main-nav__item[data-inner-list=' + item['tab-number'] + ']').attr('data-outer-background-image', item['outer-background-image']);
 			$('.alt-main-nav__item[data-inner-list=' + item['tab-number'] + ']').attr('data-outer-background-color', item['outer-background-color']);
-			console.log(item['tab-number']);
+			//console.log(item['tab-number']);
 		});
 	}
 
