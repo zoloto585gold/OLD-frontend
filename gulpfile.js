@@ -1,5 +1,5 @@
 /**
- * @version 1.5.1
+ * @version 1.5.2
  */
 
 'use strict';
@@ -162,6 +162,10 @@ const config = assign({
 }, fs.existsSync(confPath) ? require(confPath) : {});
 
 // подключение по ssh
+if (config.ssh.privateKey.length) {
+	config.ssh.privateKey = fs.readFileSync(config.ssh.privateKey);
+}
+
 const ssh = new gulpSSH({
 	ignoreErrors: false,
 	sshConfig: config.ssh
