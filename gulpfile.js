@@ -1,5 +1,5 @@
 /**
- * @version 1.5.3
+ * @version 1.5.4
  */
 
 'use strict';
@@ -27,6 +27,7 @@ const gulpSSH = require('gulp-ssh');
 const expandTilde = require('expand-tilde');
 const plato = require('gulp-plato');
 const exec = require('child_process').exec;
+const newer = require('gulp-newer');
 
 // =============================================
 // Если нужно перекрыть объект в конфиге создаем
@@ -143,6 +144,10 @@ const config = assign({
 		html: [
 			'development/htmls/*.tmpl',
 			'!development/htmls/your-page.tmpl'
+		],
+
+		images: [
+			'development/img/**/*.*',
 		],
 
 		adfox: {
@@ -349,14 +354,16 @@ gulp.task('css:adfox', function () {
 // =============== IMAGE MIN ==================
 // Оптимизация картинок
 gulp.task('img:build', function() {
-	gulp.src('development/img/**/*.*')
-  	.pipe(imagemin({
-	    interlaced: true,
-	    progressive: true,
-	    optimizationLevel: 5,
-	    svgoPlugins: [{removeViewBox: true}]
-	}))
-    .pipe(gulp.dest('production/images/'));
+	let dest = 'production/images/';
+	return gulp.src(config.path.images)
+		.pipe(newer(dest))
+		.pipe(imagemin({
+			interlaced: true,
+			progressive: true,
+			optimizationLevel: 5,
+			svgoPlugins: [{removeViewBox: true}]
+		}))
+		.pipe(gulp.dest(dest));
 });
 
 
@@ -368,7 +375,7 @@ gulp.task('build', [
 	'css:build--prod',
 	'css:adfox',
 	'html:build',
-	//'img:build',
+	'img:build',
 ]);
 
 // =================== WATCH ===================
