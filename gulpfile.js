@@ -368,7 +368,7 @@ gulp.task('build', [
 	'css:build--prod',
 	'css:adfox',
 	'html:build',
-	//'img:build',
+	'img:build',
 ]);
 
 // =================== WATCH ===================
@@ -394,6 +394,7 @@ gulp.task('watch', [ 'build' ], function() {
 // =================== DEPLOY ===================
 // Выгрузка на сервер
 gulp.task('deploy', [
+	'build',
 	'deploy--css',
 	'deploy--js',
 	'deploy--img',
