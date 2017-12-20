@@ -1,5 +1,5 @@
 /**
- * @version 1.5.2
+ * @version 1.5.3
  */
 
 'use strict';
@@ -394,23 +394,23 @@ gulp.task('watch', [ 'build' ], function() {
 // =================== DEPLOY ===================
 // Выгрузка на сервер
 gulp.task('deploy', [
-	'build',
+	'html:build', 
 	'deploy--css',
 	'deploy--js',
 	'deploy--img',
 ]);
 
-gulp.task('deploy--css', function() {
+gulp.task('deploy--css', [ 'css:build--dev', 'css:build--prod' ], function() {
 	return gulp.src('production/css/**/')
 		.pipe(ssh.dest(config.deploy.path + '/css'));
 });
 
-gulp.task('deploy--js', function() {
+gulp.task('deploy--js', [ 'js:build' ],  function() {
 	return gulp.src('production/js/**/')
 		.pipe(ssh.dest(config.deploy.path + '/js'));
 });
 
-gulp.task('deploy--img', function() {
+gulp.task('deploy--img', [ 'img:build' ], function() {
 	return gulp.src('production/images/**/')
 		.pipe(ssh.dest(config.deploy.path + '/images'));
 });
