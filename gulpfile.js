@@ -368,7 +368,7 @@ gulp.task('build', [
 	'css:build--prod',
 	'css:adfox',
 	'html:build',
-	'img:build',
+	//'img:build',
 ]);
 
 // =================== WATCH ===================
