@@ -4,6 +4,7 @@
 node_modules/
 logs/
 report/
+.vscode/
 gulp.conf.json
 
 

@@ -1,7 +1,3 @@
-/**
- * @version 1.5.4
- */
-
 'use strict';
 
 const gulp = require('gulp');
