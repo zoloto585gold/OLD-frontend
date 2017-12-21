@@ -55,22 +55,84 @@
 	//
 	// Search
 	//
-	$(document).on('keyup change', '.js-top-geo-form__search input', function() {
+	$(document).on('keyup', '.js-top-geo-form__search input', function(e) {
+		var $wrap = $(this).closest('[data-wrap]');
+		var $next = [];
+		var list  = [];
 		var query = $.trim($(this).val());
 		var tag = 'span';
-		var regex = RegExp(query, 'gi');
+		var regex = RegExp('^'+query, 'gi');
 		var replacement = '<'+ tag +'>$&</'+ tag +'>';
 		var scrollApi = $('.js-top-geo-form__cities').data('jsp');
+		var cityName;
 
-		$('.js-top-geo-form__cities a[data-city] span').contents().unwrap();
+		if (e.keyCode == 13 && $wrap.find('[data-menu] li').length) {
+			// enter
+			cityName = $.trim($wrap.find('[data-menu] .active').text());
+			set_city(cityName);
+			$('.top-geo__button>span').text(cityName); // устанавлмвает в рзамтке в шапке название выбранного города
+			$('.top-geo-form__chosen-city-result').text(cityName); // для мобильной версии
+			topGeoModal(false); // закрывает окно
+
+			// Посылаем город в корзину, обновляем корзину в шапке
+			Z585.basket.requestAPI('setcity', {
+				city: cityName,
+			}, {
+				partial: {
+					name: 'topbasket'
+				}
+			});
+
+			return false;
+		}
+		else if ($.inArray(e.keyCode, [ 40, 38 ]) != -1) {
+			if (e.keyCode == 40) {
+				// down
+				$next = $wrap.find('[data-menu] .active').next().length ?
+					$wrap.find('[data-menu] .active').next() :
+					$wrap.find('[data-menu] li').first();
+			}
+
+			if (e.keyCode == 38) {
+				// up
+				$next = $wrap.find('[data-menu] .active').prev().length ?
+					$wrap.find('[data-menu] .active').prev() :
+					$wrap.find('[data-menu] li').last();
+			}
+
+			if ($next.length) {
+				$next.addClass('active').siblings().removeClass('active');
+			}
+		} else {
+			$wrap.find('[data-menu] li').remove();
+
+			$('.js-top-geo-form__cities [data-city]').each(function() {
+				if ($(this).text().search(regex) != -1) {
+					$wrap.find('[data-menu]').append('<li>'+ $(this).text() +'</li>');
+				}
+			});
+
+			if ($wrap.find('[data-menu] li').length) {
+				$wrap.find('[data-menu]').show();
+				if ($wrap.find('[data-menu] .active').length == 0) {
+					$wrap.find('[data-menu] li').first().addClass('active');
+				}
+			} else {
+				$wrap.find('[data-menu]').hide();
+			}
+		}
+
+		$('.top-geo-form__pop-cities')[query.length >= 2 ? 'hide':'show']();
 
 		if (query.length < 2) {
 			return false;
 		}
 
+		$('.js-top-geo-form__cities a[data-city] span').contents().unwrap();
+
 		$('.js-top-geo-form__cities a[data-city]').each(function() {
 			if ($(this).text().search(regex) != -1 && scrollApi !== false) {
-				scrollApi.scrollToElement(this);
+				scrollApi.scrollToElement(this, true);
 				scrollApi = false;
 			}
 
@@ -78,6 +140,38 @@
 				return $(this).text().replace(regex, replacement);
 			});
 		});
+	});
+
+	$(document).on('click', '.js-top-geo-form__search [data-menu] li', function(e) {
+		var cityName = $.trim($(this).text());
+
+		set_city(cityName);
+		$('.top-geo__button>span').text(cityName); // устанавлмвает в рзамтке в шапке название выбранного города
+		$('.top-geo-form__chosen-city-result').text(cityName); // для мобильной версии
+		topGeoModal(false); // закрывает окно
+
+		// Посылаем город в корзину, обновляем корзину в шапке
+		Z585.basket.requestAPI('setcity', {
+			city: cityName,
+		}, {
+			partial: {
+				name: 'topbasket'
+			}
+		});
+	});
+
+	$(document).on('click', '.js-top-geo-form__search [data-btn=clear]', function(e) {
+		var $wrap = $(this).closest('[data-wrap]');
+
+		$wrap
+			.find('input').val('').end()
+			.find('[data-menu]').hide().end();
+
+		$('.top-geo-form__pop-cities').show();
+	});
+
+	$(document).on('submit', '.top-geo-form', function () {
+		return false;
 	});
 
 	$(document).on('click', '.top-geo__button', function () {

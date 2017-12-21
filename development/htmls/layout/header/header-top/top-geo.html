@@ -1,31 +1,420 @@
-<div class="header-top__item  top-geo">
-				<a id="choose-city" class="top-geo__button"><span>Москва</span></a>
-				<div class="top-geo-modal">
-					<div class="top-geo-modal__inner">
-						<div class="top-geo-modal__close">X</div>
-						<form class="form  top-geo-form">
-							<div class="top-geo-form__header">
-								ВЫБЕРИТЕ СВОЙ ГОРОД ИЗ СПИСКА
-							</div>
-							<div class="form__field  top-geo-form__option">
-								<span class="form__field-ico  form__field-ico--select-arrow  field-icons-4"></span>
-								<select class="form__field-select">
-									<option value="1">Санкт-Петербург</option>
-									<option value="2">Москва</option>
-									<option value="3">Петергоф</option>
-									<option value="4">Псков</option>
-									<option value="5">Тверь</option>
-									<option value="6">Астана</option>
-									<option value="7">Казань</option>
-									<option value="8">Луга</option>
-									<option value="9">Новгород</option>
-									<option value="10">Владимир</option>
-									<option value="11">Ульяновск</option>
-									<option value="12">Пушкин</option>
-								</select>
-							</div>
-							<input class="form__button  top-geo-form__button" type="submit" value="Выбрать">
-						</form>
+<div class="header-top__item  top-geo" id="top-geo-wrap">
+	<a id="choose-city" class="top-geo__button">
+		<span>Москва</span>
+	</a>
+	<div class="top-geo-modal">
+		<div class="top-geo-modal__inner">
+			<div class="top-geo-modal__close">X</div>
+
+			<form class="form  top-geo-form">
+				<div class="top-geo-form__header">Выбор города</div>
+				<div class="top-geo-form__total">Всего 106 городов</div>
+
+				<div class="top-geo-form__chosen-city">
+					<div class="top-geo-form__chosen-city-inner">
+						<div class="top-geo-form__chosen-city-label">Выбранный город:</div>
+						<div class="top-geo-form__chosen-city-result">Москва</div>
 					</div>
 				</div>
-			</div>
+
+				<div class="top-geo-form__search / js-top-geo-form__search" data-wrap>
+					<input placeholder="Поиск города" type="text">
+					<button data-btn="clear"></button>
+					<ul data-menu></ul>
+				</div>
+
+				<div class="top-geo-form__pop-cities">
+					<div class="top-geo-form__pop-cities-inner">
+						<a href="#">Санкт-Петербург</a>
+						<a href="#">Москва</a>
+						<a href="#">Екатеринбург</a>
+						<a href="#">Самара</a>
+						<a href="#">Тюмень</a>
+						<a href="#">Пермь</a>
+						<a href="#">Казань</a>
+					</div>
+				</div>
+
+				<div class="top-geo-form__cities-wrapper">
+					<div class="cities-list / js-top-geo-form__cities jspScrollable" tabindex="0">
+						<div class="cities-list__heading">А</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Азов</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Альметьевск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Апатиты</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Армавир</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Архангельск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Астрахань</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">Б</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Балашиха</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Барнаул</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Белгород</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Березники</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Боровичи</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Брянск</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">В</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Великие Луки</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Великий Новгород</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Видное</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Владикавказ</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Владимир</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Волгоград</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Волжский</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Вологда</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Воркута</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Воронеж пос. Солнечный</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Воскресенск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Выборг</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Вышний Волочек</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">Г</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Гатчина</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">Е</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Екатеринбург</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">И</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Иваново</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Иркутск</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">Й</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Йошкар-Ола</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">К</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Казань</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Калининград</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Калуга</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Каменск-Уральский</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Кандалакша</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Кемерово</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Кингисепп</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Кириши</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Киров</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Когалым</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Коломна</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Колпино</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Копейск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Кострома</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Краснодар</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Красное Село</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Краснотурьинск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Кронштадт</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">М</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Мелеуз</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Мичуринск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Мончегорск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Москва</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Мурманск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Мытищи</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">Н</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Набережные Челны</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Нальчик</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Нижневартовск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Нижний Новгород</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Нижний Тагил</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Новосибирск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Новоуральск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Ноябрьск</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">О</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Оренбург</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Орехово-Зуево</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Орск</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">П</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Пенза</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Пермь</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Петергоф</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Петрозаводск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Печора</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Прохладный</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Псков</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">Р</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Рыбинск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Рязань</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">С</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Самара</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Санкт-Петербург</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Саранск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Саратов</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Северодвинск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Североморск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Сергиев Посад</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Смоленск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Сочи</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Ставрополь</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Стерлитамак</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Сургут</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Сыктывкар</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">Т</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Тамбов</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Тверь</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Тольятти</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Туапсе</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Туймазы</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Тюмень</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">У</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Ульяновск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Усинск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Усть-Лабинск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Уфа</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Ухта</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">Ф</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Фрязино</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">Ч</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Чайковский</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Чебоксары</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Челябинск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Череповец</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Черкесск</a>
+							</li>
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Чудово</a>
+							</li>
+						</ul>
+						<div class="cities-list__heading">Я</div>
+						<ul class="cities-list__group">
+							<li class="cities-list__item">
+								<a href="#" class="cities-list__link" data-city="">Ярославль</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
