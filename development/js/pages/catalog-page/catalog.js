@@ -1,4 +1,20 @@
 $(document).ready(function(){
+
+  // Асинхронная загрузка изображений каталога
+
+  function imgLoad() {
+    var asyncimg = document.getElementsByClassName('img-async');
+            
+    for (var i=0; i < asyncimg.length; i++) {
+      asyncimg[i].src = asyncimg[i].getAttribute('data-src');
+            
+      // remove the attribute
+      asyncimg[i].removeAttribute('data-src');
+    }
+  }
+
+  imgLoad();
+
   $('.catalog-item-ecommerce').mouseenter(function(){
     var self = $(this);
     var imgCount = self.find('.catalog-hoverBlock__galleryList li').length;
