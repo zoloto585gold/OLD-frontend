@@ -159,14 +159,23 @@
         position: relative;
         text-align: center;
       
-        img{
+        img {
+          opacity: 1;
           display: block;
           margin: 0 auto;
+          position: absolute;
+          top: 0; left: 0;
+          bottom: 0; right: 0;
           width: 100%;
           max-width: 218px;
-          height: auto;
+          //height: auto;
           vertical-align: bottom;
           transform: scaleZ(1);
+          transition: opacity 0.6s;
+        }
+
+        img[data-src] {
+            opacity: 0;            
         }
     }
 
