@@ -854,21 +854,26 @@ html, body { margin: 0; padding: 0; }
 
 /* блок с определением своего размера для изделия */
 .pcard-store-fitting {
-	height: 54px;
+	min-height: 54px;
 	background: url(@img-thingies-shadow-2) center top no-repeat;
 	position: relative;
 
 	&--oneSize { display: none; }
 }
 
-.pcard-store-fitting-select { display: block; }
+.pcard-store-fitting-select { 
+	display: block; 
+	position: relative; 	
+}
 
 .pcard-store-fitting-select__label {
 	.font-circe_light(12px, 34px, @color-red);
 	text-transform: uppercase;
-	.-posa-tl-(12px, 22px);
+	//.-posa-tl-(12px, 22px);
+	position: relative;
+	top: 12px; left: 22px;
 	
-	&--grey { color: #333; }
+	&--grey { color: #333; }	
 }
 
 .pcard-store-fitting-select__menu_default {/* встроенный селект, <select>+<option> */
@@ -900,20 +905,50 @@ html, body { margin: 0; padding: 0; }
 	.-posa-tr-(21px, 40px);
 	text-transform: uppercase;
 	text-decoration: none;
+	display: 		inline-block;
 	
 	&:hover { color: @color-red; }
 	
 	&:after { 
 		content: '';
 		display: table;
-		width: 112px;
+		width: 102%;
 		.-posa-bl-(2px, 0px);
 		border-bottom: 1px dotted #999;
+	}
+
+	&.newsize {
+		display: 		inline-block;
+		position: 		relative;
+		top: 			20px; 		left: 22px;
+		margin-bottom: 	20px; 		right: auto;
+		font-style: 	italic;
+
+		@media screen and (max-width: 1024px) {
+			position: 	absolute;
+			top: 31px; right: 30px;
+			left: auto;
+		}
+
+		@media @tablet-under {
+			top: 20px;
+		}
+
+		/* @media @mobile-portrait {
+			// position: 		relative;
+			top: 			30px; 		//left: 22px;
+			// margin-bottom: 	20px; 		right: auto;
+		} */
+
+		@media @mobile-portrait {
+			top: 20px; right: 30px;
+		}
 	}
 }
 
 .pcard-store-fitting__size-info {
 	.set_pcard_sprite(-9px, -412px);
+	display: inline-block;
 	width: 12px;
 	height: 12px;
 	position: absolute;
@@ -940,7 +975,92 @@ html, body { margin: 0; padding: 0; }
 			margin: 0;
 		}
 	}
+
+	&.newsize {
+		display: none;
+	}
 }
+
+// Block Size ===================
+
+.pcard-store-fitting-select__blocksize {
+	display: 	flex;
+	flex-wrap: 	wrap;
+	justify-content: flex-start;
+	position: relative;
+	width: 	325px;	
+	margin: -60px 0px 7px 153px;	
+	
+	a, div {
+		cursor: 	pointer;
+		position: relative;
+		.font-circe_light(13px, 13px, #333);
+		flex-basis: 30px;
+		height: 	30px;
+		margin: 	.2em;
+		border: 	1px solid #dcdcdc;
+		padding: 	8px 0;
+		text-align: center;
+		border-radius: 3px;
+		color: #999999;
+		display: block;
+		float: left;
+
+		&.reserve {
+			background-color: #e8e8e8;
+			border-color: #d7d7d7;
+			color: #666666;
+		}
+
+		&.selected {
+			background-color: @color-red;
+			border-color: @color-dark_red;
+			color: #ffffff;
+		}
+
+		&:hover {
+			border-color: 	@color-red;
+			color: 			@color-red;
+			background-color: #fff;
+		}
+	}
+	
+	@media screen and (max-width: 1024px)  {
+		width: 580px;
+		margin: -20px 0 10px 247px;
+
+		a, div {
+			flex-basis: 40px;
+			height: 	40px;
+			margin: 	.4em;
+			padding: 	13px 0;			
+		}
+	}
+
+	@media @touch {
+	 	width: 345px;
+	 	a, div { margin: .26em; }
+	}
+
+	@media @tablet-under {
+		width: 			97%;
+		margin-left: 	16px;
+		margin-top: 	10px;
+		margin-bottom: 	10px;
+		a, div { margin: .5em; }
+	}	
+
+	@media @mobile-portrait {
+		width: 			110%;
+		margin-left: 	-5px;		
+		margin-bottom: 	-10px;
+		margin-top:  	10px;
+		a, div { margin: 6px; }
+	}
+
+}
+
+// ==============================
 
 .pcard-store-panel {
 	.-posa-bl-(-35px, 0px);
@@ -1550,16 +1670,19 @@ html, body { margin: 0; padding: 0; }
 	.pcard-socials { position: static; display: block; float: none; }
 
 	.pcard-store-fitting {
-		height: 80px;
+		//height: 80px;
 		.-solid-t-(#e0e0e0);
 		.-bgpos-y-(-2px);
 		.-bgsz-(400px, 20px);
 
 		&-select {
-			&__label { .-tl-(24px, 22px); font-size: 16px; line-height: 34px; }
+			&__label { 
+				top: 24px; left: 22px;
+				font-size: 16px; line-height: 34px; 
+			}
 			
 			&__menu_default {
-				.-tl-(12px, 250px);
+				top: 12px; left: 250px;
 				outline: none;
 				cursor: pointer;
 				.-box-border-(#e2e1e2, 2px);
@@ -1568,7 +1691,7 @@ html, body { margin: 0; padding: 0; }
 			}
 
 			&__size {
-				.-tl-(22px, 250px);
+				top: 22px; left: 250px;
 				line-height: 34px;
 			}
 		}
@@ -1654,6 +1777,12 @@ html, body { margin: 0; padding: 0; }
 
 }
 
+@media @tablet-under {
+	.pcard-store-fitting-select__label {
+		top: 10px;
+	}
+}
+
 @media screen and (max-width: 719px) {
 	.pcard-fitting{
 		&__body {
@@ -1711,7 +1840,7 @@ html, body { margin: 0; padding: 0; }
 
 	.pcard-store-fitting {
 		.-bgpos-y-(-3px);
-		height: 100px;
+		//height: 100px;
 
 		&--oneSize { height: 80px; }
 	 }

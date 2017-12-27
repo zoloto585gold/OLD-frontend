@@ -304,3 +304,12 @@
 .-bxshad-(@set: 1px 1px 3px 0px, @alfa: .5) { -webkit-box-shadow: @set rgba(0, 0, 0, @alfa); box-shadow: @set rgba(0, 0, 0, @alfa); }
 .-bxshadn- { -webkit-box-shadow:none; box-shadow:none; }
 /*----------end;box-shadow---------------------------------*/
+
+/* clearfix */
+
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+   	display: table;
+   	clear: both;
+}
