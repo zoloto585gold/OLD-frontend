@@ -998,6 +998,7 @@ html, body { margin: 0; padding: 0; }
 		flex-basis: 30px;
 		height: 	30px;
 		margin: 	.85%;
+		margin-bottom: 6px;
 		border: 	1px solid #dcdcdc;
 		padding: 	8px 0;
 		text-align: center;
@@ -1034,12 +1035,17 @@ html, body { margin: 0; padding: 0; }
 			height: 	40px;
 			margin: 	1%;
 			padding: 	13px 0;
+			margin-bottom: 6px;
 		}
 	}
 
 	@media @touch {
 	 	width: 345px;
-	 	a, div { margin: 1%; }
+
+	 	a, div { 
+	 		margin: 1%; 
+	 		margin-bottom: 6px;
+	 	}
 	}
 
 	@media @tablet-under {
@@ -1047,7 +1053,11 @@ html, body { margin: 0; padding: 0; }
 		margin-left: 	16px;
 		margin-top: 	10px;
 		margin-bottom: 	10px;
-		a, div { margin: 1.45%; }
+
+		a, div { 
+			margin: 1.45%; 
+			margin-bottom: 10px;
+		}
 	}	
 
 	@media @mobile-portrait {
