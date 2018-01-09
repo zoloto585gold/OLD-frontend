@@ -88,6 +88,10 @@
 		.font-circe_regular(32px, 1,#ff1037);
 		
 		small { font-size: 14px; }
+
+		@media @mobile-portrait {
+			font-size: 28px;
+		}
 	}
 }
 
@@ -125,6 +129,10 @@
 		 	.font-circe_regular(32px, 1,#ff1037);
 		
 			small { font-size: 14px; }
+
+			@media @mobile-portrait {
+				font-size: 28px;
+			}
 		}
 
 		&:after { display: none; }
@@ -1039,7 +1047,9 @@ html, body { margin: 0; padding: 0; }
 
 	@media @touch {
 	 	width: 345px;
+
 	 	a, div { margin: .26em; }
+
 	}
 
 	@media @tablet-under {
@@ -1047,6 +1057,7 @@ html, body { margin: 0; padding: 0; }
 		margin-left: 	16px;
 		margin-top: 	10px;
 		margin-bottom: 	10px;
+
 		a, div { margin: .5em; }
 	}	
 
