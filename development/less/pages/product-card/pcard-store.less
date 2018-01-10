@@ -888,7 +888,8 @@ html, body { margin: 0; padding: 0; }
 	.-wh-(165px, 28px);
 	padding: 0px 0px 0px 5px;
 	.-bxsz-(border-box);
-	.-posa-tl-(13px, 155px);
+	position: relative;
+	top: -20px; left: 155px;
 	.font-circe_light(14px, 28px, #b9b6b8);
 	.-box-border-(#e3e3e3, 2px);
 
@@ -910,7 +911,8 @@ html, body { margin: 0; padding: 0; }
 /* кнопка для попАпа "Как узнать свой размер" */
 .pcard-store-fitting__popup-but {
 	.font-circe_light(11px, 16px, #999);
-	.-posa-tr-(21px, 40px);
+	position: absolute;
+	top: 21px; right: 40px;
 	text-transform: uppercase;
 	text-decoration: none;
 	display: 		inline-block;
@@ -923,6 +925,14 @@ html, body { margin: 0; padding: 0; }
 		width: 102%;
 		.-posa-bl-(2px, 0px);
 		border-bottom: 1px dotted #999;
+	}
+
+	@media @mobile {
+		right: 20px;
+	}
+
+	@media @mobile-portrait {
+		right: 40px;
 	}
 
 	&.newsize {
@@ -938,8 +948,16 @@ html, body { margin: 0; padding: 0; }
 			left: auto;
 		}
 
+		@media @touch {
+			top: 30px;
+		}
+
 		@media @tablet-under {
-			top: 20px;
+			
+		}
+
+		@media @mobile {
+			top: 4px; right: 0;
 		}
 
 		/* @media @mobile-portrait {
@@ -949,7 +967,7 @@ html, body { margin: 0; padding: 0; }
 		} */
 
 		@media @mobile-portrait {
-			top: 20px; right: 30px;
+			top: 18px; right: 30px;
 		}
 	}
 }
@@ -967,6 +985,14 @@ html, body { margin: 0; padding: 0; }
 	p {
 		display: none;
 		.font-circe_light(12px, 14px, #333);
+	}
+
+	@media @mobile {
+		right: 0;
+	}
+
+	@media @mobile-portrait {
+		right: 22px;
 	}
 	
 	&:hover {
@@ -1055,11 +1081,20 @@ html, body { margin: 0; padding: 0; }
 	@media @tablet-under {
 		width: 			97%;
 		margin-left: 	16px;
-		margin-top: 	10px;
-		margin-bottom: 	10px;
+		margin-top: 	20px;
+		margin-bottom: 	15px;
 
 		a, div { margin: .5em; }
 	}	
+
+	@media @mobile {
+		width: 			110%;
+		margin-left: 	-5px;
+		margin-top: 	-10px;
+		margin-bottom: 	0px;
+
+		a, div { margin: .53em; }
+	}
 
 	@media @mobile-portrait {
 		width: 			110%;
@@ -1693,7 +1728,7 @@ html, body { margin: 0; padding: 0; }
 			}
 			
 			&__menu_default {
-				top: 12px; left: 250px;
+				top: -20px; left: 250px;
 				outline: none;
 				cursor: pointer;
 				.-box-border-(#e2e1e2, 2px);
@@ -1788,12 +1823,6 @@ html, body { margin: 0; padding: 0; }
 
 }
 
-@media @tablet-under {
-	.pcard-store-fitting-select__label {
-		top: 10px;
-	}
-}
-
 @media screen and (max-width: 719px) {
 	.pcard-fitting{
 		&__body {
@@ -1852,20 +1881,27 @@ html, body { margin: 0; padding: 0; }
 	.pcard-store-fitting {
 		.-bgpos-y-(-3px);
 		//height: 100px;
+		padding: 20px;
 
 		&--oneSize { height: 80px; }
 	 }
 	.pcard-store-fitting-select {
+		&__label {
+			top: -6px;
+			left: 0;
+		}
+
 		&__menu_default {
-			top: 13px;
-			left: auto;
-			right: 22px;
+			.-wh-(100%, 50px);
+			position: static;
+			display: block;
+			left: auto; right: auto;			
 		}
 	}
 
 	.pcard-store-fitting__popup-but,
 	.pcard-store-fitting__size-info {
-		top: 72px;
+		top: 0px;
 	}
 
 	.pcard-store-fitting__size-info:hover{
