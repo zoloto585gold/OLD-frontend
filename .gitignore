@@ -9,6 +9,7 @@ node_modules/
 #########
 #
 development/*.html
+*.DS_Store
 
 #
 development/css/
