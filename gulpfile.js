@@ -34,7 +34,7 @@ const config = assign({
 		server: {
 			baseDir: [ './development', './production' ]
 		},
-		tunnel: true,
+		tunnel: false,
 		host: 'localhost',
 		port: 8000,
 		logPrefix: 'Frontend_z585',
