@@ -356,7 +356,19 @@ gulp.task('img:build', function() {
 		.pipe(imagemin({
 			interlaced: true,
 			progressive: true,
-			optimizationLevel: 5,
+			optimizationLevel: 8,
+			svgoPlugins: [{removeViewBox: true}]
+		}))
+		.pipe(gulp.dest(dest));
+});
+
+gulp.task('img:build-all', function() {
+	let dest = 'production/images/';
+	return gulp.src(config.path.images)
+		.pipe(imagemin({
+			interlaced: true,
+			progressive: true,
+			optimizationLevel: 8,
 			svgoPlugins: [{removeViewBox: true}]
 		}))
 		.pipe(gulp.dest(dest));
