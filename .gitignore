@@ -13,6 +13,7 @@ gulp.conf.json
 #########
 #
 development/*.html
+*.DS_Store
 
 #
 development/css/
