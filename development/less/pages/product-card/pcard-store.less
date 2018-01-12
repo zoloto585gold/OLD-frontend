@@ -167,10 +167,10 @@
 
 /* Скоро в наличии */
 .pcard-store__soon-button {
-	.-box-(block, 100%, 57px);
+	.-box-(block, 100%, 37px);
 	background: #f8f8f8 url(@img-thingies-shadow-2) center -1px no-repeat;
 	.-brad-ad-(4px);
-	.font-circe_light(12px, 57px, #fff);
+	.font-circe_light(12px, 38px, #fff);
 	.-t-cnu-(#333);
 	border-top: 1px solid #d3d3d3;
 	vertical-align: middle;
@@ -183,13 +183,13 @@
 		.set_pcard_sprite(0px, -217px);
 		vertical-align: middle;
 	}
-}
 
-.pcard-store__soon-button:hover {
-	background-color: @color-red;
-	color: #fff;
+	&:hover {
+		background-color: @color-red;
+		color: #fff;
 
-	&:before { .set_pcard_sprite(-23px, -217px); }
+		&:before { .set_pcard_sprite(-23px, -217px); }	
+	}
 }
 
 /* В корзину */
@@ -264,9 +264,12 @@
 		}
 
 		&__reserve-button,
-		&__buy-button {
+		&__buy-button,
+		&__soon-button {
 			height: 60px;
-			.font-circe_regular(16px, 60px, #fff);
+			font-size: 16px;
+			line-height: 60px;
+			//.font-circe_regular(16px, 60px, #fff);
 		}
 
 		.pcard-store-prices--new {
@@ -1032,18 +1035,19 @@ html, body { margin: 0; padding: 0; }
 		flex-basis: 30px;
 		height: 	30px;
 		margin: 	.2em;
-		border: 	1px solid #dcdcdc;
+		background-color: #f3f3f3;
+		border: 	1px solid #d7d7d7;
 		padding: 	8px 0;
 		text-align: center;
 		border-radius: 3px;
-		color: #999999;
+		color: #d7d7d7;
 		display: block;
 		float: left;
 
 		&.reserve {
-			background-color: #e8e8e8;
+			background-color: white;
 			border-color: #d7d7d7;
-			color: #666666;
+			color: #333;
 		}
 
 		&.selected:hover,
@@ -1055,8 +1059,8 @@ html, body { margin: 0; padding: 0; }
 
 		&:hover {
 			border-color: 	@color-red;
-			color: 			@color-red;
-			background-color: #fff;
+			//color: 			@color-red;
+			//background-color: #fff;
 		}
 	}
 	
