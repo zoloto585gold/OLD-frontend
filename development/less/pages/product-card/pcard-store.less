@@ -862,7 +862,7 @@ html, body { margin: 0; padding: 0; }
 
 /* блок с определением своего размера для изделия */
 .pcard-store-fitting {
-	min-height: 54px;
+	min-height: 46px;
 	background: url(@img-thingies-shadow-2) center top no-repeat;
 	position: relative;
 
@@ -937,8 +937,8 @@ html, body { margin: 0; padding: 0; }
 
 	&.newsize {
 		display: 		inline-block;
-		position: 		relative;
-		top: 			20px; 		left: 22px;
+		position: 		absolute;
+		top: 			55px; 		left: 22px;
 		margin-bottom: 	20px; 		right: auto;
 		font-style: 	italic;
 
@@ -1023,7 +1023,7 @@ html, body { margin: 0; padding: 0; }
 	justify-content: flex-start;
 	position: relative;
 	width: 	325px;	
-	margin: -60px 0px 7px 153px;	
+	margin: -25px 0px 7px 153px;	
 	
 	a, div {
 		cursor: 	pointer;
@@ -1046,6 +1046,7 @@ html, body { margin: 0; padding: 0; }
 			color: #666666;
 		}
 
+		&.selected:hover,
 		&.selected {
 			background-color: @color-red;
 			border-color: @color-dark_red;
