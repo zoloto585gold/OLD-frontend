@@ -1,45 +1,29 @@
-# ignore node modules
 
-# ENVIROMENT
 node_modules/
 logs/
 report/
 .vscode/
 gulp.conf.json
+.DS_Store
+.DS_Store?
+.Trashes
+ehthumbs.db
+Thumbs.db
 
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
 
-#########
-# LOCAL #
-#########
-#
+*.log
+*.sql
+*.sqlite
+
 development/*.html
-*.DS_Store
+development/css/*
 
-#
-development/css/
-development/css/*.css
-development/less/z585-all-list.prod.less
-development/less/z585-all-list.local.less
-
-# производные сборки JS
-development/js/libs.min.js
-development/js/app.min.js
-development/js/stores-page.min.js
-development/js/shop-page.min.js
-development/js/basket-page.min.js
-development/js/legacy.js
-development/js/legacy.js.map
-
-
-
-# (BITRIX) PRODUCTION && DEVELOPMENT
-production/css/*.css
-/production/css/*.css
-/production/js/*.js
-/production/js/**/*.js
-/production/images/*
-/production/js/libs.min.js
-/production/js/libs.min.js
-/production/**/*.map
-/development/js/legacy.min.js.map
-/development/js/legacy.min.js
+production/*
