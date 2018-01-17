@@ -422,7 +422,7 @@ gulp.task('deploy--css', [ 'css:build--dev', 'css:build--prod' ], function() {
 });
 
 gulp.task('deploy--js', [ 'js:build' ],  function() {
-	return gulp.src('production/js/**/')
+	return gulp.src([ 'production/js/**/', '!production/js/libs.min.js' ])
 		.pipe(ssh.dest(config.deploy.path + '/js'));
 });
 
