@@ -2,17 +2,6 @@
 .top-basket {
 	width: 140px;
 
-	&:hover {
-		.top-basket__button {
-			background-color: #cb2430;
-			&:after{
-				transform: rotate(90deg);
-			}
-		}
-		.top-basket__inner{
-			display: block;
-		}
-	}
 	div.top-basket__button{
 		display: block;
 	}
@@ -27,8 +16,6 @@
 		width: 100%;
 		height: 100%;
 		overflow: hidden;
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
 		box-sizing: border-box;
 
 		text-decoration: none;
@@ -161,15 +148,8 @@
 /*
 	DESKTOP
 */
-@media screen and (min-width: @desktop-min) {
+@media @desktop {
 	.top-basket {
-
-		div.top-basket__button{
-			display: none;
-		}
-		a.top-basket__button{
-			display: block;
-		}
 
 		&:hover {
 			.top-basket__button {
@@ -181,6 +161,13 @@
 			.top-basket__inner{
 				display: block;
 			}
+		}
+
+		div.top-basket__button{
+			display: none;
+		}
+		a.top-basket__button{
+			display: block;
 		}
 
 		&__button {
@@ -205,6 +192,18 @@
 @media screen and (max-width: @tablet_a-max) {
 	.top-basket {
 		width: 60px;
+
+		&[data-opened="1"] {
+			.top-basket__button {
+				background-color: #cb2430;
+				&:after{
+					transform: rotate(90deg);
+				}
+			}
+			.top-basket__inner{
+				display: block;
+			}
+		}
 
 		&__button {
 			width: 60px;

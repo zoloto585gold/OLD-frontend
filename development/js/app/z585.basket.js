@@ -525,8 +525,15 @@
 	 */
 	basket.briefInit = function () {
 		var self = this;
-
+		
 		self.load('briefview', 'topbasket', true);
+
+		// Открывашка для тач версии
+		self.elements.brief.on('click', '[data-btn=open]', function (e) {
+			var opened = parseInt(self.elements.brief.attr('data-opened'));
+			
+			self.elements.brief.attr('data-opened', +!opened);
+		});
 
 		// Удаление товара из мини корзины
 		self.elements.brief.on('click', '[data-btn=remove]', function (e) {
