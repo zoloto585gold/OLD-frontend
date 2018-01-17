@@ -126,4 +126,24 @@
 		return five;
 	}
 
+	/*Асинхронная загрузка картинок в каталоге*/
+	
+	main.imgLoad = function(container) {
+
+		//если контеинер загружен на странице
+		if ( $(container).length ) {
+			var asyncimg = $(container).find(".img-async");
+
+			//если картинка не обрабатывалась скриптом
+		    if ( typeof asyncimg.data("src") !== 'undefined' ) {
+				asyncimg.each(function() {
+					$(this).attr("src", $(this).data("src"));
+
+					// remove the attribute
+					$(this).removeAttr("data-src");
+				});
+			}
+		}
+	}
+
 } ());
