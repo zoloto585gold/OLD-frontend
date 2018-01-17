@@ -1,0 +1,96 @@
+﻿
+.modal {
+	
+	/* затемнённый слой под попАпом */
+	&__overlay {
+		display: 	block;
+		position: 	absolute;
+		top: 		0; 	
+		left: 		0;
+		width: 		100%;
+		height: 	100%;
+		background: fade(black, 70%);
+		z-index: 	999;
+	}
+	
+	&__wrap {
+		display: 	none;
+		max-width: 	700px;
+		width: 		100%;
+		margin: 	0 auto;
+		overflow: 	hidden;
+		text-align: center;
+
+		background-color: fade(white, 85%);
+		padding: 	45px 15px 30px;
+
+		position: 	fixed;
+		top: 		50%;
+		left: 		50%;
+		transform: translate(-50%, -50%);
+		z-index: 	999;
+		box-sizing: border-box;
+
+		&:before {
+			z-index: 	-1;
+			position: 	absolute;			
+			top: 		10px;
+			right: 		10px; 
+			bottom: 	10px;
+			left: 		10px;			
+			content: 	'';
+			background-color: white;
+		}
+
+		@media screen and (max-width: 719px){
+			width: 	auto;
+			left: 	10px;
+			right: 	10px;
+			transform: translate(0, -50%);
+		}
+	}
+
+	&__header {
+		.font-circe_regular(24px, 24px, #333);
+		text-align: center;
+		text-transform: uppercase;
+
+		@media screen and (max-width: 719px){
+			.font-circe_regular(20px, 20px, #333);			
+		}
+	}
+	
+	&__close-but {
+		width: 				40px;
+		height: 			40px;
+		position: 			absolute;
+		top: 0; 			right: 0;
+		.set_pcard_sprite(6px, -467px);
+		background-color: 	#e73437;
+		cursor: 			pointer;
+	}
+
+	&__button {
+		min-width: 100px;
+		display: inline-block;
+		margin: 0 5px;
+		height: 38px;
+		outline: none;
+		padding: 0 15px;
+		.font-circe_regular(14px, 38px, #fbf4f4);
+		background-color: @color-red;
+		box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.5);
+		border: 0;
+		border-radius: 2px;
+		cursor: pointer;
+		text-transform: uppercase;
+
+		&:hover { background-color: @color-dark_red; }
+	}
+
+	&__info {
+		text-align: 		center;
+		margin-bottom: 		20px;
+		.font-circe_regular(18px, 24px, #333);
+	}
+}
