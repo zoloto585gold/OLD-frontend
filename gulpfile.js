@@ -113,9 +113,10 @@ const config = assign({
 				'development/js/app/z585.js',
 				'development/js/app/z585.main.js',
 				'development/js/app/z585.data.js',
-				'development/js/app/z585.htmlrender.js',
 				'development/js/app/z585.debug.js',
+				'development/js/app/z585.htmlrender.js',
 				'development/js/app/z585.yamaps.js',
+				'development/js/app/z585.modal.js',
 				'development/js/app/**/*.js',
 			],
 
