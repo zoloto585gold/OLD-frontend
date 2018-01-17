@@ -18,6 +18,7 @@
 			<!-- всплывающее окноpopup__overlay -->
 			
 			<!-- тень -->
+			<!--
 			<div class="modal__overlay is-show"></div>
 
 			<div class="modal__wrap is-show">
@@ -29,6 +30,7 @@
 				<div id="ok" class="modal__button">OK</div>
 				<div id="cancel" class="modal__button">Отмена</div>
 			</div>
+			-->
 
 			<!-- конец вспл. окна -->
 
@@ -38,6 +40,27 @@
 
 
 	@@include('scaff/layout__js-list.html')
-	<script src="js/pages/basket-page/basket.js"></script>	
+	<script>
+		// Tests
+		var modal = new Z585.modal.instance({
+			htmlHeader: 'Очистить корзину?',
+			htmlInfo: 'Вы уверены, что хотите удалить все товары из корзины?',
+			htmlConfirm: 'ОК',
+			htmlDecline: 'Отмена',
+			//allowedFires: [ 'onConfirm' ],
+			//destroyAfterFire: false,
+			onConfirm: function (elements) {
+				alert('confirm');
+			},
+			onDecline: function (elements) {
+				alert('decline');
+			},
+			onClose: function (elements) {
+				alert('close');
+			},
+		});
+
+		modal.init(true);
+	</script>	
 </body>
 </html>

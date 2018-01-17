@@ -95,13 +95,21 @@
 		self.elements.page.on('click', '[data-btn=clear]', function (e) {
 			e.preventDefault();
 
-			if (confirm('Вы уверены, что хотите удалить все товары из корзины?')) {
-				self.requestAPI('clear', {}, {
-					partial: {
-						name: 'content'
-					}
-				});
-			}		
+			var confirm = new Z585.modal.instance({
+				htmlHeader: 'Очистить корзину?',
+				htmlInfo: 'Вы уверены, что хотите удалить все товары из корзины?',
+				htmlConfirm: 'ОК',
+				htmlDecline: 'Отмена',
+				onConfirm: function (elements) {
+					self.requestAPI('clear', {}, {
+						partial: {
+							name: 'content'
+						}
+					});
+				},
+			});
+	
+			confirm.init(true);		
 		});
 
 		// Выбор магазина
@@ -165,23 +173,32 @@
 			);
 		});
 
-		// Удаление товара со страницы конрзины
+		// Удаление товара со страницы корзины
 		self.elements.page.on('click', '[data-btn=remove]', function (e) {
 			e.preventDefault();
 
 			var $item = $(this).closest('[data-el=item]');
-
-			if (confirm('Вы уверены, что хотите удалить этот товар из корзины?')) {
-				self.requestAPI('remove', {
-					sapcode: $(this).data('sapcode')
-				}, {
-					partial: {
-						name: 'content'
-					}
-				});
-			} else {
-				$item.find('[data-el=quantity] input').val(1);
-			}
+			var sapcode = $(this).data('sapcode');
+			var confirm = new Z585.modal.instance({
+				htmlHeader: 'Удалить товар?',
+				htmlInfo: 'Вы уверены, что хотите удалить товар из корзины?',
+				htmlConfirm: 'ОК',
+				htmlDecline: 'Отмена',
+				onConfirm: function (elements) {
+					self.requestAPI('remove', {
+						sapcode: sapcode
+					}, {
+						partial: {
+							name: 'content'
+						}
+					});
+				},
+				onDecline: function (elements) {
+					$item.find('[data-el=quantity] input').val(1);
+				},
+			});
+	
+			confirm.init(true);
 		});
 
 		// Фокус на инпут кол-ва выделяет значение
