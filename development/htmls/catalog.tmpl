@@ -31,23 +31,31 @@
 	@@include('scaff/layout__js-list.html')
 	<!-- <script src="js/catalog_filter_script.js"></script>
 	<script src="js/pages/catalog-page/catalog.js"></script> -->
+
 	<script>
 		$(document).ready(function() {
-			function imgLoad() {
-			    var asyncimg = document.getElementsByClassName('img-async');
-			            
-			    for (var i=0; i < asyncimg.length; i++) {
-			      asyncimg[i].src = asyncimg[i].getAttribute('data-src');
-			            
-			      // remove the attribute
-			      asyncimg[i].removeAttribute('data-src');
-			    }
+			/*Асинхронная загрузка картинок в каталоге*/
+	
+			imgLoad = function(container) {
 
+				//если контеинер загружен на странице
+				if ( $(container).length ) {
+					var asyncimg = $(container).find(".img-async");
+
+					//если картинка не обрабатывалась скриптом
+				    if ( typeof asyncimg.data("src") !== 'undefined' ) {
+						asyncimg.each(function() {
+							$(this).attr("src", $(this).data("src"));
+
+							// remove the attribute
+							$(this).removeAttr("data-src");
+						});
+					}
+				}
 			}
-			
-			imgLoad();	
+
+			imgLoad('.catalog-list');
 		});
-		
 	</script>
 </body>
 </html>
