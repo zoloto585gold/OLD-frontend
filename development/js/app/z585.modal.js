@@ -13,6 +13,7 @@
 			htmlInfo: '',
 			htmlConfirm: 'OK',
 			htmlDecline: 'Cancel',
+			hideAfterFire: true,
 			destroyAfterFire: true,
 			allowedFires: [ 'onClose', 'onConfirm', 'onDecline' ],
 			onClose:   function (elements) {},
@@ -27,6 +28,8 @@
 	 */
 	modal.instance.prototype.init = function (show) {
 		var self = this;
+		
+		show = show || false;
 
 		self.elements = {
 			overlay:    $('<div class="' + self.options.cssPrefix +'overlay" data-fire="onClose"/>'),
@@ -61,6 +64,10 @@
 						self.options[fire](self.elements);
 					}
 		
+					if (self.options.hideAfterFire) {
+						self.hide();
+					}
+
 					if (self.options.destroyAfterFire) {
 						self.destroy();
 					}
@@ -68,8 +75,13 @@
 			}
 		});
 
-		if (show === true) {
-			self.show();
+		$('body').append(
+			self.elements.overlay,
+			self.elements.wrapper
+		);
+
+		if (show !== true) {
+			self.hide();
 		}
 	}
 
@@ -77,10 +89,16 @@
 	 * Показывает модальное окно и фон
 	 */
 	modal.instance.prototype.show = function () {
-		$('body').append(
-			this.elements.overlay.addClass(this.options.cssShow),
-			this.elements.wrapper.addClass(this.options.cssShow)
-		);
+		this.elements.overlay.show();
+		this.elements.wrapper.show();
+	}
+
+	/**
+	 * Скрывает модальное окно и фон
+	 */
+	modal.instance.prototype.hide = function () {
+		this.elements.overlay.hide();
+		this.elements.wrapper.hide();
 	}
 
 	/**
