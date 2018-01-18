@@ -70,6 +70,7 @@
 					name:  'content',
 					state: $(this).data('state'),
 					template: $(this).data('template'),
+					toTop: true,
 				},
 			});
 
@@ -685,7 +686,7 @@
 
 		options = $.extend({
 			reLoad: true,
-			toTop: true,
+			toTop: false,
 			showPreloader: true,
 		}, options);
 
