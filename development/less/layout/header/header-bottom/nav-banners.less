@@ -3,8 +3,8 @@
 	//top: 15px;
 
 	display: block;
-	width: 510px;
-	height: 330px;
+	/*width: 510px;
+	height: 330px;*/
 
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -14,7 +14,7 @@
 
 	// расположение справа
 	&--type-right_510-330 {
-		right: 10px;
+		right: 0;
 		width: 510px;
 		height: 330px;
 	}
@@ -35,7 +35,7 @@
 	}
 
 	&--type-2 {
-		right: 10px;
+		right: 0;
 		width: 442px;
 		height: 332px;
 	}
@@ -48,6 +48,7 @@
 
 	&--type-left-right {
 		left: 0px;
+		right: 0px;
 		width: 100%;
 	}
 
@@ -162,5 +163,11 @@
 		}
 
 		&--type-7 {}
+	}
+}
+
+@media @touch {
+	.nav-banners {
+		display: none;
 	}
 }

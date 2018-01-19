@@ -56,11 +56,12 @@
 	.main-nav-level-2--by-price {
 		position: absolute;
 		left: 0;
-		bottom: 0;
+		right: 0;
+		bottom: 15px;
 		z-index: 12;
 
 		display: block;
-		width: 1000px;
+		width: 965px;
 		height: 40px;
 		overflow: hidden;
 
@@ -147,6 +148,11 @@
 			/*line-height: 15px;*/
 			font: 400 12px/15px 'Circe';
 			color: #666;
+
+			&:hover {
+				border-color: @color-red;
+				text-decoration: none;
+			}
 		}
 	}
 }

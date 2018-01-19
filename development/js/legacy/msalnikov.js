@@ -581,20 +581,22 @@
 	// убираю старые значения которые в верстке есть, в проде убрать строку
 	// removeMainNavBanners();
 
+	addMainNavBanners();
+
 	// адаптайзер
-	if(parseInt(window.innerWidth) > 1024) {
+	/*if(parseInt(window.innerWidth) > 999) {
 		addMainNavBanners();
 	} else {
 		removeMainNavBanners();
 	}
 
 	$(window).on('resize', function () {
-		if(parseInt(window.innerWidth) > 1024) {
+		if(parseInt(window.innerWidth) > 999) {
 			addMainNavBanners();
 		} else {
 			removeMainNavBanners();
 		}
-	});
+	});*/
 
 
 	// (2) hover
