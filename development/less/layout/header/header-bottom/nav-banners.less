@@ -3,8 +3,8 @@
 	top: 10px;
 
 	display: block;
-	width: 512px;
-	height: 332px;
+	/*width: 510px;
+	height: 330px;*/
 
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -12,6 +12,18 @@
 
 	// background-color: rgba(0, 0, 0, .3);
 
+	// расположение справа
+	&--type-right_510-330 {
+		right: 0;
+		width: 510px;
+		height: 330px;
+	}
+
+	&--type-left_510-330 {
+		left: 0;
+		width: 510px;
+		height: 330px;
+	}
 
 	&--type-1 {
 		right: 10px;
@@ -21,8 +33,7 @@
 	}
 
 	&--type-2 {
-		right: 10px;
-
+		right: 0;
 		width: 442px;
 		height: 332px;
 	}
@@ -34,11 +45,10 @@
 		height: 272px;
 	}
 
-	&--type-4 {
-		left: 30px;
-
-		width: 512px;
-		height: 332px;
+	&--type-left-right {
+		left: 0px;
+		right: 0px;
+		width: 100%;
 	}
 
 
@@ -129,5 +139,11 @@
 		}
 
 		&--type-7 {}
+	}
+}
+
+@media @touch {
+	.nav-banners {
+		display: none;
 	}
 }
