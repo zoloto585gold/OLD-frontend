@@ -1,0 +1,54 @@
+﻿
+.notification {
+	position: 		fixed;
+	display: 		flex;
+	align-items: 	center;
+	padding: 		10px 20px;
+	top: 			45px;
+	right: 			-100%;
+	min-width: 		200px;
+	min-height: 	50px;
+	//border: 		10px solid #E7E0E2;
+	background-color: @color-red;
+	text-transform: uppercase;
+	color: 			white;
+	font-size: 		12px;
+	line-height: 	20px;
+	font-weight: 	600;
+	border-radius: 	5px;
+	box-shadow: 	0 2px 15px rgba(0, 0, 0, 0.2);
+	z-index: 		9999;
+	transition: 	1.5s;
+	
+	
+	
+	&.active {
+		right: 10px;
+	}
+
+	div {
+		span {
+			font-weight: 900;
+		}
+
+		a {
+			color: white;
+			text-decoration: underline;
+			text-transform: uppercase;
+		}
+	}
+
+	/*&:before {
+		content: 		'';
+	    display: 		block;
+	    width: 			90%;
+	    height: 		30px;
+	    box-shadow: 	0 0 30px rgba(0,0,0,0.5);
+	    position: 		absolute;
+	    bottom: 		2px;
+	    border-radius: 	20px;
+	    left: 			5%;
+	    z-index: 		0;
+	    background: url('/bitrix/templates/zoloto/frontend/images/thingies/shadow-5.png') center top no-repeat;
+	}*/
+}
