@@ -21,16 +21,16 @@
 		<main class="page__content">
 			<div class="section">
 				<div class="section__inner" style="text-align: center; padding: 20% 0;">
-					<button id="notice" class="btn b-button" style="float: none; display: inline-block; width:auto; position: relative;">Start Notification</button>		
+					<button id="notice" class="b-button" style="float: none; display: inline-block; width:auto; position: relative;">Start Notification</button>		
 				</div>
 			</div>
 
-			<div class="notification">
+			<div class="notification _active">
 				<div>
-					С возвращением, <span>Дмитрий Васильевич</span><br>
-					мы сохранили для вас вашу <a href="">корзину</a> <br>						
+					<span class="comment">С возвращением, <br><span class="bold">Волков Дмитрий Васильевич</span></span>
+					мы сохранили для вас вашу <a href="">корзину</a> <br>			
 					и <a href="">избранные</a> украшения
-				</div>
+				</div>				
 			</div>
 		</main>
 
@@ -44,16 +44,21 @@
 
 	<script>
 		$(document).ready(function() {
+			
+			var timer;
+
 			$("#notice").on("click",function() {
+
+				clearTimeout(timer);
 
 				$(".notification").addClass("active");
 
 				function exitNotice() {
 					$(".notification").removeClass("active");					
-					clearTimeout();
+					clearTimeout(timer);
 				}
 
-				setTimeout(exitNotice, 5000);
+				timer = setTimeout(exitNotice, 6000);
 
 			});
 			
