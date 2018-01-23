@@ -31,8 +31,9 @@
 			padding-top: 10px;
 
 			text-transform: uppercase;
-			font: 700 11px/22px 'Circe';
-			color: #cc3333;
+			font: 11px/22px 'Circe-bold';
+			color: @color-red;
+			font-weight: 300;
 		}
 
 		&__list {}
@@ -55,11 +56,13 @@
 	.main-nav-level-2--by-price {
 		position: absolute;
 		left: 0;
-		bottom: 0;
+		right: 0;
+		//bottom: 15px;
+		top: 347px;
 		z-index: 12;
 
 		display: block;
-		width: 1000px;
+		width: 965px;
 		height: 40px;
 		overflow: hidden;
 
@@ -146,6 +149,11 @@
 			/*line-height: 15px;*/
 			font: 400 12px/15px 'Circe';
 			color: #666;
+
+			&:hover {
+				border-color: @color-red;
+				text-decoration: none;
+			}
 		}
 	}
 }
