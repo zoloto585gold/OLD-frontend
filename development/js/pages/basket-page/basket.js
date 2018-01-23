@@ -7,7 +7,7 @@ var JS_RENDER = JS_PATH + 'render/';
 var JS_DATA = JS_PATH + 'data/';
 
 (function () {
-	Z585.basket.init();
+	//Z585.basket.init();
 
 	/**
 	 * ленивая погрузка шаблонов

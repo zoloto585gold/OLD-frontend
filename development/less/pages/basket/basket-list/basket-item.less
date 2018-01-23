@@ -26,13 +26,22 @@
 		@media @touch { font: 300 14px/14px 'Circe'; }
 
 		&:hover { text-decoration: underline; }
-	}
 
+		&--combo{
+			width: 100%;
+			.font-circe_light(12px, 14px, #666);
+
+			strong{
+				font-weight: 600;
+			}
+		}
+	}
 
 	&__pic {
 		display: inline-block;
 		vertical-align: middle;
 		width: 122px;
+		margin: 10px 0 0;
 
 		img {
 			display: block;
@@ -53,10 +62,14 @@
 	&__info {
 		display: inline-block;
 		vertical-align: top;
-		margin-left: 20px;
+		margin: 0 0 0 20px;
 		font-size: 11px;
 		font-weight: 300;
 		
+		&--combo{
+			margin: 40px 0 0 25px;
+		}
+
 		@media screen and (max-width: @mobile_a-max) {
 			margin-left: 28px;
 		}
@@ -138,7 +151,9 @@
 	}
 
 	&__price {
-		font: 400 11px/30px 'Circe';
+		font: 300 11px/24px 'Circe';
+
+		color: #999;
 		
 		@media screen and (max-width: @mobile_a-max) {
 			display: inline-block;
@@ -149,6 +164,7 @@
 			font: 300 11px/28px 'Circe';
 			padding: 0 3px;
 			background: #ffec00;
+			color: #333;
 			position: relative;
 			left: -3px;
 			
@@ -156,7 +172,8 @@
 		}
 		
 		div {
-			font: 400 30px/28px 'Circe';
+			font: 300 30px/24px 'Circe';
+			color: #333;
 			
 			@media screen and (max-width: @mobile_a-max) { font: 400 24px/24px 'Circe'; }
 			small {
@@ -195,7 +212,7 @@
 			}
 			
 			div {
-				font: 300 30px/28px 'Circe';
+				font: 300 24px/28px 'Circe';
 				color: #666;
 			
 				@media screen and (max-width: @mobile_a-max) { font: 300 20px/24px 'Circe'; }
@@ -281,6 +298,111 @@
 		}
 	}
 
+	&__shops-combo{
+		position: relative;
+		top: 83px;
+		left: -80px;
+
+		button{
+			display: block;
+			.font-circe_regular(12px, 22px, #333);
+			text-decoration: underline;
+			background: url('@{img}/basket/shop-map.png') no-repeat 0 50%;
+			border: none;
+			cursor: pointer;
+			padding: 0 0 0 19px;
+
+			&:hover{
+				color: #000;
+			}
+		}
+
+		.fancy-select{
+			margin: 11px 0 0;
+
+			.trigger{
+				.font-circe_light(12px, 35px, #333);
+				text-transform: uppercase;
+				height: 35px;
+				padding: 0 10px;
+				border-radius: 3px;
+				border: solid 1px #c4c4c4;
+
+				&:after{
+					width: 9px;
+					height: 5px;
+					border: none;
+					right: 10px;
+					top: 50%;
+					background: url('@{img}/sprites/catalog_filter_sprite.png') no-repeat -34px -36px;
+					transform: translateY(-50%);
+				}
+
+				&.open{
+					background: #fff;
+					color: #333;
+
+					&:after{
+						border: none;
+						background-position: -34px -41px;
+					}
+				}
+			}
+
+			.options{
+				background: #fff;
+				border-top: solid 1px #c4c4c4;
+
+				li{
+					.font-circe_light(12px, 16px, #333);
+					text-transform: uppercase;
+					padding: 8px 100px 6px 10px;
+					min-height: 35px;
+					position: relative;
+					border: solid 1px #c4c4c4;
+					border-top: none;
+
+					&:hover{
+						background: #eee;
+					}
+
+					&:first-child{
+						display: none;
+					}
+
+					&:last-child{
+						border-bottom-right-radius: 3px;
+						border-bottom-left-radius: 3px;
+					}
+
+					div{
+						position: absolute;
+						top: 50%;
+						right: 6px;
+						transform: translateY(-50%);
+						.font-circe_regular(11px, 1, #999);
+						text-transform: lowercase;
+
+						span{
+							display: inline-block;
+							color: #4b4a4a;
+							background: #ececec;
+							text-transform: uppercase;
+							line-height: 15px;
+							padding: 0 2px;
+							margin: 1px 0 0;
+
+							&[data-today="1"]{
+								background: #ed3030;
+								color: #fff;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
 	&__remove {
 		width: 24px;
 		height: 24px;
@@ -293,6 +415,19 @@
 		&:hover {
 			background: @color-red;
 			color: #fff;
+		}
+	}
+
+	&__remove-text {
+		font: 300 11px/26px 'Circe';
+		color: #999;
+		text-decoration: underline;
+		cursor: pointer;
+		position: relative;
+		top: 83px;
+
+		&:hover {
+			color: #000;
 		}
 	}
 
@@ -349,6 +484,21 @@
 		a[data-btn='modal'],
 		& + [data-el='shop-selected'] {
 			display: inline-block;
+		}
+	}
+
+	&__like-that{
+		display: block;
+		background: none;
+		.font-circe_light(11px, 1, #999);
+		text-transform: uppercase;
+		text-decoration: underline;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+
+		&:hover{
+			color: #000;
 		}
 	}
 }

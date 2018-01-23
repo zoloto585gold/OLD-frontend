@@ -113,6 +113,17 @@
 			confirm.init(true);		
 		});
 
+		// Селектор магазина
+		self.elements.page.find('[data-el=item-shops]').fancySelect({
+			optionTemplate: function(optionEl) {
+				if (typeof optionEl.data('time') !== 'undefined') {
+					return optionEl.text() + '<div>можно забрать:<br><span data-today="'+ optionEl.data('today') +'">'+ optionEl.data('time') +'</span></div>';
+				}
+
+				return optionEl.text();
+			}
+		});
+
 		// Выбор магазина
 		self.elements.page.on('change', '[data-el=item-shops]', function (e) {
 			var el = this;
@@ -536,6 +547,15 @@
 				$btn.trigger('click');
 			}
 		});
+
+		// Загрузка товара для повторного добавления (Кнопка хочу еще)
+		var ccc = new Z585.modal.instance({
+			cssExtra: 'modal__wrap--gray',
+			htmlInfo: $('.basket-pcard-modal'),
+			buttons: [ 'close' ],
+		});
+
+		ccc.init(true);	
 	}
 
 	/**

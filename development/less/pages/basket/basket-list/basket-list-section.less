@@ -30,7 +30,7 @@
 
 		&__td {
 			display: table-cell;
-			padding: 15px 0 30px;
+			padding: 0 0 30px;
 			border-bottom: 1px solid #eaeaea;
 			
 			@media screen and (max-width: @mobile_a-max) {
@@ -91,6 +91,10 @@
 				}
 			}
 
+			&--shops-combo{
+				width: 300px;
+			}
+
 			&--remove {
 				width: 50px;
 				vertical-align: middle;
@@ -104,7 +108,22 @@
 				}
 			}
 
+			&--remove-text {
+				width: 250px;
+				text-align: right;
+			}
+
 			&--city { vertical-align: middle; }
+
+			&--like-that{
+				display: block;
+				width: 100%;
+				border: none;
+				position: absolute;
+				bottom: 15px;
+				left: 0;
+				padding: 0;
+			}
 		}
 	}
 }

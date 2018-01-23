@@ -1,0 +1,134 @@
+.basket-pcard-modal{
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	min-height: 200px;
+	padding: 0 24px;
+	text-align: left;
+
+	&__img{
+		width: 200px;
+		border: solid 1px #efefef;
+		overflow: hidden;
+		text-align: center;
+
+		img{
+			width: 100%;
+			max-width: 200px;
+			vertical-align: bottom;
+		}
+	}
+
+	&__info{
+		padding: 0 0 0 20px;
+		flex: 1;
+	}
+
+	@media screen and (max-width: 567px){
+		flex-wrap: wrap;
+		padding: 0 15px;
+
+		&__img{
+			flex-basis: 100%;
+			height: 200px;
+			margin: 10px 0 0;
+		}
+
+		&__info{
+			padding: 0;
+		}
+	}
+
+	&__prices{
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		text-align: left;
+		padding: 12px 0 0;
+	}
+
+	&__price{
+		.font-circe_light(20px, 20px, #303030);
+
+		&--old{
+			font-size: 12px;
+			color: #7b7b7b;
+			text-decoration: line-through;
+		}
+
+		&--bonus{
+			font-size: 32px;
+			font-weight: 400;
+			color: @color-red;
+			padding: 6px 35px 0 0;
+
+			div{
+				.font-circe_light(9px, 25px, #7b7b7b);
+				text-transform: uppercase;
+			}
+		}
+	}
+
+	&__fitting{
+		h3{
+			.font-circe_light(14px, 34px, #333);
+			text-transform: uppercase;
+		}
+
+		&-list{
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-start;
+		}
+
+		button{
+			display: block;
+			width: 30px;
+			max-width: 30px;
+			height: 30px;
+			margin: 0 5px 5px 0;
+			padding: 0;
+			.font-circe_light(13px, 30px, #333);
+			text-align: center;
+			border: solid 1px #d7d7d7;
+			border-radius: 3px;
+			background: #fff;
+			cursor: pointer;
+
+			&:hover:not([data-available="soon"]){
+				border-color: @color-red;
+			}
+
+			&[data-selected]{
+				background: @color-red;
+				border-color: @color-red;
+				color: #fff;
+			}
+
+			&[data-available="soon"]{
+				background: #f3f3f3;
+				color: #d7d7d7;
+				cursor: default;
+			}
+		}
+	}
+
+	&__buy{
+		display: block;
+		width: 100%;
+		height: 41px;
+		margin: 10px 0 0;
+		.font-circe_light(12px, 41px, #fff);
+		text-transform: uppercase;
+		text-align: center;
+		background: @color-red;
+		border: none;
+		border-radius: 3px;
+		cursor: pointer;
+
+		&:hover{
+			background: @color-dark_red;
+		}
+	}
+
+}

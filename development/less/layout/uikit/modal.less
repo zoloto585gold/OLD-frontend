@@ -4,7 +4,7 @@
 	/* затемнённый слой под попАпом */
 	&__overlay {
 		display: 	block;
-		position: 	absolute;
+		position: 	fixed;
 		top: 		0; 	
 		left: 		0;
 		width: 		100%;
@@ -20,13 +20,13 @@
 		overflow: 	hidden;
 		text-align: center;
 
-		background-color: fade(white, 85%);
+		background-color: fade(white, 40%);
 		padding: 	45px 15px 30px;
 
 		position: 	fixed;
 		top: 		50%;
 		left: 		50%;
-		transform: translate(-50%, -50%);
+		transform:  translate(-50%, -50%);
 		z-index: 	999;
 		box-sizing: border-box;
 
@@ -45,7 +45,8 @@
 			width: 	auto;
 			left: 	10px;
 			right: 	10px;
-			transform: translate(0, -50%);
+			top:	10px;
+			transform: translate(0, 0);
 		}
 	}
 
@@ -67,6 +68,7 @@
 		.set_pcard_sprite(6px, -467px);
 		background-color: 	#e73437;
 		cursor: 			pointer;
+		border: 			none;
 	}
 
 	&__button {
@@ -84,7 +86,7 @@
 		cursor: pointer;
 		text-transform: uppercase;
 
-		&[data-fire="onConfirm"]{
+		&[data-fire="confirm"]{
 			background-color: #f5f5f2;
 			color: #666;
 		}
@@ -99,5 +101,29 @@
 		text-align: 		center;
 		margin-bottom: 		20px;
 		.font-circe_regular(18px, 24px, #333);
+	}
+
+	/* Gray */
+	&__wrap--gray {
+		[data-fire="close"]{
+			background: #f5f5f5;
+			top: 10px;
+			right: 10px;
+
+			&:hover{
+				background: #ccc;
+			}
+
+			&:before{
+				content: '';
+				width: 12px;
+				height: 13px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				background: url('@{img}/sprites/pcard_order_sprite.png') no-repeat 0 -603px;
+			}
+		}
 	}
 }
