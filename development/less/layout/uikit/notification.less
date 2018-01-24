@@ -6,7 +6,7 @@
 	flex-wrap: 		wrap;
 	align-items: 	center;
 	padding: 		15px;
-	padding-left: 	40px;
+	//padding-left: 	40px;
 	top: 			45px;
 	right: 			-100%;
 	left: 			auto;
@@ -15,24 +15,29 @@
 	min-height: 	50px;	
 	text-transform: uppercase;
 	color: 			white;
-	font: 			300 .8em/16px 'Circe';
+	.font-circe_regular(.75em, 14px, #333);
+	//font: 			normal .75em/16px 'Circe-Bold';
 	border-radius: 	5px;
+	border: 1px solid #ddd;
 	letter-spacing: .8px;
-	box-shadow: 	0 1px 3px rgba(0, 0, 0, 0.5);
+	//box-shadow: 	0 1px 3px rgba(0, 0, 0, 0.5);
+	box-shadow: 	0 1px 2px rgba(0, 0, 0, 0.1);
 	z-index: 		9999;
 	transition: 	1.3s;	
 
-	.gradient-vert(@color-red, darken(@color-red, 8%));
+	//.gradient-vert(fade(@color-red,80%), darken(@color-red, 8%));
+	background-color: fade(#F4F4F4,97%);
 
 	&:after {
 		content: 	'';
 		display: 	block;
 		position: 	absolute;
 		top: 		20px;
-		left: 		15px;
+		left: 		11px;
 		//.primary-sprite-icon__2();
 		//.primary-sprite-icon__7();
-		.primary-sprite-icon__user_white();
+		//.primary-sprite-icon__user_white();
+		//.primary-sprite-icon__user_red();
 	}
 	
 	
@@ -56,9 +61,9 @@
 			//background-color: 	white;
 			//padding: 				5px;
 			//font-size: 			13px;
-			line-height: 			18px;
+			line-height: 			16px;
 			border-radius: 			5px;
-			font-weight: 			300;
+			//font-weight: 			100;
 			//border: 				1px solid white;
 			//color: 				darken(@color-red, 35%);
 			display: 				block;
@@ -66,13 +71,13 @@
 		}
 
 		.bold {
-			font-weight: 		600;
+			font-weight: 		500;
 			font-size: 			1.4em;
 			text-transform: 	none;
 		}
 
 		a {
-			color: 				white;
+			//color: 				white;
 			text-decoration: 	underline;
 			text-transform: 	uppercase;
 			
