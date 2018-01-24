@@ -373,24 +373,12 @@
 		$('.close-zone').remove();
 
 		// сбрасывает меню до дефолтного состояния(все вкладки становятся закрытыми)
-		/*$('.main-nav-level-1__header').removeClass('main-nav-level-1__header--active');
+		$('.main-nav-level-1__header').removeClass('main-nav-level-1__header--active');
 		$('.main-nav-level-1__list').removeClass('main-nav-level-1__list--active');
 		$('.main-nav-level-2__header').removeClass('main-nav-level-2__header--active');
-		$('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');*/
+		$('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');
 	}
 
-
-	// Закрытие меню по белой зоне в тач версии
-
-	$('.close-zone').click(function(){ 
-		resetTouchNavi();
-	});
-	
-	/*if ($('.close-zone')) {
-		$(this).click(function() {
-			
-		});
-	}*/
 
 
 	// -------------------
@@ -399,16 +387,6 @@
 	// обработка поведения навигации
 	// когда ширина экрана <= 1024px
 	// т.е. для @touch
-	/*$(document).on('touchstart', function(el){
-		var wanted = el.target,
-			$wanted = $(wanted);
-
-			console.log($wanted);
-
-		if ( $wanted.hasClass('close-zone') ) {
-			resetTouchNavi();
-		}
-	});*/
 
 	$(document).on('click', function (el) {
 		// функция сбрасывает меню до дефолтного состояния(все вкладки становятся закрытыми)
@@ -430,11 +408,11 @@
 		}
 
 
-
+		// переменная которая показывает на что нажали в меню
 		var wanted = el.target,
 			$wanted = $(wanted);
 
-			console.log($wanted);
+			//console.log($wanted);
 
 
 		// клик по "сэндвичу"
@@ -462,6 +440,7 @@
 
 				defaultMainNav();
 
+				// Закрытие меню по белой зоне в тач версии
 				$('.close-zone').click(function () {
 					resetTouchNavi();
 				});
@@ -474,35 +453,46 @@
 		// закрывает меню по клику по пустой белой области справа от меню(эскейпер)
 		//if($wanted.hasClass('header-bottom')) resetTouchNavi();
 		
-
+		// Скролл окна в начало элемента
 
 		// обработка кликов по табам для "выпадайки"
 		// выриант когда выпадайка ведёт себя как аккордеон
+		
+		var offsetMenuElement = 0;
 
 		// уровень вложенности 1
 		if($wanted.hasClass('main-nav-level-1__header')) {
 
-			if($(wanted).hasClass('main-nav-level-1__header--active')) { // закрываем открытое
+			if($wanted.hasClass('main-nav-level-1__header--active')) { // закрываем открытое
 				/*$('.main-nav-level-1__header').removeClass('main-nav-level-1__header--active');
 				$('.main-nav-level-1__list').removeClass('main-nav-level-1__list--active');*/
-				$(wanted).removeClass('main-nav-level-1__header--active');
-				$(wanted).next('.main-nav-level-1__list').removeClass('main-nav-level-1__list--active');
+				$wanted.removeClass('main-nav-level-1__header--active');
+				$wanted.next('.main-nav-level-1__list').removeClass('main-nav-level-1__list--active');
 			}
 			else { // открываем нажатое
+				//console.log($wanted);
 				//resetMainNav();
+				function scrollWindow() {
+					//var windowHeight = $(window).height();
+					offsetMenuElement = $wanted.position();
+					console.log(offsetMenuElement.top);
+					$('.header-bottom__inner').animate({scrollTop: offsetMenuElement.top + 69}, 500);
+				}
+
+				scrollWindow();
 
 				// $('.main-nav-level-1__header').removeClass('main-nav-level-1__header--active');
 				// $('.main-nav-level-1__list').removeClass('main-nav-level-1__list--active');
-				$(wanted).addClass('main-nav-level-1__header--active');
-				$(wanted).next('.main-nav-level-1__list').addClass('main-nav-level-1__list--active');
+				$wanted.addClass('main-nav-level-1__header--active');
+				$wanted.next('.main-nav-level-1__list').addClass('main-nav-level-1__list--active');
 			}
 		}
 
 		// уровень вложенности 2
 		if($wanted.hasClass('main-nav-level-2__header')) {
-			if($(wanted).hasClass('main-nav-level-2__header--active')) { // закрываем открытое
-				$(wanted).removeClass('main-nav-level-2__header--active');
-				$(wanted).next('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');
+			if($wanted.hasClass('main-nav-level-2__header--active')) { // закрываем открытое
+				$wanted.removeClass('main-nav-level-2__header--active');
+				$wanted.next('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');
 
 				/*$('.main-nav-level-2__header').removeClass('main-nav-level-2__header--active');
 				$('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');*/
@@ -510,8 +500,8 @@
 			else { // открываем нажатое
 				/*$('.main-nav-level-2__header').removeClass('main-nav-level-2__header--active');
 				$('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');*/
-				$(wanted).addClass('main-nav-level-2__header--active');
-				$(wanted).next('.main-nav-level-2__list').addClass('main-nav-level-2__list--active');
+				$wanted.addClass('main-nav-level-2__header--active');
+				$wanted.next('.main-nav-level-2__list').addClass('main-nav-level-2__list--active');
 			}
 		}
 	});
