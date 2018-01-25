@@ -1,5 +1,5 @@
 /* миксин для анимации */
-.ear_transition(@property: all, @time: 0.4s, @function: ease-in-out) {
+.ear_transition(@property: all, @time: 0.6s, @function: ease-in-out) {
 	-webkit-transition: @property @time @function;
 	-o-transition: @property @time @function;
 	transition: @property @time @function;
@@ -76,21 +76,21 @@
 /* TOUCH */
 @media @touch {
 	.header-bottom {
-		position: 		fixed;
-		top: 			0;
-		left: 			0;
-		z-index: 		9990;
-		margin-left: 	-100%;
-		//opacity: 0;
-		width: 			100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 9990;
+		margin-left: -100%;
+
+		opacity: 0;
+		width: 100%;
 		/*width: 0;*/
-		height: 		120%;
-		background-color: fade(white, 70%);
+		height: 120%;
 
-		//background-color: rgba(255, 255, 255, .7);
-		//background: rgba(255, 255, 255, .7) url(@img-thingies-shadow-1) center -1px no-repeat ;
+		/*background-color: rgba(255, 255, 255, .7);*/
+		background: rgba(255, 255, 255, .7) url(@img-thingies-shadow-1) center -1px no-repeat ;
 
-		//.ear_transition(all);
+		.ear_transition(opacity);
 
 
 		&__inner {
@@ -102,29 +102,19 @@
 			margin-left: -300px;
 			padding-top: 45px;
 			padding-bottom: 170px;
-			overflow: scroll;
+			overflow: auto;
 
 			background-color: @color-red;
 
 			.ear_transition(margin-left);
-			//transition: 0.6s;
 
-			&--active { margin-left: 0px; }
+			&--active { margin-left: 0; }
 		}
 
 
 		&--active {
-			//opacity: 1;
+			opacity: 1;
 			margin-left: 0;
-		}
-
-		.close-zone {
-			width: 100%;
-			height: 100%;
-			left: 300px;
-			//background-color: @color-red;
-			position: fixed;
-			z-index: 	9999;
 		}
 	}
 
