@@ -1,0 +1,120 @@
+﻿
+.notification {
+
+	position: 		fixed;
+	display: 		flex;
+	flex-wrap: 		wrap;
+	align-items: 	center;
+	padding: 		15px;
+	//padding-left: 	40px;
+	top: 			45px;
+	right: 			-100%;
+	left: 			auto;
+	min-width: 		100px;
+	max-width: 		400px;
+	min-height: 	50px;	
+	text-transform: uppercase;
+	color: 			white;
+	.font-circe_regular(.75em, 14px, #333);
+	//font: 			normal .75em/16px 'Circe-Bold';
+	border-radius: 	5px;
+	border: 1px solid #ddd;
+	letter-spacing: .8px;
+	//box-shadow: 	0 1px 3px rgba(0, 0, 0, 0.5);
+	box-shadow: 	0 1px 2px rgba(0, 0, 0, 0.1);
+	z-index: 		9999;
+	transition: 	1.3s;	
+
+	//.gradient-vert(fade(@color-red,80%), darken(@color-red, 8%));
+	background-color: fade(#F4F4F4,97%);
+
+	&:after {
+		content: 	'';
+		display: 	block;
+		position: 	absolute;
+		top: 		20px;
+		left: 		11px;
+		//.primary-sprite-icon__2();
+		//.primary-sprite-icon__7();
+		//.primary-sprite-icon__user_white();
+		//.primary-sprite-icon__user_red();
+	}
+	
+	
+	
+	&.active { right: 10px; }
+
+	div {
+		display: 	block;
+		margin-bottom: 15px;
+
+		&:last-child { margin-bottom: 0; }		
+
+		/*img {
+			position: relative;
+			bottom: 0;
+			border: 1px solid lighten(@color-red, 10%);
+		}*/
+
+		.comment {
+			//background-color: 	lighten(@color-red, 30%);
+			//background-color: 	white;
+			//padding: 				5px;
+			//font-size: 			13px;
+			line-height: 			16px;
+			border-radius: 			5px;
+			//font-weight: 			100;
+			//border: 				1px solid white;
+			//color: 				darken(@color-red, 35%);
+			display: 				block;
+			margin-bottom: 			5px;
+		}
+
+		.bold {
+			font-weight: 		500;
+			font-size: 			1.4em;
+			text-transform: 	none;
+		}
+
+		a {
+			//color: 				white;
+			text-decoration: 	underline;
+			text-transform: 	uppercase;
+			
+			&:hover { text-decoration: none; }
+		}
+	}
+
+	// Мобильная версия
+
+	@media @touch {
+		max-width: 		100%;
+		//width: 			90%;
+		right: 			10px; 
+		top: 			-100%;
+		margin-left: 	10px;
+		font-size: 		.7em;
+
+		
+
+		&.active { 
+			//left: 	10px;		
+			
+			top: 	50px;				
+		}
+	}
+
+	/*&:before {
+		content: 		'';
+	    display: 		block;
+	    width: 			90%;
+	    height: 		30px;
+	    box-shadow: 	0 0 30px rgba(0,0,0,0.5);
+	    position: 		absolute;
+	    bottom: 		2px;
+	    border-radius: 	20px;
+	    left: 			5%;
+	    z-index: 		0;
+	    background: url('/bitrix/templates/zoloto/frontend/images/thingies/shadow-5.png') center top no-repeat;
+	}*/
+}
