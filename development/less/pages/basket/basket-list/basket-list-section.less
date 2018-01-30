@@ -9,9 +9,14 @@
 			display: table-row;
 			
 			@media @touch {
+				width: 100%;
 				display: block;
 				position: relative;
 				padding: 15px 0;
+			}
+
+			@media @mobile{
+				min-height: 300px;
 			}
 
 			&:last-child {
@@ -93,6 +98,27 @@
 
 			&--shops-combo{
 				width: 300px;
+				vertical-align: top;
+				
+				@media @touch {
+					border: none;
+				}
+
+				@media @touch-between{
+					position: absolute;
+					top: 129px;
+					left: 150px;
+				}
+
+				@media screen and(max-width: @tablet_a-min) {
+					top: 42px;
+					left: 110px;
+				}
+
+				@media @mobile {
+					top: 190px;
+					left: 0;
+				}
 			}
 
 			&--remove {
@@ -102,7 +128,7 @@
 				@media @touch {
 					width: auto;
 					position: absolute;
-					top: 8px;
+					top: 50px;
 					right: 0;
 					border: none;
 				}
@@ -111,6 +137,19 @@
 			&--remove-text {
 				width: 250px;
 				text-align: right;
+
+				@media @touch {
+					border: none;
+				}
+
+				@media @touch-between{
+					display: block;
+					position: absolute;
+					top: 0;
+					right: 0;
+					width: auto;
+					padding: 0;
+				}
 			}
 
 			&--city { vertical-align: middle; }
@@ -123,6 +162,12 @@
 				bottom: 15px;
 				left: 0;
 				padding: 0;
+
+				@media @mobile{
+					left: 140px;
+					bottom: auto;
+					top: 148px;
+				}
 			}
 		}
 	}

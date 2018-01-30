@@ -9,6 +9,16 @@ var JS_DATA = JS_PATH + 'data/';
 (function () {
 	//Z585.basket.init();
 
+	$('.page.basket [data-el=item-shops]').fancySelect({
+		optionTemplate: function(optionEl) {
+			if (typeof optionEl.data('time') !== 'undefined') {
+				return optionEl.text() + '<div>можно забрать:<br><span data-today="'+ optionEl.data('today') +'">'+ optionEl.data('time') +'</span></div>';
+			}
+
+			return optionEl.text();
+		}
+	});
+
 	/**
 	 * ленивая погрузка шаблонов
 	 * для jsrender

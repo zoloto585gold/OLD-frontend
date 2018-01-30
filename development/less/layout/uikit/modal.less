@@ -16,6 +16,7 @@
 	&__wrap {
 		max-width: 	700px;
 		width: 		100%;
+		min-height: 100px;
 		margin: 	0 auto;
 		overflow: 	hidden;
 		text-align: center;
@@ -47,6 +48,10 @@
 			right: 	10px;
 			top:	10px;
 			transform: translate(0, 0);
+		}
+
+		&[data-wait="1"]:before{
+			background: #fff url('@{img}/input-preloader.gif') no-repeat 50% 50%;
 		}
 	}
 

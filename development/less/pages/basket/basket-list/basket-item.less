@@ -23,8 +23,6 @@
 		color: #333;
 		margin-bottom: 10px;
 
-		@media @touch { font: 300 14px/14px 'Circe'; }
-
 		&:hover { text-decoration: underline; }
 
 		&--combo{
@@ -34,6 +32,10 @@
 			strong{
 				font-weight: 600;
 			}
+		}
+
+		@media @touch {
+			font-size: 11px;
 		}
 	}
 
@@ -68,6 +70,10 @@
 		
 		&--combo{
 			margin: 40px 0 0 25px;
+
+			@media @touch{
+				margin: 0 0 0 25px;
+			}
 		}
 
 		@media screen and (max-width: @mobile_a-max) {
@@ -155,11 +161,6 @@
 
 		color: #999;
 		
-		@media screen and (max-width: @mobile_a-max) {
-			display: inline-block;
-			line-height: 24px;
-		}
-		
 		> span {
 			font: 300 11px/28px 'Circe';
 			padding: 0 3px;
@@ -200,15 +201,25 @@
 
 		}
 
+		@media @mobile{
+			position: absolute;
+			top: 100px;
+			left: 140px;
+		}
+
 		&--old {
 			margin-top: -20px;
 		
-			@media @touch { margin-top: 14px; }
+			@media @touch { margin-top: 5px; }
 			
 			@media screen and (max-width: @mobile_a-max) {
 				width: 122px;
 				margin-top: 0;
 				margin-right: 28px;
+			}
+
+			@media @mobile{
+				top: 50px;
 			}
 			
 			div {
@@ -300,20 +311,46 @@
 
 	&__shops-combo{
 		position: relative;
-		top: 83px;
-		left: -80px;
+		top: 55px;
+		left: -95px;
+
+		@media @touch {
+			left: 40px;
+		}
+
+		@media @tablet-under{
+			top: 85px;
+		}
+
+		@media @mobile{
+			left: 0;
+			top: 0;
+		}
 
 		button{
 			display: block;
 			.font-circe_regular(12px, 22px, #333);
 			text-decoration: underline;
+			text-transform: uppercase;
 			background: url('@{img}/basket/shop-map.png') no-repeat 0 50%;
 			border: none;
 			cursor: pointer;
 			padding: 0 0 0 19px;
 
 			&:hover{
-				color: #000;
+				color: @color-red;
+			}
+
+			@media @mobile {
+				width: 100%;
+				background-color: #f5f5f5;
+				background-position: 20px 50%;
+				border: solid 1px #dbdbdb;
+				border-radius: 3px;
+				text-transform: uppercase;
+				text-decoration: none;
+				text-align: left;
+				padding: 7px 0 7px 60px;
 			}
 		}
 
@@ -350,6 +387,7 @@
 			}
 
 			.options{
+				max-width: 100%;
 				background: #fff;
 				border-top: solid 1px #c4c4c4;
 
@@ -424,7 +462,7 @@
 		text-decoration: underline;
 		cursor: pointer;
 		position: relative;
-		top: 83px;
+		top: 75px;
 
 		&:hover {
 			color: #000;

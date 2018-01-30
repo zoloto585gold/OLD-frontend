@@ -7,7 +7,8 @@
 		var self = this;
 		
 		self.debug = true;
-		self.urlAPI = 'https://d03.zoloto585.ru/restapi/v1/basket/';
+		self.apiUrl = 'https://d03.zoloto585.ru/restapi/v1/basket/';
+		self.apiData = {};
 
 		self.methods = {
 			add: 'post',
@@ -53,13 +54,21 @@
 	basket.pageInit = function () {
 		var self = this;
 
-		/*
-		self.load('view', 'content', function () {
-			var template = self.elements.page.find('[data-partial=content]').data('template');
-			return template == 'start';
-		});
-		*/
-		self.load('view', 'content', false);
+		self.load('view', {
+			name: 'content',
+			callback: function ($partial) {
+				// Селектор магазинов
+				$partial.find('[data-el=item-shops]').fancySelect({
+					optionTemplate: function(optionEl) {
+						if (typeof optionEl.data('time') !== 'undefined') {
+							return optionEl.text() + '<div>можно забрать:<br><span data-today="'+ optionEl.data('today') +'">'+ optionEl.data('time') +'</span></div>';
+						}
+
+						return optionEl.text();
+					}
+				});
+			}
+		}, false);
 
 		// Выбор шага
 		self.elements.page.on('click', '[data-btn=step]', function (e) {
@@ -101,27 +110,18 @@
 				htmlInfo: 'Вы уверены, что хотите удалить все товары из корзины?',
 				htmlConfirm: 'ОК',
 				htmlDecline: 'Отмена',
-				onConfirm: function (elements) {
-					self.requestAPI('clear', {}, {
-						partial: {
-							name: 'content'
-						}
-					});
-				},
+				fires: {
+					confirm: function (elements) {
+						self.requestAPI('clear', {}, {
+							partial: {
+								name: 'content'
+							}
+						});
+					},
+				}
 			});
 	
 			confirm.init(true);		
-		});
-
-		// Селектор магазина
-		self.elements.page.find('[data-el=item-shops]').fancySelect({
-			optionTemplate: function(optionEl) {
-				if (typeof optionEl.data('time') !== 'undefined') {
-					return optionEl.text() + '<div>можно забрать:<br><span data-today="'+ optionEl.data('today') +'">'+ optionEl.data('time') +'</span></div>';
-				}
-
-				return optionEl.text();
-			}
 		});
 
 		// Выбор магазина
@@ -196,17 +196,19 @@
 				htmlInfo: 'Вы уверены, что хотите удалить товар из корзины?',
 				htmlConfirm: 'ОК',
 				htmlDecline: 'Отмена',
-				onConfirm: function (elements) {
-					self.requestAPI('remove', {
-						sapcode: sapcode
-					}, {
-						partial: {
-							name: 'content'
-						}
-					});
-				},
-				onDecline: function (elements) {
-					$item.find('[data-el=quantity] input').val(1);
+				fires: {
+					confirm: function (elements) {
+						self.requestAPI('remove', {
+							sapcode: sapcode
+						}, {
+							partial: {
+								name: 'content'
+							}
+						});
+					},
+					decline: function (elements) {
+						$item.find('[data-el=quantity] input').val(1).trigger('change');
+					},
 				},
 			});
 	
@@ -549,13 +551,39 @@
 		});
 
 		// Загрузка товара для повторного добавления (Кнопка хочу еще)
-		var ccc = new Z585.modal.instance({
-			cssExtra: 'modal__wrap--gray',
-			htmlInfo: $('.basket-pcard-modal'),
-			buttons: [ 'close' ],
-		});
+		self.elements.page.on('click', '[data-btn=like-that]', function (e) {
+			var itemid = $(this).data('itemid');
+			var data = {
+				item: self.apiData.view.items.find(function (el) {
+					return el.itemid == itemid;
+				}),
+				city: self.apiData.view.city,
+			};
 
-		ccc.init(true);	
+			console.log(JSON.stringify(self.apiData));
+
+			var modal = new Z585.modal.instance({
+				cssExtra: 'modal__wrap--gray',
+				htmlInfo: '<div data-partial="like-that"/>',
+				preloader: true,
+				buttons: [ 'close' ],
+				fires: {
+					append: function () {
+						var modalSelf = this;
+						self.loadPartial('like-that', data, {
+							showPreloader: false,
+							callback: function () {
+								modalSelf.toggleWait();
+							}
+						});
+					}
+				}
+			});
+
+			e.preventDefault();
+	
+			modal.init(true);
+		});
 	}
 
 	/**
@@ -563,8 +591,10 @@
 	 */
 	basket.briefInit = function () {
 		var self = this;
-		
-		self.load('briefview', 'topbasket', true);
+
+		self.load('briefview', {
+			name: 'topbasket'
+		}, false);
 
 		// Открывашка для тач версии
 		self.elements.brief.on('click', '[data-btn=open]', function (e) {
@@ -592,7 +622,7 @@
 	/**
 	 * 
 	 * @param {String} method - api метод
-	 * @param {String} partial - имя шаблона
+	 * @param {Object} partial - параметры шаблона
 	 * @param {Function|Bool} visChangeCond - bool для перезагрузки
 	 * @param {Number} visDelay - задержка в сек. для перезагрузки
 	 */
@@ -607,9 +637,7 @@
 
 			if (visChangeCond || loaded === false) {
 				self.requestAPI(method, {}, {
-					partial: {
-						name: partial
-					}
+					partial: partial
 				});
 
 				loaded = true;
@@ -651,7 +679,7 @@
 		options = options || {};
 
 		$.ajax({
-			url: self.urlAPI + method,
+			url: self.apiUrl + method,
 			type: type,
 			data: JSON.stringify(data || {}),
 			cache: false,
@@ -667,6 +695,8 @@
 				self.setPreloader(false);
 			},
 			success: function (json) {
+				self.apiData[method] = json;
+
 				if (json.response.code != 1) {
 					if (json.response.code == 5) {
 						alert('Не удалось загрузить корзину (UID)');
