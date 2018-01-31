@@ -1,0 +1,109 @@
+@media @desktop {
+
+	.header-menu {
+		height: 			28px;
+	    background-color: 	#e9e3e5;
+	    background-image: 	none;
+	    border-top: 		1px solid #eff0f1;
+	    border-bottom: 		1px solid #d5d5d5;
+	    box-shadow: 		0 -1px 0 0 #e0e1e3;
+	}
+
+	.header-menu__inner { 
+		display:			flex;
+		justify-content: 	space-around;
+		width: 				770px;
+		//border: 			1px solid red;
+
+		// li
+		.main-nav-item {
+
+			flex-grow: 1;
+			//border: 			1px solid red;
+			text-align: 		center;
+			height: 			28px;
+			
+			text-transform: 	uppercase;
+			
+			a {
+				position: 			relative;
+				display: 			block;
+				//border: 			1px solid #333;
+				font: 				400 11px/8px Circe;
+				color: 				#333;
+				height: 			100%;
+				padding: 			10px 2px;
+				z-index: 			100;
+
+				&:hover {
+
+					&:after {
+						position: absolute;
+					    left: 50%;
+					    bottom: 0;
+					    z-index: 0;
+					    margin-left: -12px;
+					    content: '';
+					    //display: none;
+					    border: 12px solid transparent;
+					    border-bottom: 6px solid #992528;
+					}
+				}
+			}
+
+		}
+
+		.main-nav-item__catalog {
+
+			a { 
+				padding-left: 	30px; 
+
+				&:hover {
+					&:after {
+						position: absolute;
+					    left: 50%;
+					    bottom: 0;
+					    z-index: 0;
+					    margin-left: -12px;
+					    content: '';
+					    display: none;
+					    border: 12px solid transparent;
+					    border-bottom: 6px solid #992528;
+					}
+				}
+
+				&:before {
+					position: 		absolute;
+					content: 		'';
+					left: 1px; top: 50%;
+				    margin-top: -7px;
+				    margin-left: 1px;
+				    display: block;
+				    border: 0;
+				    height: 12px;
+				    width: 18px;
+				    overflow: hidden;
+				    background: url(/bitrix/templates/zoloto/frontend/images/sprites/sprite__primary-icon-set.png?v170615) -42px -142px no-repeat;
+				}
+			}
+
+		}
+
+	}
+
+	// DROPDOWN WINDOW
+
+	.main-nav-item__dropdown {
+		position: 		inherit;
+		text-align: 	left;
+		height: 		402px;
+		z-index: 		100;
+		background-color: white;
+		top: 			28px;
+		left: 			0;
+		width: 			100%;
+		border: 1px solid #eee;
+		//border: 		1px dashed red;
+	}
+
+}
