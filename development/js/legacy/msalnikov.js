@@ -234,6 +234,8 @@
 	var $altMainNavItems = $('.alt-main-nav__item'),
 		$naviInnerListWrapper = $('.navi-inner-list-wrapper');
 
+	var headerTop = $('.header-top');
+
 
 
 	// ищем элемент с css-классом '.alt-main-nav'
@@ -318,24 +320,6 @@
 	}
 
 
-	// закрывает touchnavi и/или сбрасывает настройки активности навгиции,
-	// которые доступны только для touch-устройств
-	function resetTouchNavi() {
-		$('.section').removeClass('section--offset-left');
-
-		$('.top-sandwich__button').removeClass('top-sandwich__button--active');
-		$('.header-bottom').removeClass('header-bottom--active');
-		$('.header-bottom__inner').removeClass('header-bottom__inner--active');
-
-		// убирает заморозку вертикального скролла для страницы
-		$('body').removeClass('h-canvas-freeze-for-touch-navi');
-
-		// сбрасывает меню до дефолтного состояния(все вкладки становятся закрытыми)
-		$('.main-nav-level-1__header').removeClass('main-nav-level-1__header--active');
-		$('.main-nav-level-1__list').removeClass('main-nav-level-1__list--active');
-		$('.main-nav-level-2__header').removeClass('main-nav-level-2__header--active');
-		$('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');
-	}
 
 	//
 	// function openTouchNavi() {}
@@ -372,6 +356,29 @@
 	}
 
 
+	// закрывает touchnavi и/или сбрасывает настройки активности навгиции,
+	// которые доступны только для touch-устройств
+	function resetTouchNavi() {
+		// было $('.section')
+		headerTop.removeClass('section--offset-left');
+
+		$('.top-sandwich__button').removeClass('top-sandwich__button--active');
+		
+		$('.header-bottom__inner').removeClass('header-bottom__inner--active');
+		$('.header-bottom').removeClass('header-bottom--active');
+
+		// убирает заморозку вертикального скролла для страницы
+		$('body').removeClass('h-canvas-freeze-for-touch-navi');
+
+		$('.close-zone').remove();
+
+		// сбрасывает меню до дефолтного состояния(все вкладки становятся закрытыми)
+		$('.main-nav-level-1__header').removeClass('main-nav-level-1__header--active');
+		$('.main-nav-level-1__list').removeClass('main-nav-level-1__list--active');
+		$('.main-nav-level-2__header').removeClass('main-nav-level-2__header--active');
+		$('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');
+	}
+
 
 
 	// -------------------
@@ -380,14 +387,17 @@
 	// обработка поведения навигации
 	// когда ширина экрана <= 1024px
 	// т.е. для @touch
+
 	$(document).on('click', function (el) {
 		// функция сбрасывает меню до дефолтного состояния(все вкладки становятся закрытыми)
-		function resetMainNav() {
+		/*function resetMainNav() {
 			$('.main-nav-level-1__header').removeClass('main-nav-level-1__header--active');
 			$('.main-nav-level-1__list').removeClass('main-nav-level-1__list--active');
 			$('.main-nav-level-2__header').removeClass('main-nav-level-2__header--active');
 			$('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');
-		}
+		}*/
+
+
 
 		// настройка для вкладок открытых по умолчанию для первого открытия меню
 		function defaultMainNav() {
@@ -398,20 +408,24 @@
 		}
 
 
-
+		// переменная которая показывает на что нажали в меню
 		var wanted = el.target,
 			$wanted = $(wanted);
+
+			//console.log($wanted);
 
 
 		// клик по "сэндвичу"
 		if($wanted.hasClass('top-sandwich__button')) {
 
 			// закрывает меню по клику на кнопку с тремя полосками "Сандвич"
-			if($wanted.hasClass('top-sandwich__button--active')) resetTouchNavi();
+			if($wanted.hasClass('top-sandwich__button--active')) {
+				resetTouchNavi();
+			}
 
 			// открываем меню
 			else {
-				$('.section').addClass('section--offset-left');
+				headerTop.addClass('section--offset-left');
 				$('.header-bottom').removeClass('section--offset-left');
 
 				$wanted.addClass('top-sandwich__button--active');
@@ -421,7 +435,15 @@
 				// добавляет заморозку вертикального скролла для страницы
 				$('body').addClass('h-canvas-freeze-for-touch-navi');
 
+				// добавляет область для клика в тач версии для закрытия
+				$('.header-bottom').prepend('<a class="close-zone"></a>');
+
 				defaultMainNav();
+
+				// Закрытие меню по белой зоне в тач версии
+				$('.close-zone').click(function () {
+					resetTouchNavi();
+				});
 			}
 		}
 
@@ -429,41 +451,55 @@
 		if($wanted.hasClass('top-sandwich__button-text')) resetTouchNavi();
 
 		// закрывает меню по клику по пустой белой области справа от меню(эскейпер)
-		if($wanted.hasClass('header-bottom')) resetTouchNavi();
-
-
-
+		//if($wanted.hasClass('header-bottom')) resetTouchNavi();
+		
+		// Скролл окна в начало элемента
 
 		// обработка кликов по табам для "выпадайки"
 		// выриант когда выпадайка ведёт себя как аккордеон
+		
+		var offsetMenuElement = 0;
 
 		// уровень вложенности 1
 		if($wanted.hasClass('main-nav-level-1__header')) {
-			if($(wanted).hasClass('main-nav-level-1__header--active')) { // закрываем открытое
-				$('.main-nav-level-1__header').removeClass('main-nav-level-1__header--active');
-				$('.main-nav-level-1__list').removeClass('main-nav-level-1__list--active');
+
+			if($wanted.hasClass('main-nav-level-1__header--active')) { // закрываем открытое
+				/*$('.main-nav-level-1__header').removeClass('main-nav-level-1__header--active');
+				$('.main-nav-level-1__list').removeClass('main-nav-level-1__list--active');*/
+				$wanted.removeClass('main-nav-level-1__header--active');
+				$wanted.next('.main-nav-level-1__list').removeClass('main-nav-level-1__list--active');
 			}
 			else { // открываем нажатое
-				resetMainNav();
+				
+				//resetMainNav();
+				function scrollWindow() {
+					offsetMenuElement = $wanted.position();
+					$('.header-bottom__inner').animate({scrollTop: offsetMenuElement.top + 69}, 300);
+				}
 
-				$('.main-nav-level-1__header').removeClass('main-nav-level-1__header--active');
-				$('.main-nav-level-1__list').removeClass('main-nav-level-1__list--active');
-				$(wanted).addClass('main-nav-level-1__header--active');
-				$(wanted).next('.main-nav-level-1__list').addClass('main-nav-level-1__list--active');
+				scrollWindow();
+
+				/*$('.main-nav-level-1__header').removeClass('main-nav-level-1__header--active');
+				$('.main-nav-level-1__list').removeClass('main-nav-level-1__list--active');*/
+				$wanted.addClass('main-nav-level-1__header--active');
+				$wanted.next('.main-nav-level-1__list').addClass('main-nav-level-1__list--active');
 			}
 		}
 
 		// уровень вложенности 2
 		if($wanted.hasClass('main-nav-level-2__header')) {
-			if($(wanted).hasClass('main-nav-level-2__header--active')) { // закрываем открытое
-				$('.main-nav-level-2__header').removeClass('main-nav-level-2__header--active');
-				$('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');
+			if($wanted.hasClass('main-nav-level-2__header--active')) { // закрываем открытое
+				$wanted.removeClass('main-nav-level-2__header--active');
+				$wanted.next('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');
+
+				/*$('.main-nav-level-2__header').removeClass('main-nav-level-2__header--active');
+				$('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');*/
 			}
 			else { // открываем нажатое
-				$('.main-nav-level-2__header').removeClass('main-nav-level-2__header--active');
-				$('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');
-				$(wanted).addClass('main-nav-level-2__header--active');
-				$(wanted).next('.main-nav-level-2__list').addClass('main-nav-level-2__list--active');
+				/*$('.main-nav-level-2__header').removeClass('main-nav-level-2__header--active');
+				$('.main-nav-level-2__list').removeClass('main-nav-level-2__list--active');*/
+				$wanted.addClass('main-nav-level-2__header--active');
+				$wanted.next('.main-nav-level-2__list').addClass('main-nav-level-2__list--active');
 			}
 		}
 	});
@@ -720,7 +756,7 @@ $(function(){
 // =======================
 $(function() {
 	if( $('.js-scroll-touch').length > 0 ) {
-		if(parseInt(window.innerWidth) < 1024) {
+		if(parseInt(window.innerWidth) < 999) {
 			$('.js-scroll-touch').jScrollPane({
 				autoReinitialise : true,
 			});
@@ -729,7 +765,7 @@ $(function() {
 		}
 
 		$(window).on('resize', function () {
-			if(parseInt(window.innerWidth) < 1024) {
+			if(parseInt(window.innerWidth) < 999) {
 				$('.js-scroll-touch').jScrollPane({
 					autoReinitialise : true,
 				});
