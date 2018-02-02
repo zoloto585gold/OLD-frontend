@@ -7,7 +7,7 @@
 		var self = this;
 		
 		self.debug = true;
-		self.apiUrl = 'https://d03.zoloto585.ru/restapi/v1/basket/';
+		self.apiUrl = 'https://d03.zoloto585.ru/restapi/v2/basket/';
 		self.apiData = {};
 
 		self.methods = {
@@ -56,18 +56,9 @@
 
 		self.load('view', {
 			name: 'content',
-			callback: function ($partial) {
-				// Селектор магазинов
-				$partial.find('[data-el=item-shops]').fancySelect({
-					optionTemplate: function(optionEl) {
-						if (typeof optionEl.data('time') !== 'undefined') {
-							return optionEl.text() + '<div>можно забрать:<br><span data-today="'+ optionEl.data('today') +'">'+ optionEl.data('time') +'</span></div>';
-						}
-
-						return optionEl.text();
-					}
-				});
-			}
+			reLoad: false,
+			showPreloader: false,
+			callback: self.mainStepCallback
 		}, false);
 
 		// Выбор шага
@@ -134,7 +125,7 @@
 
 			self.requestAPI('setshop', 
 				{
-					sapcode: $(this).data('sapcode'),
+					uuid: $(this).data('uuid'),
 					city: $(this).data('city'),
 					shopid: shopid,
 				}, {
@@ -146,10 +137,17 @@
 							// Устанавливаем статус
 							$shopWrap.attr('data-status', shopid == 0 ? 'null' : 'selected');
 						}
+
+						self.load('view', {
+							name: 'content',
+							reLoad: true,
+							showPreloader: true,
+							callback: self.mainStepCallback,
+						}, false);
 				
 						// Показываем или скрываем форму подтверждения если все магазины выбраны
 						// и выбираем такой же магазин в соседнем товаре
-						self.elements.page.find('[data-el=item-shops]').each(function () {
+						//self.elements.page.find('[data-el=item-shops]').each(function () {
 							/*
 								Выбор этого же магазина в соседних селекторах
 								Временно отключено
@@ -173,13 +171,15 @@
 							}
 							*/
 			
+							/*
 							if ($(this).val() == 0) {
 								showConfirm = false;
 								return false;
 							}
-						});
+							*/
+						//});
 			
-						self.elements.page.find('[data-el=confirm-wrapper]')[showConfirm ? 'slideDown':'slideUp'](200);
+						//self.elements.page.find('[data-el=confirm-wrapper]')[showConfirm ? 'slideDown':'slideUp'](200);
 					}
 				}
 			);
@@ -190,7 +190,7 @@
 			e.preventDefault();
 
 			var $item = $(this).closest('[data-el=item]');
-			var sapcode = $(this).data('sapcode');
+			var uuid = $(this).data('uuid');
 			var confirm = new Z585.modal.instance({
 				htmlHeader: 'Удалить товар?',
 				htmlInfo: 'Вы уверены, что хотите удалить товар из корзины?',
@@ -199,10 +199,11 @@
 				fires: {
 					confirm: function (elements) {
 						self.requestAPI('remove', {
-							sapcode: sapcode
+							uuid: uuid
 						}, {
 							partial: {
-								name: 'content'
+								name: 'content',
+								callback: self.mainStepCallback,
 							}
 						});
 					},
@@ -471,6 +472,36 @@
 			self.yaMap.showMap(mapData, $modal.find('[data-el=map-balloon]'));
 		});
 
+		// Показывает блок с телефоном для подтверждения или модалку об ошибке
+		self.elements.page.on('click', '[data-btn=show-confirm]', function (e) {
+			var $confirmWrap = self.elements.page.find('[data-el=confirm-wrapper]');
+			var shops = self.elements.page.find('[data-el=item-shops]').map(function () {
+				return +$(this).val();
+			}).get();
+			var permission = $.inArray(0, shops) === -1;
+			var scrollPos = 0;
+
+			e.preventDefault();
+
+			if (permission) {
+				// Скрываем кнопку, показываем блок с подтверждением
+				$(this).hide();
+				$confirmWrap.removeClass('is-close');
+
+				scrollPos = $confirmWrap.offset().top;
+			} else {
+				var notify = new Z585.modal.instance({
+					htmlHeader: 'Магазины не выбраны',
+					htmlInfo: 'Пожалуйста, выберите магазины у всех товаров',
+					buttons: [ 'close', 'confirm' ],
+				});
+
+				notify.init(true);
+			}
+
+			$('html, body').animate({ scrollTop: scrollPos }, 200);
+		});
+
 		// Копирование GPS координат в буфер
 		self.elements.page.on('click', '[data-btn=copy-gps]', function (e) {
 			var $temp = $('<input>');
@@ -560,8 +591,6 @@
 				city: self.apiData.view.city,
 			};
 
-			console.log(JSON.stringify(self.apiData));
-
 			var modal = new Z585.modal.instance({
 				cssExtra: 'modal__wrap--gray',
 				htmlInfo: '<div data-partial="like-that"/>',
@@ -572,8 +601,100 @@
 						var modalSelf = this;
 						self.loadPartial('like-that', data, {
 							showPreloader: false,
-							callback: function () {
+							callback: function ($partial) {
+								var $btn = $partial.find('[data-btn=fittingBtn]');
+								var $selector = $partial.find('[data-btn=fittingSelector]');
+								var item = data.item;
+								var setData = function ($el) {
+									var $title         = $('<div/>').html(item.title);
+									var $size          = $title.find('size');
+									var primaryPrice   = $el.data('primary-price');
+									var discountPrice  = $el.data('discount-price');
+									var bonusPrice     = $el.data('bonus-price') || discountPrice;
+
+									if ($size.length) {
+										$size.text($el.data('itemsize'));
+									}
+
+									data = {
+										title:    $title.html(),
+										sapcode:  $el.data('sapcode'),
+										article:  $el.data('article'),
+										itemid:   $el.data('itemid'),
+										itemsize: $el.data('itemsize'),
+										weight:   $el.data('weight'),
+										price: primaryPrice.replace(/[^0-9]/g, ''),
+										discount_price: discountPrice.replace(/[^0-9]/g, ''),
+										shopid: 0,
+									};
+
+									e.preventDefault();
+
+									$partial
+										.find('[data-el=primary-price]').text(primaryPrice).end()
+										.find('[data-el=discount-price]').text(discountPrice).end()
+										.find('[data-el=bonus-price]').text(bonusPrice).end();
+
+									$el
+										.attr('data-selected', 1)
+										.siblings().removeAttr('data-selected');
+
+									$partial.find('[data-btn=add]').data('item', data);
+								}
+
 								modalSelf.toggleWait();
+
+								// Выбор размера
+								$btn.on('click', function (e) {
+									setData($(this));
+								});
+
+								// Выбор веса
+								$selector.on('change', function (e) {
+									setData($(this).find('option:selected'));
+								});
+
+								if ($selector.length && $selector.find('option').length == 2) {
+									// Если вес один выбираем его и скрываем селектор
+									$selector.hide().find('option:eq(1)')
+										.prop('selected', true)
+										.end().trigger('change');
+								} else {
+									// Выбираем первый размер
+									$btn.first().trigger('click');
+								}
+
+								// Добавление в корзину
+								$partial.find('[data-btn=add]').on('click', function (e) {
+									e.preventDefault();
+
+									if (typeof $(this).data('item') === 'undefined') {
+										var modal = new Z585.modal.instance({
+											htmlInfo: 'Пожалуйста, выберите размер',
+											buttons: [ 'close', 'confirm' ],
+										}).init(true);
+									} else {
+										data = $.extend(item, $(this).data('item'));
+
+										data.city = $(this).data('city');
+										data.url = data.href;
+
+										delete data.uuid;
+										delete data.citycount;
+										delete data.total_discount_price;
+										delete data.total_price;
+
+										modalSelf.destroy();
+
+										self.requestAPI('xadd', data, {
+											partial: {
+												name: 'content',
+												toTop: false,
+												callback: self.mainStepCallback,
+											}
+										});
+									}
+								});
 							}
 						});
 					}
@@ -609,7 +730,7 @@
 
 			//if (confirm('Вы уверены, что хотите удалить этот товар из корзины?')) {
 				self.requestAPI('remove', {
-					sapcode: $(this).data('sapcode')
+					uuid: $(this).data('uuid')
 				}, {
 					partial: {
 						name: 'topbasket'
@@ -630,6 +751,7 @@
 		var self = this;
 		var stopwatch = 0;
 		var loaded = false;
+		var $partial = $('[data-partial="'+ partial.name +'"]');
 		var sendRequest = function () {
 			if (visChangeCond instanceof Function) {
 				visChangeCond = visChangeCond();
@@ -745,6 +867,9 @@
 			template = options.template || $partial.data('template');
 
 			if (loaded === true && options.reLoad === false) {
+				if ($.isFunction(options.callback)) {
+					options.callback($partial);
+				}
 				console.log('Z585.basket.loadPartial: The partial was already loaded. '+ name +' = ('+ JSON.stringify(options) +')');
 				return true;
 			}
@@ -851,6 +976,24 @@
 		} else {
 			console.log('Z585.basket.toggleModal: "'+ name +'" is undefined');
 		}
+	}
+
+	/**
+	 * Каллбэк для первого/основного шага
+	 */
+	basket.mainStepCallback = function ($partial) {
+		// Селектор магазинов
+		$partial.find('[data-el=item-shops]').fancySelect({
+			optionTemplate: function(optionEl) {
+				if (typeof optionEl.data('time') !== 'undefined') {
+					return optionEl.text() + '<div style="display:none;">можно забрать:<br><span data-today="'+ optionEl.data('today') +'">'+ optionEl.data('time') +'</span></div>';
+				}
+
+				return optionEl.text();
+			}
+		}).on('change.fs', function() {
+			$(this).trigger('change.$');
+		});
 	}
 
 } ());
