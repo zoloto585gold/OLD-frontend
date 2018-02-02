@@ -18,7 +18,7 @@
 			return false;
 		}
 
-		setTimeout(modalPopup.generatePopup, 3000);	
+		//setTimeout(modalPopup.generatePopup, 3000);	
 	});
 
 	// функция генерирования кода окна
@@ -32,16 +32,11 @@
 			$('.modal-popup').addClass('show-popup');
 		}, 100);	
 
-		// добавление куки
-		$.cookie('modalPopup-closed', 'yes', { expires: 7 });
-		popupCheck = true;
-
-		$('.close-but, #cityOk').click(function(){
+		$('.close-but, #cityOk, #cityChange').click(function(){
 			$('#cityPopup').parent().remove();
-		});
-
-		$('#cityChange').click(function(){
-			$('#cityPopup').parent().remove();
+			// добавление куки
+			$.cookie('modalPopup-closed', 'yes', { expires: 7 });
+			popupCheck = true;
 		});
 	}
 
