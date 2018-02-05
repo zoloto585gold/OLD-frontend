@@ -1,3 +1,98 @@
+// MOBILE MENU
+
+@media @touch {
+	.main-nav-item__dropdown {
+		display: none;
+	}
+
+
+	// MAIN MENU
+
+	.header-search {
+		float: left;
+		width: 	100%;
+	}
+
+	.header-menu {
+		position: 			fixed;
+		top: 				0;
+		height: 			100%;
+	    background-color: 	#e9e3e5;
+	    background-image: 	none;
+	    width: 				400px;
+	    z-index: 			9999;
+	    border-top: 		1px solid #eff0f1;
+	    border-bottom: 		1px solid #d5d5d5;
+	    box-shadow: 		0 -1px 0 0 #e0e1e3;
+
+	    .section__inner {
+	    	width: 	100%;
+	    	float: right;
+	    }
+	}
+
+	.header-menu__inner { 
+		display: 			flex;
+		flex-wrap: 			wrap;
+		width: 				100%;
+		//border: 			1px solid red;
+
+		// ul li
+		.main-nav-item {
+
+			flex-basis: 50%;
+
+			flex-grow: 1;
+			//border: 			1px solid red;
+			text-align: 		center;
+			height: 			28px;
+			
+			text-transform: 	uppercase;
+			
+			a {
+				position: 			relative;
+				display: 			block;
+				//border: 			1px solid #333;
+				font: 				400 11px/8px Circe;
+				color: 				#333;
+				height: 			100%;
+				padding: 			10px 2px;
+				z-index: 			100;
+
+				&:hover {
+				
+					&:after {
+						/*position: absolute;
+					    left: 50%;
+					    bottom: 1px;
+					    z-index: 0;
+					    margin-left: -12px;
+					    content: '';
+					    visibility: 	visible;
+					    //display: none;
+					    border: 12px solid transparent;
+					    border-bottom: 5px solid #992528;*/
+					}
+				}
+			}
+
+		}
+
+		// Каталог
+
+		.main-nav-item__catalog {
+
+			display: none;
+
+		}
+
+	}
+
+}
+
+
+// DESKTOP MENU
+
 @media @desktop {
 
 	// DROPDOWN WINDOW
@@ -25,7 +120,7 @@
 		
 		opacity: 				0;
 		visibility: 			hidden;
-		//display: 				none;
+
 		transition-delay: 		.6s;
 
 		// BOTTOM LINKS =============================
@@ -110,9 +205,9 @@
 				display: 		flex;
 				flex-wrap: 		wrap;
 				flex-direction: column;
-				overflow: 		hidden;
+				//overflow: 		hidden;
 				height: 		330px;
-				width: 			480px;
+				//width: 			480px;
 				//border: 		1px solid red;
 
 				//-webkit-font-smoothing: subpixel-antialiased;
@@ -120,6 +215,7 @@
 				.dropdown__category-block {
 					
 					//flex-basis: 	250px;
+					//border: 		1px solid red;
 					
 					min-height: 	1px;
 					margin-right: 	15px;
@@ -185,21 +281,21 @@
 					}
 
 					.dropdown__category-block_button {
-						display: 		block;
-						width: 			100%;
-						height: 		30px;
-						box-sizing: 	border-box;
-						border: 		0;
-						border-radius: 	3px;
-						background-color: 	#ed3030;
-						box-shadow: 		1px 1px 1px rgba(0,0,0,.5);
-						outline: 		0;
-						cursor: 		pointer;
-						text-decoration: 	none;
-						text-transform: 	uppercase;
-						text-align: 		center;
-						font: 	400 11px/30px 'Circe-Regular';
-						color: 	#fff;
+						display: 				inline-block;
+						height: 				30px;
+						box-sizing: 			border-box;
+						border: 				0;
+						border-radius: 			3px;
+						background-color: 		#ed3030;
+						box-shadow: 			1px 1px 1px rgba(0,0,0,.5);
+						outline: 				0;
+						cursor: 				pointer;
+						text-decoration: 		none;
+						text-transform: 		uppercase;
+						text-align: 			center;
+						font: 					400 11px/30px 'Circe-Regular';
+						padding: 				0 20px;
+						color: 					#fff;
 						-webkit-appearance: 	none;
 						-moz-appearance: 		none;
 						appearance: 			none;
@@ -229,9 +325,9 @@
 
 				.dropdown__category-block {
 
-					// &:nth-child(3) {
-					// 	flex-grow: 200px;
-					// }
+					&:nth-child(1n + 3) {
+						//max-width: 160px;
+					}
 					
 				}
 			}
@@ -258,9 +354,12 @@
 
 					min-width: 		260px;
 				
-					&:nth-child(3) {
-						 min-width: auto;
-						 max-width: 150px;
+					&:nth-child(1n + 3) {
+
+						.dropdown__category-block_links {
+							max-width: 150px;
+						}
+				
 					}
 
 				}
@@ -286,7 +385,7 @@
 
 			.dropdown__category {
 				width: 			auto;
-				padding-left: 	32px;
+				padding-left: 	30px;
 				padding-right: 	10px;
 
 				.dropdown__category-block {
@@ -329,14 +428,14 @@
 			.dropdown__category {
 				//border: 		1px solid red;
 				//float: right;
-				width: 			390px;
-				padding-left: 	32px;
+				//width: 			390px;
+				padding-left: 	30px;
 				//padding-right: 	10px;
 
 				.dropdown__category-block {
 					//flex-basis: 	250px;
 					min-width: 		200px;
-					max-width: 		auto;
+					max-width: 		0%;
 
 					min-height: 	1px;
 					margin-right: 	15px;
