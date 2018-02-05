@@ -174,9 +174,13 @@
 		return false;
 	});
 
-	$(document).on('click', '.top-geo__button', function () {
+	// Открытие окна выбора города
+
+	$(document).on('click', '.top-geo__button, #cityChange', function () {
 		topGeoModal(true);
 	});
+
+	// Закрытие окна выбора города
 
 	$(document).on('click', '.top-geo-modal__close', function () {
 		topGeoModal(false);
