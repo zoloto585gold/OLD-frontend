@@ -279,9 +279,7 @@
 					partial: {
 						name: 'content',
 						toTop: false,
-						callback: function () {
-							//$input.prop('disabled', true);
-						}
+						callback: self.mainStepCallback
 					}
 				});
 			}
@@ -298,9 +296,7 @@
 				partial: {
 					name: 'content',
 					toTop: false,
-					callback: function () {
-						$input.prop('disabled', false);
-					}
+					callback: self.mainStepCallback
 				}
 			});
 		});
@@ -355,9 +351,7 @@
 					partial: {
 						name: 'content',
 						toTop: false,
-						callback: function () {
-							$input.prop('disabled', true);
-						}
+						callback: self.mainStepCallback
 					}
 				});
 			}
@@ -365,7 +359,6 @@
 
 		// Удаление бонусной карты
 		self.elements.page.on('click', '[data-btn=clearbcard]', function (e) {
-			var $input = self.elements.page.find('[data-el=bonus-input]');
 			var value  = $(this).data('bonus-card');
 			
 			self.requestAPI('clearbcard', {
@@ -374,9 +367,7 @@
 				partial: {
 					name: 'content',
 					toTop: false,
-					callback: function () {
-						$input.prop('disabled', false);
-					}
+					callback: self.mainStepCallback
 				}
 			});
 		});
@@ -560,6 +551,10 @@
 						// Последний шаг
 						self.loadPartial('content', json, {
 							template: 'orders',
+							callback: function () {
+								self.elements.page.find('[data-el=confirm-wrapper]').addClass('is-close');
+								$('html, body').animate({ scrollTop: 0 }, 200);
+							}
 						});
 
 						// Очистка корзины
