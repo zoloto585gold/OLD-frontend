@@ -37,7 +37,7 @@
 }
 
 .basket__title {
-  padding: 25px 0;
+  padding: 25px 0 0;
   
   @media screen and (max-width: @mobile_p-max) {
     width: 100%;
@@ -115,18 +115,11 @@
 }
 
 .basket__city {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 0;
-  font-size: 16px;
+  float: right;
+  font-size: 12px;
   text-transform: uppercase;
   color: #999;
-  
-  @media @touch {
-    position: static;
-    transform: translateY(0);
-  }
+  margin: 10px 0 0;
 
   @media screen and (max-width: @mobile_p-max) {
     span:not(.remove) { display: none; }

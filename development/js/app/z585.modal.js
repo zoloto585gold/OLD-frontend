@@ -7,18 +7,22 @@
 		var self = this;
 
 		self.options = $.extend({
-			cssPrefix: 'modal__',
-			cssExtra: '',
-			htmlHeader: '',
-			htmlInfo: '',
-			htmlConfirm: 'OK',
-			htmlDecline: 'Cancel',
-			hideAfterFire: true,
-			destroyAfterFire: true,
-			allowedFires: [ 'onClose', 'onConfirm', 'onDecline' ],
-			onClose:   function (elements) {},
-			onConfirm: function (elements) {},
-			onDecline: function (elements) {},
+			cssPrefix: 'modal__', // css префикс
+			cssExtra: '', // доп. css классы
+			htmlHeader: '', // заголовок
+			htmlInfo: '', // тело
+			htmlConfirm: 'OK', // текст кнопки "подтвердить"
+			htmlDecline: 'Cancel', // текст кнопки "отмена"
+			preloader: false, // показывать прелоадер
+			hideAfterFire: true, // скрыть после события
+			destroyAfterFire: true, // удалить после события
+			buttons: [ 'close', 'confirm', 'decline' ], // добавить кнопки
+			fires: { // события
+				append:  function () {}, // добавление в дом
+				close:   function () {}, // закрыть
+				confirm: function () {}, // подтвердить
+				decline: function () {}, // отклонить
+			}
 		}, options);
 	}
 
@@ -32,23 +36,34 @@
 		show = show || false;
 
 		self.elements = {
-			overlay:    $('<div class="' + self.options.cssPrefix +'overlay" data-fire="onClose"/>'),
-			wrapper:    $('<div class="' + self.options.cssPrefix +'wrap '+ self.options.cssExtra+'"/>'),
+			overlay:    $('<div class="' + self.options.cssPrefix +'overlay" data-fire="close"/>'),
+			wrapper:    $('<div class="' + self.options.cssPrefix +'wrap '+ self.options.cssExtra+'" data-wait="0"/>'),
 			header:     $('<h2 class="'  + self.options.cssPrefix +'header"/>'),
 			info:       $('<p class="'   + self.options.cssPrefix +'info"/>'),
-			confirmBtn: $('<div class="' + self.options.cssPrefix +'button" data-fire="onConfirm"/>'),
-			declineBtn: $('<div class="' + self.options.cssPrefix +'button" data-fire="onDecline"/>'),
-			closeBtn:   $('<div class="' + self.options.cssPrefix +'close-but" data-fire="onClose"/>'),
+			confirm:    $('<button class="' + self.options.cssPrefix +'button" data-fire="confirm">'+ self.options.htmlConfirm +'</button>'),
+			decline:    $('<button class="' + self.options.cssPrefix +'button" data-fire="decline">'+ self.options.htmlDecline +'</button>'),
+			close:      $('<button class="' + self.options.cssPrefix +'close-but" data-fire="close"/>'),
 		};
 
-		self.elements.wrapper.append(
-			self.elements.header.html(self.options.htmlHeader).append(self.elements.closeBtn),
-			self.elements.info.html(self.options.htmlInfo),
-			self.elements.confirmBtn.html(self.options.htmlConfirm),
-			self.elements.declineBtn.html(self.options.htmlDecline)
-		);
+		if (self.options.htmlHeader.length) {
+			self.elements.wrapper.append(self.elements.header.html(self.options.htmlHeader));
+		}
 
-		// Вызов каллбэка и закрытие
+		self.elements.wrapper.append(self.elements.info.html(self.options.htmlInfo));
+
+		if (self.options.preloader === true) {
+			self.toggleWait();
+		}
+
+		$.each(self.options.buttons, function (i, btn) {
+			var btnEl = self.elements[btn];
+			
+			if (btnEl) {
+				self.elements.wrapper.append(btnEl);
+			}
+		});
+
+		// Инит событий
 		$.each(self.elements, function (name, el) {
 			var fire = el.data('fire') || null;
 
@@ -56,12 +71,14 @@
 				el.on('click', function (e) {
 					e.preventDefault();
 
-					if ($.inArray(fire, self.options.allowedFires) == -1) {
-						return false;
+					if (self.fires[fire] instanceof Function) {
+						// внутреннее событие
+						self.options.fires[fire]();
 					}
 		
-					if (self.options[fire] instanceof Function) {
-						self.options[fire](self.elements);
+					if (self.options.fires[fire] instanceof Function) {
+						// каллбэк
+						self.options.fires[fire].call(self);
 					}
 		
 					if (self.options.hideAfterFire) {
@@ -79,6 +96,14 @@
 			self.elements.overlay,
 			self.elements.wrapper
 		);
+
+		if (self.fires.append instanceof Function) {
+			self.fires.append();
+		}
+
+		if (self.options.fires.append instanceof Function) {
+			self.options.fires.append.call(self);
+		}
 
 		if (show !== true) {
 			self.hide();
@@ -108,5 +133,16 @@
 		this.elements.overlay.remove();
 		this.elements.wrapper.remove();
 	}
+
+	modal.instance.prototype.toggleWait = function () {
+		var wait = parseInt(this.elements.wrapper.attr('data-wait'));
+
+		this.elements.wrapper.attr('data-wait', +!wait);
+	}
+
+	/**
+	 * События
+	 */
+	modal.instance.prototype.fires = {};
 
 } ());
