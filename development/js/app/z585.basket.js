@@ -7,7 +7,8 @@
 		var self = this;
 		
 		self.debug = true;
-		self.urlAPI = 'https://d03.zoloto585.ru/restapi/v1/basket/';
+		self.apiUrl = 'https://d03.zoloto585.ru/restapi/v2/basket/';
+		self.apiData = {};
 
 		self.methods = {
 			add: 'post',
@@ -53,13 +54,12 @@
 	basket.pageInit = function () {
 		var self = this;
 
-		/*
-		self.load('view', 'content', function () {
-			var template = self.elements.page.find('[data-partial=content]').data('template');
-			return template == 'start';
-		});
-		*/
-		self.load('view', 'content', false);
+		self.load('view', {
+			name: 'content',
+			reLoad: false,
+			showPreloader: false,
+			callback: self.mainStepCallback
+		}, false);
 
 		// Выбор шага
 		self.elements.page.on('click', '[data-btn=step]', function (e) {
@@ -101,13 +101,15 @@
 				htmlInfo: 'Вы уверены, что хотите удалить все товары из корзины?',
 				htmlConfirm: 'ОК',
 				htmlDecline: 'Отмена',
-				onConfirm: function (elements) {
-					self.requestAPI('clear', {}, {
-						partial: {
-							name: 'content'
-						}
-					});
-				},
+				fires: {
+					confirm: function (elements) {
+						self.requestAPI('clear', {}, {
+							partial: {
+								name: 'content'
+							}
+						});
+					},
+				}
 			});
 	
 			confirm.init(true);		
@@ -123,7 +125,7 @@
 
 			self.requestAPI('setshop', 
 				{
-					sapcode: $(this).data('sapcode'),
+					uuid: $(this).data('uuid'),
 					city: $(this).data('city'),
 					shopid: shopid,
 				}, {
@@ -135,10 +137,17 @@
 							// Устанавливаем статус
 							$shopWrap.attr('data-status', shopid == 0 ? 'null' : 'selected');
 						}
+
+						self.load('view', {
+							name: 'content',
+							reLoad: true,
+							showPreloader: true,
+							callback: self.mainStepCallback,
+						}, false);
 				
 						// Показываем или скрываем форму подтверждения если все магазины выбраны
 						// и выбираем такой же магазин в соседнем товаре
-						self.elements.page.find('[data-el=item-shops]').each(function () {
+						//self.elements.page.find('[data-el=item-shops]').each(function () {
 							/*
 								Выбор этого же магазина в соседних селекторах
 								Временно отключено
@@ -162,13 +171,15 @@
 							}
 							*/
 			
+							/*
 							if ($(this).val() == 0) {
 								showConfirm = false;
 								return false;
 							}
-						});
+							*/
+						//});
 			
-						self.elements.page.find('[data-el=confirm-wrapper]')[showConfirm ? 'slideDown':'slideUp'](200);
+						//self.elements.page.find('[data-el=confirm-wrapper]')[showConfirm ? 'slideDown':'slideUp'](200);
 					}
 				}
 			);
@@ -179,23 +190,26 @@
 			e.preventDefault();
 
 			var $item = $(this).closest('[data-el=item]');
-			var sapcode = $(this).data('sapcode');
+			var uuid = $(this).data('uuid');
 			var confirm = new Z585.modal.instance({
 				htmlHeader: 'Удалить товар?',
 				htmlInfo: 'Вы уверены, что хотите удалить товар из корзины?',
 				htmlConfirm: 'ОК',
 				htmlDecline: 'Отмена',
-				onConfirm: function (elements) {
-					self.requestAPI('remove', {
-						sapcode: sapcode
-					}, {
-						partial: {
-							name: 'content'
-						}
-					});
-				},
-				onDecline: function (elements) {
-					$item.find('[data-el=quantity] input').val(1);
+				fires: {
+					confirm: function (elements) {
+						self.requestAPI('remove', {
+							uuid: uuid
+						}, {
+							partial: {
+								name: 'content',
+								callback: self.mainStepCallback,
+							}
+						});
+					},
+					decline: function (elements) {
+						$item.find('[data-el=quantity] input').val(1).trigger('change');
+					},
 				},
 			});
 	
@@ -265,9 +279,7 @@
 					partial: {
 						name: 'content',
 						toTop: false,
-						callback: function () {
-							//$input.prop('disabled', true);
-						}
+						callback: self.mainStepCallback
 					}
 				});
 			}
@@ -284,9 +296,7 @@
 				partial: {
 					name: 'content',
 					toTop: false,
-					callback: function () {
-						$input.prop('disabled', false);
-					}
+					callback: self.mainStepCallback
 				}
 			});
 		});
@@ -341,9 +351,7 @@
 					partial: {
 						name: 'content',
 						toTop: false,
-						callback: function () {
-							$input.prop('disabled', true);
-						}
+						callback: self.mainStepCallback
 					}
 				});
 			}
@@ -351,7 +359,6 @@
 
 		// Удаление бонусной карты
 		self.elements.page.on('click', '[data-btn=clearbcard]', function (e) {
-			var $input = self.elements.page.find('[data-el=bonus-input]');
 			var value  = $(this).data('bonus-card');
 			
 			self.requestAPI('clearbcard', {
@@ -360,9 +367,7 @@
 				partial: {
 					name: 'content',
 					toTop: false,
-					callback: function () {
-						$input.prop('disabled', false);
-					}
+					callback: self.mainStepCallback
 				}
 			});
 		});
@@ -458,6 +463,36 @@
 			self.yaMap.showMap(mapData, $modal.find('[data-el=map-balloon]'));
 		});
 
+		// Показывает блок с телефоном для подтверждения или модалку об ошибке
+		self.elements.page.on('click', '[data-btn=show-confirm]', function (e) {
+			var $confirmWrap = self.elements.page.find('[data-el=confirm-wrapper]');
+			var shops = self.elements.page.find('[data-el=item-shops]').map(function () {
+				return +$(this).val();
+			}).get();
+			var permission = $.inArray(0, shops) === -1;
+			var scrollPos = 0;
+
+			e.preventDefault();
+
+			if (permission) {
+				// Скрываем кнопку, показываем блок с подтверждением
+				$(this).hide();
+				$confirmWrap.removeClass('is-close');
+
+				scrollPos = $confirmWrap.offset().top;
+			} else {
+				var notify = new Z585.modal.instance({
+					htmlHeader: 'Магазины не выбраны',
+					htmlInfo: 'Пожалуйста, выберите магазины у всех товаров',
+					buttons: [ 'close', 'confirm' ],
+				});
+
+				notify.init(true);
+			}
+
+			$('html, body').animate({ scrollTop: scrollPos }, 200);
+		});
+
 		// Копирование GPS координат в буфер
 		self.elements.page.on('click', '[data-btn=copy-gps]', function (e) {
 			var $temp = $('<input>');
@@ -516,6 +551,10 @@
 						// Последний шаг
 						self.loadPartial('content', json, {
 							template: 'orders',
+							callback: function () {
+								self.elements.page.find('[data-el=confirm-wrapper]').addClass('is-close');
+								$('html, body').animate({ scrollTop: 0 }, 200);
+							}
 						});
 
 						// Очистка корзины
@@ -536,6 +575,131 @@
 				$btn.trigger('click');
 			}
 		});
+
+		// Загрузка товара для повторного добавления (Кнопка хочу еще)
+		self.elements.page.on('click', '[data-btn=like-that]', function (e) {
+			var itemid = $(this).data('itemid');
+			var data = {
+				item: self.apiData.view.items.find(function (el) {
+					return el.itemid == itemid;
+				}),
+				city: self.apiData.view.city,
+			};
+
+			var modal = new Z585.modal.instance({
+				cssExtra: 'modal__wrap--gray',
+				htmlInfo: '<div data-partial="like-that"/>',
+				preloader: true,
+				buttons: [ 'close' ],
+				fires: {
+					append: function () {
+						var modalSelf = this;
+						self.loadPartial('like-that', data, {
+							showPreloader: false,
+							callback: function ($partial) {
+								var $btn = $partial.find('[data-btn=fittingBtn]');
+								var $selector = $partial.find('[data-btn=fittingSelector]');
+								var item = data.item;
+								var setData = function ($el) {
+									var $title         = $('<div/>').html(item.title);
+									var $size          = $title.find('size');
+									var primaryPrice   = $el.data('primary-price');
+									var discountPrice  = $el.data('discount-price');
+									var bonusPrice     = $el.data('bonus-price') || discountPrice;
+
+									if ($size.length) {
+										$size.text($el.data('itemsize'));
+									}
+
+									data = {
+										title:    $title.html(),
+										sapcode:  $el.data('sapcode'),
+										article:  $el.data('article'),
+										itemid:   $el.data('itemid'),
+										itemsize: $el.data('itemsize'),
+										weight:   $el.data('weight'),
+										price: primaryPrice.replace(/[^0-9]/g, ''),
+										discount_price: discountPrice.replace(/[^0-9]/g, ''),
+										shopid: 0,
+									};
+
+									e.preventDefault();
+
+									$partial
+										.find('[data-el=primary-price]').text(primaryPrice).end()
+										.find('[data-el=discount-price]').text(discountPrice).end()
+										.find('[data-el=bonus-price]').text(bonusPrice).end();
+
+									$el
+										.attr('data-selected', 1)
+										.siblings().removeAttr('data-selected');
+
+									$partial.find('[data-btn=add]').data('item', data);
+								}
+
+								modalSelf.toggleWait();
+
+								// Выбор размера
+								$btn.on('click', function (e) {
+									setData($(this));
+								});
+
+								// Выбор веса
+								$selector.on('change', function (e) {
+									setData($(this).find('option:selected'));
+								});
+
+								if ($selector.length && $selector.find('option').length == 2) {
+									// Если вес один выбираем его и скрываем селектор
+									$selector.hide().find('option:eq(1)')
+										.prop('selected', true)
+										.end().trigger('change');
+								} else {
+									// Выбираем первый размер
+									$btn.first().trigger('click');
+								}
+
+								// Добавление в корзину
+								$partial.find('[data-btn=add]').on('click', function (e) {
+									e.preventDefault();
+
+									if (typeof $(this).data('item') === 'undefined') {
+										var modal = new Z585.modal.instance({
+											htmlInfo: 'Пожалуйста, выберите размер',
+											buttons: [ 'close', 'confirm' ],
+										}).init(true);
+									} else {
+										data = $.extend(item, $(this).data('item'));
+
+										data.city = $(this).data('city');
+										data.url = data.href;
+
+										delete data.uuid;
+										delete data.citycount;
+										delete data.total_discount_price;
+										delete data.total_price;
+
+										modalSelf.destroy();
+
+										self.requestAPI('xadd', data, {
+											partial: {
+												name: 'content',
+												toTop: false,
+												callback: self.mainStepCallback,
+											}
+										});
+									}
+								});
+							}
+						});
+					}
+				}
+			});
+
+			e.preventDefault();
+	
+			modal.init(true);
+		});
 	}
 
 	/**
@@ -543,8 +707,10 @@
 	 */
 	basket.briefInit = function () {
 		var self = this;
-		
-		self.load('briefview', 'topbasket', true);
+
+		self.load('briefview', {
+			name: 'topbasket'
+		}, false);
 
 		// Открывашка для тач версии
 		self.elements.brief.on('click', '[data-btn=open]', function (e) {
@@ -559,7 +725,7 @@
 
 			//if (confirm('Вы уверены, что хотите удалить этот товар из корзины?')) {
 				self.requestAPI('remove', {
-					sapcode: $(this).data('sapcode')
+					uuid: $(this).data('uuid')
 				}, {
 					partial: {
 						name: 'topbasket'
@@ -572,7 +738,7 @@
 	/**
 	 * 
 	 * @param {String} method - api метод
-	 * @param {String} partial - имя шаблона
+	 * @param {Object} partial - параметры шаблона
 	 * @param {Function|Bool} visChangeCond - bool для перезагрузки
 	 * @param {Number} visDelay - задержка в сек. для перезагрузки
 	 */
@@ -580,6 +746,7 @@
 		var self = this;
 		var stopwatch = 0;
 		var loaded = false;
+		var $partial = $('[data-partial="'+ partial.name +'"]');
 		var sendRequest = function () {
 			if (visChangeCond instanceof Function) {
 				visChangeCond = visChangeCond();
@@ -587,9 +754,7 @@
 
 			if (visChangeCond || loaded === false) {
 				self.requestAPI(method, {}, {
-					partial: {
-						name: partial
-					}
+					partial: partial
 				});
 
 				loaded = true;
@@ -631,7 +796,7 @@
 		options = options || {};
 
 		$.ajax({
-			url: self.urlAPI + method,
+			url: self.apiUrl + method,
 			type: type,
 			data: JSON.stringify(data || {}),
 			cache: false,
@@ -647,6 +812,8 @@
 				self.setPreloader(false);
 			},
 			success: function (json) {
+				self.apiData[method] = json;
+
 				if (json.response.code != 1) {
 					if (json.response.code == 5) {
 						alert('Не удалось загрузить корзину (UID)');
@@ -695,6 +862,9 @@
 			template = options.template || $partial.data('template');
 
 			if (loaded === true && options.reLoad === false) {
+				if ($.isFunction(options.callback)) {
+					options.callback($partial);
+				}
 				console.log('Z585.basket.loadPartial: The partial was already loaded. '+ name +' = ('+ JSON.stringify(options) +')');
 				return true;
 			}
@@ -801,6 +971,24 @@
 		} else {
 			console.log('Z585.basket.toggleModal: "'+ name +'" is undefined');
 		}
+	}
+
+	/**
+	 * Каллбэк для первого/основного шага
+	 */
+	basket.mainStepCallback = function ($partial) {
+		// Селектор магазинов
+		$partial.find('[data-el=item-shops]').fancySelect({
+			optionTemplate: function(optionEl) {
+				if (typeof optionEl.data('time') !== 'undefined') {
+					return optionEl.text() + '<div style="display:none;">можно забрать:<br><span data-today="'+ optionEl.data('today') +'">'+ optionEl.data('time') +'</span></div>';
+				}
+
+				return optionEl.text();
+			}
+		}).on('change.fs', function() {
+			$(this).trigger('change.$');
+		});
 	}
 
 } ());
