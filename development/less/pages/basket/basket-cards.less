@@ -25,14 +25,6 @@
       left: 0;
       right: 0;
     }
-
-    @media @touch {
-      .basket-card__text {
-        padding-left: 40px;
-    
-        span { font-size: 16px; }
-      }
-    }
   }
 
   &--bonus-result {
@@ -56,10 +48,13 @@
     width: 350px;
     position: relative;
     padding-left: 65px;
+    //padding-right: 15px;
   
     @media @touch {
-      width: 250px;
-      margin-bottom: 12px;
+      width:          250px;
+      margin-bottom:  12px;
+      padding-left:   0;
+      span { font-size: 16px; }
     }
 
     img {
@@ -111,6 +106,10 @@
       background: #fff;
       text-transform: uppercase;
       font: 300 10px/40px 'Circe';
+
+      @media @touch {
+        width: 100%;
+      }
     
       // &::placeholder {}
     }
