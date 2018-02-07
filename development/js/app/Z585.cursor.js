@@ -20,11 +20,11 @@
 		mainmenu.hover(
 			function() {
 				mouseOver = true;
-				console.log(mouseOver);
+				//console.log(mouseOver);
 			},
 			function() {
 				mouseOver = false;
-				console.log(mouseOver);
+				//console.log(mouseOver);
 			}
 		);
 
@@ -38,14 +38,6 @@
 
 				xPos = event.pageX;
 				yPos = event.pageY;
-
-				if ( mouseOver == false ) {
-					
-					console.log('__');
-				} else {
-					clearInterval(timer);
-					console.log('наведены на меню');
-				}
 				
 		});
 
@@ -55,7 +47,7 @@
 
 
 
-			if ((xPos - posObjx) == 0 && (yPos - posObjy) == 0) {
+			if ((xPos - posObjx) == 0 && (yPos - posObjy) == 0 || mouseOver == true) {
 
 				// Если мышь не двигается
 
@@ -99,7 +91,7 @@
 	// запуск функции после загрузки страницы
 	$(document).ready(function() {
 
-		cursor.animateCursor();
+		//cursor.animateCursor();
 
 	});
 
