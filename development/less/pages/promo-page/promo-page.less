@@ -7,7 +7,7 @@
 	position: 				relative;
 	//-webkit-font-smoothing: subpixel-antialiased;
 	-webkit-font-smoothing: antialiased;
-	
+
 	&__banner {
 
 		//min-height: 		100px;
@@ -27,9 +27,15 @@
 				font: 			28px 'Circe-Light';
 				line-height: 	1.1;
 				letter-spacing: 1px;
-				padding-left: 	7px;	
+				padding-left: 	7px;
 			}
-			
+
+		}
+
+		.countdown{
+			.block-time.sec{
+				display: none;
+			}
 		}
 
 		&-video {
@@ -99,12 +105,17 @@
 				}
 
 				.center-content {
-					iframe {
-						display: 	block;
-						height: 	530px;
-
-						@media @touch {
-							height: 	400px;
+					.videoWrapper {
+						position: relative;
+						padding-bottom: 56.25%;
+						padding-top: 25px;
+						height: 0;
+						iframe {
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 100%;
+							height: 100%;
 						}
 					}
 				}
@@ -116,6 +127,9 @@
 	}
 
 	&__inform {
+		@media @tablet-under{
+			padding-bottom: 25px;
+		}
 		&-main, &-other {
 			display: 	block;
 			width: 		25%;
@@ -132,20 +146,76 @@
 
 		&-main {
 			padding-top: 18px;
-			
+
 			&__title {
 				font: 	30px/28px 'Circe-Light';
 				color: 	@color-red;
 				text-transform: 	uppercase;
+			}
+
+			@media @touch{
+				width: 150px;
+				img{
+					display: none;
+				}
+			}
+
+			@media @tablet-under{
+				width: 100%;
+				position: relative;
+				padding-left: 80px;
+				img{
+					display: block;
+					position: absolute;
+					left: 5px;
+				}
+				&__title{
+					width: 215px;
+				}
 			}
 		}
 
 		&-other {
 			padding-top: 	22px;
 			padding-right: 	10px;
-			
+
+			&:last-child{
+				padding-right: 0;
+			}
+
+			@media @touch{
+				width: 200px;
+				&:nth-child(2){
+					width: 220px;
+				}
+				&:nth-child(4){
+					width: 180px;
+				}
+			}
+
+			@media @tablet-under{
+				width: 33.333% !important;
+				position: relative;
+				padding-left: 80px;
+				img{
+					display: block;
+					position: absolute;
+					left: 0;
+				}
+				&:nth-child(3),
+				&:nth-child(4){
+					img{
+						left: 8px;
+					}
+				}
+			}
+
+			@media @mobile {
+				width: 100% !important
+			}
+
 			&__text {
-				
+
 				display: 			block;
 				text-transform: 	uppercase;
 				font: 12px/16px 'Circe';
@@ -153,11 +223,13 @@
 
 				span {
 					font: 		12px 'Circe-Bold';
-					color: 		@color-red;	
+					color: 		@color-red;
 					display: 	block;
 				}
-				
-				
+
+				@media @tablet-under {
+					font: 10px/14px 'Circe';
+				}
 			}
 		}
 	}
@@ -167,7 +239,7 @@
 		background-color: 	#f8f8f8;
 
 		padding: 			26px 0 50px;
-		
+
 		@border: 			1px solid #cbcbcb;
 
 		border-top: 		@border;
@@ -184,12 +256,24 @@
 			transform: rotate(180deg);
 		}
 
+		@media @mobile{
+			border: 0;
+			padding-bottom: 25px;
+			&:before{
+				display: none;
+			}
+		}
+
 		&-image {
 			position: 	relative;
 			display: 	block;
 			float: 		left;
 			width: 		50%;
 			height: 	264px;
+
+			@media @touch{
+				display: none;
+			}
 		}
 
 		&-form {
@@ -199,17 +283,28 @@
 			width: 			50%;
 			padding-left: 	60px;
 
+			@media @touch{
+				float: none;
+				width: 100%;
+				padding-left: 0;
+			}
+
 			&__title {
 				font: 30px/30px 'Circe-Light';
 				font-weight: 		100;
 				text-transform: 	uppercase;
 				margin-bottom: 		20px;
+				text-align: center;
 			}
 
 			.form__field {
 				width: 300px;
-				margin: 48px 0 0;
+				margin: 48px auto 0;
 				position: relative;
+
+				@media @tablet-under {
+					height: 35px;
+				}
 
 				&-label{
 					font: 12px/30px 'Circe';
@@ -227,6 +322,9 @@
 					border-radius: 3px;
 					border: none;
 					box-shadow: none;
+					@media @tablet-under {
+						padding-left: 15px;
+					}
 				}
 
 				&.numbers {
@@ -265,7 +363,7 @@
 						&.open{
 							background: #fff;
 							color: #333;
-		
+
 							&:after{
 								border: none;
 								background-position: -34px -41px;
@@ -279,7 +377,7 @@
 						border-top: solid 1px #c4c4c4;
 						top: 35px;
 						left: -1px;
-		
+
 						li{
 							font: 12px/16px 'Circe-Light';
 							color: #333;
@@ -289,15 +387,15 @@
 							position: relative;
 							border: solid 1px #c4c4c4;
 							border-top: none;
-		
+
 							&:hover{
 								background: #eee;
 							}
-		
+
 							&:first-child{
 								display: none;
 							}
-		
+
 							&:last-child{
 								border-bottom-right-radius: 3px;
 								border-bottom-left-radius: 3px;
@@ -309,7 +407,7 @@
 				&-btn{
 					display: block;
 					width: 300px;
-					margin-top: 25px;
+					margin: 25px auto 0;
 					background: @color-red;
 					color: #fff;
 					font: 12px/40px 'Circe-Light';
@@ -333,7 +431,11 @@
 					transform: translate(150%, -50%);
 					z-index: 222;
 
-					> button{
+					@media @mobile {
+						display: none;
+					}
+
+					> span{
 						display: block;
 						width: 20px;
 						height: 20px;
@@ -345,7 +447,7 @@
 						color: #999;
 						text-align: center;
 						cursor: default;
-						
+
 						&:hover{
 							background: #333;
 							border-color: #333;
@@ -379,12 +481,24 @@
 
 	&__footer{
 		margin: 55px 0 0;
+		@media @mobile{
+			margin: 0;
+		}
 
 		.section__inner{
 			border: dotted 3px @color-red;
 			border-radius: 10px;
 			position: relative;
 			padding: 64px 0 25px;
+
+			@media @touch {
+				padding-top: 40px;
+			}
+
+			@media @mobile{
+				border: 0;
+				padding-top: 0;
+			}
 		}
 
 		&-title{
@@ -399,6 +513,21 @@
 			top: 0;
 			left: 50%;
 			transform: translate(-50%, -65%);
+
+			@media @tablet-under {
+				font: 20px/40px 'Circe-Light';
+				height: 40px;
+			}
+
+			@media @mobile{
+				position: static;
+				transform: none;
+				width: calc(~'100% + 20px');
+				padding: 0;
+				text-align: center;
+				margin-left: -10px;
+				margin-right: -10px;
+			}
 		}
 
 		&-imgnumlist{
@@ -408,7 +537,11 @@
 			display: flex;
 			flex-wrap: nowrap;
 			justify-content: space-between;
-			
+
+			@media @touch {
+				display: none;
+			}
+
 			li{
 				flex: 1;
 				padding: 0 0 0 47px;
@@ -427,7 +560,7 @@
 				a{
 					text-decoration: underline;
 				}
-				
+
 				&:nth-child(1){
 					background-image: url('@{img}/promo-page/icon/1i.png');
 				}
@@ -493,6 +626,16 @@
 			> div{
 				flex: 1;
 				padding: 0 16px;
+				@media @mobile {
+					padding: 0;
+				}
+			}
+
+			@media @touch {
+				 flex-direction: column;
+				 & > div:first-child {
+					 margin-bottom: 20px;
+				 }
 			}
 		}
 
@@ -502,12 +645,18 @@
 			text-transform: uppercase;
 			padding: 0;
 			margin: 0 0 23px;
+			@media @mobile {
+				font: 26px/16px 'Circe-Light';
+			}
 		}
 
 		&-note{
 			font: 11px/14px 'Circe';
 			color: #999;
 			padding: 0 16px;
+			@media @mobile {
+				padding: 0;
+			}
 		}
 	}
 

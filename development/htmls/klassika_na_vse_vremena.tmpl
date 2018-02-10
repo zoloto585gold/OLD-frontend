@@ -19,24 +19,24 @@
 
 
 		<main class="page__content">
-			
+
 			<div class="section">
 				<div class="promo-page">
-					
+
 					<!-- баннер -->
 					<div class="promo-page__banner">
 						<div class="section__inner">
-							
+
 							<!-- таймер -->
-							<div class="promo-page__banner-timer">
+							<!-- <div class="promo-page__banner-timer">
 								<div class="promo-page__banner-timer-title">
 									До розыгрыша <br>призов осталось:
 								</div>
 
-							</div>
+							</div> -->
 
 							<!-- счетчик -->
-							<div class="countdown">
+							<!-- <div class="countdown">
 								<div class="block-time days" data-init-value="15">
 									<div class="figure days days-1">
 										<span class="top"></span>
@@ -71,7 +71,7 @@
 										<span class="bottom"></span>
 										<span class="bottom-back">
 											<span></span>
-										</span>        
+										</span>
 									</div>
 
 									<div class="figure hours hours-2">
@@ -96,7 +96,7 @@
 										<span class="bottom"></span>
 										<span class="bottom-back">
 											<span></span>
-										</span>          
+										</span>
 									</div>
 
 									<div class="figure min min-2">
@@ -121,7 +121,7 @@
 										<span class="bottom"></span>
 										<span class="bottom-back">
 											<span></span>
-										</span>          
+										</span>
 									</div>
 
 									<div class="figure sec sec-2">
@@ -136,8 +136,8 @@
 									</div>
 									<span class="count-title">Секунд</span>
 								</div>
-							</div>
-							
+							</div> -->
+
 							<!-- видео -->
 							<div class="promo-page__banner-video">
 								<table>
@@ -149,7 +149,9 @@
 									<tr>
 										<td class="left-center"></td>
 										<td class="center-content">
-											<iframe width="100%" src="https://www.youtube.com/embed/IdSWNCx19TY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+											<div class="videoWrapper">
+												<iframe width="100%" src="https://www.youtube.com/embed/IdSWNCx19TY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+											</div>
 										</td>
 										<td class="right-center"></td>
 									</tr>
@@ -198,7 +200,7 @@
 
 					<div class="promo-page__registration">
 						<div class="section__inner">
-							
+
 							<div class="promo-page__registration-image">
 								<img src="../images/promo-page/banner1.jpg" alt="">
 							</div>
@@ -209,9 +211,9 @@
 								</div>
 								<div class="form__field numbers">
 									<label class="form__field-label">Введите номер чека</label>
-									<input type="text" class="form__field-input" name="ticket" placeholder="000.0000.000000.0000">	
+									<input type="text" class="form__field-input" name="ticket" placeholder="000.0000.000000.0000">
 									<div class="form__field-tip">
-										<button>?</button>
+										<span>?</span>
 										<div>
 											<img src="../images/promo-page/ticket.jpg" alt="">
 										</div>
@@ -227,7 +229,7 @@
 										<option value="3">Магазин три</option>
 									</select>
 								</div>
-								
+
 								<button class="form__field-btn">Учавствовать в розыгрыше</button>
 							</form>
 
@@ -246,13 +248,13 @@
 									в специальной рамке в любом магазине 585 GOLD
 								</li>
 								<li>
-									<div>ПОЛУЧИ ПОДАРОК</div>	
+									<div>ПОЛУЧИ ПОДАРОК</div>
 									Стильное украшение<br>
 									и чек для розыгрыша
 								</li>
 								<li>
 									<div>Выложи фото</div>
-									В Facebook, Instagramm<br> 
+									В Facebook, Instagramm<br>
 									или Vkontakte
 								</li>
 								<li>
@@ -296,7 +298,7 @@
 
 					<div class="promo-page__luckytext">
 						<div class="section__inner">
-							Испытайте удачу, приняв участие в конкурсе «Найди Джоконду»! Быть может, именно вы станете тем счастливчиком, который вскоре увидит оригинал знаменитой Джоконды в Лувре…		
+							Испытайте удачу, приняв участие в конкурсе «Найди Джоконду»! Быть может, именно вы станете тем счастливчиком, который вскоре увидит оригинал знаменитой Джоконды в Лувре…
 						</div>
 					</div>
 
@@ -333,17 +335,17 @@
 			//console.log(time);
 
 			var Countdown = {
-			
+
 			// Backbone-like structure
 			$el: $('.countdown'),
-			
+
 			// Params
 			countdown_interval: null,
 			total_seconds     : 0,
-			
-			// Initialize the countdown  
+
+			// Initialize the countdown
 			init: function() {
-				
+
 				// DOM
 				this.$ = {
 					days   : this.$el.find('.block-time.days .figure'),
@@ -359,25 +361,25 @@
 					minutes: this.$.minutes.parent().attr('data-init-value'),
 					seconds: this.$.seconds.parent().attr('data-init-value')
 				};
-				
+
 				// Initialize total seconds
-				this.total_seconds = 
-				(this.values.days * 60 * 60 * 24)  
-				+ (this.values.hours * 60 * 60) 
-				+ (this.values.minutes * 60) 
+				this.total_seconds =
+				(this.values.days * 60 * 60 * 24)
+				+ (this.values.hours * 60 * 60)
+				+ (this.values.minutes * 60)
 				+ this.values.seconds;
 
-				// Animate countdown to the end 
+				// Animate countdown to the end
 				this.count();
-				
+
 				// Inputs
 				$('.promo-page__registration')
 					.find('[name=ticket]').mask('999.9999.999999.9999').end()
 					.find('[name=storeid]').fancySelect().end();
 			},
-			
+
 			count: function() {
-				
+
 				var that    = this,
 					$days_1 = this.$.days.eq(0),
 					$days_2 = this.$.days.eq(1),
@@ -387,12 +389,12 @@
 					$min_2  = this.$.minutes.eq(1),
 					$sec_1  = this.$.seconds.eq(0),
 					$sec_2  = this.$.seconds.eq(1);
-				
+
 					this.countdown_interval = setInterval(function() {
 
 						if(that.total_seconds > 0) {
 
-							--that.values.seconds;              
+							--that.values.seconds;
 
 							if(that.values.minutes >= 0 && that.values.seconds < 0) {
 
@@ -409,7 +411,7 @@
 							if(that.values.days >= 0 && that.values.hours < 0) {
 
 								that.values.hours = 23;
-								--that.values.days; 
+								--that.values.days;
 							}
 
 							// Update DOM values
@@ -431,11 +433,11 @@
 						else {
 							clearInterval(that.countdown_interval);
 						}
-					}, 1000);    
+					}, 1000);
 			},
-			
+
 			animateFigure: function($el, value) {
-				
+
 				var that         = this,
 					$top         = $el.find('.top'),
 					$bottom      = $el.find('.bottom'),
@@ -463,16 +465,16 @@
 					}
 				});
 
-				TweenMax.to($back_top, .85, { 
+				TweenMax.to($back_top, .85, {
 					rotationX           : 0,
 					transformPerspective: 300,
-					ease                : Quart.easeOut, 
-					clearProps          : 'all' 
-				});    
+					ease                : Quart.easeOut,
+					clearProps          : 'all'
+				});
 			},
-			
+
 			checkHour: function(value, $el_1, $el_2) {
-				
+
 				var val_1       = value.toString().charAt(0),
 					val_2       = value.toString().charAt(1),
 					fig_1_value = $el_1.find('.top').html(),
@@ -489,14 +491,14 @@
 					// If we are under 10, replace first figure with 0
 					if(fig_1_value !== '0') this.animateFigure($el_1, 0);
 					if(fig_2_value !== val_1) this.animateFigure($el_2, val_1);
-				}    
+				}
 			}
 			};
 
 			// Let's go !
 			Countdown.init();
 		});
-		
+
 	</script>
 </body>
 </html>
