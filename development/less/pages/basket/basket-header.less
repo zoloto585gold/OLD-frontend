@@ -62,9 +62,11 @@
   h4 {
 		font-size: 24px;
 		font-weight: 700;
+    float: left;
 		text-transform: uppercase;
     
     @media screen and (max-width: @mobile_p-max) {
+      float: none;
       span { display: none; }
     }
 
@@ -122,6 +124,8 @@
   margin: 10px 0 0;
 
   @media screen and (max-width: @mobile_p-max) {
+    float: none;
+    text-align: center;
     span:not(.remove) { display: none; }
   }
 

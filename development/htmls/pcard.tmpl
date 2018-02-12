@@ -37,5 +37,19 @@
 	</div>
 
 	@@include('scaff/layout__js-list.html')
+	
+	<script>
+		$(document).ready(function(){
+			// ********
+			// CUSTOM SCROLL
+			// ********
+			$('.scroll-properties').jScrollPane();
+			var apiScrollBlock = $('.scroll-properties').data('jsp');
+			$(window).bind('resize', function(){
+				$('.scroll-properties').jScrollPane();
+			});	
+		});
+		
+	</script>
 </body>
 </html>
