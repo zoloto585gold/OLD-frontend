@@ -34,7 +34,43 @@
  			);
 
  		});
-  		
+
+ 		// Mobile menu functional
+
+ 		// кнопка открытия меню
+ 		var openBut 		= $('.top-sandwich__button');
+
+
+ 		// меню
+ 		var headerMenu 		= $('.header-menu');
+ 		var menuInner 		= $('.header-menu__mobContainer');
+
+ 		// при клике на кнопку открытия меню
+ 		openBut.on( "click", function() {
+		  	headerMenu.prepend('<div class="close-zone"></div>');
+
+		  	headerMenu.addClass('active');
+		  	menuInner.addClass('active');
+		  	
+		  	// запрещает скрол сайта
+		  	$('body').addClass('body-fixed');
+
+			$('.close-zone').click(function() {
+				menuInner.removeClass('active');
+				
+		  		$(this).remove();				
+		  		setTimeout(function(){
+		  			headerMenu.removeClass('active');	
+		  			$('body').removeClass('body-fixed');
+		  		},450);
+			});
+		});
+
+		// при клике на тёмную область
+		
+		
+		
+
 
 
  	}

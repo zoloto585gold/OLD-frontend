@@ -5,12 +5,13 @@
 		display: none;
 	}
 
-	body {
-		overflow: hidden;
-	}
-
 
 	// MAIN MENU
+
+	.body-fixed {
+		position: 	fixed;
+		overflow: 	hidden;
+	}
 
 	.header-search {
 		float: left;
@@ -26,9 +27,12 @@
 		position: 			fixed;
 		top: 				0px;
 		height: 			100%;
-		overflow-y: 			scroll;
-		background-color: 	fade(black, 50%);
+		//overflow-y: 			scroll;
+		//background-color: 	fade(black, 50%);
+		margin-left: 		-100%;
 		//overflow: 			scroll;
+
+		//margin-left: 		-300px;
 	    
 	    background-image: 	none;
 	    width: 				100%;
@@ -37,19 +41,41 @@
 	    //border-bottom: 		1px solid #d5d5d5;
 	    //box-shadow: 		0 -1px 0 0 #e0e1e3;
 
+	    &.active {
+	    	margin-left: 0;
+	    }
+
+	    .close-zone {
+	    	display: 			block;
+	    	position: 			fixed;
+	    	width: 				100%;
+	    	height: 			100%;
+	    	//z-index: 			999;
+	    	cursor: 			pointer;
+	    	background-color: 	fade(black, 50%);
+	    }
+
 	    .section__inner {
 	    	//width: 	100%;
 	    	//margin-top: 60px;
+	    	min-width: 	auto;
 	    }
 
 	    .header-menu__mobContainer {
 			position: 			relative;
 			display: 			block;
-			width: 				300px;
+			max-width: 			300px;
 			height: 			100%;
 			background-color: 	#e9e3e5;
-			overflow: 			scroll;
+			overflow-y: 		scroll;
 			margin: 			0;
+
+			margin-left: 		-300px;
+			transition: 		.4s;
+
+			&.active {
+				margin-left: 	0;
+			}
 		}
 	}
 
@@ -70,18 +96,18 @@
 			flex-grow: 1;
 			
 			text-align: 		left;
-			height: 			100px;
+			height: 			150px;
 			
 			text-transform: 	uppercase;
 
 			
 			a {
-				border: 			1px solid #333;
+				//border: 			1px solid #333;
 				position: 			relative;
 				display: 			inline-block;
 				width: 				100%;
 				//border: 			1px solid #333;
-				font: 				400 11px/8px Circe;
+				font: 				400 11px/11px 'Circe';
 				color: 				#333;
 				height: 			100%;
 				padding: 			10px;
