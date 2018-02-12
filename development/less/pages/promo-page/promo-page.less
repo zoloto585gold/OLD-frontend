@@ -28,6 +28,22 @@
 				line-height: 	1.1;
 				letter-spacing: 1px;
 				padding-left: 	7px;
+
+				@media @tablet-under{
+					font-size: 22px;
+					display: block;
+					width: 100%;
+					text-align: center;
+
+					br{
+						display: none;
+					}
+				}
+			}
+
+			@media @tablet-under{
+				float: none;
+				display: block;
 			}
 
 		}
@@ -425,14 +441,15 @@
 				}
 
 				&-tip{
+					display: none;
 					position: absolute;
 					top: 50%;
 					right: 0;
 					transform: translate(150%, -50%);
 					z-index: 222;
 
-					@media @mobile {
-						display: none;
+					@media @desktop {
+						display: block;
 					}
 
 					> span{
@@ -506,7 +523,7 @@
 			font: 24px/44px 'Circe-Light';
 			padding: 0 35px;
 			height: 44px;
-			background: @color-red;
+			background: #bbb;
 			color: #fff;
 			text-transform: uppercase;
 			position: absolute;
@@ -690,12 +707,27 @@
 	padding: 		0;
 	margin-bottom: 	20px;
 	//-webkit-font-smoothing: subpixel-antialiased;
+
+	@media @tablet-under{
+		float: none;
+		display: block;
+		top: 0;
+		right: 0;
+		padding: 10px 0 0 !important;
+		min-height: 85px;
+		text-align: center;
+	}
 }
 .countdown .block-time {
 	float: 			left;
 	margin-right: 	15px;
 	text-align: 	center;
 	position: 		relative;
+
+	@media @tablet-under{
+		float: none;
+		display: inline-block;
+	}
 
 	&.sec {
 		// visibility: hidden;
@@ -744,6 +776,11 @@
   // -webkit-box-shadow: 	0 2px 4px 0 rgba(0, 0, 0, 0.4);
   box-shadow: 			0 2px 4px 0 rgba(0, 0, 0, 0.4);
   text-align: center;
+
+  @media screen and (max-width: @mobile_a-min){
+	width: 35px;
+	height: 50px;
+  }
 }
 .countdown .figure:last-child {
   margin-right: 0;
@@ -761,6 +798,10 @@
   font: normal 45px 'Circe-Bold';
   color: 			@color-red;
   //color: 			darken(@color-red, 10%);
+
+  @media screen and (max-width: @mobile_a-min){
+	font-size: 37px;
+  }
 }
 .countdown .figure .top:after, .countdown .figure .bottom-back:after {
   content: "";
