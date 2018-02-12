@@ -1,10 +1,18 @@
 <div class="cart-total">
   <div class="section__inner">
       <div class="cart-total__row">
-        <div class="cart-total__price">
+        <!-- <div class="cart-total__price">
            <i>ИТОГО:</i>  38 000 Р
            <span>ЭКОНОМЬ С БОНУСНОЙ КАРТОЙ <span>-3000 P</span></span>
+        </div> -->
+
+        <!-- Цена после применения промокода либо бонусов -->
+        <div class="cart-total__price cart-total__price--new">
+          <small>старая цена: <s>38 000</s></small>
+           <i>ИТОГО:</i>  35 000 Р
+           <span>с учетом всех скидок</span>
         </div>
+
         <div class="cart-total__btn">
           <button class="b-button">Оформить заказ</button>
         </div>
@@ -12,9 +20,10 @@
       <div class="cart-options">
         <div class="cart-options__row">
           <div class="cart-options__item cart-options__item--card">
-
-
+            <!-- До применения бонусной карты -->
             <div class="cart-options__btn"><span>У МЕНЯ ЕСТЬ БОНУСНАЯ КАРТА</span></div>
+
+            <!-- После применения бонусной карты -->
             <!-- <div class="cart-options__btn cart-options__btn--apply">
               ВАША БОНУСНАЯ КАРТА:<br> <span>1234567890001010</span>
               <a href="#">X</a>
@@ -41,120 +50,123 @@
 
           </div>
 
-          <div class="cart-options__item cart-options__item--noCard is-active">
+          <div class="cart-options__item cart-options__item--noCard">
             <div class="cart-options__btn">НЕТ БОНУСНОЙ КАРТЫ? <span>ПОЛУЧИ СЕЙЧАС</span></div>
 
             <div class="cart-options__inner">
               <div class="section__inner">
 
                 <div class="reg-card-content__form reg-card-content__form--row2">
-	<form id="reg_card" novalidate="novalidate">
-		<input type="hidden" value="new" id="reg_card_type" name="type">
+                	<form id="reg_card" novalidate="novalidate">
+                		<input type="hidden" value="new" id="reg_card_type" name="type">
 
-		<div class="reg-card-content__form-field" form-input="cardnumber" style="display: none;">
-			<label>
-				Номер бонусной карты 585 GOLD <sup>*</sup>
-				<span>Введите 16-и значный номер, указанный на карте</span>
-			</label>
-			<span class="error"></span>
-			<input type="text" class="maxi" id="cardnumber" name="dc" value="" maxlength="16">
+                		<div class="reg-card-content__form-field" form-input="cardnumber" style="display: none;">
+                			<label>
+                				Номер бонусной карты 585 GOLD <sup>*</sup>
+                				<span>Введите 16-и значный номер, указанный на карте</span>
+                			</label>
+                			<span class="error"></span>
+                			<input type="text" class="maxi" id="cardnumber" name="dc" value="" maxlength="16">
 
-			<div class="reg-card-content__form-tip">Еще нет бонусной карты? <a href="#" class="js-reg-cart__tab-trigger" data-target="getcard">Получите онлайн &gt;</a></div>
-		</div>
+                			<div class="reg-card-content__form-tip">Еще нет бонусной карты? <a href="#" class="js-reg-cart__tab-trigger" data-target="getcard">Получите онлайн &gt;</a></div>
+                		</div>
 
-		<h2 class="reg-card-content__form-title">Персональные данные</h2>
+                		<h2 class="reg-card-content__form-title">Персональные данные</h2>
 
-		<div class="reg-card-content__form-field">
-			<label>Фамилия <sup>*</sup></label>
-			<span class="error"></span>
-			<input class="name-part" type="text" id="surname" name="fn" value="" maxlength="100">
-		</div>
+                		<div class="reg-card-content__form-field">
+                			<label>Фамилия <sup>*</sup></label>
+                			<span class="error"></span>
+                			<input class="name-part" type="text" id="surname" name="fn" value="" maxlength="100">
+                		</div>
 
-		<div class="reg-card-content__form-field">
-			<label>Имя <sup>*</sup></label>
-			<span class="error"></span>
-			<input class="autocomplete name-part ui-autocomplete-input" data-source="/registraciya_karty/autocomplete/autocomplete.php?type=name" type="text" id="name" name="sn" value="" maxlength="100" autocomplete="off">
-		</div>
+                		<div class="reg-card-content__form-field">
+                			<label>Имя <sup>*</sup></label>
+                			<span class="error"></span>
+                			<input class="autocomplete name-part ui-autocomplete-input" data-source="/registraciya_karty/autocomplete/autocomplete.php?type=name" type="text" id="name" name="sn" value="" maxlength="100" autocomplete="off">
+                		</div>
 
-		<div class="reg-card-content__form-field">
-			<label>Отчество <sup>*</sup></label>
-			<span class="error"></span>
-			<input class="autocomplete name-part ui-autocomplete-input" data-source="/registraciya_karty/autocomplete/autocomplete.php?type=surname" type="text" id="patronymic" name="tn" value="" maxlength="100" autocomplete="off">
-		</div>
+                		<div class="reg-card-content__form-field">
+                			<label>Отчество <sup>*</sup></label>
+                			<span class="error"></span>
+                			<input class="autocomplete name-part ui-autocomplete-input" data-source="/registraciya_karty/autocomplete/autocomplete.php?type=surname" type="text" id="patronymic" name="tn" value="" maxlength="100" autocomplete="off">
+                		</div>
 
-		<div class="reg-card-content__form-field / select">
-			<label>Пол <sup>*</sup></label>
-			<span class="error"></span>
-			<div class="fancy-select"><select id="gender" name="sex" class="select_drop fancified" style="width: 1px; height: 1px; display: block; position: absolute; top: 0px; left: 0px; opacity: 0; border-color: red; color: rgb(255, 0, 0);">
-				<option value="0">- Выберите пол -</option>
-				<option value="2">Мужской</option>
-				<option value="1">Женский</option>
-			</select><div class="trigger">- Выберите пол -</div><ul class="options"><li data-raw-value="0" class="selected">- Выберите пол -</li><li data-raw-value="2">Мужской</li><li data-raw-value="1">Женский</li></ul></div>
-		</div>
+                		<div class="reg-card-content__form-field / select">
+                			<label>Пол <sup>*</sup></label>
+                			<span class="error"></span>
+                			<div class="fancy-select"><select id="gender" name="sex" class="select_drop fancified" style="width: 1px; height: 1px; display: block; position: absolute; top: 0px; left: 0px; opacity: 0; border-color: red; color: rgb(255, 0, 0);">
+                				<option value="0">- Выберите пол -</option>
+                				<option value="2">Мужской</option>
+                				<option value="1">Женский</option>
+                			</select><div class="trigger">- Выберите пол -</div><ul class="options"><li data-raw-value="0" class="selected">- Выберите пол -</li><li data-raw-value="2">Мужской</li><li data-raw-value="1">Женский</li></ul></div>
+                		</div>
 
-		<div class="reg-card-content__form-field / select">
-			<label>Дата рождения <sup>*</sup></label>
-			<span class="error"></span>
-			<div class="reg-card-content__form-date">
-				<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 79px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-birth_date_day-container"><span class="select2-selection__rendered" id="select2-birth_date_day-container"><span class="select2-selection__placeholder">День</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                		<div class="reg-card-content__form-field / select">
+                			<label>Дата рождения <sup>*</sup></label>
+                			<span class="error"></span>
+                			<div class="reg-card-content__form-date">
+                				<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 79px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-birth_date_day-container"><span class="select2-selection__rendered" id="select2-birth_date_day-container"><span class="select2-selection__placeholder">День</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
 
-				<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 79px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-birth_date_month-container"><span class="select2-selection__rendered" id="select2-birth_date_month-container"><span class="select2-selection__placeholder">Месяц</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                				<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 79px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-birth_date_month-container"><span class="select2-selection__rendered" id="select2-birth_date_month-container"><span class="select2-selection__placeholder">Месяц</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
 
-				<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 79px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-birth_date_year-container"><span class="select2-selection__rendered" id="select2-birth_date_year-container"><span class="select2-selection__placeholder">Год</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-			</div>
+                				<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 79px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-birth_date_year-container"><span class="select2-selection__rendered" id="select2-birth_date_year-container"><span class="select2-selection__placeholder">Год</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                			</div>
 
-			<div class="reg-card-content__form-tip">Дарим подарки <br>в Ваш День  Рождения!</div>
-		</div>
+                			<div class="reg-card-content__form-tip">Дарим подарки <br>в Ваш День  Рождения!</div>
+                		</div>
 
-		<div class="reg-card-content__form-field">
-			<label for="">Город проживания <sup>*</sup></label>
-			<span class="error"></span>
-			<input class="autocomplete ui-autocomplete-input" data-source="/registraciya_karty/autocomplete/autocomplete.php?type=city" id="city" name="sl" type="text" value="" maxlength="100" autocomplete="off">
-		</div>
+                		<div class="reg-card-content__form-field">
+                			<label for="">Город проживания <sup>*</sup></label>
+                			<span class="error"></span>
+                			<input class="autocomplete ui-autocomplete-input" data-source="/registraciya_karty/autocomplete/autocomplete.php?type=city" id="city" name="sl" type="text" value="" maxlength="100" autocomplete="off">
+                		</div>
 
-		<div class="reg-card-content__form-field" data-input="phone">
-			<label>Телефон <sup>*</sup></label>
-			<span class="error"></span>
-			<input type="text" id="phone" name="phone" value="" placeholder="(000) 000-00-00" maxlength="10">
-			<span data-code="">+7</span>
-		</div>
+                		<div class="reg-card-content__form-field" data-input="phone">
+                			<label>Телефон <sup>*</sup></label>
+                			<span class="error"></span>
+                			<input type="text" id="phone" name="phone" value="" placeholder="(000) 000-00-00" maxlength="10">
+                			<span data-code="">+7</span>
+                		</div>
 
-		<div class="reg-card-content__form-field" data-input="email">
-			<label>E-mail <sup>*</sup></label>
-			<span class="error"></span>
-			<input type="text" id="email" name="email" value="" maxlength="100">
-		</div>
+                		<div class="reg-card-content__form-field" data-input="email">
+                			<label>E-mail <sup>*</sup></label>
+                			<span class="error"></span>
+                			<input type="text" id="email" name="email" value="" maxlength="100">
+                		</div>
 
-		<div class="reg-card-content__form-agree">
-			Нажимая кнопку Зарегистрироваться,
-			Я подтверждаю свою дееспособность, ознакомление с <a href="#">правилами программы лояльности</a>,
-			и даю согласие <a href="/assets/docs/sogl_form.pdf">установленной формы</a>
-			на обработку моих персональных данных.
-		</div>
+                		<div class="reg-card-content__form-agree">
+                			Нажимая кнопку Зарегистрироваться,
+                			Я подтверждаю свою дееспособность, ознакомление с <a href="#">правилами программы лояльности</a>,
+                			и даю согласие <a href="/assets/docs/sogl_form.pdf">установленной формы</a>
+                			на обработку моих персональных данных.
+                		</div>
 
-		<button class="reg-card-content__form-btn" type="submit">Зарегистрировать карту</button>
-	</form>
+                		<button class="reg-card-content__form-btn" type="submit">Зарегистрировать карту</button>
+                	</form>
 
-	<form style="display: none" id="reg_confirm" action="" method="" novalidate="novalidate">
-		<div data-fields="">
-			<h2 class="reg-card-content__form-title / reg-card-content__form-title--lower">Для завершения регистрации введите промо-код, который придет на&nbsp;номер телефона, указанный вами в&nbsp;анкете</h2>
-			<div class="reg-card-content__form-field" data-input="promokey">
-				<label for="Confirm_promokey">Промо код</label>
-				<input type="text" name="promokey" id="Confirm_promokey">
-			</div>
-			<button class="reg-card-content__form-btn" type="submit">Продолжить</button>
-		</div>
+                	<form style="display: none" id="reg_confirm" action="" method="" novalidate="novalidate">
+                		<div data-fields="">
+                			<h2 class="reg-card-content__form-title / reg-card-content__form-title--lower">Для завершения регистрации введите промо-код, который придет на&nbsp;номер телефона, указанный вами в&nbsp;анкете</h2>
+                			<div class="reg-card-content__form-field" data-input="promokey">
+                				<label for="Confirm_promokey">Промо код</label>
+                				<input type="text" name="promokey" id="Confirm_promokey">
+                			</div>
+                			<button class="reg-card-content__form-btn" type="submit">Продолжить</button>
+                		</div>
 
-		<div class="reg-card-content__form-status" data-status=""></div>
-	</form>
-</div>
+                		<div class="reg-card-content__form-status" data-status=""></div>
+                	</form>
+                </div>
 
               </div>
             </div>
           </div>
 
-          <div class="cart-options__item cart-options__item--promocode">
+          <div class="cart-options__item cart-options__item--promocode is-active">
+            <!-- До применения промокода -->
             <div class="cart-options__btn"><span>У МЕНЯ ЕСТЬ ПРОМОКОД</span></div>
+
+            <!-- После применения промокода -->
             <!-- <div class="cart-options__btn cart-options__btn--apply">
               промокод учтен:<br> <span>test2018</span>
               <a href="#">X</a>
@@ -176,5 +188,28 @@
           </div>
         </div>
       </div>
+      <button class="b-button b-button--checkout">Оформить заказ</button>
   </div>
+</div>
+
+<div class="confirmation-order" style="display: none;">
+  <div class="confirmation-order__title">
+    <span>подтверждение заказа</span>
+    Введение номера телефона необходимо для подтверждения заказа
+  </div>
+  <form class="confirmation-order__form">
+    <div>
+      <input type="text" placeholder="+7 ( 0 0 0 ) 000 - 00-00">
+    </div>
+    <div>
+      <!-- <button class="b-button">отправить проверочный код</button> -->
+      <button class="b-button" disabled>Отправить код повторно через 0:30</button>
+    </div>
+    <div>
+      <input type="text" placeholder="введите проверочный код из смс">
+    </div>
+    <div>
+      <button class="b-button">подтвердить заказ</button>
+    </div>
+  </form>
 </div>
