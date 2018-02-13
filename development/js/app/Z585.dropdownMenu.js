@@ -5,6 +5,8 @@
 
  	dropdownMenu.dropdown = function () {
 
+ 		var timer;
+
  		$('.main-nav-item').each(function(){
  			
  			var navItem 		= $(this).attr('id');
@@ -44,6 +46,11 @@
  		// меню
  		var headerMenu 		= $('.header-menu');
  		var menuInner 		= $('.header-menu__mobContainer');
+ 		
+
+ 		// setInterval(function(){
+ 		// 	console.log(timer);
+ 		// },100);
 
  		// при клике на кнопку открытия меню
  		openBut.on( "click", function() {
@@ -51,26 +58,45 @@
 
 		  	headerMenu.addClass('active');
 		  	menuInner.addClass('active');
+
+		  	menuInner.scrollTop(0);
+
+		  	//document.body.addEventListener('touchmove',function(event){event.preventDefault();},false);
+			
+			// Запрещает скролл в мобильной версии
+			//headerMenu.bind('touchmove', false);
+
 		  	
+
 		  	// запрещает скрол сайта
 		  	$('body').addClass('body-fixed');
 
+		  	// при клике на тёмную область
 			$('.close-zone').click(function() {
-				menuInner.removeClass('active');
-				
-		  		$(this).remove();				
-		  		setTimeout(function(){
-		  			headerMenu.removeClass('active');	
-		  			$('body').removeClass('body-fixed');
-		  		},450);
+				menuInner.removeClass('active');			
+
+				// пока выполняется сворачивание меню, 
+				// функция не выполняется 450 мсек
+		  		timer = setTimeout(function(){
+		  			
+		  			// плавное исчезание тени
+		  			$('.close-zone').stop().animate({
+		  				'opacity' : 0
+		  			}, 200, function(){ 
+		  				$('body').removeClass('body-fixed');
+		  				headerMenu.removeClass('active');	
+		  				$(this).remove();
+		  			});
+
+		  		}, 450);
+		  		
 			});
 		});
 
-		// при клике на тёмную область
-		
-		
-		
-
+		function clearF() {
+			clearTimeout(timer);
+			//console.log('timer: '+ timer +'  | end func');
+		}
 
 
  	}
