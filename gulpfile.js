@@ -24,6 +24,9 @@ const expandTilde = require('expand-tilde');
 const plato = require('gulp-plato');
 const exec = require('child_process').exec;
 const newer = require('gulp-newer');
+const plumber = require('gulp-plumber');
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
 
 // =============================================
 // Если нужно перекрыть объект в конфиге создаем
@@ -471,3 +474,15 @@ gulp.task('git-start', function () {
 // =================== START ===================
 // Запуск локального сервера и слежение
 gulp.task('default', [ 'watch', 'webserver' ]);
+
+gulp.task('test', function () {
+	console.log('TEST OK');
+});
+
+gulp.task('ww', function () {
+	return gulp
+		.src('')
+		.pipe(webpackStream(require('./webpack.config.js'), webpack))
+		.pipe(gulp.dest('./production/js/'))
+		.pipe(reload({stream: true}));
+});
