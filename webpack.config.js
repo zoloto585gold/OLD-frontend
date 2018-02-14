@@ -1,4 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const glob = require('glob-all');
 const webpack = require('webpack');
 
@@ -7,9 +8,9 @@ const config = {
 
 	entry: {
 		app: glob.sync([
-			'!./development/js/app2/global/**/*.js',
+			'!./development/js/app2/*.js',
 			'./development/js/app2/components/**/*.js',
-			'./development/js/app2/global/**/*.js',
+			'./development/js/app2/*.js',
 		]),
 	},
 
@@ -46,6 +47,12 @@ const config = {
 	watchOptions: {
 		aggregateTimeout: 300
 	}
+}
+
+if (process.env.NODE_ENV === 'build') {
+	config.plugins.push(
+		new UglifyJsPlugin({})
+	);
 }
 
 module.exports = config;

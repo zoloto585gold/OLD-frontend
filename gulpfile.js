@@ -201,15 +201,22 @@ const helper = {
 
 };
 
-// Запуск локального сервера для лайврелоада
-gulp.task('webserver', function () {
+// Запуск через npm run [ dev | build ] см. package.json 
+const tasks =
+	process.env.NODE_ENV === 'dev'
+		? [ 'browser-sync' ]
+		: [ 'build' ];
+gulp.task('run', tasks);
+
+// Запуск локального сервера
+gulp.task('browser-sync', [ 'watch' ], () => {
 	browserSync(config.connect);
 });
 
 // =================== JavaScript ===================
 
 // Вендоры
-gulp.task('js:libs', function () {
+gulp.task('js:libs', () => {
 	return gulp.src(config.path.js.libs)
 		.pipe(concat('libs.min.js'))
 		.pipe(uglifyjs())
@@ -218,7 +225,7 @@ gulp.task('js:libs', function () {
 });
 
 // Основные скрипты
-gulp.task('js:app', function () {
+gulp.task('js:app', () => {
 	return gulp.src(config.path.js.app)
 		.pipe(uglifyjs('app.min.js', {
 			outSourceMap: true
@@ -227,8 +234,17 @@ gulp.task('js:app', function () {
 		.pipe(reload({stream: true}));
 });
 
+// Vue скрипты через вебпак
+gulp.task('js:vue', () => {
+	return gulp
+		.src('')
+		.pipe(webpackStream(require('./webpack.config.js'), webpack))
+		.pipe(gulp.dest('./production/js/'))
+		.pipe(reload({stream: true}));
+});
+
 // Скрипты для отдельных страниц
-gulp.task('js:pages', function () {
+gulp.task('js:pages', () => {
 	var pagesPath = 'development/js/pages/';
 	var folders = helper.getFolders(pagesPath);
 
@@ -245,14 +261,14 @@ gulp.task('js:pages', function () {
 });
 
 // JS Views
-gulp.task('js:views', function () {
+gulp.task('js:views', () => {
 	return gulp.src(config.path.js.views)
 		.pipe(gulp.dest('production/js/views/'))
 		.pipe(reload({stream: true}));
 });
 
 // JS Adfox
-gulp.task('js:adfox', function () {
+gulp.task('js:adfox', () => {
 	return gulp.src(config.path.adfox.js)
 		.pipe(uglifyjs('adfox.min.js', {
 			outSourceMap: true
@@ -261,7 +277,7 @@ gulp.task('js:adfox', function () {
 });
 
 // Устаревшие скрипты
-gulp.task('js:legacy', function() {
+gulp.task('js:legacy', () => {
 	return gulp.src('development/js/legacy/*.js')
 		.pipe(order([
 			'new.js',
@@ -276,7 +292,7 @@ gulp.task('js:legacy', function() {
 });
 
 // Аналитика кода. Складывается в папку report
-gulp.task('js:report', function () {
+gulp.task('js:report', () => {
 	return gulp.src(config.path.js.report)
 		.pipe(plato('report', {
 			jshint: {
@@ -294,6 +310,7 @@ gulp.task('js:report', function () {
 gulp.task('js:build', [
 	'js:libs',
 	'js:app',
+	'js:vue',
 	'js:pages',
 	'js:views',
 	'js:adfox',
@@ -303,7 +320,7 @@ gulp.task('js:build', [
 // =================== HTML ===================
 
 // Шаблоны
-gulp.task('html:build', function () {
+gulp.task('html:build', () => {
 	return gulp.src(config.path.html)
 		.pipe(fileinclude({
 			prefix: '@@'
@@ -318,7 +335,7 @@ gulp.task('html:build', function () {
 // =================== LESS/CSS ===================
 
 // CSS сборка без минификации
-gulp.task('css:build--dev', function () {
+gulp.task('css:build--dev', () => {
 	return gulp.src(config.path.less)
 		.pipe(concat('z585_all.css'))
 		.pipe(less())
@@ -328,7 +345,7 @@ gulp.task('css:build--dev', function () {
 });
 
 // CSS сборка для прода
-gulp.task('css:build--prod', function () {
+gulp.task('css:build--prod', () => {
 	return gulp.src(config.path.less)
 		.pipe(sourcemaps.init({loadMaps: true}))
 		.pipe(concat('z585_all.min.css'))
@@ -341,7 +358,7 @@ gulp.task('css:build--prod', function () {
 });
 
 // CSS Adfox
-gulp.task('css:adfox', function () {
+gulp.task('css:adfox', () => {
 	return gulp.src(config.path.adfox.less)
 		.pipe(concat('z585_adfox.min.css'))
 		.pipe(less())
@@ -353,7 +370,7 @@ gulp.task('css:adfox', function () {
 
 // =============== IMAGE MIN ==================
 // Оптимизация картинок
-gulp.task('img:build', function() {
+gulp.task('img:build', () => {
 	let dest = 'production/images/';
 	return gulp.src(config.path.images)
 		.pipe(newer(dest))
@@ -366,7 +383,7 @@ gulp.task('img:build', function() {
 		.pipe(gulp.dest(dest));
 });
 
-gulp.task('img:build-all', function() {
+gulp.task('img:build-all', () => {
 	let dest = 'production/images/';
 	return gulp.src(config.path.images)
 		.pipe(imagemin({
@@ -392,7 +409,7 @@ gulp.task('build', [
 
 // =================== WATCH ===================
 // Слежение за изменениями в файлах
-gulp.task('watch', [ 'build' ], function() {
+gulp.task('watch', () => {
 
 	// HTML
 	gulp.watch( ['development/htmls/**/*.{tmpl,html}'], ['html:build'] );
@@ -405,6 +422,7 @@ gulp.task('watch', [ 'build' ], function() {
 	gulp.watch('development/js/legacy/*.js', [ 'js:legacy' ] );
 	gulp.watch('development/js/libs/**/*.js', [ 'js:libs' ] );
 	gulp.watch('development/js/app/*.js', [ 'js:app' ] );
+	gulp.watch('development/js/app2/**/*.js', [ 'js:vue' ] );
 	gulp.watch('development/js/pages/**/*.js', [ 'js:pages' ] );
 	gulp.watch('development/js/views/*.js', [ 'js:views' ] );
 
@@ -419,17 +437,17 @@ gulp.task('deploy', [
 	'deploy--img',
 ]);
 
-gulp.task('deploy--css', [ 'css:build--dev', 'css:build--prod' ], function() {
+gulp.task('deploy--css', [ 'css:build--dev', 'css:build--prod' ], () => {
 	return gulp.src('production/css/**/')
 		.pipe(ssh.dest(config.deploy.path + '/css'));
 });
 
-gulp.task('deploy--js', [ 'js:build' ],  function() {
+gulp.task('deploy--js', [ 'js:build' ], () => {
 	return gulp.src([ 'production/js/**/', '!production/js/libs.min.js' ])
 		.pipe(ssh.dest(config.deploy.path + '/js'));
 });
 
-gulp.task('deploy--img', [ 'img:build' ], function() {
+gulp.task('deploy--img', [ 'img:build' ], () => {
 	return gulp.src('production/images/**/')
 		.pipe(ssh.dest(config.deploy.path + '/images'));
 });
@@ -438,7 +456,7 @@ gulp.task('deploy--img', [ 'img:build' ], function() {
 
 // Создание новой ветки
 // @TODO: чекаут на мастера, пулл, чекаут на новую ветку
-gulp.task('git-start-test', function() {
+gulp.task('git-start-test', () => {
 	const cmdList = [
 		'cd '+ config.deploy.path,
 		'git status -uno'
@@ -449,7 +467,7 @@ gulp.task('git-start-test', function() {
 		.pipe(gulp.dest('logs'))
 });
 
-gulp.task('git-start', function () {
+gulp.task('git-start', () => {
 	var gitUpdate = [
 		'git checkout master',
 		'git pull upstream master',
@@ -469,20 +487,4 @@ gulp.task('git-start', function () {
 			});	
 		}
 	});	
-});
-
-// =================== START ===================
-// Запуск локального сервера и слежение
-gulp.task('default', [ 'watch', 'webserver' ]);
-
-gulp.task('test', function () {
-	console.log('TEST OK');
-});
-
-gulp.task('ww', function () {
-	return gulp
-		.src('')
-		.pipe(webpackStream(require('./webpack.config.js'), webpack))
-		.pipe(gulp.dest('./production/js/'))
-		.pipe(reload({stream: true}));
 });
