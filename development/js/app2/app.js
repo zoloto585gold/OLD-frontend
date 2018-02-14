@@ -104,5 +104,5 @@ const App = new Vue({
 		}
 	},
 	
-	mounted() {}
+	//mounted() {}
 });
