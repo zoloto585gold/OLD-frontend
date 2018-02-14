@@ -130,6 +130,8 @@ git pull upstream master
 ## Список изменений
 
 - 2.0.x
+	- 2.0.2
+		- Добавлен html-loader для шаблонов в vue
 	- 2.0.1
 		- Добавлен плагин Webpack (webpack, webpack-stream) для сборки скриптов и вызова из галпа
 		- Добавлен плагин Babel (cli, core, loader, preset-env) для сборки через вебпак
