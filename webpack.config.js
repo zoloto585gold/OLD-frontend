@@ -29,6 +29,17 @@ const config = {
 					loader: 'babel-loader'
 				}
 			},
+			{
+				test: /\.(tpl|htm)$/,
+				use: [{
+					loader: 'html-loader',
+					options: {
+						minimize: true,
+						removeComments: false,
+						collapseWhitespace: true
+					}
+				}]
+			},
 		]
 	},
 
