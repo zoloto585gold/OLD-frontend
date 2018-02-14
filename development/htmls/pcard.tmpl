@@ -6,7 +6,7 @@
 
 	<!-- подключение мета тегов -->
 	@@include('scaff/layout__meta-tags.html')
-	
+
 	<!-- подключение стилей -->
 	@@include('scaff/layout__css-list.html')
 
@@ -18,9 +18,9 @@
 </head>
 <body>
 	<div class="page">
-		
+
 		<!-- Подключене блока шапки -->
-		
+
 		<header class="page__header">
 			@@include('scaff/layout__header.html')
 		</header>
@@ -37,7 +37,7 @@
 	</div>
 
 	@@include('scaff/layout__js-list.html')
-	
+
 	<script>
 		$(document).ready(function(){
 			// ********
@@ -47,9 +47,9 @@
 			var apiScrollBlock = $('.scroll-properties').data('jsp');
 			$(window).bind('resize', function(){
 				$('.scroll-properties').jScrollPane();
-			});	
+			});
 		});
-		
+
 	</script>
 </body>
 </html>
