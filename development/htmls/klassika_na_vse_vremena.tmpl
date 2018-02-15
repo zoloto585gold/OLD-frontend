@@ -28,16 +28,16 @@
 						<div class="section__inner">
 
 							<!-- таймер -->
-							<!-- <div class="promo-page__banner-timer">
+							<div class="promo-page__banner-timer">
 								<div class="promo-page__banner-timer-title">
 									До розыгрыша <br>призов осталось:
 								</div>
 
-							</div> -->
+							</div>
 
 							<!-- счетчик -->
-							<!-- <div class="countdown">
-								<div class="block-time days" data-init-value="15">
+							<div class="countdown" data-finish="2018/03/15 00:00:00">
+								<div class="block-time days">
 									<div class="figure days days-1">
 										<span class="top"></span>
 										<span class="top-back">
@@ -62,7 +62,7 @@
 									<span class="count-title">Дней</span>
 								</div>
 
-								<div class="block-time hours" data-init-value="00">
+								<div class="block-time hours">
 									<div class="figure hours hours-1">
 										<span class="top"></span>
 										<span class="top-back">
@@ -87,7 +87,7 @@
 									<span class="count-title">Часов</span>
 								</div>
 
-								<div class="block-time min" data-init-value="00">
+								<div class="block-time min">
 									<div class="figure min min-1">
 										<span class="top"></span>
 										<span class="top-back">
@@ -112,7 +112,7 @@
 									<span class="count-title">Минут</span>
 								</div>
 
-								<div class="block-time sec" data-init-value="00">
+								<div class="block-time sec">
 									<div class="figure sec sec-1">
 										<span class="top"></span>
 										<span class="top-back">
@@ -136,7 +136,7 @@
 									</div>
 									<span class="count-title">Секунд</span>
 								</div>
-							</div> -->
+							</div>
 
 							<!-- видео -->
 							<div class="promo-page__banner-video">
@@ -317,187 +317,233 @@
 
 	<script>
 
-		$(document).ready(function () {
-			var dt = new Date();
-			//var time = "Date: " + dt.getDate() + "Day: " + dt.getDay() + " - " + dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-			var currentDay   = dt.getDate();
-			var currentHour  = dt.getHours();
-			var currentMin   = dt.getMinutes();
-			var currentSec   = dt.getSeconds();
+		;(function () {
+			'use strict';
 
-			var finishDay    = 10; // 22 февраля
+			$(document).ready(function () {
+				var dt = new Date();
 
-			$('.block-time.days').attr('data-init-value',finishDay - currentDay - 1);
-			$('.block-time.hours').attr('data-init-value', 23 - currentHour);
-			$('.block-time.min').attr('data-init-value', 59 - currentMin);
-			$('.block-time.sec').attr('data-init-value', 59 - currentSec);
+				var Countdown = {
+				
+					// Backbone-like structure
+					$el: $('.countdown'),
+					
+					// Params
+					countdown_interval: null,
+					total_seconds     : 0,
+					
+					// Initialize the countdown  
+					init: function() {
+						// Date finish
+						var finishDt = new Date(this.$el.data('finish'));
+						var deltaDt = Math.abs(finishDt.getTime() - dt.getTime()) / 1000;
 
-			//console.log(time);
+						this.values = {};
+						this.values.days = Math.floor(deltaDt / 86400);
+					
+						deltaDt -= this.values.days * 86400;
 
-			var Countdown = {
+						this.values.hours = Math.floor(deltaDt / 3600) % 24;
 
-			// Backbone-like structure
-			$el: $('.countdown'),
+						deltaDt -= this.values.hours * 3600;
 
-			// Params
-			countdown_interval: null,
-			total_seconds     : 0,
+						this.values.minutes = Math.floor(deltaDt / 60) % 60;
 
-			// Initialize the countdown
-			init: function() {
+						deltaDt -= this.values.minutes * 60;
 
-				// DOM
-				this.$ = {
-					days   : this.$el.find('.block-time.days .figure'),
-					hours  : this.$el.find('.block-time.hours .figure'),
-					minutes: this.$el.find('.block-time.min .figure'),
-					seconds: this.$el.find('.block-time.sec .figure')
-				};
+						this.values.seconds = Math.floor(deltaDt % 60);
 
-				// Init countdown values
-				this.values = {
-					days   : this.$.days.parent().attr('data-init-value'),
-					hours  : this.$.hours.parent().attr('data-init-value'),
-					minutes: this.$.minutes.parent().attr('data-init-value'),
-					seconds: this.$.seconds.parent().attr('data-init-value')
-				};
+						this.total_seconds = finishDt.getTime() - dt.getTime();
 
-				// Initialize total seconds
-				this.total_seconds =
-				(this.values.days * 60 * 60 * 24)
-				+ (this.values.hours * 60 * 60)
-				+ (this.values.minutes * 60)
-				+ this.values.seconds;
+						// DOM
+						this.$ = {
+							days   : this.$el.find('.block-time.days .figure'),
+							hours  : this.$el.find('.block-time.hours .figure'),
+							minutes: this.$el.find('.block-time.min .figure'),
+							seconds: this.$el.find('.block-time.sec .figure')
+						};
 
-				// Animate countdown to the end
-				this.count();
+						// Animate countdown to the end 
+						this.count();
+					},
+					
+					count: function() {
+						
+						var that    = this,
+							$days_1 = this.$.days.eq(0),
+							$days_2 = this.$.days.eq(1),
+							$hour_1 = this.$.hours.eq(0),
+							$hour_2 = this.$.hours.eq(1),
+							$min_1  = this.$.minutes.eq(0),
+							$min_2  = this.$.minutes.eq(1),
+							$sec_1  = this.$.seconds.eq(0),
+							$sec_2  = this.$.seconds.eq(1);
+						
+							this.countdown_interval = setInterval(function() {
 
-				// Inputs
-				$('.promo-page__registration')
-					.find('[name=ticket]').mask('999.9999.999999.9999').end()
-					.find('[name=storeid]').fancySelect().end();
-			},
+								if(that.total_seconds > 0) {
 
-			count: function() {
+									--that.values.seconds;              
 
-				var that    = this,
-					$days_1 = this.$.days.eq(0),
-					$days_2 = this.$.days.eq(1),
-					$hour_1 = this.$.hours.eq(0),
-					$hour_2 = this.$.hours.eq(1),
-					$min_1  = this.$.minutes.eq(0),
-					$min_2  = this.$.minutes.eq(1),
-					$sec_1  = this.$.seconds.eq(0),
-					$sec_2  = this.$.seconds.eq(1);
+									if(that.values.minutes >= 0 && that.values.seconds < 0) {
 
-					this.countdown_interval = setInterval(function() {
+										that.values.seconds = 59;
+										--that.values.minutes;
+									}
 
-						if(that.total_seconds > 0) {
+									if(that.values.hours >= 0 && that.values.minutes < 0) {
 
-							--that.values.seconds;
+										that.values.minutes = 59;
+										--that.values.hours;
+									}
 
-							if(that.values.minutes >= 0 && that.values.seconds < 0) {
+									if(that.values.days >= 0 && that.values.hours < 0) {
 
-								that.values.seconds = 59;
-								--that.values.minutes;
+										that.values.hours = 23;
+										--that.values.days; 
+									}
+
+									// Update DOM values
+
+									// Days
+									that.checkHour(that.values.days, $days_1, $days_2);
+
+									// Hours
+									that.checkHour(that.values.hours, $hour_1, $hour_2);
+
+									// Minutes
+									that.checkHour(that.values.minutes, $min_1, $min_2);
+
+									// Seconds
+									that.checkHour(that.values.seconds, $sec_1, $sec_2);
+
+									--that.total_seconds;
+								}
+								else {
+									clearInterval(that.countdown_interval);
+								}
+							}, 1000);    
+					},
+					
+					animateFigure: function($el, value) {
+						
+						var that         = this,
+							$top         = $el.find('.top'),
+							$bottom      = $el.find('.bottom'),
+							$back_top    = $el.find('.top-back'),
+							$back_bottom = $el.find('.bottom-back');
+
+						// Before we begin, change the back value
+						$back_top.find('span').html(value);
+
+						// Also change the back bottom value
+						$back_bottom.find('span').html(value);
+
+						// Then animate
+						TweenMax.to($top, .85, {
+							rotationX           : '-180deg',
+							transformPerspective: 300,
+							ease                : Quart.easeOut,
+							onComplete          : function() {
+
+								$top.html(value);
+
+								$bottom.html(value);
+
+								TweenMax.set($top, { rotationX: 0 });
 							}
+						});
 
-							if(that.values.hours >= 0 && that.values.minutes < 0) {
+						TweenMax.to($back_top, .85, { 
+							rotationX           : 0,
+							transformPerspective: 300,
+							ease                : Quart.easeOut, 
+							clearProps          : 'all' 
+						});    
+					},
+					
+					checkHour: function(value, $el_1, $el_2) {
+						
+						var val_1       = value.toString().charAt(0),
+							val_2       = value.toString().charAt(1),
+							fig_1_value = $el_1.find('.top').html(),
+							fig_2_value = $el_2.find('.top').html();
 
-								that.values.minutes = 59;
-								--that.values.hours;
-							}
+						if(value >= 10) {
 
-							if(that.values.days >= 0 && that.values.hours < 0) {
-
-								that.values.hours = 23;
-								--that.values.days;
-							}
-
-							// Update DOM values
-
-							// Days
-							that.checkHour(that.values.days, $days_1, $days_2);
-
-							// Hours
-							that.checkHour(that.values.hours, $hour_1, $hour_2);
-
-							// Minutes
-							that.checkHour(that.values.minutes, $min_1, $min_2);
-
-							// Seconds
-							that.checkHour(that.values.seconds, $sec_1, $sec_2);
-
-							--that.total_seconds;
+							// Animate only if the figure has changed
+							if(fig_1_value !== val_1) this.animateFigure($el_1, val_1);
+							if(fig_2_value !== val_2) this.animateFigure($el_2, val_2);
 						}
 						else {
-							clearInterval(that.countdown_interval);
+
+							// If we are under 10, replace first figure with 0
+							if(fig_1_value !== '0') this.animateFigure($el_1, 0);
+							if(fig_2_value !== val_1) this.animateFigure($el_2, val_1);
+						}    
+					}
+				};
+
+				// Let's go !
+				Countdown.init();
+
+				// Inputs & Selector
+				$('.promo-page__registration')
+					.find('[name=ticket]').mask('999.9999.999999.9999').end()
+					.find('[name=storeid]')
+						.fancySelect().on('change.fs', function() {
+							$(this).trigger('change.$');
+						});
+
+				// Send
+				$('.promo-page__registration [data-btn=send]').on('click', function (e) {
+					var $wrap = $(this).closest('[data-wrap]');
+					var send = true;
+					var data = {
+						ticket: 0,
+						storeid: 0,
+					};
+
+					e.preventDefault();
+
+					$wrap.find('[data-invalid]').removeAttr('data-invalid');
+					
+					$.each(data, function(key, val) {
+						var $el = $wrap.find('[name="'+ key +'"]');
+						var $elWrap = $el.closest('[data-wrap]');
+						var val = 0;
+
+						if ($el.length) {
+							val = $el.val();
 						}
-					}, 1000);
-			},
 
-			animateFigure: function($el, value) {
+						if (val == 0) {
+							$elWrap.find('label').attr('data-invalid', 1);
+							send = false;
+						}
 
-				var that         = this,
-					$top         = $el.find('.top'),
-					$bottom      = $el.find('.bottom'),
-					$back_top    = $el.find('.top-back'),
-					$back_bottom = $el.find('.bottom-back');
+						data[key] = val;
+					});
 
-				// Before we begin, change the back value
-				$back_top.find('span').html(value);
+					if (send) {
+						$.get('/action/klassika_na_vse_vremena/ajax/addTicket.php', data);
 
-				// Also change the back bottom value
-				$back_bottom.find('span').html(value);
-
-				// Then animate
-				TweenMax.to($top, .85, {
-					rotationX           : '-180deg',
-					transformPerspective: 300,
-					ease                : Quart.easeOut,
-					onComplete          : function() {
-
-						$top.html(value);
-
-						$bottom.html(value);
-
-						TweenMax.set($top, { rotationX: 0 });
+						$wrap
+							.find('form').hide().end()
+							.find('[data-status]').show();
 					}
 				});
 
-				TweenMax.to($back_top, .85, {
-					rotationX           : 0,
-					transformPerspective: 300,
-					ease                : Quart.easeOut,
-					clearProps          : 'all'
+				// Scroll to form
+				$('.promo-page [data-btn=goToForm]').on('click', function (e) {
+					e.preventDefault();
+
+					$('html, body').animate({ 
+						scrollTop: $('.promo-page__registration').offset().top - 50 
+					}, 200);
 				});
-			},
-
-			checkHour: function(value, $el_1, $el_2) {
-
-				var val_1       = value.toString().charAt(0),
-					val_2       = value.toString().charAt(1),
-					fig_1_value = $el_1.find('.top').html(),
-					fig_2_value = $el_2.find('.top').html();
-
-				if(value >= 10) {
-
-					// Animate only if the figure has changed
-					if(fig_1_value !== val_1) this.animateFigure($el_1, val_1);
-					if(fig_2_value !== val_2) this.animateFigure($el_2, val_2);
-				}
-				else {
-
-					// If we are under 10, replace first figure with 0
-					if(fig_1_value !== '0') this.animateFigure($el_1, 0);
-					if(fig_2_value !== val_1) this.animateFigure($el_2, val_1);
-				}
-			}
-			};
-
-			// Let's go !
-			Countdown.init();
-		});
+			});
+		} ());
 
 	</script>
 </body>

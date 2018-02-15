@@ -59,12 +59,14 @@
 		var $wrap = $(this).closest('[data-wrap]');
 		var $next = [];
 		var list  = [];
-		var query = $.trim($(this).val());
+		var query = $.trim($(this).val()); // То что ввели
 		var tag = 'span';
 		var regex = RegExp('^'+query, 'gi');
 		var replacement = '<'+ tag +'>$&</'+ tag +'>';
 		var scrollApi = $('.js-top-geo-form__cities').data('jsp');
 		var cityName;
+
+		
 
 		if (e.keyCode == 13 && $wrap.find('[data-menu] li').length) {
 			// enter
@@ -82,6 +84,8 @@
 					name: 'topbasket'
 				}
 			});
+
+
 
 			return false;
 		}
@@ -136,6 +140,8 @@
 				scrollApi = false;
 			}
 
+			//выделяет набранный город в списке
+
 			$(this).html(function() {
 				return $(this).text().replace(regex, replacement);
 			});
@@ -160,6 +166,8 @@
 		});
 	});
 
+	// при нажатии на крестик в поиске
+
 	$(document).on('click', '.js-top-geo-form__search [data-btn=clear]', function(e) {
 		var $wrap = $(this).closest('[data-wrap]');
 
@@ -168,6 +176,13 @@
 			.find('[data-menu]').hide().end();
 
 		$('.top-geo-form__pop-cities').show();
+
+		 // очистка выделенного фрагмента в списке
+
+		$('.js-top-geo-form__cities a[data-city]').html(function() {
+			return $(this).text().replace();
+		});
+		
 	});
 
 	$(document).on('submit', '.top-geo-form', function () {

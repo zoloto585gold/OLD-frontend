@@ -1,0 +1,36 @@
+.basket {
+  
+  &__logo {
+    padding: 13px 0 11px;
+    position: relative;
+    
+    &:after {
+      content: '';
+      display: block;
+      height: 5px;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: url(@img-thingies-shadow-5) no-repeat top center;
+      z-index: 5;
+      
+      @media screen and (max-width: @mobile_p-max) {
+        background: url(@img-thingies-shadow-1) no-repeat top center;
+      }
+
+    }
+
+    a {
+      display: block;
+      margin: 0 auto;
+      width: 175px;
+      
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+    
+  }
+}

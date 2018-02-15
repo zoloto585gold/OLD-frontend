@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	@@include('scaff/layout__meta-tags.html')
+	@@include('scaff/layout__css-list.html')
+
+
+	<title>Корзина v2</title>
+</head>
+<body>
+	<div id="app" class="page">
+		<header class="page__header">
+			@@include('scaff/layout__header.html')
+		</header>
+
+
+		<main class="page__content">
+			<div class="section">
+				<div class="section__inner">
+					<h1>VUE Test</h1>
+
+					<com-test1 inline-template>
+						<div>
+							<ol>
+								<li v-for="todo in todos">
+								{{ todo.text }}
+								</li>
+							</ol>
+							
+							<button @click="addTodo">add</button>
+						</div>
+					</com-test1>
+				</div>
+			</div>
+		</main>
+
+
+		<footer class="page__footer">
+			@@include('scaff/layout__footer.html')
+		</footer>
+	</div>
+
+	@@include('scaff/layout__js-list.html')
+</body>
+</html>
