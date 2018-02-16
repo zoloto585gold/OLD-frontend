@@ -7,7 +7,7 @@
 		var self = this;
 		
 		self.debug = true;
-		self.apiUrl = 'https://d03.zoloto585.ru/restapi/v2/basket/';
+		self.apiUrl = 'https://web-v3.zoloto585.ru/restapi/v2/basket/';
 		self.apiData = {};
 
 		self.methods = {
