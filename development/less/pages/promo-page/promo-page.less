@@ -254,7 +254,7 @@
 		position: 			relative;
 		background-color: 	#f8f8f8;
 
-		padding: 			26px 0 50px;
+		padding: 			50px 0;
 
 		@border: 			1px solid #cbcbcb;
 
@@ -281,11 +281,13 @@
 		}
 
 		&-image {
+			//margin-top: 10px;
 			position: 	relative;
 			display: 	block;
 			float: 		left;
 			width: 		50%;
-			height: 	264px;
+			height: 	300px;
+			overflow: 	hidden;
 
 			@media @touch{
 				display: none;
@@ -309,21 +311,36 @@
 				font: 30px/30px 'Circe-Light';
 				font-weight: 		100;
 				text-transform: 	uppercase;
-				margin-bottom: 		20px;
+				margin-bottom: 		30px;
 				text-align: center;
 			}
 
 			.form__field {
 				width: 300px;
-				margin: 48px auto 0;
+				margin: 0px auto 32px;
 				position: relative;
 
 				@media @tablet-under {
 					height: 35px;
 				}
 
+				&-error {
+					display: 	block;
+					position: 	absolute;
+					right: 		0;
+					width: 		100px;
+					height: 	20px;
+					text-transform: uppercase;
+					top: 		-18px;
+					text-align: right;
+					color: 		black;
+					font-size: 	10px;
+					color: 		@color-red;
+					//border: 	1px solid red;
+				}
+
 				&-label{
-					font: 12px/30px 'Circe';
+					font: 11px/30px 'Circe';
 					color: #333;
 					text-transform: uppercase;
 					position: relative;
@@ -341,11 +358,17 @@
 					@media @tablet-under {
 						padding-left: 15px;
 					}
+
+					&::placeholder {
+					  color: #aaa;
+					}
 				}
 
 				&.numbers {
+
 					input {
 						font: 24px 'Circe-Light';
+						color: #333;
 					}
 				}
 
@@ -423,7 +446,8 @@
 				&-btn{
 					display: block;
 					width: 300px;
-					margin: 25px auto 0;
+					margin: 0 auto;
+					margin-top: -10px;
 					background: @color-red;
 					color: #fff;
 					font: 12px/40px 'Circe-Light';

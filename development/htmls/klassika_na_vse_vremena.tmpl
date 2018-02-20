@@ -210,7 +210,9 @@
 									Регистрация участников
 								</div>
 								<div class="form__field numbers">
+									<div class="form__field-error">Введите ещё раз</div>
 									<label class="form__field-label">Введите номер чека</label>
+									
 									<input type="text" class="form__field-input" name="ticket" placeholder="000.0000.000000.0000">
 									<div class="form__field-tip">
 										<span>?</span>
@@ -228,6 +230,12 @@
 										<option value="2">Магазин два</option>
 										<option value="3">Магазин три</option>
 									</select>
+								</div>
+
+								<div class="form__field numbers">
+									<label class="form__field-label">Введите номер бонусной карты</label>
+									<div class="form__field-error">Введите ещё раз</div>
+									<input type="text" class="form__field-input" name="bonus" placeholder="0000 0000 0000 0000">
 								</div>
 
 								<button class="form__field-btn">Учавствовать в розыгрыше</button>
@@ -495,6 +503,9 @@
 							$(this).trigger('change.$');
 						});
 
+				$('.promo-page__registration')
+					.find('[name=bonus]').mask('9999 9999 9999 9999').end();
+
 				// Send
 				$('.promo-page__registration [data-btn=send]').on('click', function (e) {
 					var $wrap = $(this).closest('[data-wrap]');
@@ -502,6 +513,7 @@
 					var data = {
 						ticket: 0,
 						storeid: 0,
+						bonus: 0,
 					};
 
 					e.preventDefault();
