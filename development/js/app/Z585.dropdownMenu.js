@@ -17,6 +17,7 @@
  			
  			selectMenu.hover(
  				function() {
+
  					selectDropdown.addClass('dropdown-show');
  				},
  				function() {

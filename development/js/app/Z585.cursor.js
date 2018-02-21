@@ -14,8 +14,10 @@
 		var posObjy;
 		var scaleVal;
 		var mouseOver = false;
+		var el = ['2','=','1','='];
+		var i = 0;
 
-		var mainmenu = $('.header-bottom');
+		var mainmenu = $('.header-menu, .main-nav-item__dropdown');
 
 		mainmenu.hover(
 			function() {
@@ -30,7 +32,7 @@
 
 		// период появленя элементов
 
-		var timer = setInterval(randomElements, 25);		
+		var timer = setInterval(randomElements, 70);		
 
 		// узнаём положение мышки и сохраняем в переменную
 
@@ -59,11 +61,25 @@
       			posObjy = yPos;	
       			scaleVal = 0;
 
-      			var element = $('<span class="heart"></span>');
-      			zone.append(element);
+      			//var element = $('<span class="heart"></span>');
+
+      			//console.log(el.length);	
+
+      			if ( i == el.length - 1 ) {
+      				var element = $('<span class="cursor-el">'+el[i]+'</span>');
+      				zone.append(element);	
+      				i = 0;
+      			} else {
+				  	var element = $('<span class="cursor-el">'+el[i]+'</span>');
+      				zone.append(element);	
+      				i++;
+      			}
+      			
+
+      			
 				
 				// рандомное число от 1 до 10
-				var rand = Math.floor((Math.random() * 20) + 1);
+				var rand = Math.floor((Math.random() * 10) + 1);
 				
 				element.css({
 					'top': yPos - rand,
@@ -71,17 +87,21 @@
 				});
 
 				var p = setTimeout(function() {
-					element.addClass('heart-min');
+					element.addClass('cursor-el-min');
 					clearTimeout(p);
 				},10);
 
 				var t = setTimeout(function() {
 					element.remove();
 					clearTimeout(t);
-				},1500);
+				},2100);
 
       			//console.log(posObjx+' : '+posObjy);
  			}
+
+ 			$('.close-zone').click(function() {
+ 				mouseOver = false;	
+ 			});
 
 		}
 

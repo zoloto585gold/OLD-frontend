@@ -1,4 +1,3 @@
-
 // ======================================================================
 // MOBILE MENU ==========================================================
 // ======================================================================
@@ -105,6 +104,7 @@
 		margin-bottom: 		20px;
 
 		// ul li
+
 		.main-nav-item {
 
 			flex-basis: 	50%;
@@ -160,6 +160,12 @@
 
 			//---------------------------------------
 
+			&__clear {
+				flex: 			auto 0;
+				display: 		block;
+				width: 			100%;
+			}
+
 			&__tags {
 		
 				/*display: 		flex;
@@ -177,9 +183,7 @@
 				display: 		inline-block;
 				word-wrap: 		normal;
 
-				&:last-child {
-					//flex-grow: 0;
-				}
+
 
 				a {
 					word-wrap: 		normal;
@@ -264,7 +268,7 @@
 		text-align: 			left;
 		top: 					0;
 		left: 					0;
-		height: 				403px;
+		height: 				400px;
 		width: 					100%;
 		padding: 				16px 0;
 		overflow: 				hidden;
@@ -275,8 +279,8 @@
 		background-position: 	center top;
 		background-repeat: 		no-repeat;
 		border-top: 			1px solid @color-dark_red;
-		border-bottom: 			1px solid #efefef;
-		box-shadow: 			0px 1px 2px rgba(0,0,0,.4);
+		border-bottom: 			1px solid #b7b5b6;
+		//box-shadow: 			0px 1px 0px rgba(0,0,0,.4);
 		z-index: 				100;
 		font-size: 				15px;
 		
@@ -290,7 +294,7 @@
 		.main-nav-item__dropdown_bottom {
 			position: 			absolute;
 			bottom: 			0;
-			height: 			40px;
+			height: 			37px;
 			width: 				100%;
 			border-top: 		1px solid #B5B5B5;
 			background-color: 	#F1F1F1;
@@ -615,7 +619,7 @@
 
 	.dropdown-show,
 	.main-nav-item__dropdown:hover {
-		transition-delay: 		.4s;
+		transition-delay: 		.25s;
 		opacity: 				1;
 		visibility: 			visible;
 		//display: 				block;
@@ -640,12 +644,14 @@
 	// MAIN MENU
 
 	.header-menu {
+		position: 			relative;
+		z-index: 			1;
 		height: 			28px;
 	    background-color: 	#e9e3e5;
 	    background-image: 	none;
 	    border-top: 		1px solid #eff0f1;
-	    border-bottom: 		1px solid #d5d5d5;
-	    box-shadow: 		0 -1px 0 0 #e0e1e3;
+	    border-bottom: 		1px solid #cfcfcf;
+	    box-shadow: 		0 1px 0 white;
 	}
 
 	.header-menu__tags,
@@ -664,7 +670,8 @@
 		// ul li
 		.main-nav-item {
 
-			&__tags {
+			&__tags,
+			&__clear {
 				display: none;
 			}
 
@@ -748,4 +755,8 @@
 
 	}
 
+}
+
+.main-nav-item__from-lombard {
+	display: none;
 }
