@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	@@include('scaff/layout__meta-tags.html')
+	@@include('scaff/layout__css-list.html')
+
+
+	<title>Modal windows</title>
+
+
+	<!-- здесь подключай свои стили -->
+	<!-- НАПРИМЕР: <link rel="stylesheet" href="css/catalog.min.css"> -->
+</head>
+<body>
+	<div class="page">
+		<header class="page__header">
+			@@include('scaff/layout__header.html')
+		</header>
+
+		<main class="page__content">
+			
+			<!-- всплывающее окноpopup__overlay -->
+			
+			<!-- тень -->
+			<!--
+			<div class="modal__overlay is-show"></div>
+
+			<div class="modal__wrap is-show">
+				<h2 class="modal__header">
+					<div class="modal__close-but"></div>
+					Очистить корзину?
+				</h2>
+				<p class="modal__info">Вы уверены, что хотите удалить все товары из корзины?</p>
+				<div id="ok" class="modal__button">OK</div>
+				<div id="cancel" class="modal__button">Отмена</div>
+			</div>
+			-->
+
+			<!-- конец вспл. окна -->
+
+			@@include('scaff/pages__catalog.html')
+		</main>
+
+		<footer class="page__footer">
+			@@include('scaff/layout__footer.html')
+		</footer>
+	</div>
+
+
+	@@include('scaff/layout__js-list.html')
+	<script>
+		// Tests
+		var modal = new Z585.modal.instance({
+			htmlHeader: 	'Спасибо!',
+			htmlInfo: 		'Для подтверждения регистрации, пожалуйста, перейдите по ссылке в письме, которое выслано на адрес: <strong> mail.@mail.ru </strong><br>С уважением, Ваша Ювелирная сеть 585GOLD',
+			/*onClose: function (elements) {
+				alert('close');
+			},*/
+			buttons: 		['close'],
+			popupType: 		'info',
+			timer: 			7,
+			bottomImage: 	'../images/modal/index-popup__bg-003.png'
+		});
+
+		modal.init(true);
+	</script>	
+</body>
+</html>

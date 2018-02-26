@@ -16,7 +16,10 @@
 			preloader: false, // показывать прелоадер
 			hideAfterFire: true, // скрыть после события
 			destroyAfterFire: true, // удалить после события
+			bottomImage: 'none', // адрес картинки
+			popupType: 'standard', // тип попапа, другие типы: info
 			buttons: [ 'close', 'confirm', 'decline' ], // добавить кнопки
+			timer: 0,
 			fires: { // события
 				append:  function () {}, // добавление в дом
 				close:   function () {}, // закрыть
@@ -96,6 +99,40 @@
 			self.elements.overlay,
 			self.elements.wrapper
 		);
+
+		// добавление картинки
+
+		if ( self.options.bottomImage != 'none' ) {
+			$('.'+self.options.cssPrefix+'wrap').append(
+				'<img class="'+self.options.cssPrefix+'bottom-image" src="'+self.options.bottomImage+'">'
+			);	
+		}
+
+		// установка типа
+
+		if ( self.options.popupType != 'standard' ) {
+			if ( self.options.popupType == 'info' )
+			$('.'+self.options.cssPrefix+'wrap').addClass('modal__type-info');	
+		}
+
+		// проверка таймера 
+
+		if ( self.options.timer != 0 ) {
+			var timer = self.options.timer;
+
+			$('.'+self.options.cssPrefix+'wrap').append('<p class="timer">Окно закроется через '+timer+' секунд</p>');
+					var t = setInterval(function(){
+						if ( timer != 0 ) {
+							$('.timer').html('Окно закроется через '+timer+' секунд');
+							timer--;
+						} else {
+							self.hide();
+							clearTimeout(t);
+						}
+					}, 1000);
+			
+		}
+
 
 		if (self.fires.append instanceof Function) {
 			self.fires.append();
