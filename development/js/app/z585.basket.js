@@ -89,7 +89,7 @@
 			}
 			*/
 
-			window.location = document.referrer || '/catalog';
+			window.location = document.referrer || '/catalog/yuvelirnye_izdeliya/';
 		});
 
 		// Очистить корзину
