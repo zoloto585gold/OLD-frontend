@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) {
 
-    function nextSlide(){
+   /* function nextSlide(){
         
         var slideCount= $('#imgBlock1 .product1').size();
 
@@ -182,12 +182,12 @@ jQuery(document).ready(function ($) {
     $('#imgBlockBig3').mouseleave(function(){
         startB3();
         start3();
-    }); 
+    }); */
 ////////////////
 
 
 
-    $(document).on('click', '#sidebar-toggle', function(){
+    /*$(document).on('click', '#sidebar-toggle', function(){
             $('#sidebar .katalog-main .level1 li').removeClass('act');
             if($(this).hasClass('open'))
             {
@@ -200,7 +200,7 @@ jQuery(document).ready(function ($) {
                 $('.katalog-li .katalog-main').show(); 
             }
             return false; 
-    });
+    });*/
 
 ///////////////
     //Fix z-index youtube video embedding
@@ -214,95 +214,95 @@ jQuery(document).ready(function ($) {
     });
 
 
-            $('#main-sl').owlCarousel({
-                navigation : true,
-                slideSpeed : 300,
-                paginationSpeed : 400,
-                singleItem:true,
-                autoHeight : true,
-                addClassActive : true,
-                autoPlay : true,
-                afterInit : function(elem){
-                    $('iframe').each(function(){
-                        var url = $(this).attr("src");
-                        $(this).attr("src",url+"?wmode=transparent&modestbranding=1&showinfo=0&controls=0&fs=0&rel=0");
-                    });
-
-
-                    $('#main-sl .owl-item iframe').each(function(){
-                        var url = $(this).attr("src");
-                        $(this).attr("src",url+"&autoplay=0");
-                    });
-
-                    $('#main-sl .owl-item.active iframe').each(function(){
-                        var url = $(this).attr("src");
-                        var play = "&autoplay=1";
-                        var stop = "&autoplay=0";
-                        var urlNew = url.replace(stop, play);
-                        $(this).attr("src",urlNew);
-                    });
-
-                },
-                /*afterMove : function(elem){
-                    var play = "&autoplay=1";
-                    var stop = "&autoplay=0";
-                    $('#main-sl .owl-item iframe').each(function(){
-                        var url = $(this).attr("src");
-                        var urlNew = url.replace(play, stop);
-                        $(this).attr("src",urlNew);
-                    });
-                    $('#main-sl .owl-item.active iframe').each(function(){
-                        var url = $(this).attr("src");
-                        var urlNew = url.replace(stop, play);
-                        $(this).attr("src",urlNew);
-                    });
-                    $(window).on("scroll", function() {
-                        if($('.main-filter').length > 0) {
-                            console.log($('.main-filter'));
-                            console.log($('.main-filter').length);
-                            if ($(window).scrollTop() > $('.main-filter').offset().top) {
-                                
-                                $('#main-sl .owl-item iframe').each(function(){
-                                    var url = $(this).attr("src");
-                                    var urlNew = url.replace(play, stop);
-                                    $(this).attr("src",urlNew);
-                                });
-                            }
-                        }
-                    });
-                }*/
+    $('#main-sl').owlCarousel({
+        navigation : true,
+        slideSpeed : 300,
+        paginationSpeed : 400,
+        singleItem:true,
+        autoHeight : true,
+        addClassActive : true,
+        autoPlay : true,
+        afterInit : function(elem){
+            $('iframe').each(function(){
+                var url = $(this).attr("src");
+                $(this).attr("src",url+"?wmode=transparent&modestbranding=1&showinfo=0&controls=0&fs=0&rel=0");
             });
 
-        $("#main-sl2").owlCarousel({
-            navigation : true,
-            slideSpeed : 300,
-            paginationSpeed : 400,
-            singleItem:true,
-            autoHeight : true,
-            addClassActive : true,
-            afterInit : function(elem){
-                $('#main-sl2 .owl-item iframe').each(function(){
-                    var url = $(this).attr("src");
-                    $(this).attr("src",url+"&autoplay=0");
-                });
-            },
-            afterMove : function(elem){
-                $('#main-sl2 .owl-item iframe').each(function(){
-                    var url = $(this).attr("src");
-                    var play = "&autoplay=1";
-                    var stop = "&autoplay=0";
-                    var urlNew = url.replace(play, stop);
-                    $(this).attr("src",urlNew);
-                });
-                $('#main-sl2 .owl-item.active iframe').each(function(){
-                    var url = $(this).attr("src");
-                    var play = "&autoplay=1";
-                    var stop = "&autoplay=0";
-                    var urlNew = url.replace(stop, play);
-                    $(this).attr("src",urlNew);
-                });
-            }
-        });
+
+            $('#main-sl .owl-item iframe').each(function(){
+                var url = $(this).attr("src");
+                $(this).attr("src",url+"&autoplay=0");
+            });
+
+            $('#main-sl .owl-item.active iframe').each(function(){
+                var url = $(this).attr("src");
+                var play = "&autoplay=1";
+                var stop = "&autoplay=0";
+                var urlNew = url.replace(stop, play);
+                $(this).attr("src",urlNew);
+            });
+
+        },
+        /*afterMove : function(elem){
+            var play = "&autoplay=1";
+            var stop = "&autoplay=0";
+            $('#main-sl .owl-item iframe').each(function(){
+                var url = $(this).attr("src");
+                var urlNew = url.replace(play, stop);
+                $(this).attr("src",urlNew);
+            });
+            $('#main-sl .owl-item.active iframe').each(function(){
+                var url = $(this).attr("src");
+                var urlNew = url.replace(stop, play);
+                $(this).attr("src",urlNew);
+            });
+            $(window).on("scroll", function() {
+                if($('.main-filter').length > 0) {
+                    console.log($('.main-filter'));
+                    console.log($('.main-filter').length);
+                    if ($(window).scrollTop() > $('.main-filter').offset().top) {
+                        
+                        $('#main-sl .owl-item iframe').each(function(){
+                            var url = $(this).attr("src");
+                            var urlNew = url.replace(play, stop);
+                            $(this).attr("src",urlNew);
+                        });
+                    }
+                }
+            });
+        }*/
+    });
+
+    $("#main-sl2").owlCarousel({
+        navigation : true,
+        slideSpeed : 300,
+        paginationSpeed : 400,
+        singleItem:true,
+        autoHeight : true,
+        addClassActive : true,
+        afterInit : function(elem){
+            $('#main-sl2 .owl-item iframe').each(function(){
+                var url = $(this).attr("src");
+                $(this).attr("src",url+"&autoplay=0");
+            });
+        },
+        afterMove : function(elem){
+            $('#main-sl2 .owl-item iframe').each(function(){
+                var url = $(this).attr("src");
+                var play = "&autoplay=1";
+                var stop = "&autoplay=0";
+                var urlNew = url.replace(play, stop);
+                $(this).attr("src",urlNew);
+            });
+            $('#main-sl2 .owl-item.active iframe').each(function(){
+                var url = $(this).attr("src");
+                var play = "&autoplay=1";
+                var stop = "&autoplay=0";
+                var urlNew = url.replace(stop, play);
+                $(this).attr("src",urlNew);
+            });
+        }
+    });
 
 
 
