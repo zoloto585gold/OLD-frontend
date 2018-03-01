@@ -89,8 +89,8 @@
 
 
 				$('#store-about-count').html(currentCityData.length);
-				$('.store-about__title').find('a').html(city);
-				$('.store-about__sub-title').find('a').html(city);
+				/*$('.store-about__title').find('a').html(city);
+				$('.store-about__sub-title').find('a').html(city);*/
 				$('.store-about__sub-title').find('a').html($('#store-list-combobox option:selected').attr('value'));
 
 
@@ -204,7 +204,7 @@
 
 								$('.store-item').removeClass('store-item--active');
 
-								$('.store-about__title').find('a').html(cityName);
+								//$('.store-about__title').find('a').html(cityName);
 
 								ymaps.geocode(cityName, {
 									results: 1

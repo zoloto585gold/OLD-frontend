@@ -8,32 +8,32 @@
 	</div>
 	<div class="section__inner">
 		<div class="shop-info__slider">
-			<!-- <div class="fotorama" data-width="100%" data-arrows="false" data-raw="/upload/uf/38a/2.jpg,/upload/uf/0fc/1.jpg,/upload/uf/1a1/5.jpg">									
+			<div class="fotorama" data-width="100%" data-arrows="false" data-raw="/upload/uf/38a/2.jpg,/upload/uf/0fc/1.jpg,/upload/uf/1a1/5.jpg">									
 				<img src="https://zoloto585.ru/upload/uf/38a/2.jpg" itemprop="image">									
 				<img src="https://zoloto585.ru/upload/uf/0fc/1.jpg" itemprop="image">									
 				<img src="https://zoloto585.ru/upload/uf/1a1/5.jpg" itemprop="image">							
-			</div> -->
-			<div class="fotorama" data-width="100%" data-arrows="false" data-raw="{{:GALLERY}}">
+			</div>
+			<!-- <div class="fotorama" data-width="100%" data-arrows="false" data-raw="{{:GALLERY}}">
 				{^{for GALLERY}}
 					<img src="https://zoloto585.ru{{:}}" itemprop="image">
 				{{/for}}
-			</div>
+			</div> -->
 		</div>
 		<div class="shop-info__locations">
 			<ul class="shop-info__info-list" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
 				<li class="shop-info__list-item">
 					<i class="shop-icon shop-icon--point"></i>
-					<span>город:</span>
-					<a href="#" itemprop="addressLocality">{{:CITY}}</a>
+					<div>город:</div>
+					<a href="#" itemprop="addressLocality">Moscow</a>
 				</li>
 				<li class="shop-info__list-item">
-					<span>Адрес:</span>
-					<div itemprop="streetAddress">{{:ADDRESS.STREET}}, {{:ADDRESS.HOUSE_FLAT}}</div>
+					<div>Адрес:</div>
+					<div itemprop="streetAddress">Крымский вал, д.3</div>
 				</li>
 				<li class="shop-info__list-item">
 					<i class="shop-icon shop-icon--clock"></i>
-					<span>режим работы:</span>
-					<time itemprop="openingHours" datetime="{{:SCHEDULE_PREPARE}}">{{:SCHEDULE_PREPARE}}</time>
+					<div>режим работы:</div>
+					<time itemprop="openingHours" datetime="{{:SCHEDULE_PREPARE}}">ежедневно с 11:00 до 18:00</time>
 				</li>
 				<li class="shop-info__list-item shop-info__list-item--phone">
 					<i class="shop-icon shop-icon--phone"></i>
@@ -52,9 +52,11 @@
 				<ul>
 					<li class="shop-info__list-item shop-info__list-item--text"><b>Как к нам добраться:</b></li>
 					<li class="shop-info__list-item"><i class="shop-icon shop-icon--yandex"></i><a  href="http://maps.yandex.ru/?rtext=~{{:GPS_N}}%2C{{:GPS_S}}" target="_blank">построить маршрут<br>на яндекс картах</a></li>
-					<li class="shop-info__list-item shop-info__list-item--gps"><i class="shop-icon shop-icon--gps"></i><b>GPS координаты:</b><br>({{:GPS_N}}, {{:GPS_S}})</li>
+					<li class="shop-info__list-item shop-info__list-item--gps"><i class="shop-icon shop-icon--gps"></i><b>GPS координаты:</b><br>
+						<span id="GPS_N">55.729257</span>, <span id="GPS_S">37.609576</span>
+					</li>
 					<li class="shop-info__list-item">
-						<button class="b-button  button  js-clipboard-button" data-clipboard-id="{{:XML_ID}}" data-clipboard-data="{{:GPS_N}} {{:GPS_S}}">скопировать GPS координаты ></button>
+						<button class="b-button  button  js-clipboard-button" data-clipboard-id="XML_ID" data-clipboard-data="59.996861 29.766674">скопировать GPS координаты ></button>
 					</li>
 				</ul>
 			</div>
@@ -81,7 +83,7 @@
 				</div>
 			</div>
 			<div  class="shop-location__map js-toggle-content">
-				<div id="shop-map" style="height: 500px;"></div>
+				<div id="map" class="store-map-container" style="height: 500px;"></div>
 			</div>
 		</div>
 		

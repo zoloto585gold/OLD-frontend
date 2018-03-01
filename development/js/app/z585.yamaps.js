@@ -6,7 +6,7 @@
 
 		self.myMap;
 		self.options = $.extend({
-			container: 'shop-map', // id
+			container: 'map', // id
 			center: [55.76, 37.64], // moscow
 			zoom: 16,
 			scrollZoom: true,
