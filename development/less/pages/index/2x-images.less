@@ -4,7 +4,8 @@
 	margin-left: -960px;
 }
 
-@media screen and (max-width: 1024px) {
+//@media screen and (max-width: 1024px) {
+@media @touch {
 
 /* коэфф. уменьшения для картинки (1920x400)*0.7 = 1344x280 */
 	.sl-desc {
@@ -13,12 +14,23 @@
 		margin-left: -672px;
 	}
 }
-@media screen and (max-width: 767px) {
+
+//@media screen and (max-width: 767px) {
+@media @tablet-under {
 	
 	/* коэфф. уменьшения для картинки (1920x400)*0.58 = 1344x230 */
 	.sl-desc {
 		height: 230px;
 		width: 1113px;
 		margin-left: -556.5px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.sl-mob {
+		height: 390px;
+		position: absolute;
+		left: 50%;
+		margin-left: -299.5px;
 	}
 }
