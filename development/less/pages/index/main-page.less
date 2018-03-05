@@ -1,24 +1,50 @@
 @padding-banners: 12px;
 
+
 // desktop banners
 
 // Banner View 1
 
 .main-page__banner-container-1 {
 
-    margin:         @padding-banners -@padding-banners 0;
-    max-width:      1850px;
-    display:        inline-block;
+    margin:         0 auto;
+    max-width:      1825px;
+    display:        block;
     position:       relative;
     overflow:       hidden;
+    text-align:     center;
+    
 
     .main-page__banner-view-1 {
-        
-        padding: @padding-banners;
-        width: 50%;
-        float: left;
-        display: block;
+
+        width:      50%;
+        float:      left;
+        display:    block;
         text-align: center;
+        margin:     (@padding-banners*2) 0;
+
+        &:first-child {
+            padding-right:  @padding-banners;
+        }
+
+        &:last-child {
+            padding-left:   @padding-banners;
+        }
+
+        @media @touch {
+
+            @padding-banners: 5px;
+
+            margin:     (@padding-banners*2) 0;
+
+            &:first-child {
+                padding-right:  @padding-banners;
+            }
+
+            &:last-child {
+                padding-left:   @padding-banners;
+            }            
+        }
     }
 
     &:after {
@@ -32,27 +58,77 @@
 // Banner View 2
 
 .main-page__banner-container-2 {
+    display:        block;
+    position:       relative;
+    overflow:       hidden;
+    text-align:     center;
+    //margin:         0 auto;
+    //max-width:      1840px;
+    max-width:      100%;
+    //border:         1px solid red;
  
     .main-page__banner-view-2 {
-        padding: 0 @padding-banners;
-        width:      100%;
-
+        max-width:      1825px;
         display:        block;
-        text-align:     center;
-        
-
-        
+        margin:          0 auto;
+        //border:       1px solid red;
+        padding:        0;
+        margin-left:    50%;
+        transform:      translate(calc(-1825px / 2));
+        //border:         1px solid green;
         
         a {
-            //margin-left:       900px;
-            transform:          translate(20%);
-            //min-width:      1800px;
-            img {
-          
             
-            } 
+            img {
+                width: auto;
+           //     width:              100%;
+            }
         }
 
+        @media screen and (max-width: 1380px) {
+            margin-left:    0;
+            transform:      none;
+            a { 
+                //min-width:  100%;
+
+                img {
+                    width:  100%;
+                }
+            }
+        }
+
+        @media @touch {
+            margin-left:    50%;
+            transform:      translate(calc(-1000px / 2));
+            a { 
+                min-width:  1000px;
+
+                img {
+                    //width:  auto;
+                }
+            }   
+        }
+
+        @media @tablet-under {
+            margin-left:    50%;
+            transform:      translate(calc(-830px / 2));
+            a { 
+                min-width:  830px;
+
+                img {
+                    //width:  auto;
+                }
+            }   
+        }
+        
+
+    }
+
+    &:after {
+        display:    table;
+        content:    '';
+        clear:      both;
+        position:   relative;
     }
 
 }
@@ -81,20 +157,22 @@
         @media @mobile {
             width: 100%;
             float: none;
-        }
+            margin-left:    0;
+            transform:      none;
 
-        &:last-child {
-            margin-bottom: 0;
+            a { min-width: 100%; }
         }
 
         .desktop-view   { display: block; }
         .mobile-view    { display: none; }
     }
 
+
+
     // mobile banners 
 
     @media @mobile {
-        margin:         20px 0;
+        margin:         0;
         min-width:      600px;
         transform:      translate(-50%);
         margin-left:    50%;
@@ -102,12 +180,196 @@
         .main-page__banner-view-1,
         .main-page__banner-view-2,
         .main-page__banner-view-3 {
+            
+            margin-left:    0;
+            transform:      none;
+            // padding: @padding-banners 0;
+
+            &:first-child,
+            &:last-child {
+                padding:        0;
+            }
+            
             .desktop-view   { display: none; }
             .mobile-view    { display: block; }
         }        
     }
 }
 
+// BANNER NEWS
+//-----------------------------------------------------------
+
+.banner-news {
+    display:            block;
+    margin:             0 -@padding-banners;
+    text-align:         center;
+    //border:             3px solid purple;
+
+    
+    &__title {
+        margin:             40px 0 20px;
+        text-align:         center;
+        text-transform:     uppercase;
+        font-family:        'Circe-Light';
+        font-size:          36px;
+
+        span {
+            display:        block;
+            font-size:      18px;
+            line-height:    22px;
+        }
+    }
+
+    &__slider {
+        //width:      100%;
+
+        max-width:      1710px;
+        //width:          100%;
+
+        overflow:       visible;
+        display:        inline-block;
+
+        margin-bottom:      30px;
+        
+        //border:     1px solid red;
+        //margin: 0 -@padding-banners;
+
+        .owl-wrapper-outer {
+            overflow:       hidden;
+            z-index:        0;
+            //border:         10px dashed green;
+            display:        block;
+            text-align:     center;
+        }
+
+        .owl-item {
+            width: 50%;
+            display:    block;
+            //border:     1px solid blue;
+            text-align: center;
+            padding:    0 @padding-banners;
+
+            // &:first-child {
+            //     padding-left: 0;
+            // }
+
+            // &:last-child {
+            //     padding-right: 0;
+            // }
+
+            .item {
+                a {
+                    img {
+                        width:          550px;
+                        height:         430px;
+                        max-width:      100%;
+                        height:         100%;
+                    }
+
+                    span {
+                        display:            block;
+                        font-size:          18px;
+                        line-height:        18px;
+                        padding:            15px;
+                        text-transform:     uppercase;
+                        font-family:        'Circe-Light';
+                    }
+
+                }     
+            }
+
+            @media screen and (max-width: 1700px) {
+
+            }
+
+            @media @touch {
+                padding:    0 (@padding-banners/2);
+            }
+            
+
+            
+        }
+
+        .owl-controls {
+            position:       absolute;
+            width:          100%;
+            top:            0;
+            z-index:        100;
+
+            .owl-pagination {
+                display: none;
+            }
+
+            .owl-buttons {
+
+                .owl-prev {
+                    position:   absolute;
+                    cursor:     pointer;
+                    top:        170px;
+                    left:       -60px;
+                    background: url('../images/main-page/slider-arrows/arrow-left.png') no-repeat;
+                    width: 52px; height: 78px;
+                    display:    block;
+                    content:    '';
+                }
+                
+                .owl-next {
+                    position:   absolute;
+                    cursor:     pointer;
+                    top:        170px;
+                    right:      -60px;
+                    background: url('../images/main-page/slider-arrows/arrow-right.png') no-repeat;
+                    width: 52px; height: 78px;
+                    display:    block;
+                    content:    '';
+                }    
+            }
+
+            @media screen and (max-width: 1845px) {
+                .owl-buttons {
+                    .owl-prev { 
+                        top: -100px;
+                        left: 10px; 
+                    }
+                    .owl-next {
+                        top: -100px; 
+                        right: 10px; 
+                    }
+                }
+            }
+            
+        } 
+    }
+
+    &__info {
+        font-size:      12px;
+        font-family:    'Circe';
+        line-height:    24px;
+        color:          #999;
+        text-align:     left;
+        display:        block;
+        width:          99%;
+        max-width:      1700px + (@padding-banners * 2);
+        padding:        0 (@padding-banners * 2);
+        margin:         0 auto 30px;
+        //border:         1px solid #456;
+
+        &-text {
+            margin-bottom: 20px;
+        }
+
+        &-list {
+            margin: 0;
+            list-style: disc;
+            li {
+                margin-left: @padding-banners;
+                padding-left: 20px;
+            }
+        }
+
+    }
+
+}
 
 //-----------------------------------------------------------
 
@@ -170,8 +432,10 @@ main
 {
     background-position: bottom right;
 }
-.index-sl .owl-pagination
-{
+
+// Pagination
+
+.owl-pagination {
     width: 1000px;
     position: absolute;
     left: 50%;
@@ -179,8 +443,8 @@ main
     bottom: 12px;
     text-align: center;
 }
-.index-sl .owl-pagination .owl-page
-{
+
+.owl-pagination .owl-page {
     display: inline-block;
     width: 12px;
     height: 12px;
@@ -189,10 +453,13 @@ main
     background: #fff;
     cursor: pointer;
 }
-.index-sl .owl-pagination .owl-page.active
-{
+
+.owl-pagination .owl-page.active {
     background: #ff0007;
 }
+
+//-----------------------------
+
 .index-sl .item img
 {
     display: block;
@@ -241,7 +508,7 @@ main
 }
 
 .index-sl__touch-hide {
-	margin-top: 30px;
+	//margin-top: 30px;
 
     @media @touch {
         display: none;
@@ -258,7 +525,7 @@ main
 	position: relative;
     display:    block;
 	overflow: hidden;
-	height: 400px;
+	height:   400px;
 }
 .index-sl .item .gradient-l,
 .index-sl .item .gradient-r
