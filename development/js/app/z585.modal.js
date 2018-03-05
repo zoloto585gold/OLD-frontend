@@ -20,6 +20,7 @@
 			popupType: 'standard', // тип попапа, другие типы: info
 			buttons: [ 'close', 'confirm', 'decline' ], // добавить кнопки
 			timer: 0,
+			dataSapConfirm: '', // параметры для кнопки OK
 			fires: { // события
 				append:  function () {}, // добавление в дом
 				close:   function () {}, // закрыть
@@ -43,7 +44,7 @@
 			wrapper:    $('<div class="' + self.options.cssPrefix +'wrap '+ self.options.cssExtra+'" data-wait="0"/>'),
 			header:     $('<h2 class="'  + self.options.cssPrefix +'header"/>'),
 			info:       $('<p class="'   + self.options.cssPrefix +'info"/>'),
-			confirm:    $('<button class="' + self.options.cssPrefix +'button" data-fire="confirm">'+ self.options.htmlConfirm +'</button>'),
+			confirm:    $('<button class="' + self.options.cssPrefix +'button" data-fire="confirm" data-sap="'+self.options.dataSapConfirm+'">'+ self.options.htmlConfirm +'</button>'),
 			decline:    $('<button class="' + self.options.cssPrefix +'button" data-fire="decline">'+ self.options.htmlDecline +'</button>'),
 			close:      $('<button class="' + self.options.cssPrefix +'close-but" data-fire="close"/>'),
 		};
