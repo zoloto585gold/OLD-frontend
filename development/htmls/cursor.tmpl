@@ -4,25 +4,6 @@
 	@@include('scaff/layout__meta-tags.html')
 	@@include('scaff/layout__css-list.html')
 
-	<style>
-		#a1{
-			top:  		0;
-			left:  		0;
-			height: 	25px;
-			width: 		25px;
-			background-color:white;
-			position:relative;
-		}
-
-		#cont{
-			position: 	relative;
-			top: 		0px;
-			height: 	2000px;
-			width: 		100%;
-			background-color: red;
-		}
-	</style>
-
 
 	<title>Title your page</title>
 
@@ -38,9 +19,6 @@
 
 
 		<main class="page__content">
-			<div id="cont">
-				<div id="a1"></div>
-			</div>
 		</main>
 
 
@@ -50,5 +28,11 @@
 	</div>
 
 	@@include('scaff/layout__js-list.html')
+
+	<script>
+		$(document).ready(function() {
+			Z585.cursor.animateCursor();
+		});
+	</script>
 </body>
 </html>
