@@ -74,6 +74,10 @@
 		background-color: 	#e73437;
 		cursor: 			pointer;
 		border: 			none;
+
+		&:hover{
+			background-color: @color-red;
+		}
 	}
 
 	&__button {
@@ -91,6 +95,7 @@
 		cursor: pointer;
 		text-transform: uppercase;
 
+		&--ok,
 		&[data-fire="confirm"]{
 			background-color: #f5f5f2;
 			color: #666;

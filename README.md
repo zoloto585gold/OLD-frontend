@@ -131,7 +131,17 @@ git pull upstream master
 
 - 2.0.x
 	- 2.0.2
-		- Добавлен html-loader для шаблонов в vue
+		- Добавлен babel-plugin-transform-object-rest-spread для распространения объектов ...mapState, etc.
+		- Добавлен axios для запросов
+		- Добавлен epic-spinners прелоадер
+		- Добавлен vue-js-modal модалки
+		- Добавлен vue-scroll-to для скрола
+		- Добавлены плагины для вебпака
+			- html-loader
+			- css-loader
+			- file-loader
+			- vue-loader
+			- vue-template-compiler
 	- 2.0.1
 		- Добавлен плагин Webpack (webpack, webpack-stream) для сборки скриптов и вызова из галпа
 		- Добавлен плагин Babel (cli, core, loader, preset-env) для сборки через вебпак
