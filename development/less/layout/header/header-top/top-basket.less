@@ -1,22 +1,19 @@
 /*"top-user"*/
+
 .top-basket {
 	width: 140px;
 
-	div.top-basket__button{
-		display: block;
-	}
-	a.top-basket__button{
-		display: none;
-	}
 	&__button {
 		position: relative;
+		line-height: 32px;
 
 		display: inline-block;
 		vertical-align: top;
 		width: 100%;
-		height: 100%;
 		overflow: hidden;
 		box-sizing: border-box;
+
+		background-color: none;
 
 		text-decoration: none;
 		text-transform: uppercase;
@@ -44,6 +41,8 @@
 		&:after {
 			right: 5px;
 			background-position: -20px -120px;
+			//top: 50%;
+			margin-top: -11px;
 		}
 		&:before {
 			left: 13px;
@@ -144,12 +143,18 @@
 	}
 }
 
-
-/*
-	DESKTOP
-*/
 @media @desktop {
 	.top-basket {
+		div.top-basket__button{
+			display: none;
+		}
+
+		a.top-basket__button{
+			display: block;
+			&:hover {
+				background-color: #cb2430;
+			}
+		}
 
 		&:hover {
 			.top-basket__button {
@@ -163,25 +168,6 @@
 			}
 		}
 
-		div.top-basket__button{
-			display: none;
-		}
-		a.top-basket__button{
-			display: block;
-		}
-
-		&__button {
-			height: 32px;
-			line-height: 32px;
-
-			&:hover {
-				background-color: #cb2430;
-			}
-
-			&:before {
-				left: 13px;
-			}
-		}
 	}
 }
 
@@ -189,9 +175,34 @@
 /*
 	TOUCH
 */
-@media screen and (max-width: @tablet_a-max) {
+@media @touch {
+
 	.top-basket {
-		width: 60px;
+		width: 83px;
+
+		div.top-basket__button {
+			display: block;
+			&:hover {
+				background-color: none;
+			}
+		}
+
+		a.top-basket__button {
+			display: none;
+		}
+
+		&:hover {
+			&[data-opened="0"] {
+				.top-basket__button {
+					background-color: none;
+					&:after{
+						transform: rotate(0deg);
+					}
+				}
+			}
+		} 
+
+		
 
 		&[data-opened="1"] {
 			.top-basket__button {
@@ -206,9 +217,68 @@
 		}
 
 		&__button {
-			width: 60px;
+			//width: 60px;
 			height: 44px;
-			font-size: 0;
+			line-height: 45px;
+			
+			//font-size: 0;
+
+			&:after {
+				margin-top: -9px;
+			}
 		}
 	}
+}
+
+@media @tablet-under {
+	.top-basket {
+		//width: 80px;
+		&__button {
+			//width: 	100%;
+			padding-left: 45px;
+			//text-align: center;
+
+			&:before {
+				left: 20px;
+			}
+
+			&:after {
+				display: none;
+			}
+		}
+	}
+}
+
+@media @mobile-portrait {
+	.top-basket {
+
+		width: 70px;
+		
+		&__button {
+			
+			padding-left: 35px;
+			//text-align: center;
+
+			&:before {
+				left: 12px;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 350px) {
+	.top-basket {
+
+	
+		
+		&__button {
+			
+			padding-left: 28px;
+			//text-align: center;
+
+			&:before {
+				left: 6px;
+			}
+		}
+	}	
 }

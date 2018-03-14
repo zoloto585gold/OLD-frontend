@@ -6,8 +6,8 @@
 
 		display: inline-block;
 		vertical-align: top;
-		width: 50px;
-		height: 100%;
+		width: 100%;
+		
 		overflow: hidden;
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
@@ -25,8 +25,8 @@
 			position: absolute;
 			top: 50%;
 			left: 50%;
-			margin-top: -10px;
-			margin-left: -22px;
+			margin-top: -11px;
+			margin-left: -18px;
 
 			content: '';
 
@@ -42,14 +42,9 @@
 /*
 	DESKTOP
 */
-@media screen and (min-width: @desktop-min) {
+@media @desktop {
 	.top-favorites {
 		width: 50px;
-
-
-		&:hover {
-			background-color: #cb2430;
-		}
 
 
 		&__button {
@@ -73,13 +68,24 @@
 /*
 	TOUCH
 */
-@media screen and (max-width: @tablet_a-max) {
+@media @touch {
 	.top-favorites {
 		height: 44px;
+
+		&__button {
+			line-height: 45px;
+			&:before {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-top: -12px;
+				margin-left: -18px;
+			}
+		}
 	}
 }
 /*@mobile Portrait*/
-@media screen and (max-width: @mobile_p-max) {
+@media @mobile-portrait {
 	.top-favorites {
 		width: 16.6%;
 
@@ -91,7 +97,7 @@
 			font-size: 0;
 
 			&:before {
-				margin-left: -10px;
+				margin-left: -12px;
 			}
 		}
 	}
