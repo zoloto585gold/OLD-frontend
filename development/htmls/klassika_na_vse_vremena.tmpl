@@ -367,7 +367,7 @@
 
 						this.values.seconds = Math.floor(deltaDt % 60);
 
-						this.total_seconds = finishDt.getTime() - dt.getTime();
+						//this.total_seconds = finishDt.getTime() - dt.getTime();
 
 						// DOM
 						this.$ = {
@@ -395,9 +395,11 @@
 						
 							this.countdown_interval = setInterval(function() {
 
-								if(that.total_seconds > 0) {
+								that.total_seconds = ((that.values.hours * 60) * 60) + (that.values.minutes * 60) + that.values.seconds;
 
-									--that.values.seconds;              
+								if(that.total_seconds >= 0) {
+
+									--that.values.seconds; 
 
 									if(that.values.minutes >= 0 && that.values.seconds < 0) {
 
@@ -431,9 +433,14 @@
 									// Seconds
 									that.checkHour(that.values.seconds, $sec_1, $sec_2);
 
-									--that.total_seconds;
+									//--that.total_seconds;
+									
 								}
 								else {
+									// таймер завершен
+									$('.classic-end').hide();
+									console.log('Акция завершена.');
+									register_complite();
 									clearInterval(that.countdown_interval);
 								}
 							}, 1000);    
@@ -509,6 +516,7 @@
 							$(this).trigger('change.$');
 						});
 
+				// Bonus card
 				$('.promo-page__registration')
 					.find('[name=bonus]').mask('9999 9999 9999 9999').end();
 
@@ -520,11 +528,13 @@
 						ticket: 0,
 						storeid: 0,
 						bonus: 0,
+						link: 0,
 					};
 
 					e.preventDefault();
 
-					$wrap.find('[data-invalid]').removeAttr('data-invalid');
+					//$wrap.find('[data-invalid]').removeAttr('data-invalid');
+					$wrap.find('.form__field-error').remove();
 					
 					$.each(data, function(key, val) {
 						var $el = $wrap.find('[name="'+ key +'"]');
@@ -535,8 +545,14 @@
 							val = $el.val();
 						}
 
+						/*if ( $('.promo-page__registration').find('.trigger').hasClass('selected') == false ) {
+							$('.promo-page__registration > .form__field.list').css({'border-color': 'red'});
+							send = false;
+						}*/
+
 						if (val == 0) {
-							$elWrap.find('label').attr('data-invalid', 1);
+							//$elWrap.find('label').attr('data-invalid', 1);
+							$elWrap.prepend("<div class='form__field-error'>Введите ещё раз</div>");
 							send = false;
 						}
 
@@ -546,11 +562,16 @@
 					if (send) {
 						$.get('/action/klassika_na_vse_vremena/ajax/addTicket.php', data);
 
-						$wrap
-							.find('form').hide().end()
-							.find('[data-status]').show();
+						register_complite();
 					}
 				});
+
+				function register_complite() {
+					var $wrap = $('.promo-page__registration [data-btn=send]').closest('[data-wrap]');
+					$wrap
+						.find('form').hide().end()
+						.find('[data-status]').show();
+				}
 
 				// Scroll to form
 				$('.promo-page [data-btn=goToForm]').on('click', function (e) {
