@@ -7,6 +7,7 @@
 		var self = this;
 		
 		self.debug = true;
+		//self.apiUrl = 'https://web-v3.zoloto585.ru/restapi/v2/basket/';
 		self.apiUrl = 'https://d03.zoloto585.ru/restapi/v2/basket/';
 		self.apiData = {};
 
@@ -53,6 +54,8 @@
 	 */
 	basket.pageInit = function () {
 		var self = this;
+
+		return true;
 
 		self.load('view', {
 			name: 'content',

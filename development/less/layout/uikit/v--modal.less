@@ -1,0 +1,36 @@
+﻿.v--modal{
+
+	&-overlay{
+		background: fade(black, 70%) !important;
+	}
+
+	&-box{
+		border-radius: 0 !important;
+		background-color: fade(white, 40%) !important;
+		padding: 45px 15px 30px !important;
+		text-align: center !important;
+
+		&:before {
+			z-index: 	-1;
+			position: 	absolute;			
+			top: 		10px;
+			right: 		10px; 
+			bottom: 	10px;
+			left: 		10px;			
+			content: 	'';
+			background-color: white;
+		}
+	}
+
+	&__close-btn{
+		width: 40px;
+		height: 40px;
+		position: absolute;
+		top: 0; right: 0;
+		.set_pcard_sprite(6px, -467px);
+		background-color: #e73437;
+		cursor: pointer;
+		border: none;
+	}
+
+}

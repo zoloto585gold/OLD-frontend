@@ -1,0 +1,13 @@
+{
+	"mainApiUrl": "http:\/\/localhost:8000\/api\/",
+	"cartApiUrl": "http:\/\/localhost:8000\/api\/basket\/",
+	"catalogUrl": "\/catalog\/yuvelirnye_izdeliya\/",
+	"cookieKey": "ZOLOTO585_USER_ID",
+	"city": "Москва",
+	"coords": [
+	  55.76,
+	  37.64
+	],
+	"dir": "basket2",
+	"template": "\/bitrix\/templates\/zoloto"
+  }

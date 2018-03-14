@@ -13,16 +13,18 @@
     font-size: 11px;
     line-height: 14px;
     color: #999999;
-    text-decoration: underline;
+    text-decoration: none;
+    text-transform: uppercase;
     margin-bottom: 10px;
     &:hover{
-      text-decoration: none;
+      text-decoration: underline;
     }
   }
   &__remove{
     position: absolute;
-    top: 12px;
+    top: 50%;
     right: 0;
+    transform: translateY(-50%);
     display: block;
     width: 25px;
     height: 25px;
@@ -128,6 +130,16 @@
     span{
       color: #999;
       display: block;
+    }
+    div{
+      margin: 5px 0 0;
+        span{
+          display: inline-block;
+          font-size: 12px;
+          background: #ffec00;
+          color: #333;
+          padding: 2px 4px;
+        }
     }
   }
   &__chooseCity{

@@ -1,14 +1,36 @@
 <!-- "BASKET-LIST" -->
 <div class="section">
 	<div class="section__inner">
-		<cart inline-template>
-			<div class="cart">
+		<div class="cart" v-if="!orders">
+			<transition-group name="list" tag="div" class="cart-list-wrapper">
 				<cart-item 
-					v-for="item, index in items" 
-					:index="index"	
+					v-for="item, index in data.items" 
+					:key="item.uuid" 
+					:index="index" 
+					:itemid="item.itemid" 
+					:title="item.title" 
+					:href="item.href" 
+					:img="item.img" 
+					:price="item.price" 
+					:discount-price="item.discount_price" 
+					:total-discount-price="item.total_discount_price" 
+					:shopid="item.shopid" 
 				></cart-item>
+			</transition-group>
+
+			<p v-if="data.items.length == 0">Пустая</p>
+		</div>
+		<div v-else>
+			<div class="section basket-finishList">
+				<cart-order 
+					v-for="(orderItems, orderid, index) in orders" 
+					:orderid="orderid" 
+					:index="index" 
+					:order-items="orderItems" 
+				>
+				</cart-order>
 			</div>
-		</cart>
+		</div>
 	</div>
 </div>
 <!-- END-of-"BASKET-LIST" -->
