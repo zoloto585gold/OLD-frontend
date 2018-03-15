@@ -12,6 +12,7 @@
 .modal-shops{
   display: flex;
   flex-wrap: wrap;
+  overflow: hidden;
   &__toggles{
     display: none;
     width: 100%;
@@ -28,6 +29,7 @@
       font-size: 14px;
       background: #f5f5f5;
       border-bottom: 1px solid #adacad;
+      cursor: pointer;
       &:first-child{
         border-right: 1px solid #adacad;
       }
@@ -55,6 +57,15 @@
     }
   }
 
+  &__tabContent{
+    position: absolute;
+    left: -9999em;
+
+    &.active{
+      position: static;
+    }
+  }
+
   &__shopList{
     width: 325px;
     height: 540px;
@@ -69,9 +80,6 @@
   &__map{
     flex-grow: 1;
     text-align: left;
-    @media @tablet-under{
-      display: none;
-    }
   }
 
   &__title{

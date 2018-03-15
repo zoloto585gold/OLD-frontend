@@ -22,6 +22,7 @@ store.registerModule('CartShops', {
 			placemarks: [],
 			selectedShop: {},
 			shopid: 0,
+			activeTab: '',
 		}
 	},
 
@@ -30,6 +31,10 @@ store.registerModule('CartShops', {
 	mutations: {
 		setShopid(state, shopid) {
 			state.shopid = shopid
+		},
+
+		setTab(state, payload) {
+			state.activeTab = payload
 		}
 	},
 })
@@ -62,7 +67,7 @@ const CartShops = {
 	computed: {
 		...mapGetters('Cart', ['selectedItem', 'city']),
 		...mapState('Cart', ['data', 'shops']),
-		...mapState('CartShops', ['shopid', 'placemarks']),
+		...mapState('CartShops', ['shopid', 'placemarks', 'activeTab']),
 
 		itemShops(state) {
 			let itemid = +state.selectedItem.itemid
@@ -81,9 +86,21 @@ const CartShops = {
 		}
 	},
 
+	mounted() {
+		const vm = this
+
+		window.addEventListener('resize', () => {
+			const tab = window.screen.width >= 768 ? 'all' : 'shopList'
+
+			vm.$store.commit('CartShops/setTab', tab)
+		})
+		
+		window.dispatchEvent(new Event('resize'))
+	},
+
 	methods: {
 		...mapMutations('Cart', ['setShopid']),
-		...mapMutations('CartShops', ['setShopid']),
+		...mapMutations('CartShops', ['setShopid', 'setTab']),
 
 		close(selected) {
 			this.$modal.hide('cart-shops')
