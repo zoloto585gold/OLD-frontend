@@ -2,11 +2,19 @@
 	<div class="modal__info">
 		<div class="modal-shops">
 			<div class="modal-shops__toggles">
-				<div class="active">СПИСКОМ</div>
-				<div>НА КАРТЕ</div>
+				<div class="active" @click.prevent="setTab('shopList')">СПИСКОМ</div>
+				<div @click.prevent="setTab('map')">НА КАРТЕ</div>
 			</div>
 
-			<div class="modal-shops__shopList">
+			<div 
+				:class="[
+					'modal-shops__tabContent',
+					'modal-shops__shopList',
+					{
+						'active': activeTab == 'shopList' || activeTab == 'all'
+					}
+				]"
+			>
 				<div class="modal-shops__title">Выберите магазин:</div>
 
 				<div 
@@ -27,48 +35,16 @@
 					</div>
 					-->
 				</div>
-
-				<!--
-				<div class="modal-shops__title modal-shops__title--big">изделия Под заказ</div>
-
-				<div class="modal-shops__item">
-					<div class="modal-shops__shopAddress">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum tempora</div>
-					<span>Под заказ</span>
-					<div class="modal-shops__day">
-						Можно забрать: <span>29 сентября</span>
-					</div>
-				</div>
-				<div class="modal-shops__item">
-					<div class="modal-shops__shopAddress">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum tempora</div>
-					<span>Под заказ</span>
-					<div class="modal-shops__day">
-						Можно забрать: <span>29 сентября</span>
-					</div>
-				</div>
-				<div class="modal-shops__item">
-					<div class="modal-shops__shopAddress">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum tempora</div>
-					<span>Под заказ</span>
-					<div class="modal-shops__day">
-						Можно забрать: <span>29 сентября</span>
-					</div>
-				</div>
-				<div class="modal-shops__item">
-					<div class="modal-shops__shopAddress">Lorem ipsum dolor sit amet</div>
-					<span>Под заказ</span>
-					<div class="modal-shops__day">
-						Можно забрать: <span>29 сентября</span>
-					</div>
-				</div>
-				<div class="modal-shops__item">
-					<div class="modal-shops__shopAddress">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum tempora</div>
-					<span>Под заказ</span>
-					<div class="modal-shops__day">
-						Можно забрать: <span>29 сентября</span>
-					</div>
-				</div>
-				-->
 			</div>
-			<div class="modal-shops__map">
+			<div
+				:class="[
+					'modal-shops__tabContent',
+					'modal-shops__map',
+					{
+						'active': activeTab == 'map' || activeTab == 'all'
+					}
+				]"
+			>
 				<div class="modal-shops__title">ваш город: <span>{{ city }}</span></div>
 				<div id="shops-map" class="basket-shops__map"></div>
 			</div>
