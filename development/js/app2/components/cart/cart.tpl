@@ -260,7 +260,7 @@
 										<div class="cart-options__error" v-if="couponShowError">Не верный код</div>
 										<input 
 											type="text" 
-											placeholder="ВВЕДИТЕ ПРОМОКОД, ЕСЛИ ЕСТЬ"
+											placeholder="ЕСТЬ ПРОМОКОД? ВВЕДИ"
 											name="coupon" 
 											:value="inputs.coupon || coupon"
 											@input="updateInput">
