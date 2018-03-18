@@ -20,9 +20,9 @@
 		<div class="section cart__title">
 			<div class="section__inner">
 				<h4>Ваша КОРЗИНА</h4>
-				<div class="cart__city">
+				<!-- <div class="cart__city">
 					Ваш город: Санкт-Петеребург
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
