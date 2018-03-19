@@ -141,6 +141,7 @@
 			background: #cb2430;
 		}
 	}
+
 }
 
 @media @desktop {
@@ -148,8 +149,17 @@
 		div.top-basket__button{
 			display: none;
 		}
+		
+		// отдельный стиль для отображения корзины при добавлении товара
+		a.top-basket--hover {
+			background-color: #cb2430;
+			&:after{
+				transform: rotate(90deg);
+			}
+		}
+		// -------------------------------------------------------------
 
-		a.top-basket__button{
+		a.top-basket__button {
 			display: block;
 			&:hover {
 				background-color: #cb2430;
@@ -201,6 +211,15 @@
 				}
 			}
 		} 
+
+		// отдельный стиль для отображения корзины при добавлении товара
+		div.top-basket--hover {
+			background-color: #cb2430;
+			&:after{
+				transform: rotate(90deg);
+			}
+		}
+		// -------------------------------------------------------------
 
 		
 
