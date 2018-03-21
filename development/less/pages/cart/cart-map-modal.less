@@ -111,8 +111,17 @@
   }
 
   &__map{
+    position: relative;
     flex-grow: 1;
     text-align: left;
+
+    &.active {
+      @media @tablet-under {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+    }
   }
 
   &__title{
@@ -201,8 +210,23 @@
   }
 
   .basket-shops__map {
-    height: 100%;
+    position: absolute;
+    bottom: 0;
+    top: 20px;
     width: 100%;
+  }
+
+  .shops__map {
+    position:     absolute;
+    bottom:       0;
+    left:         0;
+    right:        0;
+    top:          20px;
+    
+    @media @tablet-under {
+      top: 0;
+      height: 100%;
+    }    
   }
 
   &__zoom-wrapper{
@@ -213,7 +237,7 @@
     bottom: 35px;
 
     @media @tablet-under {
-      bottom: 55px;
+      bottom: 35px;
     }
   }
   

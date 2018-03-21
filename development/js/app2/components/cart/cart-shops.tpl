@@ -46,7 +46,7 @@
 				]"
 			>
 				<div class="modal-shops__title">ваш город: <span>{{ city }}</span></div>
-				<div id="shops-map" class="basket-shops__map"></div>
+				<div id="shops-map" class="shops__map _basket-shops__map"></div>
 			</div>
 		</div>
 	</div>
