@@ -19,17 +19,22 @@
 				<div class="section__inner">
 					<h1>VUE Test</h1>
 
-					<com-test1 inline-template>
+					<carttt inline-template>
+
 						<div>
-							<ol>
-								<li v-for="todo in todos">
-								{{ todo.text }}
-								</li>
-							</ol>
-							
-							<button @click="addTodo">add</button>
-						</div>
-					</com-test1>
+							<h2>msg = {{ foobar }}</h2>
+				
+							<div>
+								<ol>
+									<li v-for="todo in todos">
+									{{ todo.text }}
+									</li>
+								</ol>
+								
+								<button @click="addTodo">add</button>
+							</div>
+					</div>
+					</carttt>
 				</div>
 			</div>
 		</main>

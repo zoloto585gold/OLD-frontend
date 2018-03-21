@@ -2,6 +2,15 @@
   background: #f1f1f1;
   padding-top: 25px;
   position: relative;
+
+  &--fixed{
+    @media @desktop{
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+  }
   .section__inner{
     max-width: 850px;
     position: static;
@@ -98,11 +107,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    &--center{
+      justify-content: space-around;
+    }
     & > div{
       width: 250px;
-      &:nth-child(2){
-        width: 300px;
-      }
     }
     @media @touch {
       & > div{
@@ -127,14 +136,20 @@
     font-size: 12px;
     line-height: 14px;
     text-align: center;
+    flex: 1;
+    margin-right: 25px;
+    &:last-child{
+      margin-right: 0;
+    }
     @media @tablet-under{
       position: relative;
     }
     &--noCard{
       width: 300px;
-      .cart-options__inner{
+      flex-grow: 1.5;
+      /*.cart-options__inner{
         background: #fbfbfb;
-      }
+      }*/
     }
     &.is-active{
       .cart-options__btn{
@@ -176,7 +191,9 @@
     @media @mobile{
       font-size: 11px;
     }
-
+    &.is-disabled:after{
+      right: -9999px;
+    }
     span{
       border-bottom: 1px dotted #000;
     }
@@ -202,6 +219,9 @@
           color: #fff;
           background-color: #ed3030;
         }
+        @media @tablet-under{
+          right: 7px;
+        }
       }
     }
     @media @tablet-under{
@@ -221,6 +241,9 @@
     display: none;
     padding: 35px 0;
     text-align: left;
+    @media @desktop{
+      min-height: 500px;
+    }
     @media @tablet-under{
       position: static;
       padding: 15px;
@@ -238,11 +261,12 @@
       }
     }
     input{
+      font-size: 14px;
       width: 100%;
       height: 40px;
       border: 1px solid #d3d3d3;
       border-radius: 3px;
-      padding: 0 25px;
+      padding: 0 15px;
     }
     .b-button{
       width: auto;
@@ -258,11 +282,13 @@
   }
 }
 
-.reg-card-content__form--row2{
-  margin: 0 auto;
-  width: 550px;
-  @media @tablet-under{
-    width: 250px;
+.reg-card-form-wrapper{
+  .reg-card-content__form{
+    margin: 0 auto;
+    width: 550px;
+    @media @tablet-under{
+      width: 250px;
+    }
   }
   #reg_card{
     display: flex;
@@ -277,6 +303,10 @@
   .reg-card-content__form-field{
     width: 250px;
     display: inline-block;
+
+    &[form-input="cardnumber"]{
+      display: none;
+    }
   }
   .reg-card-content__form-field[data-input='phone'] span[data-code]{
     height: 40px;
@@ -296,6 +326,9 @@
       right: -6px;
       transform: rotate(180deg);
     }
+  }
+  .select2-container{
+    flex: 1;
   }
 }
 
@@ -341,5 +374,9 @@
         box-shadow: none;
       }
     }
+  }
+  &__error{
+    margin: 5px 0 0;
+    color: @color-red;
   }
 }

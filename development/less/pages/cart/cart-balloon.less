@@ -1,0 +1,72 @@
+.cart-balloon{
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 370px;
+	height: 190px;
+	z-index: 100;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	padding: 30px;
+
+	@media @mobile-portrait {
+		width: 280px;
+		padding: 10px;
+		//height: auto;
+	}
+
+	&__close-btn{
+		width: 25px;
+		height: 25px;
+		position: absolute;
+		top: 0; 
+		right: 0;
+		color: #fff;
+		background-color: #e73437;
+		cursor: pointer;
+		border: none;
+
+		&:hover{
+			background-color: @color-red;
+		}
+	}
+
+	&__address{
+		font-size: 12px;
+		text-transform: uppercase;
+		color: #666;
+		line-height: 16px;
+	}
+
+	&__info{
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		margin: 14px 0 0;
+
+		> div{
+			flex: 1;
+		}
+	}
+
+	&__label{
+		font-size: 12px;
+		text-transform: uppercase;
+		line-height: 1;
+		color: #999;
+	}
+
+	&__value{
+		font-size: 13px;
+		text-transform: uppercase;
+		line-height: 1;
+		color: #333;
+		margin: 5px 0 0;
+	}
+
+	&__select-btn{
+		display: block;
+		margin: 20px 0 0;
+	}
+}

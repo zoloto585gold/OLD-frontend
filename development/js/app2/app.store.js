@@ -1,7 +1,7 @@
 import Vue from 'vue/dist/vue';
 import Vuex from 'vuex';
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
 	modules: {
@@ -9,6 +9,12 @@ export default new Vuex.Store({
 			namespaced: true,
 			state() {
 				return {
+					preloader: false,
+					alert: {
+						show: false,
+						title: '',
+						text:  '',
+					},
 					modal: {
 						show: false,
 						content: ''
@@ -16,12 +22,14 @@ export default new Vuex.Store({
 				};
 			},
 			mutations: {
-				showModal(state, payload) {
-					const newState = state;
-					newState.modal.show = true;
-					newState.modal.content = payload.content;
+				setAlert(state, payload) {
+					state.alert = payload;
+				},
+
+				setPreloader(state, payload) {
+					state.preloader = payload;
 				}
 			}
 		}
 	}
-});
+})

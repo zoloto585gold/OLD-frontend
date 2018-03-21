@@ -30,6 +30,15 @@ const config = {
 				}
 			},
 			{
+				test: /\.vue$/,
+				loader: 'vue-loader',
+				options: {
+					loaders: {
+						js: 'babel-loader'
+					}
+				}
+			},
+			{
 				test: /\.(tpl|htm)$/,
 				use: [{
 					loader: 'html-loader',
@@ -39,6 +48,16 @@ const config = {
 						collapseWhitespace: true
 					}
 				}]
+			},
+			{
+				test: /\.css$/,
+				loader: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use:
+						process.env.NODE_ENV === 'dev'
+						? 'css-loader?sourceMap'
+						: 'css-loader'
+				})
 			},
 		]
 	},

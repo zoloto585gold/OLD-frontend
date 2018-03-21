@@ -1,15 +1,37 @@
-<div class="section cart__options">
-  <div class="section__inner">
-    <a href="#">< вернуться<span> к покупкам</span></a>
-    <a href="#" class="cart__clearLink">очистить<span> корзину</span></a>
+<div v-if="!orders">
+  <div class="section cart__options">
+    <div class="section__inner">
+      <a :href="conf.catalogUrl">&lt; вернуться
+        <span> к покупкам</span>
+      </a>
+      <a href="#" class="cart__clearLink" v-if="data.items.length" @click.prevent="showClearConfirm">очистить
+        <span> корзину</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="section cart__title">
+    <div class="section__inner">
+      <h4>Ваша КОРЗИНА</h4>
+      <div class="cart__city">
+        Ваш город: Санкт-Петеребург
+      </div>
+    </div>
   </div>
 </div>
-
-<div class="section cart__title">
-  <div class="section__inner">
-  	<h4>Ваша КОРЗИНА</h4>
-  	<div class="cart__city">
-		Ваш город: Санкт-Петеребург
-	</div>
+<div v-else>
+  <div class="section basket__options">
+    <div class="section__inner">
+      <a href="/catalog/yuvelirnye_izdeliya/">&lt; перейти в каталог</a>
+    </div>
+  </div>
+  <div class="section basket__title basket__title--step3">
+    <div class="section__inner">
+      <h4>Благодарим вас за заказ</h4>
+      <p v-if="ordersCount > 1">
+        Обращаем ваше внимание, что выбранные изделия есть в наличии в разных магазинах вашего города
+        <br> и забрать их можно по отдельности по указанным ниже адресам.
+      </p>
+    </div>
   </div>
 </div>

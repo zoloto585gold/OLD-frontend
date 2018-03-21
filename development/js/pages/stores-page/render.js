@@ -89,8 +89,8 @@
 
 
 				$('#store-about-count').html(currentCityData.length);
-				$('.store-about__title').find('a').html(city);
-				$('.store-about__sub-title').find('a').html(city);
+				/*$('.store-about__title').find('a').html(city);
+				$('.store-about__sub-title').find('a').html(city);*/
 				$('.store-about__sub-title').find('a').html($('#store-list-combobox option:selected').attr('value'));
 
 
@@ -133,7 +133,8 @@
 			return function () {
 						var STORE_POINT_FOCUS_ZOOM = 17; // уровень zoom'а для конкретного магазина(т.е. после того как пользователь кликнул на метку)
 						var myMap = new ymaps.Map("map", {
-								center: [55.753994, 37.622093], // Координаты центра карты
+								//center: [55.753994, 37.622093], // Координаты центра карты
+								center: [],
 								zoom: 16 // Zoom
 						});
 
@@ -204,7 +205,7 @@
 
 								$('.store-item').removeClass('store-item--active');
 
-								$('.store-about__title').find('a').html(cityName);
+								//$('.store-about__title').find('a').html(cityName);
 
 								ymaps.geocode(cityName, {
 									results: 1
@@ -227,10 +228,10 @@
 
 
 						// смена карты по по выбору города в шапке из списка ПОПУЛЯРНЫХ ГОРОДОВ
-						$('.top-geo-form__pop-cities-inner a').bind('click', changeCityListener());
+						//$('.top-geo-form__pop-cities-inner a').bind('click', changeCityListener());
 
 						// смена карты по по выбору города в шапке из списка ВСЕХ ГОРОДОВ
-						$('.cities-list__item a').bind('click', changeCityListener());
+						//$('.cities-list__item a').bind('click', changeCityListener());
 
 						// смена карты по выбору города в select-меню над картой
 						$('#store-list-combobox').bind('change', function () {

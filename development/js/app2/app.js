@@ -2,16 +2,31 @@ import Vue from 'vue/dist/vue';
 import bowser from 'bowser';
 import store from './app.store';
 import 'vue-clicky';
+import { mapState, mapMutations } from 'vuex';
+import { FingerprintSpinner } from 'epic-spinners'
+import VModal from 'vue-js-modal'
+import VScrollTo from 'vue-scroll-to'
+import './filters'
 
-Vue.config.productionTip = false;
-Vue.config.performance = process.env.NODE_ENV === 'dev';
-Vue.config.devtools = process.env.NODE_ENV === 'dev';
-Vue.config.ignoredElements = ['vue-ignore', 'noindex'];
+const VueInputMask = require('vue-inputmask').default
+
+Vue.use(VModal)
+Vue.use(VScrollTo)
+Vue.use(VueInputMask)
+
+Vue.config.productionTip = false
+Vue.config.performance = process.env.NODE_ENV === 'dev'
+Vue.config.devtools = process.env.NODE_ENV === 'dev'
+Vue.config.ignoredElements = ['vue-ignore', 'noindex']
 
 const App = new Vue({
 	el: '#app',
 	name: 'App',
 	store,
+
+	components: {
+		FingerprintSpinner
+	},
 
 	data: {
 		device: {},
@@ -94,7 +109,15 @@ const App = new Vue({
 			this.device.type = detectDeviceType();
 			this.device.os = detectOs();
 			this.device.osVersion = bowser.osversion;
-		},
+		}
+	},
+
+	computed: {
+		...mapState('App', [
+			'alert',
+			'preloader'
+		])
+
 	},
 
 	beforeMount() {
@@ -103,6 +126,11 @@ const App = new Vue({
 			this.bowser();
 		}
 	},
-	
-	mounted() {}
-});
+
+	watch: {
+		alert(value) {
+			let method = value.show === true ? 'show' : 'hide'
+			this.$modal[method]('alert')
+		}
+	}
+})

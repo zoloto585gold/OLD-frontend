@@ -37,7 +37,7 @@
 		$('.close-but, #cityOk, #cityChange').click(function(){
 			$('#cityPopup').parent().remove();
 			// добавление куки
-			$.cookie('cityPopup-closed', 'yes', { expires: 7 });
+			$.cookie('cityPopup-closed', 'yes', {expires: 14, path: '/'});
 			popupCheck = true;
 			$('#top-geo-wrap #choose-city').removeClass('_active');
 		});

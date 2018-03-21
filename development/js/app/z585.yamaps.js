@@ -6,7 +6,7 @@
 
 		self.myMap;
 		self.options = $.extend({
-			container: 'shop-map', // id
+			container: 'map', // id
 			center: [55.76, 37.64], // moscow
 			zoom: 16,
 			scrollZoom: true,
@@ -39,21 +39,24 @@
 			}
 
 			ymaps.ready(function () {
-				self.myMap = new ymaps.Map(self.options.container, {
-					center: center,
-					zoom: self.options.zoom,
-				});
-	
-				if (self.options.scrollZoom) {
-					self.myMap.controls.add(new ymaps.control.ZoomControl());
-					self.myMap.behaviors.enable('scrollZoom');
-				}
+				
+				try {
 
-				if (data.length) {
-					placemarkCollection = new ymaps.GeoObjectCollection();
+					self.myMap = new ymaps.Map(self.options.container, {
+						center: center,
+						zoom: self.options.zoom,
+					});
+					
+					if (self.options.scrollZoom) {
+						self.myMap.controls.add(new ymaps.control.ZoomControl());
+						self.myMap.behaviors.enable('scrollZoom');
+					}
 
-					for (var i = 0; i < data.length; i++) {
-						self.placemarks[i] = new ymaps.Placemark(data[i]['coords'],
+					if (data.length) {
+						placemarkCollection = new ymaps.GeoObjectCollection();
+
+						for (var i = 0; i < data.length; i++) {
+							self.placemarks[i] = new ymaps.Placemark(data[i]['coords'],
 							{
 								shopid: data[i]['shopid'],
 								city: data[i]['city'],
@@ -69,17 +72,17 @@
 								hideIconOnBalloonOpen: false,
 								balloonOffset: [0, -100],
 							}
-						);
+							);
 
-						placemarkCollection.add(self.placemarks[i]);
-					}
-		
-					self.myMap.geoObjects.add(placemarkCollection);
+							placemarkCollection.add(self.placemarks[i]);
+						}
+						
+						self.myMap.geoObjects.add(placemarkCollection);
 
-					if (typeof balloon !== 'undefined') {
-						balloonLayout = balloonIsObj ? balloon.html() : balloon;
+						if (typeof balloon !== 'undefined') {
+							balloonLayout = balloonIsObj ? balloon.html() : balloon;
 
-						balloonLayout = ymaps.templateLayoutFactory.createClass(balloonLayout,
+							balloonLayout = ymaps.templateLayoutFactory.createClass(balloonLayout,
 							{
 								build: function () {
 									var $closeBtn;
@@ -102,30 +105,35 @@
 									this.events.fire('userclose');
 								},
 							}
-						);
-				
-						ymaps.layout.storage.add('my#shopsBalloon', balloonLayout);
-						placemarkCollection.options.set({balloonLayout:'my#shopsBalloon'});
+							);
+							
+							ymaps.layout.storage.add('my#shopsBalloon', balloonLayout);
+							placemarkCollection.options.set({balloonLayout:'my#shopsBalloon'});
 
-						self.myMap.geoObjects.events.add('click', function (e) {
-							var obj = e.get('target');
+							self.myMap.geoObjects.events.add('click', function (e) {
+								var obj = e.get('target');
 
-							self.setCenter(obj.geometry.getCoordinates(), 15);
-							self.options.onBalloonClick.call(this, e, obj);
+								self.setCenter(obj.geometry.getCoordinates(), 15);
+								self.options.onBalloonClick.call(this, e, obj);
 
-							if (obj.balloon.isOpen()) {
-								obj.balloon.close();
-							}
-						});
+								if (obj.balloon.isOpen()) {
+									obj.balloon.close();
+								}
+							});
 
-						self.myMap.geoObjects.events.add('mouseenter', function (e) {
-							var obj = e.get('target');
+							self.myMap.geoObjects.events.add('mouseenter', function (e) {
+								var obj = e.get('target');
 
-							obj.balloon.open();
-						});
+								obj.balloon.open();
+							});
+						}
 					}
+
+				} catch(e) {
+					Raven.captureException(e);
 				}
-			});
+
+			}); // end ready ymaps
 		}
 
 		self.setCenter = function (coords, zoom) {
