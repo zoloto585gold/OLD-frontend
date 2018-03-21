@@ -493,6 +493,8 @@ const Cart = {
 								city: vm.city
 							}
 						})
+
+                        axios.get('/basket/ajax/unomi.php?phone='+ vm.inputs.smsPhone)
 					}
 
 					// Аналитика
@@ -543,7 +545,8 @@ const Cart = {
 								}
 							}
 						})
-					}
+                        axios.get('/basket/ajax/unomi.php?phone='+ phone)
+                    }
 				})
 				.catch(error => {
 					console.log(error)
