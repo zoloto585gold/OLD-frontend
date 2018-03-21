@@ -85,15 +85,14 @@
   }
 
   &__tabContent{
-    position: absolute;
-    left: -9999em;
+    display: none;
 
     @media @tablet-under {
       width:  100%;
     }
 
     &.active{
-      position: static;
+      display: block;
     }
   }
 
@@ -197,5 +196,15 @@
     line-height: 1.1;
     text-transform: uppercase;
     margin-bottom: 5px;
+  }
+  &__zoom-wrapper{
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+  }
+  &__zoom{
+    background: red;
+    width: 15px;
+    height: 15px;
   }
 }

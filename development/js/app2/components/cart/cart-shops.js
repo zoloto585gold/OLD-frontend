@@ -129,16 +129,57 @@ const CartShops = {
 							vm.mapid,
 							{
 								center: coords,
-								zoom: vm.zoom
+								zoom: vm.zoom,
+								controls: []
 							},
 							{
 								searchControlProvider: 'yandex#search'
 							}
 						)
 
+						/*
 						// Контролы карты
 						vm.map.controls.add(new ymaps.control.ZoomControl())
 						vm.map.behaviors.enable('scrollZoom')
+						*/
+
+						// Кастомные кнопки зума
+						let ZoomLayout = ymaps.templateLayoutFactory.createClass("<div class='modal-shops__zoom-wrapper'>" +
+							"<div class='modal-shops__zoom modal-shops__zoom--in'>+</div>" +
+							"<div class='modal-shops__zoom modal-shops__zoom--out'>-</div>" +
+							"</div>", {
+
+							build: function () {
+								ZoomLayout.superclass.build.call(this);
+
+								this.zoomInCallback = ymaps.util.bind(this.zoomIn, this);
+								this.zoomOutCallback = ymaps.util.bind(this.zoomOut, this);
+
+								$('.modal-shops__zoom--in').bind('click', this.zoomInCallback);
+								$('.modal-shops__zoom--out').bind('click', this.zoomOutCallback);
+							},
+
+							clear: function () {
+								$('.modal-shops__zoom--in').unbind('click', this.zoomInCallback);
+								$('.modal-shops__zoom--out').unbind('click', this.zoomOutCallback);
+
+								ZoomLayout.superclass.clear.call(this);
+							},
+
+							zoomIn: function () {
+								var map = this.getData().control.getMap();
+								map.setZoom(map.getZoom() + 1, {checkZoomRange: true});
+							},
+
+							zoomOut: function () {
+								var map = this.getData().control.getMap();
+								map.setZoom(map.getZoom() - 1, {checkZoomRange: true});
+							}
+						}),
+						
+						zoomControl = new ymaps.control.ZoomControl({options: {layout: ZoomLayout}})
+						
+						vm.map.controls.add(zoomControl)
 
 						// Добавляем метки на карту
 						let placemarkCollection = new ymaps.GeoObjectCollection()
@@ -243,7 +284,25 @@ const CartShops = {
 		}
 	},
 
-	watch: {}
+	watch: {
+		activeTab(val) {
+			if (val == 'map') {
+				const checkApiLoaded = setInterval(() => {
+					if (typeof this.map !== 'undefined') {
+						this.map.container.fitToViewport()
+						
+						clearInterval(checkApiLoaded)
+					}
+				}, 100)
+			}
+		},
+
+		shopid(val) {
+			if (this.activeTab != 'all') {
+				this.$store.commit('CartShops/setTab', 'map')
+			}
+		}
+	}
 }
 
 Vue.component('CartShops', CartShops)

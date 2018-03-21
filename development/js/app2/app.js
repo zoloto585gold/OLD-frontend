@@ -8,8 +8,11 @@ import VModal from 'vue-js-modal'
 import VScrollTo from 'vue-scroll-to'
 import './filters'
 
+const VueInputMask = require('vue-inputmask').default
+
 Vue.use(VModal)
 Vue.use(VScrollTo)
+Vue.use(VueInputMask)
 
 Vue.config.productionTip = false
 Vue.config.performance = process.env.NODE_ENV === 'dev'

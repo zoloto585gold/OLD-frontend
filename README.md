@@ -130,6 +130,8 @@ git pull upstream master
 ## Список изменений
 
 - 2.0.x
+	- 2.0.3
+		- Добавлен vue-inputmask для масок в инпутах
 	- 2.0.2
 		- Добавлен babel-plugin-transform-object-rest-spread для распространения объектов ...mapState, etc.
 		- Добавлен axios для запросов

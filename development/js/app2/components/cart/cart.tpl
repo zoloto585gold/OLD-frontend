@@ -182,10 +182,10 @@
 									<div>
 										<div class="cart-options__error" v-if="bonusShowError">Карта не найдена</div>
 										<input 
-											type="text" 
+											type="tel" 
 											placeholder="+7 (000) 000-00-00" 
 											name="cardPhone" 
-											data-mask="phone" 
+											v-mask="'+7 (999) 999-99-99'" 
 											:value="inputs.cardPhone"
 											@keyup="updateInput" 
 											@change="updateInput" 
@@ -274,7 +274,14 @@
 					</div>
 				</div>
 			</div>
-			<button class="b-button b-button--checkout">Оформить заказ</button>
+			<button 
+				class="b-button b-button--checkout" 
+				@click.prevent="checkout" 
+				v-scroll-to="'.confirmation-order-wrapper, 0'" 
+				v-if="!confirmForm"
+			>
+				Оформить заказ
+			</button>
 		</div>
 	</div>
 
@@ -287,10 +294,10 @@
 			<form class="confirmation-order__form">
 				<div>
 					<input 
-						type="text" 
+						type="tel" 
 						placeholder="+7 (000) 000-00-00" 
 						name="smsPhone" 
-						data-mask="phone" 
+						v-mask="'+7 (999) 999-99-99'" 
 						:disabled="smsLock" 
 						@keyup="updateInput" 
 						@keydown.enter="sendSms">

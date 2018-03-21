@@ -2,8 +2,8 @@
 	<div class="modal__info">
 		<div class="modal-shops">
 			<div class="modal-shops__toggles">
-				<div class="active" @click.prevent="setTab('shopList')">СПИСКОМ</div>
-				<div @click.prevent="setTab('map')">НА КАРТЕ</div>
+				<div :class="{ 'active': activeTab == 'shopList' }" @click.prevent="setTab('shopList')">СПИСКОМ</div>
+				<div :class="{ 'active': activeTab == 'map' }"      @click.prevent="setTab('map')">НА КАРТЕ</div>
 			</div>
 
 			<div 
