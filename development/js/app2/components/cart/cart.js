@@ -262,10 +262,7 @@ const Cart = {
 		this.setShops(this.initialShops)
 	},
 
-	mounted() {
-		// Маска для телефонов (@TODO: переписать на нативе)
-		$('.cart-wrapper input[data-mask=phone]').mask('+7 (999) 999-99-99')
-	},
+	mounted() {},
 
 	computed: {
 		...mapState('Cart', [
