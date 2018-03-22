@@ -315,7 +315,7 @@
 				<div v-if="smsSended">
 					<input 
 						type="text" 
-						placeholder="введите проверочный код из смс"
+						placeholder="введите проверочный код из SMS"
 						name="smsCode"
 						:value="inputs.smsCode"
 						@input="updateInput"
