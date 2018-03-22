@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	@@include('scaff/layout__meta-tags.html')
+	@@include('scaff/layout__css-list.html')
+
+
+	<title>Регистрация карты</title>
+
+
+	<!-- здесь подключай свои стили -->
+	<!-- НАПРИМЕР: <link rel="stylesheet" href="css/catalog.min.css"> -->
+</head>
+<body>
+	<div class="page">
+		<header class="page__header">
+			@@include('scaff/layout__header.html')
+		</header>
+		
+		<div class="clearfix"></div>
+		<br>
+
+		<main class="page__content">
+			<div class="section__inner">
+				<div class="_reg-card-form-wrapper">
+					<div class="reg-card-content__form">
+						<form id="reg_card">
+							<input type="hidden" value="new" id="reg_card_type" name="type">
+
+							<div class="reg-card-content__form-field" form-input="cardnumber">
+								<label>
+									Номер бонусной карты 585 GOLD <sup>*</sup>
+									<span>Введите 16-и значный номер, указанный на карте</span>
+								</label>
+								<span class="error"></span>
+								<input type="text" class="maxi" id="cardnumber" name="dc" value="0000000000000000" maxlength="16">
+
+								<div class="reg-card-content__form-tip">Еще нет бонусной карты? <a href="#" class="js-reg-cart__tab-trigger" data-target="getcard">Получите онлайн &gt;</a></div>
+							</div>
+
+							<h2 class="reg-card-content__form-title">Персональные данные</h2>
+
+							<div class="reg-card-content__form-field">
+								<label>Фамилия <sup>*</sup></label>
+								<span class="error"></span>
+								<input class="name-part" type="text" id="surname" name="fn" value="" maxlength="100">
+							</div>
+
+							<div class="reg-card-content__form-field">
+								<label>Имя <sup>*</sup></label>
+								<span class="error"></span>
+								<input class="autocomplete name-part" data-source="/registraciya_karty/autocomplete/autocomplete.php?type=name" type="text" id="name" name="sn" value="" maxlength="100">
+							</div>
+
+							<div class="reg-card-content__form-field">
+								<label>Отчество <sup>*</sup></label>
+								<span class="error"></span>
+								<input class="autocomplete name-part" data-source="/registraciya_karty/autocomplete/autocomplete.php?type=surname" type="text" id="patronymic" name="tn" value="" maxlength="100">
+							</div>
+
+							<div class="reg-card-content__form-field / select">
+								<label>Пол <sup>*</sup></label>
+								<span class="error"></span>
+								<select id="gender" name="sex" <?/* class="select_drop" */?> > 
+									<option value="0">- Выберите пол -</option>
+									<option value="2">Мужской</option>
+									<option value="1">Женский</option>
+								</select>
+							</div>
+
+							<div class="reg-card-content__form-field / select">
+								<label>Дата рождения <sup>*</sup></label>
+								<span class="error"></span>                            
+								<div class="reg-card-content__form-date">
+									<select name="birth_date[day]" id="birth_date_day" class="birth_date-select" data-placeholder="День">
+										<option></option>
+										<? for ($day = 1; $day <= 31; $day++) { ?>
+											<? $day = str_pad($day, 2, '0', STR_PAD_LEFT); ?>
+											<option value="<?=$day?>"><?=$day?></option>
+										<? } ?>
+									</select>
+
+									<select name="birth_date[month]" id="birth_date_month" class="birth_date-select" data-placeholder="Месяц">
+										<option></option>
+										<? foreach ($months as $index => $name) { ?>
+											<option value="<?=str_pad(($index + 1), 2, 0, STR_PAD_LEFT)?>"><?php echo $name;?></option>
+										<? } ?>
+									</select>
+
+									<select name="birth_date[year]" id="birth_date_year" class="birth_date-select" data-placeholder="Год">
+										<option value=""></option>
+										<? for ($year = ( (int) date('Y') - 18 ); $year >= 1925; $year--) { ?>
+											<option value="<?=$year?>"><?=$year?></option>
+										<? } ?>
+									</select>
+								</div>	
+								
+								<div class="reg-card-content__form-tip">Дарим подарки <br>в Ваш День  Рождения!</div>
+							</div>
+
+							<div class="reg-card-content__form-field">
+								<label for="">Город проживания <sup>*</sup></label>
+								<span class="error"></span>
+								<input class="autocomplete" data-source="/registraciya_karty/autocomplete/autocomplete.php?type=city" id="city" name="sl" type="text" value="" maxlength="100" />
+							</div>
+
+							<div class="reg-card-content__form-field" data-input="phone">
+								<label>Телефон <sup>*</sup></label>
+								<span class="error"></span>
+								<input type="text" id="phone" name="phone" value="" placeholder="(000) 000-00-00" maxlength="10">
+								<span data-code>+7</span>
+							</div>
+
+							<div class="reg-card-content__form-field" data-input="email">
+								<label>E-mail <sup>*</sup></label>
+								<span class="error"></span>
+								<input type="text" id="email" name="email" value="" maxlength="100">
+							</div>
+
+							<div class="reg-card-content__form-agree">
+								Нажимая кнопку Зарегистрироваться,  
+								Я подтверждаю свою дееспособность, ознакомление с <a href="#">правилами программы лояльности</a>, 
+								и даю согласие <a href="/assets/docs/sogl_form.pdf">установленной формы</a> 
+								на обработку моих персональных данных.  
+							</div>
+
+							<button class="reg-card-content__form-btn" type="submit">Зарегистрировать карту</button>
+						</form>
+						<form id="reg_confirm" action="" method="">
+							<div data-fields>
+								<h1 class="uppercase font-size-1_7">Подтверждение регистрации<br>бонусной карты</h1>
+								<h2 class="font-size-1">Для завершения регистрации введите SMS код, пришедший на Ваш номер телефона.</h2>
+								<div class="reg-card-content__form-field" data-input="promokey">
+									<input type="text" name="promokey" placeholder="Введите проверочный код из SMS" id="Confirm_promokey">
+								</div>
+								<button class="reg-card-content__form-btn" type="submit">Подтвердить регистрацию</button>
+							</div>
+
+							<div class="reg-card-content__form-status uppercase" data-status="success">
+								<h1 class="uppercase font-size-1_7">Благодарим Вас за регистрацию <br>в Бонусной программе лояльности. </h1>
+								<br>
+								<div class="font-size-1_3">
+									Ваша новая карта: <strong>1120000054271963</strong>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</main>
+
+
+		<footer class="page__footer">
+			@@include('scaff/layout__footer.html')
+		</footer>
+	</div>
+
+	@@include('scaff/layout__js-list.html')
+	<script src="js/catalog_filter_script.js"></script>
+	<script src="js/pages/reg-card-page/reg-card.js"></script>
+</body>
+</html>
