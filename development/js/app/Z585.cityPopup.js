@@ -7,19 +7,19 @@
 
 	var popupCheck = false;
 	var popupCookie = $.cookie('cityPopup-closed');
+	var showPopup = !popupCookie && popupCheck !== true;
 
-	// запуск функции после загрузки страницы
-	$(document).ready(function() {
-		if (popupCookie) {
-			return false;
-		}
-
-		if (popupCheck === true) {
-			return false;
-		}
-
-		setTimeout(cityPopup.generatePopup, 3000);	
-	});
+    if (!!window.frameCacheVars){
+        BX.addCustomEvent("onFrameDataReceived" , function() {
+            if(showPopup)
+        		setTimeout(cityPopup.generatePopup, 3000);
+        });
+    } else {
+        BX.ready(function() {
+            if(showPopup)
+            	setTimeout(cityPopup.generatePopup, 3000);
+        });
+    }
 
 	// функция генерирования кода окна
 	cityPopup.generatePopup = function() {

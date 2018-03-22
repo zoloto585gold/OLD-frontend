@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	@@include('scaff/layout__meta-tags.html')
+	@@include('scaff/layout__css-list.html')
+
+
+	<title>Новая главная страница</title>
+
+
+	<!-- здесь подключай свои стили -->
+	<!-- НАПРИМЕР: <link rel="stylesheet" href="css/catalog.min.css"> -->
+</head>
+<body class="main_page">
+	<div class="page">
+		<header class="page__header">
+			@@include('scaff/layout__header.html')
+		</header>
+
+
+		<main>
+
+			<!-- Первый слайдер -->
+			<div id="main-sl" class="owl-carousel owl-theme index-sl">
+	
+
+			
+				<div class="item">
+					<div class="slide">
+						<a class="ecommerce-promo-item" data-position="Слот 1" data-ecommerce-id="PROMO_MAINPAGE_TOP_14525294" data-name="Париж" href="/action/klassika_na_vse_vremena">
+							<img class="sl-mob" src="http://zoloto585.ru/upload/iblock/c0d/599x390_Paris_mobile.jpg" alt="" height="390" width="599">
+							<img class="sl-desc" src="http://zoloto585.ru/upload/iblock/405/1920x400_Paris_desktop.jpg" alt="" height="400" width="1920">
+						</a>
+					</div>
+				</div>
+		
+				<div class="item">
+					<div class="slide">
+						<a class="ecommerce-promo-item" data-position="Слот 2" data-ecommerce-id="PROMO_MAINPAGE_TOP_14525191" data-name="2=1_ДК" href="/catalog/yuvelirnye_izdeliya/zoloto-s-dk-pdk/">
+							<img class="sl-mob" src="http://zoloto585.ru/upload/iblock/59e/599x390_dk_mobile.jpg" alt="" height="390" width="599">
+							<img class="sl-desc" src="http://zoloto585.ru/upload/iblock/f97/1920x400_dk_desktop.jpg" alt="" height="400" width="1920">
+						</a>
+					</div>
+				</div>
+		
+				<div class="item">
+					<div class="slide">
+						<a class="ecommerce-promo-item" data-position="Слот 3" data-ecommerce-id="PROMO_MAINPAGE_TOP_14525192" data-name="2=1_ИФ" href="/catalog/yuvelirnye_izdeliya/zoloto-s-fianitom_bez-vstavok/">
+							<img class="sl-mob" src="http://zoloto585.ru/upload/iblock/962/599x390_IF_mobile.jpg" alt="" height="390" width="599">
+							<img class="sl-desc" src="http://zoloto585.ru/upload/iblock/da5/1920x400_IF_desktop.jpg" alt="" height="400" width="1920">
+						</a>
+
+					</div>
+				</div>
+		
+				<div class="item">
+					<div class="slide">
+						<a class="ecommerce-promo-item" data-position="Слот 4" data-ecommerce-id="PROMO_MAINPAGE_TOP_14525193" data-name="2=1_СИ" href="/catalog/yuvelirnye_izdeliya/serebro-925-proby/">
+							<img class="sl-mob" src="http://zoloto585.ru/upload/iblock/e20/599x390_silver_mobile.jpg" alt="" height="390" width="599">
+							<img class="sl-desc" src="http://zoloto585.ru/upload/iblock/c4a/1920x400_silver_desktop.jpg" alt="" height="400" width="1920">
+						</a>
+					</div>
+				</div>
+
+			</div>
+
+		
+			<!-- ФИЛЬТР -->
+			<div class="main-filter" id="main-filter">
+				<div class="wrp">
+					<span>подбор украшения</span>        
+					<ul>
+						<form name="_form" action="/catalog/yuvelirnye_izdeliya/" method="get" id="main_filter_form">
+
+							<input type="hidden" name="set_filter" value="Y">
+
+							<li>
+								<div class="fancy-select">
+									<select data-filter-id="155" class="select-filter-variant filter-id-155 fancified" id="wear-type-select" style="width: 1px; height: 1px; display: block; position: absolute; top: 0px; left: 0px; opacity: 0;">
+										<option value="">Тип изделия</option>
+										<option id="arrFilter_155_1439034161" value="arrFilter_155_1439034161" data-control-name="arrFilter_155_1439034161" data-url="/catalog/yuvelirnye_izdeliya/braslety/">БРАСЛЕТ</option>                    	
+										<option id="arrFilter_155_1909833998" value="arrFilter_155_1909833998" data-control-name="arrFilter_155_1909833998" data-url="/catalog/yuvelirnye_izdeliya/braslety-na-nogu/">БРАСЛЕТ НА НОГУ</option>                    	
+										<option id="arrFilter_155_2858664349" value="arrFilter_155_2858664349" data-control-name="arrFilter_155_2858664349" data-url="/catalog/yuvelirnye_izdeliya/broshi/">БРОШЬ</option>                    	
+										<option id="arrFilter_155_589459321" value="arrFilter_155_589459321" data-control-name="arrFilter_155_589459321" data-url="/catalog/yuvelirnye_izdeliya/bulavki/">БУЛАВКА</option>                    	
+										<option id="arrFilter_155_4275829580" value="arrFilter_155_4275829580" data-control-name="arrFilter_155_4275829580" data-url="">БУСЫ</option>                    	
+										<option id="arrFilter_155_1009379417" value="arrFilter_155_1009379417" data-control-name="arrFilter_155_1009379417" data-url="/catalog/yuvelirnye_izdeliya/lozhki-zagrebushki/">ЗАГРЕБУШКА</option>                    	
+										<option id="arrFilter_155_989526005" value="arrFilter_155_989526005" data-control-name="arrFilter_155_989526005" data-url="/catalog/yuvelirnye_izdeliya/zakolka-dlya-galstuka/">ЗАКОЛКА ДЛЯ ГАЛСТУКА</option>                    	
+										<option id="arrFilter_155_2618438582" value="arrFilter_155_2618438582" data-control-name="arrFilter_155_2618438582" data-url="/catalog/yuvelirnye_izdeliya/zaponki/">ЗАПОНКА</option>                    	
+										<option id="arrFilter_155_1392624751" value="arrFilter_155_1392624751" data-control-name="arrFilter_155_1392624751" data-url="/catalog/yuvelirnye_izdeliya/ikony/">ИКОНА</option>                    	
+										<option id="arrFilter_155_2492591449" value="arrFilter_155_2492591449" data-control-name="arrFilter_155_2492591449" data-url="/catalog/yuvelirnye_izdeliya/kolye/">КОЛЬЕ</option>                    	
+										<option id="arrFilter_155_3108575426" value="arrFilter_155_3108575426" data-control-name="arrFilter_155_3108575426" data-url="/catalog/yuvelirnye_izdeliya/kolca/">КОЛЬЦО</option>                    	
+										<option id="arrFilter_155_4024416260" value="arrFilter_155_4024416260" data-control-name="arrFilter_155_4024416260" data-url="/catalog/yuvelirnye_izdeliya/stolovoe-serebro/">ЛОЖКА</option>                    	
+										<option id="arrFilter_155_1035178867" value="arrFilter_155_1035178867" data-control-name="arrFilter_155_1035178867" data-url="">МОНЕТА СУВЕНИРНАЯ</option>                    	
+										<option id="arrFilter_155_2356800597" value="arrFilter_155_2356800597" data-control-name="arrFilter_155_2356800597" data-url="/catalog/yuvelirnye_izdeliya/pirsing/">ПИРСИНГ</option>                    	
+										<option id="arrFilter_155_1631425733" value="arrFilter_155_1631425733" data-control-name="arrFilter_155_1631425733" data-url="/catalog/yuvelirnye_izdeliya/podveski/">ПОДВЕС</option>                    	
+										<option id="arrFilter_155_2830439643" value="arrFilter_155_2830439643" data-control-name="arrFilter_155_2830439643" data-url="">ПОСУДА</option>                    	
+										<option id="arrFilter_155_888419979" value="arrFilter_155_888419979" data-control-name="arrFilter_155_888419979" data-url="/catalog/yuvelirnye_izdeliya/sergi/">СЕРЬГИ</option>                    	
+										<option id="arrFilter_155_4082896313" value="arrFilter_155_4082896313" data-control-name="arrFilter_155_4082896313" data-url="">СЛЕЙВ</option>                    	
+										<option id="arrFilter_155_1180097146" value="arrFilter_155_1180097146" data-control-name="arrFilter_155_1180097146" data-url="/catalog/yuvelirnye_izdeliya/cepi/">ЦЕПЬ</option>                    	
+									</select>
+
+									<div class="trigger">Тип изделия</div>
+									<ul class="options">
+										<li data-raw-value="arrFilter_155_1439034161">БРАСЛЕТ</li>
+										<li data-raw-value="arrFilter_155_1909833998">БРАСЛЕТ НА НОГУ</li>
+										<li data-raw-value="arrFilter_155_2858664349">БРОШЬ</li>
+										<li data-raw-value="arrFilter_155_589459321">БУЛАВКА</li>
+										<li data-raw-value="arrFilter_155_4275829580">БУСЫ</li>
+										<li data-raw-value="arrFilter_155_1009379417">ЗАГРЕБУШКА</li>
+										<li data-raw-value="arrFilter_155_989526005">ЗАКОЛКА ДЛЯ ГАЛСТУКА</li>
+										<li data-raw-value="arrFilter_155_2618438582">ЗАПОНКА</li>
+										<li data-raw-value="arrFilter_155_1392624751">ИКОНА</li>
+										<li data-raw-value="arrFilter_155_2492591449">КОЛЬЕ</li>
+										<li data-raw-value="arrFilter_155_3108575426">КОЛЬЦО</li>
+										<li data-raw-value="arrFilter_155_4024416260">ЛОЖКА</li>
+										<li data-raw-value="arrFilter_155_1035178867">МОНЕТА СУВЕНИРНАЯ</li>
+										<li data-raw-value="arrFilter_155_2356800597">ПИРСИНГ</li>
+										<li data-raw-value="arrFilter_155_1631425733">ПОДВЕС</li>
+										<li data-raw-value="arrFilter_155_2830439643">ПОСУДА</li>
+										<li data-raw-value="arrFilter_155_888419979">СЕРЬГИ</li>
+										<li data-raw-value="arrFilter_155_4082896313">СЛЕЙВ</li>
+										<li data-raw-value="arrFilter_155_1180097146">ЦЕПЬ</li>
+									</ul>
+								</div>
+								
+								<input type="hidden" name="" value="" id="wear-type-select_hidden">
+							</li>   
+							<li>
+								<div class="fancy-select">
+									<select data-filter-id="157" class="select-filter-variant filter-id-157 fancified" id="metal-select" style="width: 1px; height: 1px; display: block; position: absolute; top: 0px; left: 0px; opacity: 0;">
+										<option value="">Металл</option>
+										<option id="arrFilter_157_3887755616" value="arrFilter_157_3887755616" data-control-name="arrFilter_157_3887755616" data-url="">БЕЗ МЕТАЛЛА</option>                    	
+										<option id="arrFilter_157_1899819237" value="arrFilter_157_1899819237" data-control-name="arrFilter_157_1899819237" data-url="">ЗОЛОТО</option>                    	
+										<option id="arrFilter_157_3752058845" value="arrFilter_157_3752058845" data-control-name="arrFilter_157_3752058845" data-url="">СЕРЕБРО</option>                    	
+									</select>
+									<div class="trigger">Металл</div>
+									<ul class="options">
+										<li data-raw-value="arrFilter_157_3887755616">БЕЗ МЕТАЛЛА</li>
+										<li data-raw-value="arrFilter_157_1899819237">ЗОЛОТО</li>
+										<li data-raw-value="arrFilter_157_3752058845">СЕРЕБРО</li>
+									</ul>
+								</div>
+								<input type="hidden" name="" value="" id="metal-select_hidden">
+							</li>   
+							<li>
+								<div class="fancy-select">
+									<select data-filter-id="158" class="select-filter-variant filter-id-158 fancified" id="proba-select" style="width: 1px; height: 1px; display: block; position: absolute; top: 0px; left: 0px; opacity: 0;">
+										<option value="">Проба</option>
+										<option id="arrFilter_158_534308556" value="arrFilter_158_534308556" data-control-name="arrFilter_158_534308556" data-url="">375</option>                    	
+										<option id="arrFilter_158_612300854" value="arrFilter_158_612300854" data-control-name="arrFilter_158_612300854" data-url="">500</option>                    	
+										<option id="arrFilter_158_2630715057" value="arrFilter_158_2630715057" data-control-name="arrFilter_158_2630715057" data-url="">585</option>                    	
+										<option id="arrFilter_158_328010029" value="arrFilter_158_328010029" data-control-name="arrFilter_158_328010029" data-url="">875</option>                    	
+										<option id="arrFilter_158_1865979743" value="arrFilter_158_1865979743" data-control-name="arrFilter_158_1865979743" data-url="">925</option>                    	
+										<option id="arrFilter_158_2067703508" value="arrFilter_158_2067703508" data-control-name="arrFilter_158_2067703508" data-url="">960</option>                    	
+										<option id="arrFilter_158_2239365823" value="arrFilter_158_2239365823" data-control-name="arrFilter_158_2239365823" data-url="">999</option>                    	
+									</select>
+
+									<div class="trigger">Проба</div>
+									<ul class="options">
+										<li data-raw-value="arrFilter_158_534308556">375</li>
+										<li data-raw-value="arrFilter_158_612300854">500</li>
+										<li data-raw-value="arrFilter_158_2630715057">585</li>
+										<li data-raw-value="arrFilter_158_328010029">875</li>
+										<li data-raw-value="arrFilter_158_1865979743">925</li>
+										<li data-raw-value="arrFilter_158_2067703508">960</li>
+										<li data-raw-value="arrFilter_158_2239365823">999</li>
+									</ul>
+								</div>
+								<input type="hidden" name="" value="" id="proba-select_hidden">
+							</li>   
+							<li>
+								<div class="fancy-select">
+									<select data-filter-id="162" class="select-filter-variant filter-id-162 fancified" id="main-insert-select" style="width: 1px; height: 1px; display: block; position: absolute; top: 0px; left: 0px; opacity: 0;">
+										<option value="">Вставка</option>
+										<option id="arrFilter_162_206253272" value="arrFilter_162_206253272" data-control-name="arrFilter_162_206253272" data-url="">АГАТ</option>                    	
+										<option id="arrFilter_162_1362845775" value="arrFilter_162_1362845775" data-control-name="arrFilter_162_1362845775" data-url="">АКРИЛ</option>                    	
+										<option id="arrFilter_162_1450346919" value="arrFilter_162_1450346919" data-control-name="arrFilter_162_1450346919" data-url="">АЛЕКСАНДРИТ</option>                    	
+										<option id="arrFilter_162_4153542112" value="arrFilter_162_4153542112" data-control-name="arrFilter_162_4153542112" data-url="">АМЕТИСТ</option>                    	
+										<option id="arrFilter_162_2677276532" value="arrFilter_162_2677276532" data-control-name="arrFilter_162_2677276532" data-url="">БЕЗ ВСТАВКИ</option>                    	
+										<option id="arrFilter_162_2080825261" value="arrFilter_162_2080825261" data-control-name="arrFilter_162_2080825261" data-url="">БИРЮЗА</option>                    	
+										<option id="arrFilter_162_3936532910" value="arrFilter_162_3936532910" data-control-name="arrFilter_162_3936532910" data-url="">БИРЮЗА СИНТЕТИЧЕСКАЯ</option>                    	
+										<option id="arrFilter_162_1830750550" value="arrFilter_162_1830750550" data-control-name="arrFilter_162_1830750550" data-url="">БРИЛЛИАНТ</option>                    	
+										<option id="arrFilter_162_1801126437" value="arrFilter_162_1801126437" data-control-name="arrFilter_162_1801126437" data-url="">БРИЛЛИАНТ_ЧЕРНЫЙ</option>                    	
+										<option id="arrFilter_162_4147626267" value="arrFilter_162_4147626267" data-control-name="arrFilter_162_4147626267" data-url="">ГИДРОТЕРМАЛЬНЫЙ ИЗУМРУД</option>                    	
+										<option id="arrFilter_162_2040717060" value="arrFilter_162_2040717060" data-control-name="arrFilter_162_2040717060" data-url="">ГОРНХРУСТАЛЬ</option>                    	
+										<option id="arrFilter_162_1006937024" value="arrFilter_162_1006937024" data-control-name="arrFilter_162_1006937024" data-url="">ГРАНАТ</option>                    	
+										<option id="arrFilter_162_165161427" value="arrFilter_162_165161427" data-control-name="arrFilter_162_165161427" data-url="">ДИФФУЗИОННЫЙ САПФИР</option>                    	
+										<option id="arrFilter_162_1122115849" value="arrFilter_162_1122115849" data-control-name="arrFilter_162_1122115849" data-url="">ДК ПРОЧЕЕ</option>                    	
+										<option id="arrFilter_162_3561243971" value="arrFilter_162_3561243971" data-control-name="arrFilter_162_3561243971" data-url="">ЖЕМЧУГ</option>                    	
+										<option id="arrFilter_162_1992524352" value="arrFilter_162_1992524352" data-control-name="arrFilter_162_1992524352" data-url="">ЖЕМЧУГ ИСКУСТВ</option>                    	
+										<option id="arrFilter_162_2511072885" value="arrFilter_162_2511072885" data-control-name="arrFilter_162_2511072885" data-url="">ИЗУМРУД</option>                    	
+										<option id="arrFilter_162_1018094111" value="arrFilter_162_1018094111" data-control-name="arrFilter_162_1018094111" data-url="">ИЗУМРУД СИНТЕТИЧЕСКИЙ</option>                    	
+										<option id="arrFilter_162_2669338486" value="arrFilter_162_2669338486" data-control-name="arrFilter_162_2669338486" data-url="">КВАРЦ</option>                    	
+										<option id="arrFilter_162_3811972302" value="arrFilter_162_3811972302" data-control-name="arrFilter_162_3811972302" data-url="">КОРАЛЛ</option>                    	
+										<option id="arrFilter_162_174389348" value="arrFilter_162_174389348" data-control-name="arrFilter_162_174389348" data-url="">МАРКАЗИТ</option>                    	
+										<option id="arrFilter_162_4073301433" value="arrFilter_162_4073301433" data-control-name="arrFilter_162_4073301433" data-url="">МУРАНСКОЕ СТЕКЛО</option>                    	
+										<option id="arrFilter_162_1588451815" value="arrFilter_162_1588451815" data-control-name="arrFilter_162_1588451815" data-url="">НАНО-ИЗУМРУД</option>                    	
+										<option id="arrFilter_162_3648006838" value="arrFilter_162_3648006838" data-control-name="arrFilter_162_3648006838" data-url="">НАНО-САПФИР</option>                    	
+										<option id="arrFilter_162_1463646251" value="arrFilter_162_1463646251" data-control-name="arrFilter_162_1463646251" data-url="">ОБЛАГОРОЖЕННЫЙ РУБИН</option>                    	
+										<option id="arrFilter_162_2533230694" value="arrFilter_162_2533230694" data-control-name="arrFilter_162_2533230694" data-url="">ОНИКС</option>                    	
+										<option id="arrFilter_162_3592764019" value="arrFilter_162_3592764019" data-control-name="arrFilter_162_3592764019" data-url="">ПДК ПРОЧИЕ</option>                    	
+										<option id="arrFilter_162_4272854845" value="arrFilter_162_4272854845" data-control-name="arrFilter_162_4272854845" data-url="">ПЕРЛАМУТР</option>                    	
+										<option id="arrFilter_162_3804439813" value="arrFilter_162_3804439813" data-control-name="arrFilter_162_3804439813" data-url="">ПОДЕЛ ПРОЧЕЕ</option>                    	
+										<option id="arrFilter_162_1772657704" value="arrFilter_162_1772657704" data-control-name="arrFilter_162_1772657704" data-url="">РАУХ-ТОПАЗ</option>                    	
+										<option id="arrFilter_162_3390331633" value="arrFilter_162_3390331633" data-control-name="arrFilter_162_3390331633" data-url="">РОДОЛИТ</option>                    	
+										<option id="arrFilter_162_4207882425" value="arrFilter_162_4207882425" data-control-name="arrFilter_162_4207882425" data-url="">РУБИН</option>                    	
+										<option id="arrFilter_162_3350912745" value="arrFilter_162_3350912745" data-control-name="arrFilter_162_3350912745" data-url="">САПФИР</option>                    	
+										<option id="arrFilter_162_1786008483" value="arrFilter_162_1786008483" data-control-name="arrFilter_162_1786008483" data-url="">САПФИР СИНТЕТИЧЕСКИЙ</option>                    	
+										<option id="arrFilter_162_398271494" value="arrFilter_162_398271494" data-control-name="arrFilter_162_398271494" data-url="">СВАРОВСКИ</option>                    	
+										<option id="arrFilter_162_4020207087" value="arrFilter_162_4020207087" data-control-name="arrFilter_162_4020207087" data-url="">СТЕКЛО</option>                    	
+										<option id="arrFilter_162_3332783715" value="arrFilter_162_3332783715" data-control-name="arrFilter_162_3332783715" data-url="">ТОПАЗ</option>                    	
+										<option id="arrFilter_162_679124393" value="arrFilter_162_679124393" data-control-name="arrFilter_162_679124393" data-url="">ТОПАЗ ЛОНДОН</option>                    	
+										<option id="arrFilter_162_473987779" value="arrFilter_162_473987779" data-control-name="arrFilter_162_473987779" data-url="">ФИАНИТ</option>                    	
+										<option id="arrFilter_162_1951589457" value="arrFilter_162_1951589457" data-control-name="arrFilter_162_1951589457" data-url="">ХРИЗОЛИТ</option>                    	
+										<option id="arrFilter_162_3161029607" value="arrFilter_162_3161029607" data-control-name="arrFilter_162_3161029607" data-url="">ЦИРКОН</option>                    	
+										<option id="arrFilter_162_2068325575" value="arrFilter_162_2068325575" data-control-name="arrFilter_162_2068325575" data-url="">ЦИТРИН</option>                    	
+										<option id="arrFilter_162_1840715191" value="arrFilter_162_1840715191" data-control-name="arrFilter_162_1840715191" data-url="">ШПИНЕЛЬ</option>                    	
+										<option id="arrFilter_162_2686077796" value="arrFilter_162_2686077796" data-control-name="arrFilter_162_2686077796" data-url="">ЭМАЛЬ</option>                    	
+										<option id="arrFilter_162_1757657426" value="arrFilter_162_1757657426" data-control-name="arrFilter_162_1757657426" data-url="">ЮВЕЛИРНОЕ СТЕКЛО</option>                    	
+										<option id="arrFilter_162_1375176203" value="arrFilter_162_1375176203" data-control-name="arrFilter_162_1375176203" data-url="">ЮВЕЛИРНЫЙ КРИСТАЛЛ</option>                    	
+										<option id="arrFilter_162_2981811250" value="arrFilter_162_2981811250" data-control-name="arrFilter_162_2981811250" data-url="">ЯНТАРЬ</option>                    	
+										<option id="arrFilter_162_3355311156" value="arrFilter_162_3355311156" data-control-name="arrFilter_162_3355311156" data-url="">ЯШМА</option>                    	
+									</select>
+
+									<div class="trigger">Вставка</div>
+									<ul class="options">
+										<li data-raw-value="arrFilter_162_206253272">АГАТ</li>
+										<li data-raw-value="arrFilter_162_1362845775">АКРИЛ</li>
+										<li data-raw-value="arrFilter_162_1450346919">АЛЕКСАНДРИТ</li>
+										<li data-raw-value="arrFilter_162_4153542112">АМЕТИСТ</li>
+										<li data-raw-value="arrFilter_162_2677276532">БЕЗ ВСТАВКИ</li>
+										<li data-raw-value="arrFilter_162_2080825261">БИРЮЗА</li>
+										<li data-raw-value="arrFilter_162_3936532910">БИРЮЗА СИНТЕТИЧЕСКАЯ</li>
+										<li data-raw-value="arrFilter_162_1830750550">БРИЛЛИАНТ</li>
+										<li data-raw-value="arrFilter_162_1801126437">БРИЛЛИАНТ_ЧЕРНЫЙ</li>
+										<li data-raw-value="arrFilter_162_4147626267">ГИДРОТЕРМАЛЬНЫЙ ИЗУМРУД</li>
+										<li data-raw-value="arrFilter_162_2040717060">ГОРНХРУСТАЛЬ</li>
+										<li data-raw-value="arrFilter_162_1006937024">ГРАНАТ</li>
+										<li data-raw-value="arrFilter_162_165161427">ДИФФУЗИОННЫЙ САПФИР</li>
+										<li data-raw-value="arrFilter_162_1122115849">ДК ПРОЧЕЕ</li>
+										<li data-raw-value="arrFilter_162_3561243971">ЖЕМЧУГ</li>
+										<li data-raw-value="arrFilter_162_1992524352">ЖЕМЧУГ ИСКУСТВ</li>
+										<li data-raw-value="arrFilter_162_2511072885">ИЗУМРУД</li>
+										<li data-raw-value="arrFilter_162_1018094111">ИЗУМРУД СИНТЕТИЧЕСКИЙ</li>
+										<li data-raw-value="arrFilter_162_2669338486">КВАРЦ</li>
+										<li data-raw-value="arrFilter_162_3811972302">КОРАЛЛ</li>
+										<li data-raw-value="arrFilter_162_174389348">МАРКАЗИТ</li>
+										<li data-raw-value="arrFilter_162_4073301433">МУРАНСКОЕ СТЕКЛО</li>
+										<li data-raw-value="arrFilter_162_1588451815">НАНО-ИЗУМРУД</li>
+										<li data-raw-value="arrFilter_162_3648006838">НАНО-САПФИР</li>
+										<li data-raw-value="arrFilter_162_1463646251">ОБЛАГОРОЖЕННЫЙ РУБИН</li>
+										<li data-raw-value="arrFilter_162_2533230694">ОНИКС</li>
+										<li data-raw-value="arrFilter_162_3592764019">ПДК ПРОЧИЕ</li>
+										<li data-raw-value="arrFilter_162_4272854845">ПЕРЛАМУТР</li>
+										<li data-raw-value="arrFilter_162_3804439813">ПОДЕЛ ПРОЧЕЕ</li>
+										<li data-raw-value="arrFilter_162_1772657704">РАУХ-ТОПАЗ</li>
+										<li data-raw-value="arrFilter_162_3390331633">РОДОЛИТ</li>
+										<li data-raw-value="arrFilter_162_4207882425">РУБИН</li>
+										<li data-raw-value="arrFilter_162_3350912745">САПФИР</li>
+										<li data-raw-value="arrFilter_162_1786008483">САПФИР СИНТЕТИЧЕСКИЙ</li>
+										<li data-raw-value="arrFilter_162_398271494">СВАРОВСКИ</li>
+										<li data-raw-value="arrFilter_162_4020207087">СТЕКЛО</li>
+										<li data-raw-value="arrFilter_162_3332783715">ТОПАЗ</li>
+										<li data-raw-value="arrFilter_162_679124393">ТОПАЗ ЛОНДОН</li>
+										<li data-raw-value="arrFilter_162_473987779">ФИАНИТ</li>
+										<li data-raw-value="arrFilter_162_1951589457">ХРИЗОЛИТ</li>
+										<li data-raw-value="arrFilter_162_3161029607">ЦИРКОН</li>
+										<li data-raw-value="arrFilter_162_2068325575">ЦИТРИН</li>
+										<li data-raw-value="arrFilter_162_1840715191">ШПИНЕЛЬ</li>
+										<li data-raw-value="arrFilter_162_2686077796">ЭМАЛЬ</li>
+										<li data-raw-value="arrFilter_162_1757657426">ЮВЕЛИРНОЕ СТЕКЛО</li>
+										<li data-raw-value="arrFilter_162_1375176203">ЮВЕЛИРНЫЙ КРИСТАЛЛ</li>
+										<li data-raw-value="arrFilter_162_2981811250">ЯНТАРЬ</li>
+										<li data-raw-value="arrFilter_162_3355311156">ЯШМА</li>
+									</ul>
+								</div>
+								<input type="hidden" name="" value="" id="main-insert-select_hidden">
+							</li>   
+						</form>
+					</ul>
+					
+					<a href="#" id="set_filter" class="btn">Подобрать</a>        
+				</div>
+			</div>
+
+			<!-- SHADOW -->
+			<div class="shadow-5"></div>
+
+			<!-- НОВЫЙ БЛОК -->
+			<!-- ============================================ -->
+
+			<div class="main-page__banner-container-1">
+				<div class="main-page__banner-view-1">
+					<a href="">
+						<img class="desktop-view" src="../images/main-page/temp-img/banner1-900-500.jpg">
+						<img class="mobile-view" src="../images/main-page/temp-img/banner1-599-390.jpg">	
+					</a>
+				</div>
+				
+				<div class="main-page__banner-view-1">
+					<a href="">
+						<img class="desktop-view" src="../images/main-page/temp-img/banner2-900-500.jpg">
+						<img class="mobile-view" src="../images/main-page/temp-img/banner2-599-390.jpg">
+					</a>
+				</div>
+			</div>	
+			
+			<div class="main-page__banner-container-2">
+				<div class="main-page__banner-view-2">
+					<a href="">
+						<img class="desktop-view" src="../images/main-page/temp-img/3bn_desk.jpg">
+						<img class="mobile-view" src="../images/main-page/temp-img/3bn_mob.jpg">
+					</a>
+				</div>
+			</div>	
+			
+			 <div class="main-page__banner-container-1">
+				<div class="main-page__banner-view-1">
+					<a href="">
+						<img class="desktop-view" src="../images/main-page/temp-img/banner4-900-500.jpg">
+						<img class="mobile-view" src="../images/main-page/temp-img/banner4-599-390.jpg">	
+					</a>
+				</div>
+				
+				<div class="main-page__banner-view-1">
+					<a href="">
+						<img class="desktop-view" src="../images/main-page/temp-img/banner5-900-500.jpg">
+						<img class="mobile-view" src="../images/main-page/temp-img/banner5-599-390.jpg">
+					</a>
+				</div>
+			</div>	
+					
+			<div class="clearfix"></div>
+
+
+
+			<!-- Второй слайдер -->
+			<!-- ============================================ -->
+
+			<div id="main-sl2" class="owl-carousel owl-theme index-sl index-sl__touch-hide">
+			
+				<div class="item">
+					<div class="slide">
+						<a href="http://zoloto585.ru/catalog/yuvelirnye_izdeliya/new_zoloto-s-dk/">
+							<img class="sl-desc" src="http://zoloto585.ru/upload/iblock/f30/Brillianti%20dec.jpg" alt="">
+						</a>
+					</div>
+				</div>
+				<div class="item">
+					<div class="slide">
+						<a href="http://zoloto585.ru/catalog/yuvelirnye_izdeliya/new_zoloto-s-fianitom_bez-vstavok/">
+							<img class="sl-desc" src="http://zoloto585.ru/upload/iblock/254/Fianiti%20dec.jpg" alt="">
+						</a>
+					</div>
+				</div>
+				<div class="item">
+					<div class="slide">
+						<a href="http://zoloto585.ru/catalog/yuvelirnye_izdeliya/new_serebro-925-proby/">
+							<img class="sl-desc" src="http://zoloto585.ru/upload/iblock/4a0/Serebro%20dec.jpg" alt="">
+						</a>
+					</div>
+				</div>
+						
+			</div>
+
+			<!-- SHADOW -->
+			<div class="shadow-5"></div>
+
+
+			<!-- Новостной блок -->
+			<!-- ============================================ -->
+
+			
+			<div class="banner-news">
+
+				<div class="banner-news__title">
+					Новости
+					<span>
+						ЕСЛИ ПОДАРОК ПОНРАВИЛСЯ, ЗНАЧИТ, 
+						<br>ТЫ ОТДАЛ ЧАСТЬ СВОЕЙ ДУШИ.
+					</span>	
+				</div>
+
+				<div id="banner-news" class="owl-carousel owl-theme banner-news__slider">
+
+					<div class="item">
+						<a href="">
+							<img src="../images/main-page/temp-img/banner-news-550-430.jpg">
+
+							<span>Что подарить мужчинам на 23 февраля?</span>
+						</a>
+						
+					</div>
+					<div class="item">
+						<a href="">
+							<img src="../images/main-page/temp-img/banner-news-550-430.jpg">
+							<span>Lorem ipsum dolor sit ametelit. </span>
+						</a>
+					</div>
+					<div class="item">
+						<a href="">
+							<img src="../images/main-page/temp-img/banner-news-550-430.jpg">
+							<span>Lorem ipsum dolor sit amet. </span>
+						</a>
+					</div>
+					<div class="item">
+						<a href="">
+							<img src="../images/main-page/temp-img/banner-news-550-430.jpg">
+							<span>Lorem ipsum dolor sit amet</span>
+						</a>
+					</div>
+
+				</div>	
+				
+				<div class="banner-news__info">
+					<div class="touch-hide ">
+						<div class="banner-news__info-text">
+							Сеть ювелирных магазинов 585GOLD основана в Санкт-Петербурге в 2000 году и уже более 17 лет по праву занимает лидирующую позицию на ювелирном рынке России, радуя своих покупателей качественными золотыми и серебряными украшениями, низкими ценами и постоянно действующими акционными предложениями! Ювелирный магазин 585GOLD неизменно придерживается четырех основных принципов в своей работе:
+						</div>
+						<ul class="banner-news__info-list">
+							<li>Предлагаем своим покупателям только качественные золотые и серебряные украшения, проверенные и опробированные Российской государственной пробирной палатой.</li>
+							<li>Постоянно расширяем свой ассортимент, чтобы наши клиенты могли найти то, о чем они действительно мечтали. Наш ювелирный сайт предлагает огромный выбор изделий из желтого, белого, красного золота и серебра. Ознакомиться с ассортиментом подробнее вы можете в нашем каталоге.</li>
+							<li>Заботимся о том, чтобы наши покупатели могли приобретать ювелирные украшения с максимальной выгодой. Именно поэтому у нас всегда демократичные цены, а также постоянно действуют скидки и специальные предложения на ювелирную продукцию.</li>
+							<li>Предоставляем возможность выбрать удобный способ оплаты. Кроме того, у нас можно приобрести изделия в кредит. И даже обменять украшения, которые уже вышли из моды, на новые!</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+		</main>
+
+
+		<footer class="page__footer">
+			@@include('scaff/layout__footer.html')
+		</footer>
+	</div>
+
+	@@include('scaff/layout__js-list.html')
+
+	<script>
+		$(document).ready(function() {
+			$('#banner-news').owlCarousel({
+				navigation : true,
+		        slideSpeed : 300,
+		        paginationSpeed : 400,
+		        navigationText : ["", ""],
+				items: 				3,
+
+		        itemsDesktop : [1684, 3],
+		        itemsDesktopSmall : [984, 2],
+		        //itemsTablet : [640, 2],
+		        //itemsTabletSmall : false,
+		        itemsMobile : [464, 1],
+		        
+		       // autoHeight : true,
+		        //addClassActive : true,
+		        //singleItem: 		true
+		        
+	
+		        //center: 			true,
+		        //autoWidth: 		false
+		    });
+		});
+	</script>
+</body>
+</html>
