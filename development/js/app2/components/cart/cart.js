@@ -3,6 +3,7 @@ import { mapState, mapGetters, mapMutations } from 'vuex'
 import axios from 'axios'
 import qs from 'qs'
 import store from '../../app.store'
+import Cookies from 'js-cookie'
 
 /*
 |------------------------------------------------------------------------------
@@ -335,7 +336,7 @@ const Cart = {
 				value: e.target.value
 			})
 
-			$.cookie('cart.'+ e.target.name, e.target.value)
+			Cookies.set('cart'+ e.target.name, e.target.value, { expires: 7 });
 		},
 
 		// Отправка запроса в api
@@ -343,8 +344,7 @@ const Cart = {
 			const vm = this
 
 			let data = Object.assign(options.data || {}, {
-				// Кука корзины (@TODO: переписать на нативе)
-				[vm.conf.cookieKey]: $.cookie(vm.conf.cookieKey) || ''
+				[vm.conf.cookieKey]: Cookies.get(vm.conf.cookieKey)|| ''
 			})
 
 			if (options.preloader === true) {
@@ -408,7 +408,7 @@ const Cart = {
 						sendMethod: 'post',
 						preloader: true,
 						data: {
-							phone: $.cookie('cart.cardPhone'),
+							phone: Cookies.get('cart.cardPhone'),
 							ch_code: ''
 						},
 						onResponse(response) {
@@ -788,6 +788,6 @@ const Cart = {
 	}
 }
 
-Vue.component('Cart', Cart)
+Vue.component('Cart', Cart);
 
-export default Cart
+export default Cart;
