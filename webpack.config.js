@@ -5,8 +5,16 @@ const webpack = require('webpack');
 const config = {
 	context: __dirname,
 
+	resolve: {
+		alias: {
+			masonry: 'masonry-layout',
+			isotope: 'isotope-layout'
+		},
+		modules: ['bower_components', 'node_modules']
+	},
+
 	entry: {
-		app: glob.sync([
+		app2: glob.sync([
 			'./node_modules/babel-polyfill/dist/polyfill.min.js',
 			'!./development/js/app2/*.js',
 			'./development/js/app2/components/**/*.js',
@@ -16,15 +24,14 @@ const config = {
 
 	output: {
 		path: `${__dirname}/WEBPACK_TEST`,
-		//filename: '[name].js'
-		filename: 'app2.js'
+		filename: '[name].js'
 	},
 
 	module: {
 		rules: [
 			{
 				test: /\.js$/,
-				exclude: /(node_modules(?!\/(vue-clicky))|bower_components)/,
+				//exclude: /(node_modules(?!\/(vue-clicky))|bower_components)/,
 				use: {
 					loader: 'babel-loader'
 				}
@@ -66,7 +73,7 @@ const config = {
 		new webpack.ProvidePlugin({
 			//$: 'jquery',
 			//jQuery: 'jquery',
-			Vue: 'vue/dist/vue.js'
+			//Vue: 'vue/dist/vue.js'
 		})
 	],
 

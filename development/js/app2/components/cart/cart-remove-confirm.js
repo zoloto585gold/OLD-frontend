@@ -49,6 +49,6 @@ const CartRemoveConfirm = {
 	}
 }
 
-Vue.component('CartRemoveConfirm', CartRemoveConfirm)
+Vue.component('CartRemoveConfirm', CartRemoveConfirm);
 
-export default CartRemoveConfirm
+export default CartRemoveConfirm;
