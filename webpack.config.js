@@ -1,5 +1,4 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const glob = require('glob-all');
 const webpack = require('webpack');
 
@@ -8,6 +7,7 @@ const config = {
 
 	entry: {
 		app: glob.sync([
+			'./node_modules/babel-polyfill/dist/polyfill.min.js',
 			'!./development/js/app2/*.js',
 			'./development/js/app2/components/**/*.js',
 			'./development/js/app2/*.js',
@@ -79,9 +79,14 @@ const config = {
 	}
 }
 
-if (process.env.NODE_ENV === 'build') {
+if (process.env.NODE_ENV !== 'dev') {
 	config.plugins.push(
-		new UglifyJsPlugin({})
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false,
+				drop_console: true
+			}
+		})
 	);
 }
 
