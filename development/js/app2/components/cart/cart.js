@@ -408,7 +408,7 @@ const Cart = {
 						sendMethod: 'post',
 						preloader: true,
 						data: {
-							phone: Cookies.get('cart.cardPhone'),
+							phone: Cookies.get('cartcardPhone'),
 							ch_code: ''
 						},
 						onResponse(response) {
