@@ -665,7 +665,7 @@ const Cart = {
 					ecommerce: {
 						purchase: {
 							actionField: {
-								id: orderid,
+								id: vm.data.orders.order_create[orderid],
 								revenue: items.reduce((sum, item) => 
 									sum + (+item.total_price
 										.replace(/\..?$/, '')
