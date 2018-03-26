@@ -371,6 +371,8 @@ fieldset.select_type_content{
 	text-align: left;
 	position: absolute;
 	top:0;
+	height: 	auto;
+	z-index: 10;
 }
 .content_pagination .wrp {
 	position: relative;
@@ -1651,6 +1653,12 @@ fieldset.select_type_content{
 
 	.filter-section-1 .filter-section__block{
 		height: 180px;
+	}
+
+	@media @touch {
+		.filter-product_typedesign-properties{
+			width: 100%;
+		}
 	}
 
 }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	@@include('scaff/layout__meta-tags.html')
+	@@include('scaff/layout__css-list.html')
+
+
+	<title>Title your page</title>
+
+
+	<!-- здесь подключай свои стили -->
+	<!-- НАПРИМЕР: <link rel="stylesheet" href="css/catalog.min.css"> -->
+</head>
+<body>
+	<div class="page">
+		<header class="page__header">
+			@@include('scaff/layout__header.html')
+		</header>
+
+
+		<main>
+			<section class="content">
+				<div class="wrp clearfix">
+					<h1>Новости</h1>
+					<article class="news_detail">
+
+						<div class="detail_img">
+							<img src="https://zoloto585.ru/upload/iblock/b74/tumen%20mel.jpg" width="1000" height="333" alt="Beauty Days в Тюмени на Мельникайте,64!" title="Beauty Days в Тюмени на Мельникайте,64!">
+						</div>
+						
+						<span class="date">05.03.2018</span>
+						
+						<h3 class="name">Beauty Days в Тюмени на Мельникайте,64!</h3>
+						
+						<div class="detail_text text_page"><p>
+							Приходите&nbsp;7 марта&nbsp;в магазин&nbsp;Ювелирной сети 585GOLD по адресу: Мельникайте. 64, совершите покупку на сумму не менее 4500 рублей и получите в подарок весеннюю экспресс-укладку волос (локоны или коса) от профессионального стилиста.
+						</p>
+						<p>
+							Побалуйте себя красивыми украшениями и приятной beauty-услугой от&nbsp;<b><u><a target="_blank" href="http://vk.com/besthaircuts72">Салона Красоты "МУСКАРИ"</a></u></b>.
+						</p>
+						<p>
+							Ждём Вас!
+						</p></div>
+						
+						<a href="/news/" class="more"></a>
+					</article>
+				</div>
+			</section>
+		</main>
+
+
+		<footer class="page__footer">
+			@@include('scaff/layout__footer.html')
+		</footer>
+	</div>
+
+	@@include('scaff/layout__js-list.html')
+</body>
+</html>

@@ -16,7 +16,11 @@
 			preloader: false, // показывать прелоадер
 			hideAfterFire: true, // скрыть после события
 			destroyAfterFire: true, // удалить после события
+			bottomImage: 'none', // адрес картинки
+			popupType: 'standard', // тип попапа, другие типы: info
 			buttons: [ 'close', 'confirm', 'decline' ], // добавить кнопки
+			timer: 0,
+			dataSapConfirm: '', // параметры для кнопки OK
 			fires: { // события
 				append:  function () {}, // добавление в дом
 				close:   function () {}, // закрыть
@@ -40,7 +44,7 @@
 			wrapper:    $('<div class="' + self.options.cssPrefix +'wrap '+ self.options.cssExtra+'" data-wait="0"/>'),
 			header:     $('<h2 class="'  + self.options.cssPrefix +'header"/>'),
 			info:       $('<p class="'   + self.options.cssPrefix +'info"/>'),
-			confirm:    $('<button class="' + self.options.cssPrefix +'button" data-fire="confirm">'+ self.options.htmlConfirm +'</button>'),
+			confirm:    $('<button class="' + self.options.cssPrefix +'button" data-fire="confirm" data-sap="'+self.options.dataSapConfirm+'">'+ self.options.htmlConfirm +'</button>'),
 			decline:    $('<button class="' + self.options.cssPrefix +'button" data-fire="decline">'+ self.options.htmlDecline +'</button>'),
 			close:      $('<button class="' + self.options.cssPrefix +'close-but" data-fire="close"/>'),
 		};
@@ -96,6 +100,40 @@
 			self.elements.overlay,
 			self.elements.wrapper
 		);
+
+		// добавление картинки
+
+		if ( self.options.bottomImage != 'none' ) {
+			$('.'+self.options.cssPrefix+'wrap').append(
+				'<img class="'+self.options.cssPrefix+'bottom-image" src="'+self.options.bottomImage+'">'
+			);	
+		}
+
+		// установка типа
+
+		if ( self.options.popupType != 'standard' ) {
+			if ( self.options.popupType == 'info' )
+			$('.'+self.options.cssPrefix+'wrap').addClass('modal__type-info');	
+		}
+
+		// проверка таймера 
+
+		if ( self.options.timer != 0 ) {
+			var timer = self.options.timer;
+
+			$('.'+self.options.cssPrefix+'wrap').append('<p class="timer">Окно закроется через '+timer+' секунд</p>');
+					var t = setInterval(function(){
+						if ( timer != 0 ) {
+							$('.timer').html('Окно закроется через '+timer+' секунд');
+							timer--;
+						} else {
+							self.hide();
+							clearTimeout(t);
+						}
+					}, 1000);
+			
+		}
+
 
 		if (self.fires.append instanceof Function) {
 			self.fires.append();

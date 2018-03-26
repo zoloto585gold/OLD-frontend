@@ -18,7 +18,7 @@
 			<div class="section__inner">
 
 				<!-- opacity временно -->
-				<div class="modal-popup" style="opacity: 1;">
+				<!-- <div class="modal-city-popup" style="opacity: 1;">
 					<div class="close-but"></div>
 					<div class="message">
 						Ваш город <br>
@@ -28,7 +28,7 @@
 						<button class="b-button b-white">Выбрать другой</button>
 						<button class="b-button">Да, верно</button>	
 					</div>
-				</div>
+				</div> -->
 				
 			</div>
 		</div>
@@ -49,5 +49,11 @@
 	</div>
 
 	@@include('scaff/layout__js-list.html')
+
+	<script>
+		$(document).ready(function(){
+			Z585.cityPopup.generatePopup();	
+		});
+	</script>
 </body>
 </html>

@@ -286,7 +286,7 @@
 			display: 	block;
 			float: 		left;
 			width: 		50%;
-			height: 	300px;
+			//height: 	300px;
 			overflow: 	hidden;
 
 			@media @touch{
@@ -317,7 +317,7 @@
 
 			.form__field {
 				width: 300px;
-				margin: 0px auto 32px;
+				margin: 0px auto 28px;
 				position: relative;
 
 				@media @tablet-under {
@@ -351,6 +351,7 @@
 					}
 				}
 
+
 				&-input{
 					border-radius: 3px;
 					border: none;
@@ -364,11 +365,25 @@
 					}
 				}
 
-				&.numbers {
+				&.numbers,
+				&.account {
 
 					input {
 						font: 24px 'Circe-Light';
 						color: #333;
+						text-transform: none;
+					}
+				}
+
+				&.account {
+					top:  5px;
+					label {
+						font: 10px/12px 'Circe';
+						color: #333;
+						text-transform: uppercase;
+						position: relative;
+						top: -28px;
+						height: 	auto;
 					}
 				}
 
@@ -499,10 +514,10 @@
 					> div{
 						display: none;
 						position: absolute;
-						top: 0;
-						left: 0;
-						transform: translate(-102%, -8%);
-						box-shadow: 0 0 10px -5px #000;
+						top: -5px;
+						left: -295px;
+						//transform: translate(-110%, 0%);
+						box-shadow: 0 0 10px -3px #000;
 					}
 
 					&:hover > div{

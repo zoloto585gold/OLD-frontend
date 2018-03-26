@@ -422,7 +422,7 @@ gulp.task('watch', () => {
 	gulp.watch('development/js/legacy/*.js', [ 'js:legacy' ] );
 	gulp.watch('development/js/libs/**/*.js', [ 'js:libs' ] );
 	gulp.watch('development/js/app/*.js', [ 'js:app' ] );
-	gulp.watch('development/js/app2/**/*.js', [ 'js:vue' ] );
+	gulp.watch([ 'development/js/app2/**/*.js', 'development/js/app2/**/*.tpl' ], [ 'js:vue' ] );
 	gulp.watch('development/js/pages/**/*.js', [ 'js:pages' ] );
 	gulp.watch('development/js/views/*.js', [ 'js:views' ] );
 

@@ -52,4 +52,46 @@
 @mobile-album: ~'screen and (min-width: @{mobile_a-min}) and (max-width: @{mobile_a-max})';
 @mobile-portrait: ~'screen and (max-width: @{mobile_p-max})';
 
+// hide \ show responsive
 
+
+	.desktop-show, 
+	.desktop-hide,
+	.touch-show, 
+	.touch-hide, 	
+	.tablet-show, 
+	.tablet-hide, 
+	.tablet-under-show, 
+	.tablet-under-hide,
+	.mobile-show, 
+	.mobile-hide {
+		//display: none;		
+	}
+
+
+@media @desktop {
+	
+	.desktop-hide { display: none; }
+	.desktop-show { display: block; }
+}
+
+@media @touch {
+	
+	.touch-hide { display: none; }	
+	.touch-show { display: block; }
+}
+
+@media @tablet {
+	.tablet-hide { display: none; }
+	.tablet-show { display: block; }
+}
+
+@media @tablet-under {
+	.tablet-under-hide { display: none; }
+	.tablet-under-show { display: block; }
+}
+
+@media @mobile {
+	.mobile-hide { display: none; }
+	.mobile-show { display: block; }
+}

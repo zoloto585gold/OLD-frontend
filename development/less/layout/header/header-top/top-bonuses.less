@@ -16,7 +16,7 @@
 
 		text-decoration: none;
 		text-transform: uppercase;
-		.font-circe_light(11px, 47px, #fff);
+		.font-circe_light(11px, 45px, #fff);
 
 		cursor: pointer;
 
@@ -98,7 +98,7 @@
 /*
 	DESKTOP
 */
-@media screen and (min-width: @desktop-min) {
+@media @desktop {
 	.top-bonuses {
 
 		&:hover{
@@ -123,8 +123,23 @@
 /*
 	TOUCH
 */
+@media @touch {
+	.top-bonuses {
+		
+		&__button {
+
+			line-height: 45px;
+		
+			&:before {
+				
+				margin-top: 	-11px;
+			}
+		}
+	}	
+}
+
 /*@mobile Portrait*/
-@media screen and (max-width: @mobile_p-max) {
+@media @mobile-portrait {
 
 	.top-bonuses {
 		width: 16.6%;
@@ -132,7 +147,7 @@
 		text-align: center;
 
 		&__button {
-			height: 44px;
+			//height: 44px;
 			width: 47px;
 			font-size: 0;
 			padding: 0;

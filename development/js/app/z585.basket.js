@@ -54,6 +54,8 @@
 	basket.pageInit = function () {
 		var self = this;
 
+		return true;
+
 		self.load('view', {
 			name: 'content',
 			reLoad: false,
@@ -89,7 +91,7 @@
 			}
 			*/
 
-			window.location = document.referrer || '/catalog';
+			window.location = document.referrer || '/catalog/yuvelirnye_izdeliya/';
 		});
 
 		// Очистить корзину
@@ -191,11 +193,14 @@
 
 			var $item = $(this).closest('[data-el=item]');
 			var uuid = $(this).data('uuid');
+			var sap = $(this).data('sap');
 			var confirm = new Z585.modal.instance({
 				htmlHeader: 'Удалить товар?',
 				htmlInfo: 'Вы уверены, что хотите удалить товар из корзины?',
 				htmlConfirm: 'ОК',
 				htmlDecline: 'Отмена',
+				dataSapConfirm: sap,
+
 				fires: {
 					confirm: function (elements) {
 						self.requestAPI('remove', {

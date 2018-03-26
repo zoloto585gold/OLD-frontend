@@ -113,7 +113,7 @@ if (typeof Object.create !== "function") {
             }
             base.play();
 
-            base.$elem.find(".owl-wrapper").css("display", "block");
+            //base.$elem.find(".owl-wrapper").css("display", "block");
 
             if (!base.$elem.is(":visible")) {
                 base.watchVisibility();
@@ -190,7 +190,7 @@ if (typeof Object.create !== "function") {
             base.$userItems.wrapAll("<div class=\"owl-wrapper\">").wrap("<div class=\"owl-item\"></div>");
             base.$elem.find(".owl-wrapper").wrap("<div class=\"owl-wrapper-outer\">");
             base.wrapperOuter = base.$elem.find(".owl-wrapper-outer");
-            base.$elem.css("display", "block");
+            //base.$elem.css("display", "block");
         },
 
         baseClass : function () {
