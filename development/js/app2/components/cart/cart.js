@@ -345,7 +345,7 @@ const Cart = {
 				value: e.target.value
 			})
 
-			Cookies.set('cart'+ e.target.name, e.target.value, { expires: 7 });
+			Cookies.set('cart.'+ e.target.name, e.target.value, { expires: 7 });
 		},
 
 		// Отправка запроса в api
@@ -417,7 +417,7 @@ const Cart = {
 						sendMethod: 'post',
 						preloader: true,
 						data: {
-							phone: Cookies.get('cartcardPhone'),
+							phone: Cookies.get('cart.cardPhone'),
 							ch_code: ''
 						},
 						onResponse(response) {
