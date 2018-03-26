@@ -66,10 +66,19 @@ store.registerModule('Cart', {
 		},
 
 		discount(state) {
-			let wholePrice = +state.data.whole_price.replace(/\D/g, '')
-			let totalPrice = +state.data.total_price.replace(/\D/g, '')
+			const totalSum = state.data.items.reduce((sum, item) => 
+				sum + (+item.discount_price
+					.replace(/\..?$/, '')
+					.replace(/\D/g, '')
+				), 0)
 
-			return wholePrice - totalPrice
+			const totalSumBc = state.data.items.reduce((sum, item) => 
+				sum + (+item.price_bc
+					.replace(/\..?$/, '')
+					.replace(/\D/g, '')
+				), 0)
+
+			return totalSum - totalSumBc
 		},
 
 		city: state => state.data.city || state.conf.city,
