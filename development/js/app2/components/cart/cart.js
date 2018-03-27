@@ -512,7 +512,7 @@ const Cart = {
 		// Применение бонусной карты
 		applyBonusCard($event) {
 			const vm = this
-			let phone = vm.inputs.cardPhone
+			let phone = Cookies.get('cart.cardPhone')
 				.replace(/\D/g, '')
 				.substring(1)
 

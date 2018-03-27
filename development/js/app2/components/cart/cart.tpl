@@ -283,6 +283,11 @@
 				Оформить заказ
 			</button>
 		</div>
+
+		<div class="cart-bonus-success" v-if="footTab == 'noCard'">
+			<div class="cart-bonus-success__title">Благодарим вас за регистрацию <br>в бонусной программе лояльности.</div>
+			<div class="cart-bonus-success__num">Ваша новая карта: <span>0</span></div>
+		</div>
 	</div>
 
 	<div class="confirmation-order-wrapper">
