@@ -263,7 +263,7 @@ const CartShops = {
 							vm.map.setCenter(obj.geometry.getCoordinates(), 16)
 							vm.$store.commit('CartShops/setShopid', obj.properties.get('shopid'))
 
-							obj.balloon.close()
+							obj.balloon.open()
 						});
 
 						// Переходим к выбранному магазину, открываем баллун, центрируем
@@ -310,8 +310,23 @@ const CartShops = {
 		},
 
 		shopid(val) {
+			const vm = this
+
 			if (this.activeTab != 'all') {
 				this.$store.commit('CartShops/setTab', 'map')
+
+				const checkApiLoaded = setInterval(() => {
+					if (typeof this.map !== 'undefined') {
+						vm.placemarks.forEach((e) => {
+							if (val == e.properties.get('shopid')) {
+								vm.map.setCenter(e.properties.get('coords'), 16)
+								e.balloon.open()
+							}
+						});
+						
+						clearInterval(checkApiLoaded)
+					}
+				}, 100)
 			}
 		}
 	}
