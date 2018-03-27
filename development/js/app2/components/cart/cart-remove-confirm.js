@@ -35,10 +35,15 @@ const CartRemoveConfirm = {
 
 	props: [],
 
+	computed: {
+		...mapGetters('Cart', ['selectedItem']),
+	},
+
 	methods: {
 		...mapMutations('Cart', [
 			'setRemoveIndex'
 		]),
+
 		close(remove) {
 			if (remove === true) {
 				this.$store.commit('Cart/setRemoveIndex')
