@@ -26,11 +26,31 @@ store.registerModule('CartShops', {
 		}
 	},
 
-	getters: {},
+	getters: {
+		selectedShop(state, getters, rootState, rootGetters) {
+			let selectedItem = rootGetters['Cart/selectedItem']
+			let itemShops = rootGetters['Cart/itemShops']
+			let shopid = selectedItem ? selectedItem.shopid : 0
+
+			if (
+				typeof itemShops === 'undefined' || 
+				itemShops.length == 0 || 
+				shopid == 0
+			) {
+				return false
+			}
+
+			return itemShops.filter(shop => shop.xml_id == shopid)[0]
+		}
+	},
 
 	mutations: {
-		setShopid(state, shopid) {
-			state.shopid = shopid
+		setPlacemarks(state, payload) {
+			state.placemarks = payload
+		},
+
+		setShopid(state, payload) {
+			state.shopid = payload
 		},
 
 		setTab(state, payload) {
@@ -65,30 +85,15 @@ const CartShops = {
 	},
 
 	computed: {
-		...mapGetters('Cart', ['selectedItem', 'city']),
-		...mapState('Cart', ['data', 'shops']),
+		...mapState('Cart', ['data', 'shops', 'stock']),
 		...mapState('CartShops', ['shopid', 'placemarks', 'activeTab']),
-
-		itemShops(state) {
-			let itemid = +state.selectedItem.itemid
-
-			return state.shops[itemid]
-		},
-
-		selectedShop(state) {
-			let shopid = +state.selectedItem.shopid
-
-			if (shopid == 0) {
-				return false
-			}
-
-			return state.itemShops.filter(shop => shop.xml_id == shopid)[0]
-		}
+		...mapGetters('Cart', ['selectedItem', 'itemShops', 'city']),
+		...mapGetters('CartShops', ['selectedShop']),
 	},
 
 	mounted() {
 		const vm = this
-		var event = document.createEvent('Event');
+		let event = document.createEvent('Event');
 
 		window.addEventListener('resize', () => {
 			const tab = window.screen.width >= 768 ? 'all' : 'shopList'
@@ -102,7 +107,7 @@ const CartShops = {
 
 	methods: {
 		...mapMutations('Cart', ['setShopid']),
-		...mapMutations('CartShops', ['setShopid', 'setTab']),
+		...mapMutations('CartShops', ['setPlacemarks', 'setShopid', 'setTab']),
 
 		close(selected) {
 			this.$modal.hide('cart-shops')
@@ -110,6 +115,11 @@ const CartShops = {
 
 		opened(events) {
 			const vm = this
+
+			if (!vm.itemShops.length) {
+				return false
+			}
+
 			let curShop = vm.selectedShop
 			let coords = vm.center
 
@@ -122,6 +132,8 @@ const CartShops = {
 			}
 
 			coords = [ curShop.shopLat, curShop.shopLon ];
+
+			vm.$store.commit('CartShops/setPlacemarks', [])
 
 			const checkApiLoaded = setInterval(() => {
 				if (typeof ymaps !== 'undefined') {
@@ -197,7 +209,7 @@ const CartShops = {
 						let placemarkCollection = new ymaps.GeoObjectCollection()
 
 						vm.itemShops.forEach((shop, index) => {
-							let coords = [ shop.shopLat, shop.shopLon ];
+							let coords = [ shop.shopLat, shop.shopLon ]
 
 							vm.placemarks[index] = new ymaps.Placemark(coords,
 								{
@@ -293,6 +305,13 @@ const CartShops = {
 					e.balloon.open()
 				}
 			});
+		},
+
+		removeItem() {
+			const vm = this
+
+			vm.$modal.hide('cart-shops')
+			vm.$modal.show('remove-confirm')
 		}
 	},
 
