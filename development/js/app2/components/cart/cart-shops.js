@@ -212,7 +212,8 @@ const CartShops = {
 									iconImageSize: [33, 44],
 									iconImageClipRect: [[99, 393], [132, 437]],
 									hideIconOnBalloonOpen: false,
-									balloonOffset: [0, -100]
+									balloonOffset: [0, -100],
+									balloonPanelMaxMapArea: 0,
 								}
 							)
 
