@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	@@include('scaff/layout__meta-tags.html')
+	@@include('scaff/layout__css-list.html')
+
+
+	<title>Title your page</title>
+
+
+	<!-- здесь подключай свои стили -->
+	<!-- НАПРИМЕР: <link rel="stylesheet" href="css/catalog.min.css"> -->
+</head>
+<body>
+	<div class="page">
+		<header class="page__header">
+			@@include('scaff/layout__header.html')
+		</header>
+
+			<div style="height: 500px;"></div>
+
+			<div id="wdr2_add_wrapper_1" class="wdr2-add-wrapper" style="" data-wrap="">
+				<div class="wdr2-add / wdr2-add--1">
+					<div class="wdr2-add__header">
+						<span data-title="">Оставить отзыв об изделии</span>
+
+						<button class="wdr2-add__close-btn" data-close="">X</button>
+					</div>
+
+					<div class="wdr2-add__content">
+
+						<form name="wdr2_add_form_1" class="wdr2-form-reviews" id="wdr2_add_form_1" target="wdr2_add_iframe_1" action="/bitrix/tools/wd_reviews2.php?action=save&amp;interface=1&amp;target=E_13859343&amp;anticache=465050797" enctype="multipart/form-data" method="post">
+
+							<div class="wdr2-add__content-img" data-img="" style="background-image: url(&quot;/upload/iblock/919/919c5e265675d760bb379afde351b092/4100067504.jpg&quot;);"></div>
+
+							<div class="wdr2-add__ratings">
+								<div class="wdr2-add__ratings-item">
+									<div class="wdr2-add__ratings-label">Цена</div>
+									<div class="wdr2-add__ratings-value">
+										<div id="wd_reviews2_rating_0309ca9b693a64419e0bd2f2dcc667aa" class="wd_reviews2_rating" style="white-space: nowrap; cursor: pointer;"><img alt="1" src="/upload/webdebug.reviews/1/star/active.png" title=""><img alt="2" src="/upload/webdebug.reviews/1/star/inactive.png" title=""><img alt="3" src="/upload/webdebug.reviews/1/star/inactive.png" title=""><img alt="4" src="/upload/webdebug.reviews/1/star/inactive.png" title=""><img alt="5" src="/upload/webdebug.reviews/1/star/inactive.png" title=""><input name="review[RATINGS][1]" type="hidden" value="1"></div>
+
+										<script>//<![CDATA[
+											$('#wd_reviews2_rating_0309ca9b693a64419e0bd2f2dcc667aa').raty({number:5,score: 1,starOff:'inactive.png',starOn:'active.png',precision:false,space:false,scoreName:'review[RATINGS][1]',hints:['','','','',''],path:'/upload/webdebug.reviews/1/star'});
+											//]]>
+												
+										</script>
+									</div>
+								</div>
+							
+								<div class="wdr2-add__ratings-item">
+									<div class="wdr2-add__ratings-label">Дизайн</div>
+									<div class="wdr2-add__ratings-value">
+										<div id="wd_reviews2_rating_e80790c655037d692de1017fa4b27a32" class="wd_reviews2_rating" style="white-space: nowrap; cursor: pointer;"><img alt="1" src="/upload/webdebug.reviews/1/star/active.png" title=""><img alt="2" src="/upload/webdebug.reviews/1/star/inactive.png" title=""><img alt="3" src="/upload/webdebug.reviews/1/star/inactive.png" title=""><img alt="4" src="/upload/webdebug.reviews/1/star/inactive.png" title=""><img alt="5" src="/upload/webdebug.reviews/1/star/inactive.png" title=""><input name="review[RATINGS][2]" type="hidden" value="1"></div>
+
+										<script>//<![CDATA[
+											$('#wd_reviews2_rating_e80790c655037d692de1017fa4b27a32').raty({number:5,score: 1,starOff:'inactive.png',starOn:'active.png',precision:false,space:false,scoreName:'review[RATINGS][2]',hints:['','','','',''],path:'/upload/webdebug.reviews/1/star'});
+											//]]>
+												
+										</script>
+									</div>
+								</div>
+								
+								<div class="wdr2-add__ratings-item">
+									<div class="wdr2-add__ratings-label">Качество</div>
+									<div class="wdr2-add__ratings-value">
+										<div id="wd_reviews2_rating_bd8db90cda07482eeaeb36756df19b55" class="wd_reviews2_rating" style="white-space: nowrap; cursor: pointer;"><img alt="1" src="/upload/webdebug.reviews/1/star/active.png" title=""><img alt="2" src="/upload/webdebug.reviews/1/star/inactive.png" title=""><img alt="3" src="/upload/webdebug.reviews/1/star/inactive.png" title=""><img alt="4" src="/upload/webdebug.reviews/1/star/inactive.png" title=""><img alt="5" src="/upload/webdebug.reviews/1/star/inactive.png" title=""><input name="review[RATINGS][3]" type="hidden" value="1"></div>
+
+										<script>//<![CDATA[
+											$('#wd_reviews2_rating_bd8db90cda07482eeaeb36756df19b55').raty({number:5,score: 1,starOff:'inactive.png',starOn:'active.png',precision:false,space:false,scoreName:'review[RATINGS][3]',hints:['','','','',''],path:'/upload/webdebug.reviews/1/star'});
+											//]]>
+												
+										</script>
+									</div>
+								</div>
+							
+							</div>
+
+							<a href="/upload/rules.pdf" class="wdr2-add__rules-link" target="_blank">Смотреть правила отправки отзывов &gt;</a>
+
+							<div class="wrd2-add__fields">
+
+								<div class="wrd2-add__fields-item / wrd2-add__fields-item--name" data-item="">
+									
+									<input type="text" name="review[FIELDS][NAME]" value="" id="wdr2_ujnvsq" placeholder="Ваше имя">
+								</div>
+
+								<div class="wrd2-add__fields-item / wrd2-add__fields-item--email" data-item="">
+									<div class="wrd2-add__fields-required" data-required="">Поле не заполнено</div>
+									
+									<input type="text" name="review[FIELDS][EMAIL]" value="" id="wdr2_notlz6" placeholder="Введите email" data-tip="Адрес не будет виден другим посетителям."><div class="wrd2-add__fields-tip">Адрес не будет виден другим посетителям.</div>
+								</div>
+
+								<div class="wrd2-add__fields-item / wrd2-add__fields-item--reviews" data-item="">
+									<div class="wrd2-add__fields-required" data-required="">Поле не заполнено</div>
+									
+									<textarea name="review[FIELDS][REVIEWS]" style="overflow:auto; resize:vertical; " id="wdr2_2t0fs6" placeholder="Введите ваше сообщение"></textarea>
+								</div>
+							</div>
+
+							<div class="wrd2-add__errors" data-errors=""></div>
+
+							<div class="wrd2-add__submit">
+								<input type="submit" value="Отправить свой отзыв">
+							</div>
+
+							<input type="hidden" name="wdr2_interface" value="1">
+							<input type="hidden" name="wdr2_target" value="E_13859343">
+							<input type="hidden" name="wdr2_form" value="1">
+							<input type="hidden" name="wdr2_field" value="review">
+							<input type="hidden" name="wdr2_site" value="s1">
+							<input type="hidden" class="wdr2_url_input" name="wdr2_url" value="/catalog/yuvelirnye_izdeliya/kolca/13859343/">
+							<input type="hidden" name="wd_reviews2_review_sessid" id="wd_reviews2_review_sessid" value="">
+						</form>
+						<div class="wrd2-add__result" data-result=""></div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<div style="height: 500px;"></div>
+
+			
+
+
+			<footer class="page__footer">
+				@@include('scaff/layout__footer.html')
+			</footer>
+		</div>
+
+	@@include('scaff/layout__js-list.html')
+</body>
+</html>
