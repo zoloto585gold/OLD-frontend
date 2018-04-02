@@ -45,7 +45,8 @@
 				@click.prevent="showModal('cart-shops', index)"
 			>
 				Изменить магазин
-			</a>
+			</a><br>
+			<span class="cart-item__notavailable" v-if="!available">Не достаточно товара в магазине</span>
 		</div>
 		<div v-else class="cart-item__city">
 			<span>ваш город: {{ city }}</span>

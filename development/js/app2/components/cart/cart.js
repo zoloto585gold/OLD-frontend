@@ -26,6 +26,7 @@ store.registerModule('Cart', {
 				items: []
 			},
 			shops: {},
+			stock: [],
 			removeIndex: -1,
 			itemIndex: -1,
 			shopid: 0,
@@ -65,6 +66,29 @@ store.registerModule('Cart', {
 			return {}
 		},
 
+		itemShops(state, getters) {	
+			if (!getters.selectedItem) {
+				return []
+			}
+
+			let shopid = getters.selectedItem.shopid
+			let itemid = getters.selectedItem.itemid
+			let stock  = state.stock[shopid]
+			let shops  = state.shops[itemid]
+
+			if (typeof shops !== 'undefined' && shopid != 0) {
+				// магазины с не пустым складом и выбранный
+				shops = shops.filter(shop => state.stock[shop.xml_id] > 0 || shop.xml_id == shopid)
+			}
+
+			if (getters.selectedItem.available === false && shopid != 0) {
+				// исключаем выбранный магазин с пустым складом
+				shops = shops.filter(shop => shop.xml_id != shopid)
+			}
+
+			return shops
+		},
+
 		discount(state) {
 			const totalSum = state.data.items.reduce((sum, item) => 
 				sum + (+item.discount_price
@@ -80,6 +104,8 @@ store.registerModule('Cart', {
 
 			return totalSum - totalSumBc
 		},
+
+		deficiency: state => Object.values(state.stock).filter(amount => amount < 0).length > 0,
 
 		city: state => state.data.city || state.conf.city,
 
@@ -139,6 +165,9 @@ store.registerModule('Cart', {
 					// Показывать прелоадер магазина
 					shop_loading: false,
 
+					// Доступность на складе
+					available: true,
+
 					// Размер, если в нем нет грамм
 					sanitized_size: /^.+\s+.+$/.test(item.size) ?
 						false : parseFloat(item.size),
@@ -153,12 +182,8 @@ store.registerModule('Cart', {
 			Vue.set(state, 'data', data)
 		},
 
-		setShops(state, shops) {
-			Vue.set(state, 'shops', shops)
-		},
-
-		setShop(state, payload) {
-			state.shops[payload.itemid] = payload.shops
+		setShops(state, payload) {
+			Vue.set(state, 'shops', payload)
 		},
 
 		setShopid(state, payload) {
@@ -233,7 +258,37 @@ store.registerModule('Cart', {
 
 		setCouponError(state, payload) {
 			state.couponError = payload
-		}
+		},
+
+		// Проходим по всем продуктом с выбранным магазином и считаем остаток
+		calcStock(state) {
+			// Делаем из магазинов объект склада { xml_id: amount, ... }
+			let stock = Object.keys(state.shops)
+				.map(itemid => state.shops[itemid]).flatten()
+				.reduce((result, shop) => {
+					result[shop.xml_id] = shop.amount
+					return result
+				}, {})
+
+			Vue.set(state, 'stock', stock)
+
+			state.data.items.filter(item => item.shopid != 0).forEach(item => {
+				state.stock[item.shopid]--
+			})
+
+			state.data.items.forEach(item => {
+				item.available = true
+			})
+
+			for(let shopid in state.stock) {
+				let amount = +state.stock[shopid]
+				let items = state.data.items.filter(item => item.shopid == shopid)
+
+				if (items && amount < 0) {
+					items[items.length-1].available = false
+				}
+			}
+		},
 	}
 })
 
@@ -270,6 +325,7 @@ const Cart = {
 		this.setConf(this.initialConf)
 		this.setData(this.initialData)
 		this.setShops(this.initialShops)
+		this.calcStock()
 	},
 
 	mounted() {},
@@ -299,6 +355,7 @@ const Cart = {
 			'items',
 			'city',
 			'discount',
+			'deficiency',
 			'selectedItem',
 			'itemsCount',
 			'bonusCard',
@@ -336,6 +393,7 @@ const Cart = {
 			'decrementSmsCountdown',
 			'setBonusError',
 			'setCouponError',
+			'calcStock',
 		]),
 
 		// Мутация полей
@@ -371,9 +429,7 @@ const Cart = {
 				vm.$store.commit('App/setPreloader', false)
 	
 				if (response.data.response.error) {
-					console.log(response.data.response.error)
-					alert('Возникла ошибка!')
-					return
+					throw new Error(response.data.response.error)
 				}
 
 				if (response.data.items && options.refresh !== false) {
@@ -409,37 +465,88 @@ const Cart = {
 			const vm = this
 
 			if (vm.itemsForgetShop) {
-				vm.$modal.show('forget-shops')
-			} else {
-				if (vm.bonusCardCheck) {
-					vm.sendRequest({
-						apiMethod: 'checkout',
-						sendMethod: 'post',
-						preloader: true,
-						data: {
-							phone: Cookies.get('cart.cardPhone'),
-							ch_code: ''
-						},
-						onResponse(response) {
-							if (!response.error) {
-								// Очистка корзины
-								vm.sendRequest({
-									apiMethod: 'setcity',
-									refresh: false,
-									data: {
-										city: vm.city
-									}
-								})
-
-								// Аналитика
-								vm.setDataLayer()
-							}
-						}
-					})
-				} else {
-					vm.$store.commit('Cart/setConfirmForm', true)
-				}
+				// Есть не выбранные магазины, предупреждение
+				return vm.$modal.show('forget-shops')
 			}
+
+			vm.$store.commit('App/setPreloader', true)
+
+			let promise = new Promise((resolve, reject) => {
+				let data = {
+					items: vm.data.items.map(item => item.itemid)
+				}
+
+				// Обновляем список магазинов
+				axios
+					.post('ajax/shops.php', qs.stringify(data))
+					.then(response => {
+						resolve(response.data)
+					})
+					.catch(error => {
+						reject(new Error(error))
+					})
+			})
+			
+			promise
+				.then(
+					shops => {
+						return new Promise((resolve, reject) => {
+							// Пересчитываем склад
+							vm.$store.commit('Cart/setShops', shops)
+							vm.$store.commit('Cart/calcStock')
+
+							if (vm.deficiency) {
+								reject(new Error('Не достаточно товара на складе'))
+							} else {
+								resolve(true)
+							}
+						})
+					},
+					error => {
+						alert('Возникла ошибка при пересчете товаров!')
+						console.log(error)
+					}
+				)
+				.then(
+					result => {
+						// Все товары в наличии
+						// Отправляем сразу если есть БК или показываем форму
+						if (vm.bonusCardCheck) {
+							vm.sendRequest({
+								apiMethod: 'checkout',
+								sendMethod: 'post',
+								preloader: true,
+								data: {
+									phone: Cookies.get('cart.cardPhone'),
+									ch_code: ''
+								},
+								onResponse(response) {
+									if (!response.error) {
+										// Очистка корзины
+										vm.sendRequest({
+											apiMethod: 'setcity',
+											refresh: false,
+											data: {
+												city: vm.city
+											}
+										})
+		
+										// Аналитика
+										vm.setDataLayer()
+									}
+								}
+							})
+						} else {
+							vm.$store.commit('Cart/setConfirmForm', true)
+							vm.$store.commit('App/setPreloader', false)
+						}
+					},
+					error => {
+						// В каком-то магазине нет в наличии, предупреждение
+						vm.$modal.show('shop-notavailable')
+						vm.$store.commit('App/setPreloader', false)
+					}
+				)
 		},
 
 		// Отправка смс, запуск таймера на кнопке
@@ -500,7 +607,7 @@ const Cart = {
 							}
 						})
 
-                        axios.get('/basket/ajax/unomi.php?phone='+ vm.inputs.smsPhone)
+                        axios.get('ajax/unomi.php?phone='+ vm.inputs.smsPhone)
 					}
 
 					// Аналитика
@@ -547,14 +654,18 @@ const Cart = {
 							onResponse() {
 								if (vm.bonusCardCheck) {
 									// Если карта прошла убираем таб с формой
-									vm.$store.commit('Cart/setFootTab', '');
-                                    axios.get('/basket/ajax/unomi.php?phone='+ phone);
+									vm.$store.commit('Cart/setFootTab', '')
 
-                                    window.dataLayer = window.dataLayer || [];
-                                    dataLayer.push(
-                                        { 'event': 'UA event', 'eventCategory': 'Basket', 'eventAction': 'Применил БК', 'eventLabel': undefined }
-                                    );
-                                }
+									axios.get('ajax/unomi.php?phone='+ phone)
+									
+									window.dataLayer = window.dataLayer || []
+									dataLayer.push({ 
+										'event': 'UA event', 
+										'eventCategory': 'Basket', 
+										'eventAction': 'Применил БК', 
+										'eventLabel': undefined 
+									})
+								}
 							}
 						})
                     }
@@ -719,18 +830,21 @@ const Cart = {
 				})
 			}
 		},
-
-		// Очистка корзины
-		// Фиксирование футера
+		
+		// Слежение за кол-вом изделий
 		itemsCount() {
-			if (this.itemsCount == 0) {
-				this.sendRequest({
+			const vm = this
+
+			if (vm.itemsCount == 0) {
+				// Очистка корзины
+				vm.sendRequest({
 					apiMethod: 'clear',
 					sendMethod: 'get'
 				})
 			}
 
-			this.$store.commit('Cart/setFootFix', this.itemsCount > this.footFixCount)
+			// Фиксирование футера
+			vm.$store.commit('Cart/setFootFix', this.itemsCount > this.footFixCount)
 		},
 
 		// Установка магазина
@@ -778,10 +892,14 @@ const Cart = {
 					apiMethod:  'setshops',
 					sendMethod: 'post',
 					data: data,
-					refresh: true
+					refresh: true,
+					onResponse() {
+						vm.$store.commit('Cart/calcStock')
+					}
 				})
 			}
 
+			vm.$store.commit('Cart/setConfirmForm', false)
 			vm.$store.commit('Cart/setShopid', 0)
 		},
 

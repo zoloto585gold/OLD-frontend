@@ -75,6 +75,7 @@
 						:price-bc="item.price_bc" 
 						:shopid="item.shopid" 
 						:shop-loading="item.shop_loading" 
+						:available="item.available" 
 						:sanitized-size="item.sanitized_size" 
 						:sanitized-price="item.sanitized_price" 
 					></cart-item>

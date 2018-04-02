@@ -74,6 +74,12 @@ const config = {
 			//$: 'jquery',
 			//jQuery: 'jquery',
 			//Vue: 'vue/dist/vue.js'
+		}),
+
+		new webpack.DefinePlugin({
+			'process.env': {
+				NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+			}
 		})
 	],
 

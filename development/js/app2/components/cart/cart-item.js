@@ -48,6 +48,7 @@ const CartItem = {
 		'priceBc',
 		'shopid',
 		'shopLoading',
+		'available',
 		'sanitizedSize',
 		'sanitizedPrice',
 	],

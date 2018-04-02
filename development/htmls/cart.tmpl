@@ -17,13 +17,6 @@
 			/>
 		</div>
 
-		<modal name="forget-shops" :adaptive="true" width="500" height="auto">
-			<p class="modal__info">Пожалуйста, выберите магазины у всех товаров</p>
-
-			<button @click="$modal.hide('forget-shops')" class="modal__button modal__button--ok">ОК</button>
-			<button @click="$modal.hide('forget-shops')" class="modal__close-but"></button>
-		</modal>
-
 		<main class="page__content">
 			<cart 
 				v-cloak  
@@ -34,10 +27,10 @@
 			</cart>
 		</main>
 
-		<cart-remove-confirm></cart-remove-confirm>
-		<cart-clear-confirm></cart-clear-confirm>
-		<cart-shops></cart-shops>
-		<cart-item-copy></cart-item-copy>
+		<cart-remove-confirm v-cloak></cart-remove-confirm>
+		<cart-clear-confirm v-cloak></cart-clear-confirm>
+		<cart-shops v-cloak></cart-shops>
+		<cart-item-copy v-cloak></cart-item-copy>
 
 
 	</div>
