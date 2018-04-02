@@ -67,7 +67,7 @@ const CartItemCopy = {
 	computed: {
 		...mapGetters('Cart', ['items', 'selectedItem', 'city']),
 		...mapGetters('CartItemCopy', ['offer']),
-		...mapState('Cart', ['conf']),
+		...mapState('Cart', ['conf', 'data', 'shops', 'stock']),
 		...mapState('CartItemCopy', ['prices', 'offers', 'type', 'selected']),
 
 		item: state => state.selectedItem,
@@ -88,9 +88,10 @@ const CartItemCopy = {
 		]),
 		...mapMutations('Cart', [
 			'setData',
-			'setShop',
+			'setShops',
 			'setShopid',
 			'setItemShop',
+			'calcStock',
 		]),
 		...mapMutations('CartItemCopy', [
 			'setPrices',
@@ -157,11 +158,8 @@ const CartItemCopy = {
 			}
 
 			vm.$store.commit('App/setPreloader', true)
-			vm.$store.commit('Cart/setShop', {
-				itemid: vm.offer.ID,
-				shops: vm.offer.SHOPS,
-			})
 
+			// Добавляем в корзину
 			axios({
 				url: vm.conf.cartApiUrl + 'xadd',
 				method: 'post',
@@ -169,23 +167,25 @@ const CartItemCopy = {
 				withCredentials: true,
 				responseType: 'json'
 			})
-			.then(response => {
+			.then(response => {		
 				vm.$store.commit('App/setPreloader', false)
-	
+
 				if (response.data.response.error) {
-					console.log(response.data.response.error)
-					return
+					throw new Error(response.data.response.error)
 				}
 
 				vm.$store.commit('Cart/setData', response.data)
+				vm.$store.commit('Cart/calcStock')
 
-				if (+vm.item.shopid) {
+				if (vm.item.shopid != 0  && vm.stock[vm.item.shopid] > 0) {
+					// Ставим тот же магазин, если на складе еще осталось
 					vm.$store.commit('Cart/setShopid', vm.item.shopid)
 				}
 
 				vm.$modal.hide('item-copy')
 			})
 			.catch(error => {
+				alert('Возникла ошибка при добавлении изделия!')
 				console.log(error)
 			})
 		}

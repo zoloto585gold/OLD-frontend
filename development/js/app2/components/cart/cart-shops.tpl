@@ -1,23 +1,23 @@
 <div class="cart-shops-modals">
 	<modal 
-		name="cart-shops" 
-		:adaptive="true" 
-		:width="900" 
-		:height="500" 
+		name="cart-shops"  
+		width="900" 
+		height="500" 
+		:adaptive="true"
 		@opened="opened" 
 		v-cloak
 	>
 		<div class="modal__info" v-if="itemShops">
 			<div v-if="itemShops.length == 0" class="modal-shops-empty">
-				<div class="modal__header">Нет доступных магазинов</div>
+				<div class="modal__header">Упс!</div>
 
-				<p class="modal__info">Данного изделия пока нет в наличии ни в одном магазине</p>
+				<p class="modal__info">Выбранного изделия нет в наличии ни в одном магазине</p>
 
 				<button 
 					@click.prevent="removeItem" 
 					class="modal__button"
 				>
-					Удалить изделие из корзины
+					Удалить из корзины
 				</button>
 			</div>
 			<div v-else class="modal-shops">

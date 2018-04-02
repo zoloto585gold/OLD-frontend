@@ -158,10 +158,7 @@ const CartShops = {
 						*/
 
 						// Кастомные кнопки зума
-						let ZoomLayout = ymaps.templateLayoutFactory.createClass("<div class='modal-shops__zoom-wrapper'>" +
-							"<div class='modal-shops__zoom modal-shops__zoom--in'>+</div>" +
-							"<div class='modal-shops__zoom modal-shops__zoom--out'>-</div>" +
-							"</div>", {
+						let ZoomLayout = ymaps.templateLayoutFactory.createClass(require('./cart-map-zoom.tpl'), {
 
 							build: function () {
 								ZoomLayout.superclass.build.call(this);
@@ -224,14 +221,15 @@ const CartShops = {
 									iconImageSize: [33, 44],
 									iconImageClipRect: [[99, 393], [132, 437]],
 									hideIconOnBalloonOpen: false,
-									balloonOffset: [0, -100]
+									balloonOffset: [0, -100],
+									balloonPanelMaxMapArea: 0,
 								}
 							)
 
 							placemarkCollection.add(vm.placemarks[index])
 						})
 
-						vm.map.geoObjects.add(placemarkCollection);
+						vm.map.geoObjects.add(placemarkCollection)
 
 						// Добавляем баллун
 						let balloonLayout = ymaps.templateLayoutFactory.createClass(require('./cart-map-balloon.tpl'),
@@ -261,7 +259,7 @@ const CartShops = {
 								onCloseClick(e) {
 									e.preventDefault()
 									this.events.fire('userclose')
-								},
+								}
 							}
 						)
 
@@ -317,10 +315,12 @@ const CartShops = {
 
 	watch: {
 		activeTab(val) {
+			const vm = this
+
 			if (val == 'map') {
 				const checkApiLoaded = setInterval(() => {
-					if (typeof this.map !== 'undefined') {
-						this.map.container.fitToViewport()
+					if (typeof vm.map !== 'undefined') {
+						vm.map.container.fitToViewport()
 						
 						clearInterval(checkApiLoaded)
 					}
@@ -335,7 +335,7 @@ const CartShops = {
 				this.$store.commit('CartShops/setTab', 'map')
 
 				const checkApiLoaded = setInterval(() => {
-					if (typeof this.map !== 'undefined') {
+					if (typeof vm.map !== 'undefined') {
 						vm.placemarks.forEach((e) => {
 							if (val == e.properties.get('shopid')) {
 								vm.map.setCenter(e.properties.get('coords'), 16)

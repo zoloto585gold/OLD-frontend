@@ -76,7 +76,13 @@ store.registerModule('Cart', {
 			let stock  = state.stock[shopid]
 			let shops  = state.shops[itemid]
 
+			if (typeof shops !== 'undefined' && shopid != 0) {
+				// магазины с не пустым складом и выбранный
+				shops = shops.filter(shop => state.stock[shop.xml_id] > 0 || shop.xml_id == shopid)
+			}
+
 			if (getters.selectedItem.available === false && shopid != 0) {
+				// исключаем выбранный магазин с пустым складом
 				shops = shops.filter(shop => shop.xml_id != shopid)
 			}
 
@@ -178,10 +184,6 @@ store.registerModule('Cart', {
 
 		setShops(state, payload) {
 			Vue.set(state, 'shops', payload)
-		},
-
-		setShop(state, payload) {
-			state.shops[payload.itemid] = payload.shops
 		},
 
 		setShopid(state, payload) {
@@ -427,9 +429,7 @@ const Cart = {
 				vm.$store.commit('App/setPreloader', false)
 	
 				if (response.data.response.error) {
-					console.log(response.data.response.error)
-					alert('Возникла ошибка!')
-					return
+					throw new Error(response.data.response.error)
 				}
 
 				if (response.data.items && options.refresh !== false) {
@@ -830,18 +830,21 @@ const Cart = {
 				})
 			}
 		},
-
-		// Очистка корзины
-		// Фиксирование футера
+		
+		// Слежение за кол-вом изделий
 		itemsCount() {
-			if (this.itemsCount == 0) {
-				this.sendRequest({
+			const vm = this
+
+			if (vm.itemsCount == 0) {
+				// Очистка корзины
+				vm.sendRequest({
 					apiMethod: 'clear',
 					sendMethod: 'get'
 				})
 			}
 
-			this.$store.commit('Cart/setFootFix', this.itemsCount > this.footFixCount)
+			// Фиксирование футера
+			vm.$store.commit('Cart/setFootFix', this.itemsCount > this.footFixCount)
 		},
 
 		// Установка магазина
